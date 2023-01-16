@@ -1,0 +1,213 @@
+body {
+    background-color: #efefef;
+}
+
+#showregion > div {
+    display: none;
+    margin-bottom: 4rem;
+}
+
+a {
+    z-index: 2;
+}
+
+/* 首页样式 */
+
+	/* 首页顶部样式 */
+   
+#homepage #homepage-head {
+    display: none;
+	margin: .5rem 0;
+    font-size: .8rem;
+    color: #f40;
+}
+
+#homepage #homepage-head span {
+    margin: 0 .2rem;
+    color: #999;
+}
+
+
+
+#homepage .jumbotron {
+    box-shadow: 0 2px 10px black;
+}
+
+#homepage .jumbotron h4 {
+    text-shadow: -1px -1px 2px #666;
+}
+
+	/* 首页分区标题颜色 */
+
+#homepage .fn-qq .jumbotron h4 {
+    color: #dc3545;
+}
+
+#homepage .fn-informationquery .jumbotron h4 {
+    color: #6c757d;
+}
+
+#homepage .fn-website .jumbotron h4 {
+    color: #ffc107;
+}
+
+#homepage .fn-copywriting .jumbotron h4 {
+    color: #28a745;
+}
+
+#homepage .fn-other .jumbotron h4 {
+    color: #17a2b8;
+}
+
+
+#homepage .row .jumbotron .row a {
+    margin-top: 1rem;
+	text-align: center;
+   	text-shadow: -2px -2px 3px #ccc;
+}
+
+#homepage .fntop {
+    margin-top: 7%;
+}
+
+/* 更新日志 */
+
+#toupdate .tips {
+    font-size: .7rem;
+    color: #999;
+}
+
+#toupdate > div:first-child {
+    margin-top: .5rem;
+}
+
+#toupdate > ul {
+    list-style: none;
+    border-left: 1px solid #aaa;
+}
+
+#toupdate .update-date {
+    font-size: 1.2rem;
+    color: #2bb;
+}
+
+#toupdate .update-content {
+    color: #999;
+}
+
+#toupdate .update-content li {
+    list-style: square;
+}
+
+#toupdate .c-f40 {
+    color: #f40;
+}
+
+	/* 返回置顶按钮样式 */
+
+#toupdate #returntop {
+    display: none;
+    position: fixed;
+    top: 60%;
+    right: 10px;
+    width: 2rem;
+    z-index: 999;
+}
+
+/* 底部样式 */
+
+footer {
+	position: fixed;
+   	bottom: 0;
+    width: 100%;
+    height: 7%;  
+    opacity: .9;
+    z-index: 999;
+}
+
+footer button {
+    border: none;
+    border-top: 2px solid black;
+    font-size: .5rem;
+    color: #fffeee;
+    outline: none;
+    text-shadow: 1px 1px 1px black;
+}
+
+footer button p {
+    margin: 6px 0;
+}
+
+footer button .icon .cornflowerblue {
+    color: cornflowerblue;
+}
+
+footer button .text span {
+    padding: 5px 10px;
+    border-radius: 15px;
+}
+
+/* 联系作者样式 */
+
+#author {
+    position: fixed;
+    bottom: 10%;
+    right: 10px;
+    width: 40px;
+    border-radius: 10px;
+    font-size: .8rem;
+    opacity: .9;
+    z-index: 999;
+}
+
+#exampleModal #exampleModalLabel {
+    font-size: 1.3rem;
+    text-shadow: -1px -1px 1px #369;
+}
+
+#exampleModal .modal-body > p {
+    font-size: .9rem;
+}
+
+#exampleModal .modal-body #authorQQ span,
+#exampleModal .modal-body #authormail span,
+#exampleModal .modal-body #authorCommunicationGroup span {
+    text-shadow: 1px 1px 1px #f40;
+}
+
+/* 下载样式 */
+
+#exampleModal .modal-body #appdownload {
+    margin-left: 1rem;
+    font-size: .9rem;
+    color: navy;
+}
+
+#exampleModal .modal-body #appdownload button {
+    background: none;
+    border: none;
+    padding: 0;
+    color: #abcdef;
+}
+
+/* 打赏样式 */
+
+#reward button {
+    text-shadow: 1px 1px 1px #000;
+}
+
+#reward button:first-child {
+    margin-right: 25%;
+}
+
+	/* 打赏二维码 */
+
+#reward img {	
+   	width: 60%;
+    margin-top: 10px;
+    border-radius: 10px;
+}
+
+#reward img:last-child {
+	display: none;
+}

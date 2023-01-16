@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="en, zh"> 
+    <head> 
+        <meta charset="UTF-8"> 
+        <meta name="viewport" id="viewport" content="width=device-width, initial-scale=1, user-scalable=no"> 
+        <link rel="icon" type="image/x-icin" href="./images/logo.ico">
+        <title>积木</title>
+        <script src="./tools/jQuery3.6.0_main.js"></script>
+        <link rel="stylesheet" href="./tools/bootstrap.min.css">
+        <script src="./tools/bootstrap.min.js"></script>
+        <link rel="stylesheet" href="index.css">
+        <script src="index.js"></script>
+        <!-- 复制功能工具导入-->
+        <script src="./tools/clipboard.min.js"></script>
+        <!-- 下雪特效导入 -->
+        <script src="./tools/xiaxue.js"></script>
+    </head> 
+    <body>    	
+    	<div class="container-fluid">
+       		<!-- 联系作者 -->
+            <button id="author" class="contact btn btn-success" data-toggle="modal" data-target="#exampleModal">联系作者</button>  
+            <div class="modal fade" id="exampleModal">
+  				<div class="modal-dialog">
+    				<div class="modal-content">
+      					<div class="modal-header">
+        					<h5 class="modal-title" id="exampleModalLabel">联系作者</h5>
+        					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          						<span aria-hidden="true">&times;</span>
+        					</button>
+      					</div>
+                  		<div class="modal-body">
+        					<p id="authorQQ">
+                 				<span>作者QQ(<span id="authorQQcopybtn" data-clipboard-target="#QQnum">点我复制</span>)：</span><a id="QQnum" href="https://api.vvhan.com/api/qqChat?qq=1352058684" target="_blank">1352058684</a>                             	
+                 			</p>
+                          	<p id="authormail">
+                             	<span>作者邮箱(<span id="authorQQmailcopybtn" data-clipboard-target="#QQmaillink">点我复制</span>)：</span><a id="QQmaillink" href="mailto:1352058684@qq.com" target="_blank">1352058684@qq.com</a>
+                            </p>
+                            <p id="authorCommunicationGroup">
+                                <span>作者邮箱(<span id="authorQQCommunicationGroup" data-clipboard-target="#communicationGroup">点我复制</span>)：</span><a id="communicationGroup" href="https://jq.qq.com/?_wv=1027&k=DNmTqW6E" target="_blank">610411365</a>
+                            </p>
+                            <p>
+                            	<div style="text-align: center;color: #f40;">-- 软件更新链接 --</div>
+                               	<div id="appdownload">
+                                  	<div id="aliyunpan">
+                                  		<span>源码下载(<button id="aliyunpanDownload" data-clipboard-text="https://lhshilin.github.io/jimu/download/积木2023.01.16.999版本源码.zip">复制链接</button>)</span>：
+                                    	<a id="toupdatalink" href="https://lhshilin.github.io/jimu/download/积木2023.01.16.0版本源码.zip" download="积木2023.01.16.999版本源码.zip" target="_blank">跳转下载地址</a>
+                                	</div>
+                                    <div id="android">
+                                        <span>安卓版下载(<button id="androidDownload" data-clipboard-text="https://lhshilin.github.io/jimu/download/积木_2023.01.16.999.apk">复制链接</button>)</span>：
+                                        <a id="toupdatalink" href="https://lhshilin.github.io/jimu/download/积木_2023.01.16.999.apk" download="积木_2023.01.16.999.apk" target="_blank">跳转下载地址</a>
+                                    </div>
+                                	<div id="lanzouyun">
+                                		<span>备用蓝奏云(<button id="lanzouyunDownload" data-clipboard-text="https://lhshilin.lanzoui.com/b0176d1pe">复制链接</button>)</span>：
+                                   		<a id="toupdatalink" href="https://lhshilin.lanzoui.com/b0176d1pe" target="_blank">跳转下载地址</a>
+                                        <div><i class="bi bi-bag-plus-fill"></i>蓝奏云盘密码：lin1</div>
+                                	</div>
+                                </div>
+                            </p>
+                            <p id="reward" class="text-center">
+                            	<button class="btn btn-success">微信打赏</button>
+                               	<button class="btn">支付宝打赏</button>
+                            	<img src="images/wxcode.png">
+                            	<img src="images/zfbcode.jpg">                               	
+                            </p>
+      					</div>
+                  		<div class="modal-footer">
+        					<button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>       						
+      					</div>
+    				</div>
+  				</div>
+			</div>
+         	<!-- 显示区 -->
+            <!-- 首页 -->
+            <div id="showregion">      			     	
+            	<div id="homepage" class="container">
+               		<div id="homepage-head">
+                     	<div class="col-12 pasttime">
+                     		软件已运行<span id="day"></span>天<span id="hour"></span>小时<span id="minute"></span>分钟<span id="second"></span>秒
+                		</div>
+                      	<div class="offset-8 func-num">
+                         	一共<span></span>个功能
+                        </div>
+                    </div>
+                	<div class="row fn-qq">
+                		<div class="jumbotron col-12">
+  							<h4>QQ专区</h4> 						
+ 	 						<hr class="my-4">
+  							<p class="row"></p> 						
+						</div>
+                	</div>
+                   	<div class="row fn-informationquery">
+                		<div class="jumbotron col-12">
+  							<h4>信息查询专区</h4> 						
+ 	 						<hr class="my-4">
+  							<p class="row"></p> 						
+						</div>
+                	</div>
+                   	<div class="row fn-website">
+                		<div class="jumbotron col-12">
+  							<h4>网站专区</h4> 						
+ 	 						<hr class="my-4">
+  							<p class="row"></p> 						
+						</div>
+                	</div>
+                   	<div class="row fn-copywriting">
+                		<div class="jumbotron col-12">
+  							<h4>文案专区</h4> 						
+ 	 						<hr class="my-4">
+  							<p class="row"></p> 						
+						</div>
+                	</div>
+                   	<div class="row fn-other">
+                		<div class="jumbotron col-12">
+  							<h4>其他</h4> 						
+ 	 						<hr class="my-4">
+  							<p class="row"></p> 						
+						</div>
+                	</div>           	
+            	</div>
+               	<!-- 更新日志 -->
+            	<div id="toupdate" class="container">
+               		<div class="tips text-center">
+                        <div>#日志前加“New”代表此版本更新内容#</div>
+                    </div>
+               		<img id="returntop" src="images/capslock-fill.svg">
+               	</div>               	
+            </div>                        	                  					     					
+       		<!-- 底部元素 -->
+        	<footer class="row">                              
+        			<button id="homepagebtn" class="col-6">
+                 		<p class="icon">
+                            <img src="images/layers-fill.svg">
+                        </p>
+                 		<p class="text cornflowerblue">
+                       		<span class="texttype" style="font-size: .6rem;color: #fedcba;background-color: cornflowerblue;">首页</span>
+                        </p>
+                    </button>
+           			<button id="toupdatelogobtn" class="col-6">
+                    	<p class="icon">
+                          	<img src="images/calendar2-check-fill.svg">
+                        </p>
+                        <p class="text">
+                        	<span>更新日志</span>
+                        </p>
+                    </button>                
+        	</footer>
+      		<canvas class="xiaxue" style="display: block;width: 100%;height: 100%;top: 0;left: 0;position: fixed;z-index: 1;"></canvas>
+        </div>
+    </body>
+</html>

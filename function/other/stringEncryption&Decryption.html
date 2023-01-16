@@ -1,0 +1,128 @@
+<!doctype html>
+<html> 
+    <head> 
+        <meta charset="UTF-8"> 
+        <meta name="viewport" id="viewport" content="width=device-width, initial-scale=1, user-scalable=no"> 
+        <title>积木·文字加密/解密</title>
+        <link rel="icon" type="image/x-icin" href="../../images/logo.ico">
+        <script src="../../tools/jQuery3.6.0_main.js"></script>
+        <script src="../../tools/clipboard.min.js"></script>
+        <link rel="stylesheet" href="../../tools/bootstrap.min.css">
+        <link rel="stylesheet" href="../css/function.css">
+        <style>
+        	textarea,
+            input {
+    			margin-top: 2rem;
+			}
+			.btn-secondary {
+             	margin-top: 1rem;
+               	box-shadow: 0 2px 2px black;
+			}
+        </style>
+    </head> 
+    <body>
+		<div class="result text-center"></div>
+	   	<div class="container">
+         	<div class="switch text-center" style="margin-top: 20%;">
+            	<button class="btn btn-success" style="margin-right: 2rem;width: 9rem;">字符串加密</button>
+               	<button class="btn btn-info" style="width: 7rem">字符串解密</button>
+            </div>
+            <div id="function">
+            	<!-- 文字加密输入框 -->
+            	<div id="encryption">
+            		<textarea class="form-control text-center" placeholder="请输入需要加密的内容"></textarea>
+            		<input type="text" class="form-control" placeholder="请输入加密的密码" required>
+            	</div>
+               	<!-- 文字解密输入框 -->
+            	<div id="decryption" style="display: none;">
+            		<textarea class="form-control text-center" placeholder="请输入需要解密的内容"></textarea>
+            		<input type="text" class="form-control" placeholder="请输入解密的密码" required>
+            	</div>
+            </div>
+         	
+	        <div class="text-center">
+	           	<button class="btn btn-secondary">加密/解密</button>
+	        </div>
+           	<div class="notes text-center">
+              	<div>#无反应请检测网络#</div>
+                <div>#密码必须为<span style="color: red;">1-8位纯数字</span>#</div>
+            </div>
+	        <div class="data text-center" style="margin-top: 2rem;">
+           		<div>加密/解密结果</div>
+                <div id="result" data-clipboard-target="#result"></div>
+                <div style="color: #999;font-size: .8rem;text-shadow: none;">##加密/解密结果可以点击复制</div>
+           	</div> 
+        </div>
+        <span class="from text-center">接口来自:<a href="https://api.vvhan.com/" target="_blank">韩小韩API</a></span>  
+        <script>
+        	$(function () {
+               	$('.container').stop().fadeIn(300)
+                // 切换解密加密
+                function switchbtn() {
+                    $('.switch button').each(function (i, e) {
+                    	$(this).click(function () {
+                           	$(this).stop().animate({
+                              	width : '9rem'
+                            }).siblings().animate({
+                            	width : '7rem'
+                            })
+                       		$('#function > div').eq(i).stop().fadeIn(500).siblings().hide()
+                       	})
+                    })
+                }
+                switchbtn()
+				function getdata() {
+                	if($('.btn-success').css('width') < $('.btn-info').css('width')) {
+                       	return decryption()
+                   	}else {
+                      	return encryption()
+                    }
+                	// 加密方法
+                	function encryption() {
+                       	var string = $('#encryption textarea').val();
+                   		var key = $('#encryption input').val()
+                        $.get('https://api.vvhan.com/api/jm', {key:key,string:string,type:'en'}, function (res){
+                            if(!res.success) return $('.result').html('操作失败').fadeOut(3000)
+                            $('.result').html('操作成功').fadeOut(3000)
+                         	$('#result').html(res.enmissString)
+                            $('#encryption textarea').val('')
+                            $('#encryption input').val('')
+                            results()
+       					})
+                   	}
+                    // 解密方法
+       				function decryption() {
+                       	var string = $('#decryption textarea').val();
+                   		var key = $('#decryption input').val();
+                        $.get('https://api.vvhan.com/api/jm', {key:key,string:string,type:'de'}, function (res){
+                            if(!res.success) return $('.result').html('操作失败').fadeOut(3000)
+                            $('.result').html('操作成功').fadeOut(3000)
+                         	$('#result').html(res.demissString)
+                            $('#decryption textarea').val('')
+                            $('#decryption input').val('')
+                            results()
+       					})
+                    }
+                    // 结果显示方法
+                    function results() {
+                        $('.data').fadeIn(500)
+                        $('.result').html('操作成功').fadeOut(3000)
+                    }
+   				}
+				$('.btn-secondary').click(function () {
+            		$('.result').stop().fadeIn(1000).html('请稍等')      	
+   					getdata()        			
+   				})
+         		$(window).on('keydown', function (e) {
+               		if(e.keyCode === 13) getdata()
+               	})
+                // 翻译结果点击复制
+         		new Clipboard('#result', {
+    					'#result': function(trigger) {
+        				return trigger.nextElementSibling
+    				}
+				})
+			})
+        </script> 	
+    </body>
+</html>

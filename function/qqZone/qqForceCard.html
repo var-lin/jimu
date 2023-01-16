@@ -1,0 +1,43 @@
+<!doctype html>
+<html> 
+    <head> 
+        <meta charset="UTF-8"> 
+        <meta name="viewport" id="viewport" content="width=device-width, initial-scale=1, user-scalable=no"> 
+        <title>积木·QQ跳转资料卡</title>
+        <link rel="icon" type="image/x-icin" href="../../images/logo.ico">
+        <script src="../../tools/jQuery3.6.0_main.js"></script>
+        <link rel="stylesheet" href="../../tools/bootstrap.min.css">
+        <link rel="stylesheet" href="../css/function.css">
+    </head> 
+    <body>
+		<div class="result text-center"></div>
+	   	<div class="container">
+	       	<input type="number" class="form-control" placeholder="请输入需要跳转资料卡的QQ号" required>            
+	        <div class="text-center" style="margin: 20px 0;">
+	           	<button class="btn btn-secondary">点击跳转</button>
+	        </div>
+           	<div class="notes text-center">
+              	<div>#没跳转请检测网络#</div>
+                <div>#网络没问题的话或许功能已经不能用了#</div>
+            </div>
+            <div class="text-center force" style="display: none;">已跳转QQ：<span style="text-shadow: 1px 1px 1px #f40;"></span></div>
+        </div>
+        <span class="from text-center">接口来自:<a href="https://api.vvhan.com/" target="_blank">韩小韩API</a></span>  
+        <script>
+        	$(function () {
+               	$('.container').stop().fadeIn(300)
+				$('button').click(function () {               	
+                	if($('input').val() === '') return $('.result').stop().fadeIn(1000).html('请输入QQ号').fadeOut(3000)
+                  	location.href = 'https://api.vvhan.com/api/qqCard?qq=' + $('input').val();
+                    $('.result').stop().fadeIn(1000).html('操作成功,没跳转检测QQ号或者功能有问题了').fadeOut(5000)                   
+                    $('.force span').html($('input').val())
+                    $('.force').stop().fadeIn(300)
+                    $('input').val('');       
+   				})
+         		$(window).on('keydown', function (e) {
+               		if(e.keyCode === 13) $('button').click()
+               	})
+			})
+        </script> 	
+    </body>
+</html>
