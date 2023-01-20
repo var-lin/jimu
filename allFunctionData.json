@@ -1,0 +1,33 @@
+{
+    "QQ" : [
+        {"name" : "获取QQ昵称和头像", "url" : "./function/qqZone/getQQNameImg.html"},
+        {"name" : "QQ电脑在线查询", "url" : "./function/qqZone/queryQQPConline.html"},
+        {"name" : "QQ强制聊天", "url" : "./function/qqZone/qqForceChat.html"},
+        {"name" : "QQ跳转资料卡", "url" : "./function/qqZone/qqForceCard.html"},
+        {"name" : "QQ号测凶吉(娱乐)", "url" : "./function/qqZone/qqMeasuringGoodAndBadLuck.html"}
+    ],
+    "informationquery" : [
+    	{"name" : "访客相关信息查询", "url" : "./function/informationQueryZone/visitorInformation.html"},
+       	{"name" : "获得IP信息归属地", "url" : "./function/informationQueryZone/GetiPInformationplaceOfOwnership.html"},
+        {"name" : "身份证信息查询", "url" : "./function/informationQueryZone/idCardInformationQuery.html"},
+        {"name" : "历史上的今天", "url" : "./function/informationQueryZone/todayInHistory.html"},
+        {"name" : "手机号归属地查询", "url" : "./function/informationQueryZone/queryTelAttribution.html"}
+    ],
+    "website" : [
+    	{"name" : "查询网站标题", "url" : "./function/webSiteZone/queryWebSiteTitle.html"},
+        {"name" : "域名注册查询", "url" : "./function/webSiteZone/queryDomainNameRegistration.html"},
+        {"name" : "ICP备案查询", "url" : "./function/webSiteZone/queryICP.html"},
+        {"name" : "效验爬虫真实性", "url" : "./function/webSiteZone/checkCrawler.html"}
+    ],
+    "copywriting" : [
+    	{"name" : "毒鸡汤", "url" : "./function/copyZone/poisonousChickenSoup.html"},
+        {"name" : "社会经典语录", "url" : "./function/copyZone/socialClassicQuotations.html"},
+        {"name" : "舔狗日记", "url" : "./function/copyZone/lickDogDiary.html"},
+        {"name" : "一言", "url" : "./function/copyZone/aBriefRemark.html"}
+    ],
+    "other" : [
+       	{"name" : "微博热搜榜", "url" : "./function/other/blogHotSearch.html"},
+    	{"name" : "万能翻译", "url" : "./function/other/universalTranslata.html"},
+       	{"name" : "字符串加密/解密", "url" : "./function/other/stringEncryption&Decryption.html"}
+    ]
+}
