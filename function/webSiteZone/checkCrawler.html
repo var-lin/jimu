@@ -33,17 +33,17 @@
                	$('.container').stop().fadeIn(300)
 				function getdata() {
        				var ip = $('input').val()
-                   	if(ip === '') return $('.result').fadeOut(3000).html('请输入IP')
+                   	if(ip === '') return $('.result').html('请输入IP').stop().fadeOut(3000)
        				$.get('https://api.uomg.com/api/ck_spider', {ip:ip}, function (res){                  
                    		$('.data span').eq(0).html(ip)                 	
                    		$('.data span').eq(1).html(res.spider).html(res.msg)         			
-                     	$('.data').fadeIn(500)
-                        $('.result').html('操作成功').fadeOut(3000)
+                     	$('.data').stop().fadeIn(500)
+                        $('.result').html('操作成功').stop().fadeOut(3000)
                         $('input').val('')                          
        				})
    				}
 				$('button').click(function () {
-            		$('.result').fadeIn(1000).html('请稍等')      	
+            		$('.result').html('请稍等').stop().fadeIn(1000)
    					getdata()                          			
    				})
          		$(window).on('keydown', function (e) {

@@ -27,9 +27,9 @@
         	$(function () {
                	$('.container').stop().fadeIn(300)
 				$('button').click(function () {             
-                	if($('input').val() === '') return $('.result').stop().fadeIn(1000).html('请输入QQ号').fadeOut(3000)
+                	if($('input').val() === '') return $('.result').html('请输入QQ号').stop().fadeIn(1000).fadeOut(3000)
                   	location.href = 'https://api.vvhan.com/api/qqChat?qq=' + $('input').val();
-                    $('.result').stop().fadeIn(1000).html('操作成功,没跳转检测QQ号或者功能有问题了').fadeOut(5000)                   
+                    $('.result').html('操作成功,没跳转检测QQ号或者功能有问题了').stop().fadeIn(1000).fadeOut(5000)                   
                     $('.force span').html($('input').val())
                     $('.force').stop().fadeIn(300)
                     $('input').val('');             
