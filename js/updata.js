@@ -10,7 +10,7 @@ $(function () {
     })
     // 判断最新版本
     $.get('https://lhshilin.github.io/jimu/updata.json', function (res) {
-        if('2023.01.22.00' === res.updataV) {
+        if('2023.01.22.0' === res.updataV) {
             console.log('已经是最新版本')
         }else if(localStorage.getItem('updataTip') == 'true' || localStorage.getItem('updataV') !== res.updataV) {
             $('.updata').stop().fadeIn(1500)
