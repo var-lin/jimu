@@ -17,13 +17,18 @@
     	{"name" : "查询网站标题", "url" : "./function/webSiteZone/queryWebSiteTitle.html"},
         {"name" : "域名注册查询", "url" : "./function/webSiteZone/queryDomainNameRegistration.html"},
         {"name" : "ICP备案查询", "url" : "./function/webSiteZone/queryICP.html"},
-        {"name" : "效验爬虫真实性", "url" : "./function/webSiteZone/checkCrawler.html"}
+        {"name" : "效验爬虫真实性", "url" : "./function/webSiteZone/checkCrawler.html"},
+        {"name" : "判断域名是否被收录", "url" : "./function/webSiteZone/ifIncluded.html"},
+        {"name" : "查询域名收录量", "url" : "./function/webSiteZone/queryIncludedQuantity.html"}
     ],
     "copywriting" : [
     	{"name" : "毒鸡汤", "url" : "./function/copyZone/poisonousChickenSoup.html"},
         {"name" : "社会经典语录", "url" : "./function/copyZone/socialClassicQuotations.html"},
         {"name" : "舔狗日记", "url" : "./function/copyZone/lickDogDiary.html"},
-        {"name" : "一言", "url" : "./function/copyZone/aBriefRemark.html"}
+        {"name" : "一言", "url" : "./function/copyZone/aBriefRemark.html"},
+        {"name" : "随机骚话", "url" : "./function/copyZone/obsceneRemarks.html"},
+        {"name" : "随机笑话", "url" : "./function/copyZone/joke.html"},
+        {"name" : "随机情话", "url" : "./function/copyZone/loveTalk.html"}
     ],
     "other" : [
        	{"name" : "微博热搜榜", "url" : "./function/other/blogHotSearch.html"},
