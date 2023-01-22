@@ -26,13 +26,13 @@
         <span class="from text-center">接口来自:<a href="https://api.oick.cn/yulu/" target="_blank">零七生活API</a></span>  
         <script>
         	$(function () {
-               	$('.container').stop().fadeIn(300)
-                $('.result').html('请稍等').stop().fadeIn(1000)
+               	$('.container').fadeIn(300)
+                $('.result').html('请稍等').fadeIn(1000)
 				function getData() {
        				$.get('https://api.oick.cn/yulu/api.php', function (res){
             			$('#result').html(res)
-                     	$('.data').stop().fadeIn(500)
-                        $('.result').html('操作成功').stop().fadeOut(3000)      
+                     	$('.data').fadeIn(500)
+                        $('.result').html('操作成功').fadeOut(3000)      
        				})
    				}
                 getData()

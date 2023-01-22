@@ -93,7 +93,7 @@
         	$(function () {
 				function getdata() {
        				$.get('https://api.vvhan.com/api/wbhot', function (res){                       
-       					if(!res.success) return $('.result').html('查询失败').stop().fadeOut(5000)         			
+       					if(!res.success) return $('.result').html('查询失败').fadeOut(5000)         			
            				$('.network span').html(res.NetWork);
                        	$('.time span').html(res.time)
                         $(res.data).each(function (i, e) {
@@ -102,11 +102,11 @@
                            	$('.data > .row').eq(i).find('.row:eq(1) .url a').html(e.title).prop('href', e.url)
                            	$('.data > .row').eq(i).find('.row:eq(1) .hot').html(e.hot)
                         })
-                        $('.container').stop().fadeIn(300)
-                        $('.result').html('查询成功').stop().fadeOut(3000)
+                        $('.container').fadeIn(300)
+                        $('.result').html('查询成功').fadeOut(3000)
        				})
    				}
-         		$('.result').html('请稍等').stop().fadeIn(1000)
+         		$('.result').html('请稍等').fadeIn(1000)
          		getdata()
                	// 更新日志返回置顶显示隐藏功能
     			function returnTop() {
@@ -119,7 +119,7 @@
             			}
         			})
         			$('#returntop').on('click', function () {
-        				$('html').stop().animate({
+        				$('html').animate({
            					scrollTop : 0
            				})
         			})

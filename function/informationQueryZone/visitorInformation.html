@@ -35,7 +35,7 @@
         <span class="from text-center">接口来自:<a href="https://api.vvhan.com/" target="_blank">韩小韩API</a></span>  
         <script>
         	$(function () {
-               	$('.container').stop().fadeIn(300)   
+               	$('.container').fadeIn(300)   
 				function getdata() {       
        				$.get('https://api.vvhan.com/api/visitor.info', function (res){    			
            				$('.data ul li:eq(0) span').html(res.browser)

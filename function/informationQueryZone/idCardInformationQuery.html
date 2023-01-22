@@ -36,15 +36,15 @@
         <span class="from text-center">接口来自:<a href="https://www.jisuapi.com/" target="_blank">极速数据API</a></span>  
         <script>
         	$(function () {
-               	$('.container').stop().fadeIn(300)
+               	$('.container').fadeIn(300)
 				function getdata() {
        				var idcard = $('input').val()
-                   	if(idcard === '') return $('.result').html('身份证号码不能为空').stop().fadeOut(3000)
+                   	if(idcard === '') return $('.result').html('身份证号码不能为空').fadeOut(3000)
                     $.ajax({
                     	url : 'https://api.jisuapi.com/idcard/query?appkey=2ffe53aad1021979&idcard=' + idcard,
                        	dataType : 'jsonp',
                         success : function (res) {
-                            if(res.status !== 0) return $('.result').html(res.msg).stop().fadeOut(3000)         			
+                            if(res.status !== 0) return $('.result').html(res.msg).fadeOut(3000)         			
            					$('.data ul li:eq(0) span').html(idcard)
                      		$('.data ul li:eq(1) span').html(res.result.area)
                            	$('.data ul li:eq(2) span').html(res.result.areaid)
@@ -59,14 +59,14 @@
                                 $('.data ul li:eq(4)').show()
                                 $('.data ul li:eq(5)').show()
                             }
-                     		$('.data').stop().fadeIn(500)
-                        	$('.result').html('操作成功').stop().fadeOut(3000)
+                     		$('.data').fadeIn(500)
+                        	$('.result').html('操作成功').fadeOut(3000)
                         	$('input').val('')
                         }
                     })
    				}
 				$('button').click(function () {
-            		$('.result').html('请稍等').stop().fadeIn(1000)
+            		$('.result').html('请稍等').fadeIn(1000)
    					getdata()        			
    				})
          		$(window).on('keydown', function (e) {

@@ -33,24 +33,24 @@
         <span class="from text-center">接口来自:<a href="https://api.vvhan.com/" target="_blank">韩小韩API</a></span>  
         <script>
         	$(function () {
-               	$('.container').stop().fadeIn(300)
+               	$('.container').fadeIn(300)
 				function getdata() {
        				var tel = $('input').val()
-                   	if(tel === '') return $('.result').html('手机号不能为空').stop().fadeOut(3000)
+                   	if(tel === '') return $('.result').html('手机号不能为空').fadeOut(3000)
        				$.get('https://api.vvhan.com/api/phone', {tel:tel}, function (res){
-       					if(!res.success) return $('.result').html(res.message).stop().fadeOut(3000)         			
+       					if(!res.success) return $('.result').html(res.message).fadeOut(3000)         			
            				$('.data ul li:eq(0) span').html(res.tel)
                      	$('.data ul li:eq(1) span').html(res.info.local)
                         $('.data ul li:eq(2) span').html(res.info.type)
                         $('.data ul li:eq(3) span').html(res.info.yys)
                         $('.data ul li:eq(4) span').html(res.info.bz)                                                          
-                     	$('.data').stop().fadeIn(500)
-                        $('.result').html('操作成功').stop().fadeOut(3000)
+                     	$('.data').fadeIn(500)
+                        $('.result').html('操作成功').fadeOut(3000)
                         $('input').val('')                                                    
        				})
    				}
 				$('button').click(function () {
-            		$('.result').html('请稍等').stop().fadeIn(1000)
+            		$('.result').html('请稍等').fadeIn(1000)
    					getdata()        			
    				})
          		$(window).on('keydown', function (e) {
