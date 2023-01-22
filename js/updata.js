@@ -25,5 +25,8 @@ $(function () {
             localStorage.setItem('updataTip', 'false')
             localStorage.setItem('updataV', res.updataV)
         })
+        $('.updata .updatabtnright').on('click', function () {
+            window.location.href = res.androidUrl;
+        })
     })
 })
