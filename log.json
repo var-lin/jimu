@@ -1,18 +1,38 @@
-[    
+[
+    {
+        "date" : "2023.01.31更新日志",
+        "data" : [
+            "<span class=\"c-f40\">New&nbsp</span>新增“<a href=\"./function/webSiteZone/domainNameInterceptionDetection.html\">域名拦截检测</a>”功能",
+            "<span class=\"c-f40\">New&nbsp</span>新增“<a href=\"./function/webSiteZone/websitePortScanQuery.html\">网站端口检测查询</a>”功能",
+            "<span class=\"c-f40\">New&nbsp</span>新增“<a href=\"./function/informationQueryZone/harassmentTelephoneQuery.html\">骚扰电话查询</a>”",
+            "<span class=\"c-f40\">New&nbsp</span>新增“<a href=\"./function/informationQueryZone/licensePlateAscriptionPlaceQuery.html\">车牌号归属地查询</a>”功能",
+            "<span class=\"c-f40\">New&nbsp</span>新增“<a href=\"./function/informationQueryZone/realTimeOil.html\">实时石油</a>”功能",
+            "<span class=\"c-f40\">New&nbsp</span>新增“<a href=\"./function/informationQueryZone/phoneEvaluation.html\">手机号估价</a>”功能",
+            "<span class=\"c-f40\">New&nbsp</span>恢复“<a href=\"./function/webSiteZone/shortenUrl.html\">网址缩短</a>”功能",
+            "<span class=\"c-f40\">New&nbsp</span>恢复“<a href=\"./function/qqZone/queryQQSpaceVisitors.html\">查询QQ访客情况</a>”功能",
+            "<span class=\"c-f40\">New&nbsp</span>恢复“<a href=\"./function/qqZone/QQEvaluation.html\">QQ估价</a>”功能",
+            "<span class=\"c-f40\">New&nbsp</span>修复“<a href=\"./function/webSiteZone/ifIncluded.html\">判断域名是否被收录</a>”功能查询失败",
+            "<span class=\"c-f40\">New&nbsp</span>恢复“<a href=\"./function/other/md5Encryption&Decryption.html\">md5加密/解密</a>”功能",
+            "<span class=\"c-f40\">New&nbsp</span>优化代码逻辑",
+            "<span class=\"c-f40\">New&nbsp</span>添加logo图标·3s·",
+            "<span class=\"c-f40\">New&nbsp</span>logo变圆角",
+            "<span class=\"c-f40\">New&nbsp</span>更新jQuery最新版本3.6.3",
+            "<span style=\"color: #055\">注释&nbsp</span>软件的接口都是别人的，所以不知道什么时候功能就会失效"
+        ]
+    },
     {
         "date" : "2023.01.22更新日志",
         "data" : [
-            "<span class=\"c-f40\">New&nbsp</span>新增“<a href=\"./function/copyZone/obsceneRemarks.html\">随机骚话</a>”功能",
-            "<span class=\"c-f40\">New&nbsp</span>新增“<a href=\"./function/copyZone/joke.html\">随机笑话</a>”功能",
-            "<span class=\"c-f40\">New&nbsp</span>新增“<a href=\"./function/copyZone/loveTalk.html\">随机情话</a>”功能",
-            "<span class=\"c-f40\">New&nbsp</span>新增“<a href=\"./function/webSiteZone/ifIncluded.html\">判断域名是否被收录</a>”功能",
-            "<span class=\"c-f40\">New&nbsp</span>新增“<a href=\"./function/webSiteZone/queryIncludedQuantity.html\">查询域名收录量</a>”功能",
-            "<span class=\"c-f40\">New&nbsp</span>增加新版本更新提示",
-            "<span class=\"c-f40\">New&nbsp</span>调整功能页面圆角",
-            "<span class=\"c-f40\">New&nbsp</span>云更新日志及功能数据",
-            "<span class=\"c-f40\">New&nbsp</span>界面UI美化",
-            "<span class=\"c-f40\">New&nbsp</span>优化代码逻辑",
-            "<span style=\"color: #055\">注释&nbsp</span>软件的接口都是别人的，所以不知道什么时候功能就会失效"
+            "新增“<a href=\"./function/copyZone/obsceneRemarks.html\">随机骚话</a>”功能",
+            "新增“<a href=\"./function/copyZone/joke.html\">随机笑话</a>”功能",
+            "新增“<a href=\"./function/copyZone/loveTalk.html\">随机情话</a>”功能",
+            "新增“<a href=\"./function/webSiteZone/ifIncluded.html\">判断域名是否被收录</a>”功能",
+            "新增“<a href=\"./function/webSiteZone/queryIncludedQuantity.html\">查询域名收录量</a>”功能",
+            "增加新版本更新提示",
+            "调整功能页面圆角",
+            "云更新日志及功能数据",
+            "界面UI美化",
+            "优化代码逻辑"
         ]
     },
     {
