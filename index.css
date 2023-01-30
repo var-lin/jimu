@@ -11,6 +11,82 @@ a {
     z-index: 999;
 }
 
+/* logo */
+
+#logo {
+    position: fixed;
+    bottom: 180px;
+    right: 10px;
+    width: 40px;
+    opacity: .9;
+    z-index: 999;
+}
+
+/* 联系作者样式 */
+
+#author {
+    position: fixed;
+    bottom: 66px;
+    right: 10px;
+    width: 40px;
+    border-radius: 10px;
+    font-size: .8rem;
+    opacity: .9;
+    z-index: 999;
+}
+
+#exampleModal #exampleModalLabel {
+    font-size: 1.3rem;
+    text-shadow: -1px -1px 1px #369;
+}
+
+#exampleModal .modal-body > p {
+    font-size: .9rem;
+}
+
+#exampleModal .modal-body #authorQQ span,
+#exampleModal .modal-body #authormail span,
+#exampleModal .modal-body #authorCommunicationGroup span {
+    text-shadow: 1px 1px 1px #f40;
+}
+
+/* 下载样式 */
+
+#exampleModal .modal-body #appdownload {
+    margin-left: 1rem;
+    font-size: .9rem;
+    color: navy;
+}
+
+#exampleModal .modal-body #appdownload button {
+    background: none;
+    border: none;
+    padding: 0;
+    color: #abcdef;
+}
+
+/* 打赏样式 */
+
+#reward button {
+    text-shadow: 1px 1px 1px #000;
+}
+
+#reward button:first-child {
+    margin-right: 25%;
+}
+
+    /* 打赏二维码 */
+
+#reward img {    
+    width: 60%;
+    margin-top: 10px;
+    border-radius: 10px;
+}
+
+#reward img:last-child {
+    display: none;
+}
+
 /* 首页样式 */
 
     /* 首页顶部样式 */
@@ -43,28 +119,7 @@ a {
     padding: 5px;
 }
 
-    /* 首页分区标题颜色 */
-
-#homepage .fn-qq .jumbotron h4 {
-    color: #dc3545;
-}
-
-#homepage .fn-informationquery .jumbotron h4 {
-    color: #6c757d;
-}
-
-#homepage .fn-website .jumbotron h4 {
-    color: #ffc107;
-}
-
-#homepage .fn-copywriting .jumbotron h4 {
-    color: #28a745;
-}
-
-#homepage .fn-other .jumbotron h4 {
-    color: #17a2b8;
-}
-
+    /* 首页分区a链接样式 */
 
 #homepage .row .jumbotron .row a {
     margin-top: 1rem;
@@ -117,6 +172,7 @@ a {
     top: 60%;
     right: 10px;
     width: 2rem;
+    cursor: pointer;
     z-index: 999;
 }
 
@@ -153,73 +209,47 @@ footer button .text span {
     border-radius: 15px;
 }
 
-/* 联系作者样式 */
+/* mysteriouCode */
 
-#author {
+.mysteriouCode {
     position: fixed;
-    bottom: 10%;
-    right: 10px;
-    width: 40px;
-    border-radius: 10px;
-    font-size: .8rem;
-    opacity: .9;
-    z-index: 999;
-}
-
-#exampleModal #exampleModalLabel {
-    font-size: 1.3rem;
-    text-shadow: -1px -1px 1px #369;
-}
-
-#exampleModal .modal-body > p {
-    font-size: .9rem;
-}
-
-#exampleModal .modal-body #authorQQ span,
-#exampleModal .modal-body #authormail span,
-#exampleModal .modal-body #authorCommunicationGroup span {
-    text-shadow: 1px 1px 1px #f40;
-}
-
-/* 下载样式 */
-
-#exampleModal .modal-body #appdownload {
-    margin-left: 1rem;
-    font-size: .9rem;
-    color: navy;
-}
-
-#exampleModal .modal-body #appdownload button {
-    background: none;
-    border: none;
-    padding: 0;
-    color: #abcdef;
-}
-
-/* 打赏样式 */
-
-#reward button {
-    text-shadow: 1px 1px 1px #000;
-}
-
-#reward button:first-child {
-    margin-right: 25%;
-}
-
-    /* 打赏二维码 */
-
-#reward img {    
-       width: 60%;
-    margin-top: 10px;
-    border-radius: 10px;
-}
-
-#reward img:last-child {
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 300px;
+    border: 5px solid #add;
+    border-radius: 20px;
+    padding: 10px 20px;
+    background-color: #eee;
     display: none;
+    z-index: 10000;
+}
+
+.mysteriouCode input {
+    width: 100%;
+    margin: auto;
+    border: none;
+    border-bottom: 3px solid #daa;
+    outline-style: none;
+    background: none;
+    padding: 5px;
+    text-align: center;
+    color: #f40;
+}
+
+.mysteriouCode .mysteriouCodeTip {
+    margin: 5px 0;
+    font-size: 8px;
+    color: #666;
+    text-align: center;
+}
+
+.mysteriouCode button {
+    margin: 10px;
 }
 
 /* 更新链接弹窗 */
-.updata {
+.update {
     position: fixed;
     top: 50%;
     left: 50%;
@@ -228,7 +258,7 @@ footer button .text span {
     padding: 5px 20px;
     border: 5px solid #aaf;
     border-radius: 20px;
-    background-image: url('./images/updataimg.jpg');
+    background-image: url('./images/updateimg.jpg');
     background-size: 500px;
     background-position: center;
     background-repeat: no-repeat;
@@ -237,19 +267,23 @@ footer button .text span {
     z-index: 10000;
 }
 
-.updata h3 {
+.update h3 {
     color: #aff;
     text-align: center;
 }
 
-.updata button {
+.update a {
+    color: #fff;
+}
+
+.update button {
     border-radius: 5px;
 }
-.updata .updatabtnleft {
+.update .updatebtnleft {
     background-color: #faa;
 }
 
-.updata .updatabtnright {
+.update .updatebtnright {
     background-color: #afa;
     float: right;
 }
@@ -259,7 +293,9 @@ footer button .text span {
     position: fixed;
     top: 0;
     left: 0;
-    background-color: #eee;
+    width: 10000px;
+    height: 10000px;
+    background-color: #999;
     display: none;
     opacity: .5;
     z-index: 9999;
