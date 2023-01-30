@@ -263,7 +263,7 @@ footer button .text span {
     background-position: center;
     background-repeat: no-repeat;
     color: #dfd;
-    display: none;
+    /*display: none;*/
     z-index: 10000;
 }
 
@@ -274,6 +274,12 @@ footer button .text span {
 
 .update a {
     color: #fff;
+}
+
+.update .updateTips {
+    font-size: 12px;
+    text-align: center;
+    color: #ccc;
 }
 
 .update button {
