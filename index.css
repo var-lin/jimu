@@ -263,7 +263,7 @@ footer button .text span {
     background-position: center;
     background-repeat: no-repeat;
     color: #dfd;
-    /*display: none;*/
+    display: none;
     z-index: 10000;
 }
 
