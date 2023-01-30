@@ -22,11 +22,12 @@ $(function () {
         if(version === res.updateV) {
             console.log('已经是最新版本')
         }else if(localStorage.getItem('updateTip') == 'true' || localStorage.getItem('updateV') !== res.updateV) {
+            var updateAndroidUrl = 'https://lhshilin.github.io/jimu/download/积木_' + res.updateV + '.apk';
             $('.update').stop().fadeIn(1500)
             $('.cover').show()
             $('body').css('overflow', 'hidden')
         }
-        $('.update .androidUrl a').prop('href', androidUrl).children('span').html(androidUrl)
+        $('.update .androidUrl a').prop('href', updateAndroidUrl).children('span').html(updateAndroidUrl)
         $('.update .updatebtnleft').on('click', function () {
             $('.update').stop().fadeOut(300)
             $('.cover').hide()
@@ -35,7 +36,7 @@ $(function () {
             localStorage.setItem('updateV', res.updateV)
         })
         $('.update .updatebtnright').on('click', function () {
-            window.location.href = androidUrl;
+            window.location.href = updateAndroidUrl;
         })
     });
 })
