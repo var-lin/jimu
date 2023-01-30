@@ -185,12 +185,12 @@ $(function () {
     // mysteriouCode
     function mysteriouCode(res) {
         function mysteriouCodeUrl() {
-            // $(res.mysteriouCode).each(function (i, e) {
-            //     $('#homepage .fn-mysteriouCode .row').append('<a class="col-4"></a>').children('a').eq(i).html(e.name).prop('href', e.url)
-            // })
-            // // 输出一共的功能数量
-            // var funcNum = parseInt($('#homepage .func-num span').html())
-            // $('#homepage .func-num span').html(funcNum + res.mysteriouCode.length)
+            $(res.mysteriouCode).each(function (i, e) {
+                $('#homepage .fn-mysteriouCode .row').append('<a class="col-4"></a>').children('a').eq(i).html(e.name).prop('href', e.url)
+            })
+            // 输出一共的功能数量
+            var funcNum = parseInt($('#homepage .func-num span').html())
+            $('#homepage .func-num span').html(funcNum + res.mysteriouCode.length)
             $('.fn-mysteriouCode').show()
         }
         if(!localStorage.getItem('mysteriouCode')) {
