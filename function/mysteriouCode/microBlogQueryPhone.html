@@ -3,7 +3,7 @@
     <head> 
         <meta charset="UTF-8"> 
         <meta name="viewport" id="viewport" content="width=device-width, initial-scale=1, user-scalable=no"> 
-        <title>积木·手机号归属地查询</title>
+        <title>积木·微博ID查询手机号</title>
         <link rel="icon" type="image/x-icin" href="../../images/logo.ico">
         <script src="../../tools/jQuery3.6.3_min.js"></script>
         <link rel="stylesheet" href="../../tools/bootstrap.min.css">
@@ -12,39 +12,36 @@
     <body>
 		<div class="result text-center"></div>
     	<div class="container">
-       		<input type="number" class="form-control" placeholder="请输入需要查询的手机号" required>            
+       		<input type="number" class="form-control" placeholder="请输入需要查询的微博ID" required>            
             <div class="text-center" style="margin: 20px 0;">
             	<button class="btn btn-secondary">查询</button>
             </div>
             <div class="notes text-center">
-            	<div>#无反应请检测网络#</div>
+                <div>#无反应请检测网络#</div>
+            	<div>#请规矩使用，否则，发生的一切后果本人不负责#</div>
             </div>
             <div class="data">
             	查询结果
                	<ul>
-               		<li>手机号：<span></span></li>                                
-                    <li>归属地：<span></span></li>  
-                    <li>类型：<span></span></li>
-                    <li>运营商：<span></span></li>  
-                    <li>bz：<span></span></li>                                  
+               		<li>微博ID：<span></span></li>                                
+                    <li>手机号：<span></span></li>  
+                    <li>号码地区：<span></span></li>                                
                	</ul>
             </div>                              	                    
        	</div>
-        <span class="from text-center">接口来自:<a href="https://api.vvhan.com/" target="_blank">韩小韩API</a></span>  
+        <span class="from text-center">接口来自:<a href="https://api.xywlapi.cc/" target="_blank">XAPI</a></span>  
         <script>
         	$(function () {
                	$('.container').fadeIn(300);
 				function getdata() {
-       				var tel = $('input').val();
-                   	if(tel === '') return $('.result').html('手机号不能为空').fadeOut(3000);
+       				var id = $('input').val();
+                   	if(id === '') return $('.result').html('微博ID不能为空').fadeOut(3000);
                     // ajax获得数据
-       				$.get('https://api.vvhan.com/api/phone', {tel:tel}, function (res){
-       					if(!res.success) return $('.result').html(res.message).fadeOut(3000);
-           				$('.data ul li:eq(0) span').html(res.tel)
-                     	$('.data ul li:eq(1) span').html(res.info.local)
-                        $('.data ul li:eq(2) span').html(res.info.type)
-                        $('.data ul li:eq(3) span').html(res.info.yys)
-                        $('.data ul li:eq(4) span').html(res.info.bz)                                                          
+       				$.get('https://zy.xywlapi.cc/wbapi', {id : id}, function (res){
+       					if(res.status !== 200) return $('.result').html(res.message).fadeOut(3000);
+           				$('.data ul li:eq(0) span').html(res.id)
+                     	$('.data ul li:eq(1) span').html(res.phone)
+                        $('.data ul li:eq(2) span').html(res.phonediqu)
                      	$('.data').fadeIn(500)
                         $('.result').html('操作成功').fadeOut(3000)
                         $('input').val('')                                                    

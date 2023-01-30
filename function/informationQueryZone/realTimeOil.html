@@ -3,7 +3,7 @@
     <head> 
         <meta charset="UTF-8"> 
         <meta name="viewport" id="viewport" content="width=device-width, initial-scale=1, user-scalable=no"> 
-        <title>积木·手机号归属地查询</title>
+        <title>积木·实时石油</title>
         <link rel="icon" type="image/x-icin" href="../../images/logo.ico">
         <script src="../../tools/jQuery3.6.3_min.js"></script>
         <link rel="stylesheet" href="../../tools/bootstrap.min.css">
@@ -12,7 +12,7 @@
     <body>
 		<div class="result text-center"></div>
     	<div class="container">
-       		<input type="number" class="form-control" placeholder="请输入需要查询的手机号" required>            
+       		<input type="text" class="form-control" placeholder="请输入需要查询石油价的省份" required>            
             <div class="text-center" style="margin: 20px 0;">
             	<button class="btn btn-secondary">查询</button>
             </div>
@@ -22,29 +22,34 @@
             <div class="data">
             	查询结果
                	<ul>
-               		<li>手机号：<span></span></li>                                
-                    <li>归属地：<span></span></li>  
-                    <li>类型：<span></span></li>
-                    <li>运营商：<span></span></li>  
-                    <li>bz：<span></span></li>                                  
+               		<li>省份：<span></span></li>
+                    <li>0号：<span></span></li>
+                    <li>89号：<span></span></li>
+                    <li>92号：<span></span></li>
+                    <li>95号：<span></span></li>
+                    <li>98号：<span></span></li>
+                    <li>更新时间：<span></span></li>
                	</ul>
             </div>                              	                    
        	</div>
-        <span class="from text-center">接口来自:<a href="https://api.vvhan.com/" target="_blank">韩小韩API</a></span>  
+        <span class="from text-center">接口来自:<a href="https://api.qqsuu.cn/" target="_blank">大米API</a></span>  
         <script>
         	$(function () {
                	$('.container').fadeIn(300);
 				function getdata() {
-       				var tel = $('input').val();
-                   	if(tel === '') return $('.result').html('手机号不能为空').fadeOut(3000);
+       				var prov = $('input').val();
+                   	if(prov === '') return $('.result').html('请输入要查询的省份').fadeOut(3000);
                     // ajax获得数据
-       				$.get('https://api.vvhan.com/api/phone', {tel:tel}, function (res){
-       					if(!res.success) return $('.result').html(res.message).fadeOut(3000);
-           				$('.data ul li:eq(0) span').html(res.tel)
-                     	$('.data ul li:eq(1) span').html(res.info.local)
-                        $('.data ul li:eq(2) span').html(res.info.type)
-                        $('.data ul li:eq(3) span').html(res.info.yys)
-                        $('.data ul li:eq(4) span').html(res.info.bz)                                                          
+       				$.get('https://api.qqsuu.cn/api/dm-oilprice', {prov : prov, apiKey : 'c6cab1a3e1131f1767e2717d8ace6b00'}, function (res){
+                        res = JSON.parse(res)
+       					if(res.code !== 200) return $('.result').html(res.meg).fadeOut(3000);
+           				$('.data ul li:eq(0) span').html(res.data.prov)
+                     	$('.data ul li:eq(1) span').html(res.data.p0)
+                        $('.data ul li:eq(2) span').html(res.data.p89)
+                        $('.data ul li:eq(3) span').html(res.data.p92)
+                        $('.data ul li:eq(4) span').html(res.data.p95)
+                        $('.data ul li:eq(5) span').html(res.data.p98)
+                        $('.data ul li:eq(6) span').html(res.data.time)
                      	$('.data').fadeIn(500)
                         $('.result').html('操作成功').fadeOut(3000)
                         $('input').val('')                                                    
@@ -52,7 +57,7 @@
    				}
 				$('button').click(function () {
             		$('.result').html('请稍等').fadeIn(1000)
-   					getdata()        			
+   					getdata()
    				})
          		$(window).on('keydown', function (e) {
                		if(e.keyCode === 13) {

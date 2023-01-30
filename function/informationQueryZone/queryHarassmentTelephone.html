@@ -1,0 +1,70 @@
+<!doctype html>
+<html> 
+    <head> 
+        <meta charset="UTF-8"> 
+        <meta name="viewport" id="viewport" content="width=device-width, initial-scale=1, user-scalable=no"> 
+        <title>积木·骚扰电话查询</title>
+        <link rel="icon" type="image/x-icin" href="../../images/logo.ico">
+        <script src="../../tools/jQuery3.6.3_min.js"></script>
+        <link rel="stylesheet" href="../../tools/bootstrap.min.css">
+        <link rel="stylesheet" href="../css/function.css">
+    </head> 
+    <body>
+        <div class="result text-center"></div>
+        <div class="container">
+            <input type="number" class="form-control" placeholder="请输入需要查询的手机号" required>            
+            <div class="text-center" style="margin: 20px 0;">
+                <button class="btn btn-secondary">查询</button>
+            </div>
+            <div class="notes text-center">
+                <div>#无反应请检测网络#</div>
+            </div>
+            <div class="data">
+                查询结果
+                <ul>
+                    <li>手机号：<span></span></li>                                
+                    <li>归属地：<span></span><span></span></li>
+                    <li>运营商：<span></span></li>  
+                    <li>360手机卫士：<span></span></li>
+                    <li>搜狗号码通：<span></span></li>
+                    <li>百度手机卫士：<span></span></li>
+                    <li><span></span></li>                                  
+                </ul>
+            </div>                                                      
+        </div>
+        <span class="from text-center">接口来自:<a href="https://api.aa1.cn/" target="_blank">夏柔API</a></span>  
+        <script>
+            $(function () {
+                $('.container').fadeIn(300);
+                function getdata() {
+                    var tel = $('input').val();
+                    if(tel === '') return $('.result').html('手机号不能为空').fadeOut(3000);
+                    // ajax获得数据
+                    $.get('https://zj.v.api.aa1.cn/api/saorao/', {phone : tel}, function (res){
+                        if(!res.success) return $('.result').html('操作失败').fadeOut(3000);
+                        $('.data ul li:eq(0) span').html(res.tel)
+                        $('.data ul li:eq(1) span:eq(0)').html(res.info.province).siblings('span').html(res.info.city)
+                        $('.data ul li:eq(2) span').html(res.info.operator)
+                        $('.data ul li:eq(3) span').html(res.data[0].msg)
+                        $('.data ul li:eq(4) span').html(res.data[1].msg)
+                        $('.data ul li:eq(5) span').html(res.data[2].msg)
+                        $('.data ul li:eq(6) span').html(res.text.time)
+                        $('.data').fadeIn(500)
+                        $('.result').html('操作成功').fadeOut(3000)
+                        $('input').val('')                                                    
+                    })
+                }
+                $('button').click(function () {
+                    $('.result').html('请稍等').fadeIn(1000)
+                    getdata()                   
+                })
+                $(window).on('keydown', function (e) {
+                    if(e.keyCode === 13) {
+                        $('.result').html('请稍等').fadeIn(1000)
+                        getdata()
+                    }
+                })
+            })
+        </script>   
+    </body>
+</html>

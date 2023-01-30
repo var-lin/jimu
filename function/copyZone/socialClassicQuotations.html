@@ -5,7 +5,7 @@
         <meta name="viewport" id="viewport" content="width=device-width, initial-scale=1, user-scalable=no"> 
         <title>积木·社会经典语录</title>
         <link rel="icon" type="image/x-icin" href="../../images/logo.ico">
-        <script src="../../tools/jQuery3.6.0_main.js"></script>
+        <script src="../../tools/jQuery3.6.3_min.js"></script>
         <script src="../../tools/clipboard.min.js"></script>
         <link rel="stylesheet" href="../../tools/bootstrap.min.css">
         <link rel="stylesheet" href="../css/function.css">
@@ -26,22 +26,22 @@
         <span class="from text-center">接口来自:<a href="https://api.oick.cn/yulu/" target="_blank">零七生活API</a></span>  
         <script>
         	$(function () {
-               	$('.container').fadeIn(300)
-                $('.result').html('请稍等').fadeIn(1000)
-				function getData() {
+               	$('.container').fadeIn(300);
+                $('.result').html('请稍等').fadeIn(1000);
+                // ajax获得数据
+				(function () {
        				$.get('https://api.oick.cn/yulu/api.php', function (res){
             			$('#result').html(res)
                      	$('.data').fadeIn(500)
                         $('.result').html('操作成功').fadeOut(3000)      
        				})
-   				}
-                getData()
-                // 翻译结果点击复制
+   				}());
+                // 文字点击复制
          		new Clipboard('#result', {
-    					'#result': function(trigger) {
+    				'#result': function(trigger) {
         				return trigger.nextElementSibling
     				}
-				})
+				});
 			})
         </script> 	
     </body>

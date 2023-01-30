@@ -5,7 +5,7 @@
         <meta name="viewport" id="viewport" content="width=device-width, initial-scale=1, user-scalable=no"> 
         <title>积木·历史上的今天</title>
         <link rel="icon" type="image/x-icin" href="../../images/logo.ico">
-        <script src="../../tools/jQuery3.6.0_main.js"></script> 
+        <script src="../../tools/jQuery3.6.3_min.js"></script> 
         <link rel="stylesheet" href="../../tools/bootstrap.min.css">
         <style>
         	.result {
@@ -63,6 +63,7 @@
     			bottom: 20%;
     			right: 10px;
     			width: 2rem;
+                cursor: pointer;
     			z-index: 999;
             }
 			.from {
@@ -88,9 +89,11 @@
         <span class="from text-center">接口来自:<a href="https://api.oick.cn/" target="_blank">零七生活API</a></span>  
         <script>
         	$(function () {
-				function getdata() {
+                $('.result').html('请稍等(有时候不稳定)').fadeIn(1000);
+                // ajax获得数据
+				(function () {
        				$.get('https://api.oick.cn/lishi/api.php', function (res){
-       					if(res.code !== "1") return $('.result').html('查询失败').fadeOut(5000)
+       					if(res.code !== "1") return $('.result').html('查询失败').fadeOut(5000);
                        	$('.time span').html(res.day)
                         $(res.result).each(function (i, e) {
                             $('.data').append('<div class="row text-center"><div class="row col-12 time">时间：<span></span></div><div class="row">事件</div><div class="row col-12"></div></div>')
@@ -100,9 +103,7 @@
                         $('.container').fadeIn(300)
                         $('.result').html('查询成功').fadeOut(3000)
        				})
-   				}
-         		$('.result').html('请稍等(有时候不稳定)').fadeIn(1000)
-         		getdata()
+   				}());
                	// 更新日志返回置顶显示隐藏功能
     			function returnTop() {
         			$(window).on('scroll', function () {

@@ -3,7 +3,7 @@
     <head> 
         <meta charset="UTF-8"> 
         <meta name="viewport" id="viewport" content="width=device-width, initial-scale=1, user-scalable=no"> 
-        <title>积木·ICP备案查询</title>
+        <title>积木·域名拦截检测</title>
         <link rel="icon" type="image/x-icin" href="../../images/logo.ico">
         <script src="../../tools/jQuery3.6.3_min.js"></script>
         <link rel="stylesheet" href="../../tools/bootstrap.min.css">
@@ -12,9 +12,9 @@
     <body>
 		<div class="result text-center"></div>
     	<div class="container">
-       		<input type="text" class="form-control" placeholder="请输入需要查询ICP备案的域名" required>            
+       		<input type="text" class="form-control" placeholder="请输入需要查询域名" required>            
             <div class="text-center" style="margin: 20px 0;">
-            	<button class="btn btn-secondary">查询域名ICP</button>
+            	<button class="btn btn-secondary">查询</button>
             </div>
             <div class="notes text-center">
                 <div>#无反应请检测网络#</div>
@@ -23,40 +23,31 @@
             <div class="data">
             	查询结果
                	<ul>
-               		<li>网址公司名字</li>
-                    <li><span></span></li>
-                    <li>网址类型：<span></span></li>
-                    <li>网址ICP：<span></span></li>
-                    <li>网址名字：<span></span></li>
                     <li>网址：<span></span></li>
-                    <li>备案最新时间：<span></span></li>                    
+               		<li>结果：<span></span></li>                          
                	</ul>
             </div>                              	                    
        	</div>
-        <span class="from text-center">接口来自:<a href="https://api.oick.cn/" target="_blank">零七生活api</a></span>  
+        <span class="from text-center">接口来自:<a href="https://api.oick.cn/" target="_blank">零七生活API</a></span>  
         <script>
         	$(function () {
                	$('.container').fadeIn(300);
                 // ajax获得数据
 				function getdata() {
        				var url = $('input').val();
-                   	if(url === '') return $('.result').html('请输入域名').fadeOut(3000);
-       				$.get('https://api.oick.cn/icp/api.php', {url:url}, function (res){
-       					if(res.code != 200) return $('.result').html('操作失败').fadeOut(3000);
-           				$('.data ul li:eq(1) span').html(res.name)
-            			$('.data ul li:eq(2) span').html(res.nature)
-            			$('.data ul li:eq(3) span').html(res.icp)
-                     	$('.data ul li:eq(4) span').html(res.site_name)
-                        $('.data ul li:eq(5) span').html(res.site_index)
-                        $('.data ul li:eq(6) span').html(res.site_time)            
+                    if(url === '') return $('.result').html('请输入网址').fadeOut(3000);
+       				$.get('https://api.oick.cn/t/api.php', {url:url}, function (res){
+       					if(res.code !== 1) return $('.result').html(res.msg).fadeOut(3000);
+                        $('.data ul li:eq(0) span').html(res.url)
+                        $('.data ul li:eq(1) span').html(res.type)                                                   
                      	$('.data').fadeIn(500)
                         $('.result').html('操作成功').fadeOut(3000)
-                        $('input').val('')                    
+                        $('input').val('')                                                    
        				})
    				}
-				$('button').click(function () { 
+				$('button').click(function () {
             		$('.result').html('请稍等').fadeIn(1000)
-   					getdata()        			
+   					getdata()
    				})
          		$(window).on('keydown', function (e) {
                		if(e.keyCode === 13) {

@@ -5,11 +5,11 @@
         <meta name="viewport" id="viewport" content="width=device-width, initial-scale=1, user-scalable=no"> 
         <title>积木·效验爬虫的真实性</title>
         <link rel="icon" type="image/x-icin" href="../../images/logo.ico">
-        <script src="../../tools/jQuery3.6.0_main.js"></script> 
+        <script src="../../tools/jQuery3.6.3_min.js"></script> 
         <link rel="stylesheet" href="../../tools/bootstrap.min.css">
         <link rel="stylesheet" href="../css/function.css">
         <style>
-			.data {
+			.data span {
              	text-shadow: 1px 1px 1px #f40;                      
 			}
         </style>
@@ -30,11 +30,12 @@
 	    <span class="from text-center">接口来自:<a href="https://api.uomg.com/" target="_blank">UomgAPI</a></span>  
         <script>
         	$(function () {
-               	$('.container').fadeIn(300)
+               	$('.container').fadeIn(300);
+                // ajax获得数据
 				function getdata() {
-       				var ip = $('input').val()
-                   	if(ip === '') return $('.result').html('请输入IP').fadeOut(3000)
-       				$.get('https://api.uomg.com/api/ck_spider', {ip:ip}, function (res){                  
+       				var ip = $('input').val();
+                   	if(ip === '') return $('.result').html('请输入IP').fadeOut(3000);
+       				$.get('https://api.uomg.com/api/ck_spider', {ip:ip}, function (res){
                    		$('.data span').eq(0).html(ip)                 	
                    		$('.data span').eq(1).html(res.spider).html(res.msg)         			
                      	$('.data').fadeIn(500)
@@ -47,7 +48,10 @@
    					getdata()                          			
    				})
          		$(window).on('keydown', function (e) {
-               		if(e.keyCode === 13) getdata()
+               		if(e.keyCode === 13) {
+                        $('.result').html('请稍等').fadeIn(1000)
+                        getdata()
+                    }
                	})
 			})
         </script> 	

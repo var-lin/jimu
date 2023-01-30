@@ -3,15 +3,14 @@
     <head> 
         <meta charset="UTF-8"> 
         <meta name="viewport" id="viewport" content="width=device-width, initial-scale=1, user-scalable=no"> 
-        <title>积木·字符串加密/解密</title>
+        <title>积木·md5加密/解密</title>
         <link rel="icon" type="image/x-icin" href="../../images/logo.ico">
         <script src="../../tools/jQuery3.6.3_min.js"></script>
         <script src="../../tools/clipboard.min.js"></script>
         <link rel="stylesheet" href="../../tools/bootstrap.min.css">
         <link rel="stylesheet" href="../css/function.css">
         <style>
-        	textarea,
-            input {
+        	textarea {
     			margin-top: 2rem;
 			}
 			.btn-secondary {
@@ -24,19 +23,17 @@
 		<div class="result text-center"></div>
 	   	<div class="container">
          	<div class="switch text-center" style="margin-top: 20%;">
-            	<button class="btn btn-success" style="margin-right: 2rem;width: 9rem;">字符串加密</button>
-               	<button class="btn btn-info" style="width: 7rem">字符串解密</button>
+            	<button class="btn btn-success" style="margin-right: 2rem;width: 9rem;">md5加密</button>
+               	<button class="btn btn-info" style="width: 7rem">md5解密</button>
             </div>
             <div id="function">
-            	<!-- 字符串加密输入框 -->
+            	<!-- md5加密输入框 -->
             	<div id="encryption">
             		<textarea class="form-control text-center" placeholder="请输入需要加密的内容"></textarea>
-            		<input type="text" class="form-control" placeholder="请输入加密的密码" required>
             	</div>
-               	<!-- 字符串解密输入框 -->
+               	<!-- md5解密输入框 -->
             	<div id="decryption" style="display: none;">
             		<textarea class="form-control text-center" placeholder="请输入需要解密的内容"></textarea>
-            		<input type="text" class="form-control" placeholder="请输入解密的密码" required>
             	</div>
             </div>
          	
@@ -45,7 +42,7 @@
 	        </div>
            	<div class="notes text-center">
               	<div>#无反应请检测网络#</div>
-                <div>#密码必须为<span style="color: red;">1-8位纯数字</span>#</div>
+                <div>#md5解密只有一小部分可以#</div>
             </div>
 	        <div class="data text-center" style="margin-top: 2rem;">
            		<div>加密/解密结果</div>
@@ -53,7 +50,7 @@
                 <div style="color: #999;font-size: .8rem;text-shadow: none;">#加密/解密结果可以点击复制#</div>
            	</div> 
         </div>
-        <span class="from text-center">接口来自:<a href="https://api.vvhan.com/" target="_blank">韩小韩API</a></span>  
+        <span class="from text-center">接口来自:<a href="https://api.aa1.cn/" target="_blank">夏柔API</a></span>  
         <script>
         	$(function () {
                	$('.container').fadeIn(300);
@@ -80,26 +77,22 @@
                 	// 加密方法
                 	function encryption() {
                        	var string = $('#encryption textarea').val();
-                   		var key = $('#encryption input').val()
-                        $.get('https://api.vvhan.com/api/jm', {key:key,string:string,type:'en'}, function (res){
-                            if(!res.success) return $('.result').html('操作失败').fadeOut(3000);
+                        $.get('https://v.api.aa1.cn/api/api-md5/go.php', {act : '加密', md5 : string}, function (res){
+                            if(string == '') return $('.result').html('操作失败').fadeOut(3000);
                             $('.result').html('操作成功').fadeOut(3000)
-                         	$('#result').html(res.enmissString)
+                         	$('#result').html(res)
                             $('#encryption textarea').val('')
-                            $('#encryption input').val('')
                             results()
        					})
                    	}
                     // 解密方法
        				function decryption() {
                        	var string = $('#decryption textarea').val();
-                   		var key = $('#decryption input').val();
-                        $.get('https://api.vvhan.com/api/jm', {key:key,string:string,type:'de'}, function (res){
-                            if(!res.success) return $('.result').html('操作失败').fadeOut(3000);
+                        $.get('https://v.api.aa1.cn/api/api-md5/go.php', {act : '解密', md5 : string}, function (res){
+                            if(string == '') return $('.result').html('操作失败').fadeOut(3000);
                             $('.result').html('操作成功').fadeOut(3000)
-                         	$('#result').html(res.demissString)
+                         	$('#result').html(res)
                             $('#decryption textarea').val('')
-                            $('#decryption input').val('')
                             results()
        					})
                     }

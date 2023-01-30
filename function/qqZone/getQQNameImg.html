@@ -5,7 +5,7 @@
         <meta name="viewport" id="viewport" content="width=device-width, initial-scale=1, user-scalable=no"> 
         <title>积木·获取QQ昵称和头像</title>
         <link rel="icon" type="image/x-icin" href="../../images/logo.ico">
-        <script src="../../tools/jQuery3.6.0_main.js"></script>
+        <script src="../../tools/jQuery3.6.3_min.js"></script>
         <link rel="stylesheet" href="../../tools/bootstrap.min.css">
         <link rel="stylesheet" href="../css/function.css">
         <style>
@@ -34,21 +34,23 @@
 	         	<div class="dataname"><span></span>的昵称：<span></span></div>
 	         	<div class="dataimg">
 	          		<h4><span></span>的头像</h4>
-	           		<img src="">           
+	           		<a href="" download="QQ头像"><img src=""></a>
 	           	</div>
            	</div> 
         </div>
         <span class="from text-center">接口来自:<a href="https://api.oick.cn/" target="_blank">零七生活API</a></span>  
         <script>
         	$(function () {
-               	$('.container').fadeIn(300)
+               	$('.container').fadeIn(300);
 				function getdata() {
        				var qqnum = $('input').val();
-                   	if(qqnum === '') return $('.result').html('请输入QQ号').fadeOut(3000)
+                   	if(qqnum === '') return $('.result').html('请输入QQ号').fadeOut(3000);
+                   	// ajax获得数据
        				$.get('https://api.oick.cn/qqtx/api.php', {qq:qqnum}, function (res){
-       					if(res.code !== 1) return $('.result').html('获取失败').fadeOut(3000)                      	             	
+       					if(res.code !== 1) return $('.result').html('获取失败').fadeOut(3000);
             			$('.dataname span').eq(0).html(qqnum).siblings().html(res.name)
             			$('.dataimg h4 span').html(qqnum)
+            			$('.dataimg a').prop('href', res.imgurl)
             			$('.dataimg img').prop('src', res.imgurl)
                      	$('.data').fadeIn(500)
                         $('.result').html('操作成功').fadeOut(3000)
@@ -60,7 +62,10 @@
    					getdata()        			
    				})
          		$(window).on('keydown', function (e) {
-               		if(e.keyCode === 13) getdata()
+               		if(e.keyCode === 13) {
+                        $('.result').html('请稍等').fadeIn(1000)
+                        getdata()
+                    }
                	})
 			})
         </script> 	
