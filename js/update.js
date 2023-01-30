@@ -26,7 +26,7 @@ $(function () {
             $('.cover').show()
             $('body').css('overflow', 'hidden')
         }
-        $('.update .androidUrl a').prop('href', res.androidUrl).children('span').html(res.androidUrl)
+        $('.update .androidUrl a').prop('href', androidUrl).children('span').html(androidUrl)
         $('.update .updatebtnleft').on('click', function () {
             $('.update').stop().fadeOut(300)
             $('.cover').hide()
@@ -35,7 +35,7 @@ $(function () {
             localStorage.setItem('updateV', res.updateV)
         })
         $('.update .updatebtnright').on('click', function () {
-            window.location.href = res.androidUrl;
+            window.location.href = androidUrl;
         })
     });
 })
