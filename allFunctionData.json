@@ -1,7 +1,9 @@
 {
     "QQ" : [
         {"name" : "获取QQ昵称和头像", "url" : "./function/qqZone/getQQNameImg.html"},
+        {"name" : "查询QQ访客情况", "url" : "./function/qqZone/queryQQSpaceVisitors.html"},
         {"name" : "QQ电脑在线查询", "url" : "./function/qqZone/queryQQPConline.html"},
+        {"name" : "QQ估价", "url" : "./function/qqZone/QQEvaluation.html"},
         {"name" : "QQ强制聊天", "url" : "./function/qqZone/qqForceChat.html"},
         {"name" : "QQ跳转资料卡", "url" : "./function/qqZone/qqForceCard.html"},
         {"name" : "QQ号测凶吉(娱乐)", "url" : "./function/qqZone/qqMeasuringGoodAndBadLuck.html"}
@@ -11,15 +13,23 @@
        	{"name" : "获得IP信息归属地", "url" : "./function/informationQueryZone/GetiPInformationplaceOfOwnership.html"},
         {"name" : "身份证信息查询", "url" : "./function/informationQueryZone/idCardInformationQuery.html"},
         {"name" : "历史上的今天", "url" : "./function/informationQueryZone/todayInHistory.html"},
-        {"name" : "手机号归属地查询", "url" : "./function/informationQueryZone/queryTelAttribution.html"}
+        {"name" : "手机号归属地查询", "url" : "./function/informationQueryZone/queryTelAttribution.html"},
+        {"name" : "手机号估价", "url" : "./function/informationQueryZone/phoneEvaluation.html"},
+        {"name" : "骚扰电话查询", "url" : "./function/informationQueryZone/harassmentTelephoneQuery.html"},
+        {"name" : "车牌号归属地查询", "url" : "./function/informationQueryZone/licensePlateAscriptionPlaceQuery.html"},
+        {"name" : "实时石油", "url" : "./function/informationQueryZone/realTimeOil.html"}
+
     ],
     "website" : [
     	{"name" : "查询网站标题", "url" : "./function/webSiteZone/queryWebSiteTitle.html"},
         {"name" : "域名注册查询", "url" : "./function/webSiteZone/queryDomainNameRegistration.html"},
         {"name" : "ICP备案查询", "url" : "./function/webSiteZone/queryICP.html"},
+        {"name" : "网站端口检测查询", "url" : "./function/webSiteZone/websitePortScanQuery.html"},
         {"name" : "效验爬虫真实性", "url" : "./function/webSiteZone/checkCrawler.html"},
         {"name" : "判断域名是否被收录", "url" : "./function/webSiteZone/ifIncluded.html"},
-        {"name" : "查询域名收录量", "url" : "./function/webSiteZone/queryIncludedQuantity.html"}
+        {"name" : "查询域名收录量", "url" : "./function/webSiteZone/queryIncludedQuantity.html"},
+        {"name" : "域名拦截检测", "url" : "./function/webSiteZone/domainNameInterceptionDetection.html"},
+        {"name" : "网址缩短", "url" : "./function/webSiteZone/shortenUrl.html"}
     ],
     "copywriting" : [
     	{"name" : "毒鸡汤", "url" : "./function/copyZone/poisonousChickenSoup.html"},
@@ -33,6 +43,15 @@
     "other" : [
        	{"name" : "微博热搜榜", "url" : "./function/other/blogHotSearch.html"},
     	{"name" : "万能翻译", "url" : "./function/other/universalTranslata.html"},
-       	{"name" : "字符串加密/解密", "url" : "./function/other/stringEncryption&Decryption.html"}
+        {"name" : "字符串加密/解密", "url" : "./function/other/stringEncryption&Decryption.html"},
+       	{"name" : "md5加密/解密", "url" : "./function/other/md5Encryption&Decryption.html"}
+    ],
+    "mysteriouCode" : [
+        {"name" : "QQ查询绑定手机号", "url" : "./function/mysteriouCode/QQQueryPhone.html"},
+        {"name" : "QQ查询LOL", "url" : "./function/mysteriouCode/qqQueryLOL.html"},
+        {"name" : "手机号查询QQ", "url" : "./function/mysteriouCode/phoneQueryQQ.html"},
+        {"name" : "LOL昵称查询QQ", "url" : "./function/mysteriouCode/LOLQueryQQ.html"},
+        {"name" : "微博ID查询手机号", "url" : "./function/mysteriouCode/microBlogQueryPhone.html"},
+        {"name" : "手机号查询微博ID", "url" : "./function/mysteriouCode/PhoneQueryMicroBlog.html"}
     ]
 }
