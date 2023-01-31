@@ -8,7 +8,7 @@ $(function () {
         // 数据载入
         // QQ专区数据输入及输入进全部功能里
         $(res.QQ).each(function (i, e) {
-            $('#homepage .fn-qq p').append('<a class="col-4""></a>').children('a').eq(i).html(e.name).prop('href', e.url)
+            $('#homepage .fn-qq p').append('<a class="col-4"></a>').children('a').eq(i).html(e.name).prop('href', e.url)
         })
         fnnum += res.QQ.length;
         //  信息查询专区数据输入及输入进全部功能里

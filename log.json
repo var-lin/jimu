@@ -4,6 +4,7 @@
         "data" : [
             "<span class=\"c-f40\">New&nbsp</span>新增“<a href=\"./function/webSiteZone/domainNameInterceptionDetection.html\">域名拦截检测</a>”功能",
             "<span class=\"c-f40\">New&nbsp</span>新增“<a href=\"./function/webSiteZone/websitePortScanQuery.html\">网站端口检测查询</a>”功能",
+            "<span class=\"c-f40\">New&nbsp</span>新增“<a href=\"./function/webSiteZone/pingTest.html\">ping测试(2023.01.31.999)</a>”功能",
             "<span class=\"c-f40\">New&nbsp</span>新增“<a href=\"./function/informationQueryZone/harassmentTelephoneQuery.html\">骚扰电话查询</a>”",
             "<span class=\"c-f40\">New&nbsp</span>新增“<a href=\"./function/informationQueryZone/licensePlateAscriptionPlaceQuery.html\">车牌号归属地查询</a>”功能",
             "<span class=\"c-f40\">New&nbsp</span>新增“<a href=\"./function/informationQueryZone/realTimeOil.html\">实时石油</a>”功能",
@@ -13,9 +14,12 @@
             "<span class=\"c-f40\">New&nbsp</span>恢复“<a href=\"./function/qqZone/QQEvaluation.html\">QQ估价</a>”功能",
             "<span class=\"c-f40\">New&nbsp</span>恢复“<a href=\"./function/other/md5Encryption&Decryption.html\">md5加密/解密</a>”功能",
             "<span class=\"c-f40\">New&nbsp</span>修复“<a href=\"./function/webSiteZone/ifIncluded.html\">判断域名是否被收录</a>”功能查询失败",
+            "<span class=\"c-f40\">New&nbsp</span>修复“<a href=\"./function/qqZone/qqForceChat.html\">QQ强制聊天</a>”功能打开后白屏(2023.01.31.999)",
             "<span class=\"c-f40\">New&nbsp</span>优化代码逻辑",
             "<span class=\"c-f40\">New&nbsp</span>添加logo图标·3s·",
             "<span class=\"c-f40\">New&nbsp</span>logo变圆角",
+            "<span class=\"c-f40\">New&nbsp</span>功能输入文字居中(2023.01.31.999)",
+            "<span class=\"c-f40\">New&nbsp</span>联系作者及logo显示在最上层(2023.01.31.999)",
             "<span class=\"c-f40\">New&nbsp</span>更新jQuery最新版本3.6.3",
             "<span style=\"color: #055\">注释&nbsp</span>软件的接口都是别人的，所以不知道什么时候功能就会失效"
         ]

@@ -5,7 +5,6 @@
     left: 50%;
     transform: translateX(-50%);
     color: red;
-    text-shadow: 1px 1px #000;
 }
 .refresh {
     position: fixed;
@@ -13,19 +12,21 @@
     right: .5rem;  
    	width: 1rem;              
     font-size: 1.1rem;
-    color: #04f;               
-    text-shadow: 0 -1px 1px green;
+    color: #04f;
     z-index: 999;
 }
 .container {
     display: none;
 }
 input {
+    text-align: center;
  	margin-top: 25%;
+    width: 30px;
     box-shadow: 0 -1px 1px black;
     outline: none;
 }
 textarea {
+    text-align: center;
    	margin-top: 2rem;
     box-shadow: 0 -1px 1px black;
     outline: none;
@@ -51,11 +52,10 @@ textarea {
    	padding: 10px;
    	text-align: center;
    	background-color: #eee;
-  	text-shadow: 1px 1px #963;
     box-shadow: 1px 1px 1px black;
 }
 .data div span {
-   	text-shadow: 1px 1px 1px #f40;
+    color: #f40;
 }
 .data ul {
   	padding: 0;

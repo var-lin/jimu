@@ -25,6 +25,7 @@
         {"name" : "域名注册查询", "url" : "./function/webSiteZone/queryDomainNameRegistration.html"},
         {"name" : "ICP备案查询", "url" : "./function/webSiteZone/queryICP.html"},
         {"name" : "网站端口检测查询", "url" : "./function/webSiteZone/websitePortScanQuery.html"},
+        {"name" : "网站端口检测查询", "url" : "./function/webSiteZone/pingTest.html"},
         {"name" : "效验爬虫真实性", "url" : "./function/webSiteZone/checkCrawler.html"},
         {"name" : "判断域名是否被收录", "url" : "./function/webSiteZone/ifIncluded.html"},
         {"name" : "查询域名收录量", "url" : "./function/webSiteZone/queryIncludedQuantity.html"},
