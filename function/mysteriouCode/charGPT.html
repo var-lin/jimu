@@ -107,6 +107,7 @@
                     if(text === '') return alert('请输入内容');
                     $('.dialogBox').append('<p class="right"><img src="../../images/logo.png" alt="logo"></p><p class="content"><span class="right">' + text +'</span></p>')
                     $('.text').val('')
+                    $('.dialogBox').scrollTop(1000000000)
                     var data = {
                         model : 'text-davinci-003',
                         user : '1',
@@ -128,6 +129,7 @@
                         data : data,
                         success : function (res) {
                             $('.dialogBox').append('<p class="left"><img src="../../images/charGPT.png" alt="charGpt-log"></p><p class="content"><span class="left">' + res.choices[0].text + '</span></p>')
+                            $('.dialogBox').scrollTop(1000000000)
                         }
                     })
                 }
