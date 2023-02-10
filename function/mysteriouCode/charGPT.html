@@ -1,0 +1,141 @@
+<!doctype html>
+<html> 
+    <head> 
+        <meta charset="UTF-8"> 
+        <meta name="viewport" id="viewport" content="width=device-width, initial-scale=1, user-scalable=no"> 
+        <title>积木·charGPt</title>
+        <link rel="icon" type="image/x-icin" href="../../images/logo.ico">
+        <script src="../../tools/jQuery3.6.3_min.js"></script>
+        <link rel="stylesheet" href="../../tools/bootstrap.min.css">
+        <style>
+            * {
+                margin: 0;
+                padding: 0;
+            }
+            /* 头部 */
+
+            .header {
+                height: 10%;
+                padding: 10px;
+                text-align: center;
+            }
+            .header img {
+                width: 40px;
+            }
+            .header span {
+                font-size: 25px;
+                font-weight: bolder;
+                vertical-align: bottom;
+                margin-left: 5px;
+            }
+
+            /* 对话框 */
+
+            .dialogBox {
+                width: 70%;
+                background-color: #efefef;
+                margin: 10px auto;
+                padding: 10px;
+                border-radius: 15px;
+                overflow: auto;
+            }
+            .dialogBox .left {
+                text-align: left;
+            }
+            .dialogBox .right {
+                text-align: right;
+            }
+            .dialogBox img {
+                width: 40px;
+                margin-top: 10px;
+            }
+            .dialogBox .content {
+                margin: 0 10px;
+                padding: 10px;
+                border-radius: 5px;
+                background-color: #bbb;
+            }
+
+            /* 输入框 */
+
+        	.inputBox {
+                position: fixed;
+                bottom: 10px;
+                width: 100%;
+                height: 50px;
+                text-align: center;
+            }
+            .inputBox input {
+                width: 70%;
+                height: 100%;
+                border: none;
+                border-radius: 8px;
+                outline-style: none;
+                background-color: #efefef;
+                padding: 5px 10px;
+             }
+             .inputBox .send {
+                width: 66px;
+                height: 80%;
+                border: none;
+                background-color: #abf;
+                border-radius: 5px;
+             }
+        </style>
+    </head> 
+    <body>
+		<div class="header">
+            <img src="../../images/charGPT.png" alt="log"><span>charGPT</span>
+        </div>
+        <div class="dialogBox">
+            <p class="left">
+                <img src="../../images/charGpt.png" alt="charGpt-log">
+            </p>
+            <p class="content">
+                <span class="left">您需要什么帮助呢？</span>
+            </p>
+        </div>
+        <div class="inputBox">
+            <input class="text" type="text" placeholder="请输入内容">
+            <button class="send">发送</button>
+        </div>
+        <script>
+        	$(function () {
+                $('.dialogBox').css('height', ($(window).height()) * 0.8)
+                function data() {
+                    var text = $('.text').val();
+                    if(text === '') return alert('请输入内容');
+                    $('.dialogBox').append('<p class="right"><img src="../../images/logo.png" alt="logo"></p><p class="content"><span class="right">' + text +'</span></p>')
+                    $('.text').val('')
+                    var data = {
+                        model : 'text-davinci-003',
+                        user : '1',
+                        max_tokens : 1000,
+                        temperature : 0.5,
+                        frequency_penalty : 0,
+                        presence_penalty : 0,
+                        prompt : text
+                    }
+                    data = JSON.stringify(data);
+                    $.ajax({
+                        url : 'https://api.openai.com/v1/completions',
+                        type : 'post',
+                        dataType : 'json',
+                        headers : {
+                            Authorization : 'Bearer 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',
+                            'Content-Type' : 'application/json'
+                        },
+                        data : data,
+                        success : function (res) {
+                            $('.dialogBox').append('<p class="left"><img src="../../images/charGpt.png" alt="charGpt-log"></p><p class="content"><span class="left">' + res.choices[0].text + '</span></p>')
+                        }
+                    })
+                }
+                $('.send').on('click', data)
+                $(window).on('keydown', function (e) {
+                    if(e.keyCode == 13) data();
+                })
+			})
+        </script> 	
+    </body>
+</html>
