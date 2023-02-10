@@ -102,7 +102,7 @@
         <script>
         	$(function () {
                 $('.dialogBox').css('height', ($(window).height()) * 0.8)
-                function data() {
+                function getData() {
                     var text = $('.text').val();
                     if(text === '') return alert('请输入内容');
                     $('.dialogBox').append('<p class="right"><img src="../../images/logo.png" alt="logo"></p><p class="content"><span class="right">' + text +'</span></p>')
@@ -131,9 +131,9 @@
                         }
                     })
                 }
-                $('.send').on('click', data)
+                $('.send').on('click', getData)
                 $(window).on('keydown', function (e) {
-                    if(e.keyCode == 13) data();
+                    if(e.keyCode == 13) getData();
                 })
 			})
         </script> 	
