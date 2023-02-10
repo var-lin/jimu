@@ -108,29 +108,31 @@
                     $('.dialogBox').append('<p class="right"><img src="../../images/logo.png" alt="logo"></p><p class="content"><span class="right">' + text +'</span></p>')
                     $('.text').val('')
                     $('.dialogBox').scrollTop(1000000000)
-                    var data = {
-                        model : 'text-davinci-003',
-                        user : '1',
-                        max_tokens : 1000,
-                        temperature : 0.5,
-                        frequency_penalty : 0,
-                        presence_penalty : 0,
-                        prompt : text
-                    }
-                    data = JSON.stringify(data);
-                    $.ajax({
-                        url : 'https://api.openai.com/v1/completions',
-                        type : 'post',
-                        dataType : 'json',
-                        headers : {
-                            Authorization : 'Bearer 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',
-                            'Content-Type' : 'application/json'
-                        },
-                        data : data,
-                        success : function (res) {
-                            $('.dialogBox').append('<p class="left"><img src="../../images/charGPT.png" alt="charGpt-log"></p><p class="content"><span class="left">' + res.choices[0].text + '</span></p>')
-                            $('.dialogBox').scrollTop(1000000000)
-                        }
+                    $.get('https://api.vvhan.com/api/jm', {key : '0310', string : 'IjNBUnR2SHc3cXZtTjB6YzR2RUdielo3bjlWZ01UVng2emMwS1NSZDVHbGY4VUxTaE5HYU5Sek9FbkswenllbzJkYUZlTGtOaDVQcStyRmRrRUxGTzVnPT0i', type : 'de'}, function (res){
+                        var Authorization = 'Bearer ' + res.demissString,
+                            data = JSON.stringify({
+                            model : 'text-davinci-003',
+                            user : '1',
+                            max_tokens : 1000,
+                            temperature : 0.5,
+                            frequency_penalty : 0,
+                            presence_penalty : 0,
+                            prompt : text
+                        });
+                        $.ajax({
+                            url : 'https://api.openai.com/v1/completions',
+                            type : 'post',
+                            dataType : 'json',
+                            headers : {
+                                Authorization : Authorization,
+                                'Content-Type' : 'application/json'
+                            },
+                            data : data,
+                            success : function (res) {
+                                $('.dialogBox').append('<p class="left"><img src="../../images/charGPT.png" alt="charGpt-log"></p><p class="content"><span class="left">' + res.choices[0].text + '</span></p>')
+                                $('.dialogBox').scrollTop(1000000000)
+                            }
+                        })
                     })
                 }
                 $('.send').on('click', getData)
