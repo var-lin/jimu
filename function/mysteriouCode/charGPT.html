@@ -32,7 +32,7 @@
             /* 对话框 */
 
             .dialogBox {
-                width: 70%;
+                width: 85%;
                 background-color: #efefef;
                 margin: 10px auto;
                 padding: 10px;
@@ -49,11 +49,19 @@
                 width: 40px;
                 margin-top: 10px;
             }
-            .dialogBox .content {
+            .dialogBox .leftContent,
+            .dialogBox .rightContent {
                 margin: 0 10px;
                 padding: 10px;
                 border-radius: 5px;
-                background-color: #bbb;
+            }
+            .dialogBox .leftContent {
+                background-color: #fff;
+                color: #424242;
+            }
+            .dialogBox .rightContent {
+                background-color: skyblue;
+                color: #fff;
             }
 
             /* 输入框 */
@@ -91,7 +99,7 @@
             <p class="left">
                 <img src="../../images/charGPT.png" alt="charGpt-log">
             </p>
-            <p class="content">
+            <p class="leftContent">
                 <span class="left">您需要什么帮助呢？</span>
             </p>
         </div>
@@ -105,20 +113,20 @@
                 function getData() {
                     var text = $('.text').val();
                     if(text === '') return alert('请输入内容');
-                    $('.dialogBox').append('<p class="right"><img src="../../images/logo.png" alt="logo"></p><p class="content"><span class="right">' + text +'</span></p>')
+                    $('.dialogBox').append('<p class="right"><img src="../../images/logo.png" alt="logo"></p><p class="leftContent"><span>' + text +'</span></p>')
                     $('.text').val('')
                     $('.dialogBox').scrollTop(1000000000)
                     $.get('https://api.vvhan.com/api/jm', {key : '0310', string : 'IjNBUnR2SHc3cXZtTjB6YzR2RUdielo3bjlWZ01UVng2emMwS1NSZDVHbGY4VUxTaE5HYU5Sek9FbkswenllbzJkYUZlTGtOaDVQcStyRmRrRUxGTzVnPT0i', type : 'de'}, function (res){
                         var Authorization = 'Bearer ' + res.demissString,
                             data = JSON.stringify({
-                            model : 'text-davinci-003',
-                            user : '1',
-                            max_tokens : 1000,
-                            temperature : 0.5,
-                            frequency_penalty : 0,
-                            presence_penalty : 0,
-                            prompt : text
-                        });
+                                model : 'text-davinci-003',
+                                user : '1',
+                                max_tokens : 1000,
+                                temperature : 0.5,
+                                frequency_penalty : 0,
+                                presence_penalty : 0,
+                                prompt : text
+                            });
                         $.ajax({
                             url : 'https://api.openai.com/v1/completions',
                             type : 'post',
@@ -129,7 +137,7 @@
                             },
                             data : data,
                             success : function (res) {
-                                $('.dialogBox').append('<p class="left"><img src="../../images/charGPT.png" alt="charGpt-log"></p><p class="content"><span class="left">' + res.choices[0].text + '</span></p>')
+                                $('.dialogBox').append('<p class="left"><img src="../../images/charGPT.png" alt="charGpt-log"></p><p class="rightContent"><span>' + res.choices[0].text + '</span></p>')
                                 $('.dialogBox').scrollTop(1000000000)
                             }
                         })
