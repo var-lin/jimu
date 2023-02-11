@@ -113,7 +113,7 @@
                 function getData() {
                     var text = $('.text').val();
                     if(text === '') return alert('请输入内容');
-                    $('.dialogBox').append('<p class="right"><img src="../../images/logo.png" alt="logo"></p><p class="rightContent"><span>' + text +'</span></p>')
+                    $('.dialogBox').append('<p class="right"><img src="../../images/logo.png" alt="logo"></p><p class="rightContent"><span>' + text +'</span></p><p class="left"><img src="../../images/chatGPT.png" alt="chatGPT-log"></p><p class="leftContent"><span>chatGPT正在思考中...</span></p>')
                     $('.text').val('')
                     $('.dialogBox').scrollTop($('.dialogBox').prop('scrollHeight'))
                     $.get('https://api.vvhan.com/api/jm', {key : '0310', string : 'IjNBUnR2SHc3cXZtTjB6YzR2RUdielo3bjlWZ01UVng2emMwS1NSZDVHbGY4VUxTaE5HYU5Sek9FbkswenllbzJkYUZlTGtOaDVQcStyRmRrRUxGTzVnPT0i', type : 'de'}, function (res){
@@ -137,12 +137,12 @@
                             },
                             data : data,
                             success : function (res) {
-                                $('.dialogBox').append('<p class="left"><img src="../../images/chatGPT.png" alt="chatGPT-log"></p><p class="leftContent"><span>' + res.choices[0].text + '</span></p>')
+                                $('.dialogBox p:last-child span').html(res.choices[0].text)
                                 $('.dialogBox').scrollTop($('.dialogBox').prop('scrollHeight'))
                             },
                             error : function (err) {
                                 err = JSON.parse(err.responseText)
-                                $('.dialogBox').append('<p class="left"><img src="../../images/chatGPT.png" alt="chatGPT-log"></p><p class="leftContent"><span>' + err.error.message + '</span></p>')
+                                $('.dialogBox p:last-child span').html(err.error.message)
                                 $('.dialogBox').scrollTop($('.dialogBox').prop('scrollHeight'))
                             }
                         })
