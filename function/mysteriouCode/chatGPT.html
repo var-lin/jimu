@@ -49,6 +49,9 @@
                 width: 40px;
                 margin-top: 10px;
             }
+            .dialogBox .time {
+                margin: 0 5px;
+            }
             .dialogBox .leftContent,
             .dialogBox .rightContent {
                 margin: 0 10px;
@@ -98,9 +101,10 @@
         <div class="dialogBox">
             <p class="left">
                 <img src="../../images/chatGPT.png" alt="chatGPT-log">
+                <span class="time"></span>
             </p>
             <p class="leftContent">
-                <span class="left">您需要什么帮助呢？</span>
+                <span class="leftText">您需要什么帮助呢？</span>
             </p>
         </div>
         <div class="inputBox">
@@ -110,10 +114,22 @@
         <script>
         	$(function () {
                 $('.dialogBox').css('height', ($(window).height()) * 0.8)
+                $('.dialogBox .left:first-child .time').html(nowTime())
+                function nowTime() {
+                    var time = new Date();
+                    function zeroPadding(num) {
+                        if(num < 10) {
+                            return '0' + num
+                        }
+                        return num
+                    }
+                    time = time.getHours() + ':' + zeroPadding(time.getMinutes()) + ':' + zeroPadding(time.getSeconds());
+                    return time
+                }
                 function getData() {
                     var text = $('.text').val();
                     if(text === '') return alert('请输入内容');
-                    $('.dialogBox').append('<p class="right"><img src="../../images/logo.png" alt="logo"></p><p class="rightContent"><span>' + text +'</span></p><p class="left"><img src="../../images/chatGPT.png" alt="chatGPT-log"></p><p class="leftContent"><span>chatGPT正在思考中...</span></p>')
+                    $('.dialogBox').append('<p class="right"><span class="time">' + nowTime() + '</span><img src="../../images/logo.png" alt="logo"></p><p class="rightContent"><span class="rightText">' + text +'</span></p><p class="left"><img src="../../images/chatGPT.png" alt="chatGPT-log"><span class="time"></span></p><p class="leftContent"><span class="leftText">chatGPT正在思考中...</span></p>')
                     $('.text').val('')
                     $('.dialogBox').scrollTop($('.dialogBox').prop('scrollHeight'))
                     $.get('https://api.vvhan.com/api/jm', {key : '0310', string : 'IjNBUnR2SHc3cXZtTjB6YzR2RUdielo3bjlWZ01UVng2emMwS1NSZDVHbGY4VUxTaE5HYU5Sek9FbkswenllbzJkYUZlTGtOaDVQcStyRmRrRUxGTzVnPT0i', type : 'de'}, function (res){
@@ -137,12 +153,14 @@
                             },
                             data : data,
                             success : function (res) {
-                                $('.dialogBox p:last-child span').html(res.choices[0].text)
+                                $('.dialogBox .leftContent:last-child .leftText').html(res.choices[0].text)
+                                $('.dialogBox .left:nth-last-child(2) .time').html(nowTime())
                                 $('.dialogBox').scrollTop($('.dialogBox').prop('scrollHeight'))
                             },
                             error : function (err) {
                                 err = JSON.parse(err.responseText)
-                                $('.dialogBox p:last-child span').html(err.error.message)
+                                $('.dialogBox .leftContent:last-child .leftText').html(err.error.message)
+                                $('.dialogBox .left:nth-last-child(2) .time').html(nowTime())
                                 $('.dialogBox').scrollTop($('.dialogBox').prop('scrollHeight'))
                             }
                         })
