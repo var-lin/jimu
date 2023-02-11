@@ -32,7 +32,7 @@
             /* 对话框 */
 
             .dialogBox {
-                width: 85%;
+                width: 80%;
                 background-color: #efefef;
                 margin: 10px auto;
                 padding: 10px;
@@ -113,9 +113,9 @@
                 function getData() {
                     var text = $('.text').val();
                     if(text === '') return alert('请输入内容');
-                    $('.dialogBox').append('<p class="right"><img src="../../images/logo.png" alt="logo"></p><p class="leftContent"><span>' + text +'</span></p>')
+                    $('.dialogBox').append('<p class="right"><img src="../../images/logo.png" alt="logo"></p><p class="rightContent"><span>' + text +'</span></p>')
                     $('.text').val('')
-                    $('.dialogBox').scrollTop(1000000000)
+                    $('.dialogBox').scrollTop($('.dialogBox').prop('scrollHeight'))
                     $.get('https://api.vvhan.com/api/jm', {key : '0310', string : 'IjNBUnR2SHc3cXZtTjB6YzR2RUdielo3bjlWZ01UVng2emMwS1NSZDVHbGY4VUxTaE5HYU5Sek9FbkswenllbzJkYUZlTGtOaDVQcStyRmRrRUxGTzVnPT0i', type : 'de'}, function (res){
                         var Authorization = 'Bearer ' + res.demissString,
                             data = JSON.stringify({
@@ -132,13 +132,18 @@
                             type : 'post',
                             dataType : 'json',
                             headers : {
-                                Authorization : Authorization,
+                                Authorization : '',
                                 'Content-Type' : 'application/json'
                             },
-                            data : data,
+                            data : 'data',
                             success : function (res) {
-                                $('.dialogBox').append('<p class="left"><img src="../../images/charGPT.png" alt="charGpt-log"></p><p class="rightContent"><span>' + res.choices[0].text + '</span></p>')
-                                $('.dialogBox').scrollTop(1000000000)
+                                $('.dialogBox').append('<p class="left"><img src="../../images/charGPT.png" alt="charGpt-log"></p><p class="leftContent"><span>' + res.choices[0].text + '</span></p>')
+                                $('.dialogBox').scrollTop($('.dialogBox').prop('scrollHeight'))
+                            },
+                            error : function (err) {
+                                err = JSON.parse(err.responseText)
+                                $('.dialogBox').append('<p class="left"><img src="../../images/charGPT.png" alt="charGpt-log"></p><p class="leftContent"><span>' + err.error.message + '</span></p>')
+                                $('.dialogBox').scrollTop($('.dialogBox').prop('scrollHeight'))
                             }
                         })
                     })
