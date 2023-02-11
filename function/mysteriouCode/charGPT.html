@@ -132,10 +132,10 @@
                             type : 'post',
                             dataType : 'json',
                             headers : {
-                                Authorization : '',
+                                Authorization : Authorization,
                                 'Content-Type' : 'application/json'
                             },
-                            data : 'data',
+                            data : data,
                             success : function (res) {
                                 $('.dialogBox').append('<p class="left"><img src="../../images/charGPT.png" alt="charGpt-log"></p><p class="leftContent"><span>' + res.choices[0].text + '</span></p>')
                                 $('.dialogBox').scrollTop($('.dialogBox').prop('scrollHeight'))
