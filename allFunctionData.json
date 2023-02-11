@@ -54,6 +54,6 @@
         {"name" : "LOL昵称查询QQ", "url" : "./function/mysteriouCode/LOLQueryQQ.html"},
         {"name" : "微博ID查询手机号", "url" : "./function/mysteriouCode/microBlogQueryPhone.html"},
         {"name" : "手机号查询微博ID", "url" : "./function/mysteriouCode/PhoneQueryMicroBlog.html"},
-        {"name" : "charGPT", "url" : "https://lhshilin.github.io/jimu/function/mysteriouCode/charGPT.html"}
+        {"name" : "charGPT", "url" : "https://lhshilin.github.io/jimu/function/mysteriouCode/chatGPT.html"}
     ]
 }
