@@ -6,7 +6,7 @@
             "<span class=\"c-f40\">New&nbsp</span>新增“<a href=\"./function/informationQueryZone/charGPTKeyQuotaQuery.html\">charGPT密钥额度查询</a>”功能",
             "<span class=\"c-f40\">New&nbsp</span>“<a href=\"./function/informationQueryZone/realTimeOil.html\">实时石油</a>”功能不再需要ip加入白名单",
             "<span class=\"c-f40\">New&nbsp</span>修复返回首页后滚动条置顶",
-            "<span class=\"c-f40\">New&nbsp</span>优化代码逻辑"
+            "<span class=\"c-f40\">New&nbsp</span>优化代码逻辑",
             "<span style=\"color: #055\">注释&nbsp</span>软件的接口都是别人的，所以不知道什么时候功能就会失效"
         ]
     },
