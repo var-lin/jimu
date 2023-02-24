@@ -119,6 +119,10 @@ a {
     padding: 5px;
 }
 
+#homepage .jumbotron p {
+    height: 200px;
+}
+
     /* 首页分区a链接样式 */
 
 #homepage .row .jumbotron .row a {

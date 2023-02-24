@@ -8,6 +8,7 @@ $(function () {
         type : 'get',
         dataType : 'json',
         success : function (res) {
+            $('#homepage .row p').css('height', 'auto')
             var fnnum = 0,
                 aElement = '<a class="col-4"></a>';
             // 数据载入
