@@ -18,8 +18,6 @@
             </div>
             <div class="notes text-center">
                 <div>#无反应请检测网络#</div>
-                <div>#如果查询失败可能是被锁ip禁用了#</div>
-            	<div>#可以联系作者ip添加到白名单#</div>
             </div>
             <div class="data">
             	查询结果
@@ -42,7 +40,7 @@
        				var prov = $('input').val();
                    	if(prov === '') return $('.result').html('请输入要查询的省份').fadeOut(3000);
                     // ajax获得数据
-       				$.get('https://api.qqsuu.cn/api/dm-oilprice', {prov : prov, apiKey : 'c6cab1a3e1131f1767e2717d8ace6b00'}, function (res){
+       				$.get('https://api.qqsuu.cn/api/dm-oilprice', {prov : prov}, function (res){
                         res = JSON.parse(res)
        					if(res.code !== 200) return $('.result').html(res.meg).fadeOut(3000);
            				$('.data ul li:eq(0) span').html(res.data.prov)

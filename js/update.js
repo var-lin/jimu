@@ -1,6 +1,6 @@
 $(function () {
     // 当前版本信息写入
-    var version = '2023.01.31.999',
+    var version = '2023.02.25.999',
         sourceCodeUrl = 'https://lhshilin.github.io/jimu/download/积木' + version + '版本源码.zip',
         androidUrl = 'https://lhshilin.github.io/jimu/download/积木_' + version + '.apk';
     $('#sourceCodeDownload').attr('data-clipboard-text', sourceCodeUrl)

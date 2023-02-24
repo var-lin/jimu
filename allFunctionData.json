@@ -17,7 +17,8 @@
         {"name" : "手机号估价", "url" : "./function/informationQueryZone/phoneEvaluation.html"},
         {"name" : "骚扰电话查询", "url" : "./function/informationQueryZone/harassmentTelephoneQuery.html"},
         {"name" : "车牌号归属地查询", "url" : "./function/informationQueryZone/licensePlateAscriptionPlaceQuery.html"},
-        {"name" : "实时石油", "url" : "./function/informationQueryZone/realTimeOil.html"}
+        {"name" : "实时石油", "url" : "./function/informationQueryZone/realTimeOil.html"},
+        {"name" : "chatGPT密钥额度查询", "url" : "./function/informationQueryZone/charGPTKeyQuotaQuery.html"}
 
     ],
     "website" : [
@@ -45,7 +46,8 @@
        	{"name" : "微博热搜榜", "url" : "./function/other/blogHotSearch.html"},
     	{"name" : "万能翻译", "url" : "./function/other/universalTranslata.html"},
         {"name" : "字符串加密/解密", "url" : "./function/other/stringEncryption&Decryption.html"},
-       	{"name" : "md5加密/解密", "url" : "./function/other/md5Encryption&Decryption.html"}
+       	{"name" : "md5加密/解密", "url" : "./function/other/md5Encryption&Decryption.html"},
+        {"name" : "charGPT", "url" : "./function/other/chatGPT.html"}
     ],
     "mysteriouCode" : [
         {"name" : "QQ查询绑定手机号", "url" : "./function/mysteriouCode/QQQueryPhone.html"},
@@ -54,6 +56,6 @@
         {"name" : "LOL昵称查询QQ", "url" : "./function/mysteriouCode/LOLQueryQQ.html"},
         {"name" : "微博ID查询手机号", "url" : "./function/mysteriouCode/microBlogQueryPhone.html"},
         {"name" : "手机号查询微博ID", "url" : "./function/mysteriouCode/PhoneQueryMicroBlog.html"},
-        {"name" : "charGPT", "url" : "https://lhshilin.github.io/jimu/function/mysteriouCode/chatGPT.html"}
+        {"name" : "charGPT(内置keyapi)", "url" : "./function/mysteriouCode/chatGPT.html"}
     ]
 }

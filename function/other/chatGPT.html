@@ -1,0 +1,315 @@
+<!doctype html>
+<html> 
+    <head> 
+        <meta charset="UTF-8"> 
+        <meta name="viewport" id="viewport" content="width=device-width, initial-scale=1, user-scalable=no"> 
+        <title>积木·chatGPT</title>
+        <link rel="icon" type="image/x-icin" href="../../images/logo.ico">
+        <script src="../../tools/jQuery3.6.3_min.js"></script>
+        <link rel="stylesheet" href="../../tools/bootstrap.min.css">
+        <style>
+            * {
+                margin: 0;
+                padding: 0;
+            }
+
+            /* 头部 */
+
+            .header {
+                height: 10%;
+                padding: 10px;
+                text-align: center;
+            }
+
+            .header img {
+                width: 40px;
+            }
+
+            .header span {
+                font-size: 25px;
+                font-weight: bolder;
+                vertical-align: bottom;
+                margin-left: 5px;
+            }
+
+            /* 对话框 */
+
+            .dialogBox {
+                width: 80%;
+                background-color: #efefef;
+                margin: 10px auto;
+                padding: 10px;
+                border-radius: 15px;
+                overflow: auto;
+            }
+
+            .dialogBox::-webkit-scrollbar {
+                width: 0;
+            }
+
+            .dialogBox .left {
+                text-align: left;
+            }
+
+            .dialogBox .right {
+                text-align: right;
+            }
+
+            .dialogBox img {
+                width: 40px;
+                margin-top: 10px;
+                border: 5px;
+            }
+
+            .dialogBox .time {
+                margin: 0 5px;
+            }
+
+            .dialogBox .leftContent,
+            .dialogBox .rightContent {
+                margin: 0 10px;
+                padding: 10px;
+                border-radius: 5px;
+            }
+
+            .dialogBox textarea {
+                width: 100%;
+                height: 1.5rem;
+                border: none;
+                background: none;
+                resize: none;
+            }
+
+            .dialogBox .leftContent {
+                background-color: #fff;
+                color: #424242;
+            }
+
+            .dialogBox .rightContent {
+                background-color: skyblue;
+                color: #fff;
+            }
+
+            /* 输入框 */
+
+            .inputBox {
+                position: fixed;
+                bottom: 10px;
+                width: 100%;
+                height: 50px;
+                text-align: center;
+            }
+
+            .inputBox input {
+                width: 70%;
+                height: 100%;
+                border: none;
+                border-radius: 8px;
+                outline-style: none;
+                background-color: #cfcfcf;
+                padding: 5px 10px;
+            }
+
+             .inputBox .send {
+                width: 66px;
+                height: 80%;
+                border: none;
+                background-color: #abf;
+                border-radius: 5px;
+            }
+
+            /* apikey输入框 */
+
+            .apikey {
+                position: fixed;
+                left: 50%;
+                top: 50%;
+                transform: translate(-50%, -50%);
+                width: 300px;
+                border: 5px solid #add;
+                border-radius: 20px;
+                padding: 10px 20px;
+                background-color: #fff;
+                display: none;
+                z-index: 10000;
+            }
+
+            .apikey input {
+                width: 100%;
+                margin: auto;
+                border: none;
+                border-bottom: 3px solid #daa;
+                outline-style: none;
+                background: none;
+                padding: 5px;
+                text-align: center;
+                color: #f40;
+            }
+
+            .apikey .apikeyTip {
+                margin: 5px 0;
+                font-size: 8px;
+                color: #666;
+                text-align: center;
+            }
+
+            .apikey button {
+                margin: 10px auto;
+                float: right;
+            }
+
+            /* 遮掩层 */
+            .cover {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 10000px;
+                height: 10000px;
+                background-color: #999;
+                display: none;
+                opacity: .5;
+                z-index: 9999;
+            }
+        </style>
+    </head> 
+    <body>
+		<div class="header">
+            <img src="../../images/chatGPT.png" alt="log"><span>chatGPT</span>
+        </div>
+        <div class="dialogBox">
+            <p class="left">
+                <img src="../../images/chatGPT.png" alt="chatGPT-log">
+                <span class="time"></span>
+            </p>
+            <p class="leftContent">
+                <textarea class="leftText" disabled>您需要什么帮助呢？</textarea>
+            </p>
+        </div>
+        <div class="inputBox">
+            <input class="text" type="text" placeholder="请输入内容">
+            <button class="send">发送</button>
+        </div>
+        <div class="apikey">
+            <div>
+                <input class="apikeyInput" type="text" placeholder="请输入apikey">
+            </div>
+            <div class="apikeyTip">
+                <div>#长按页面最上面的chatGPT的logo图片2秒可以换apikey#</div>
+            </div>
+            <div>
+                <button class="apikeyBtn btn btn-secondary">确定</button>
+            </div>
+        </div>
+        <div class="cover"></div>
+        <script>
+            $(function () {
+                $('.dialogBox').css('height', ($(window).height()) * 0.8)
+                $('.dialogBox .left:first-child .time').html(nowTime())
+                function nowTime() {
+                    var time = new Date();
+                    function zeroPadding(num) {
+                        if(num < 10) {
+                            return '0' + num
+                        }
+                        return num
+                    }
+                    time = zeroPadding(time.getHours()) + ':' + zeroPadding(time.getMinutes()) + ':' + zeroPadding(time.getSeconds());
+                    return time
+                }
+                if(!localStorage.getItem('apikey')) {
+                    $('.apikey').show()
+                    $('.cover').show()
+                    $('body').css('overflow', 'hidden')
+                }
+                $('.apikeyBtn').on('click', function () {
+                    if($('.apikeyInput').val()) {
+                        localStorage.setItem('apikey', $('.apikeyInput').val())
+                        $('.apikey').hide(300)
+                        $('.cover').hide()
+                        $('body').css('overflow', 'visible')
+                    }
+                })
+                // 得到回复信息
+                function getData() {
+                    var text = $.trim($('.text').val());
+                    if(text === '') return;
+                    $('.dialogBox').append('<p class="right"><span class="time">' + nowTime() + '</span><img src="../../images/logo.png" alt="logo"></p><p class="rightContent"><textarea class="rightText" disabled>' + text +'</textarea></p><p class="left"><img src="../../images/chatGPT.png" alt="chatGPT-log"><span class="time"></span></p><p class="leftContent"><textarea class="leftText" disabled>chatGPT正在思考中...</textarea></p>')
+                    $('.text').val('')
+                    $('.dialogBox .rightText:last').css('height', $('.dialogBox .rightText:last').prop('scrollHeight'))
+                    $('.dialogBox').scrollTop($('.dialogBox').prop('scrollHeight'))
+                    var Authorization = 'Bearer ' + localStorage.getItem('apikey'),
+                        data = JSON.stringify({
+                            model : 'text-davinci-003',
+                            user : '1',
+                            max_tokens : 2000,
+                            temperature : 0.5,
+                            frequency_penalty : 0,
+                            presence_penalty : 0,
+                            prompt : text
+                        });
+                    $.ajax({
+                        url : 'https://api.openai.com/v1/completions',
+                        type : 'post',
+                        dataType : 'json',
+                        headers : {
+                            Authorization : Authorization,
+                            'Content-Type' : 'application/json'
+                        },
+                        data : data,
+                        success : function (res) {
+                            $('.dialogBox .leftText:last').html($.trim(res.choices[0].text)).css('height', $('.dialogBox .leftContent:last-child .leftText').prop('scrollHeight'))
+                            $('.dialogBox .left:nth-last-child(2) .time').html(nowTime())
+                            $('.dialogBox').scrollTop($('.dialogBox').prop('scrollHeight'))
+                        },
+                        error : function (err) {
+                            err = JSON.parse(err.responseText)
+                            $('.dialogBox .leftText:last').html($.trim(err.error.message)).css('height', $('.dialogBox .leftContent:last-child .leftText').prop('scrollHeight'))
+                            $('.dialogBox .left:nth-last-child(2) .time').html(nowTime())
+                            $('.dialogBox').scrollTop($('.dialogBox').prop('scrollHeight'))
+                        }
+                    })
+                }
+                // 长按效果
+                function headerDown() {
+                    var count = 0;
+                    timer = setInterval(function () {
+                        count ++;
+                        if(count == 2) {
+                            count = 0;
+                            clearInterval(timer)
+                            $('.apikey').fadeIn(300)
+                            $('.cover').show()
+                            $('body').css('overflow', 'hidden')
+                        }
+                    }, 1000)
+                    return timer
+                }
+                $('.header img').on({
+                    mousedown : function () {
+                        headerDown()
+                        $('.header img').on('mouseup', function () {
+                            count = 0;
+                            clearInterval(timer)
+                            return false;
+                        }) 
+                    },
+                    touchstart : function () {
+                        headerDown()
+                        $('.header img').on('touchend', function () {
+                            count = 0;
+                            clearInterval(timer)
+                            return false;
+                        }) 
+                    }
+                })
+                $('.send').on('click', getData)
+                $('.apikeyInput').on('keydown', function (e) {
+                    if(e.keyCode == 13) $('.apikeyBtn').click();
+                })
+                $('.text').on('keydown', function (e) {
+                    if(e.keyCode == 13) getData();
+                })
+            })
+        </script> 	
+    </body>
+</html>

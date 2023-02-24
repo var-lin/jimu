@@ -3,7 +3,7 @@
     <head> 
         <meta charset="UTF-8"> 
         <meta name="viewport" id="viewport" content="width=device-width, initial-scale=1, user-scalable=no"> 
-        <title>积木·QQ估价</title>
+        <title>积木·chatGPT密钥额度查询</title>
         <link rel="icon" type="image/x-icin" href="../../images/logo.ico">
         <script src="../../tools/jQuery3.6.3_min.js"></script>
         <link rel="stylesheet" href="../../tools/bootstrap.min.css">
@@ -12,7 +12,7 @@
     <body>
 		<div class="result text-center"></div>
     	<div class="container">
-       		<input type="number" class="form-control" placeholder="请输入需要查询的QQ号" required>            
+       		<input type="text" class="form-control" placeholder="请输入需要查询的chatGPT的apikey" required>            
             <div class="text-center" style="margin: 20px 0;">
             	<button class="btn btn-secondary">查询</button>
             </div>
@@ -22,10 +22,11 @@
             <div class="data">
             	查询结果
                	<ul>
-               		<li>QQ号：<span></span></li>
-                    <li>估价：<span></span></li>
-                    <li>规律：<span></span></li>
-                    <li>位数：<span></span></li>
+               		<li>总额度：<span></span></li>
+                    <li>已用额度：<span></span></li>
+                    <li>剩余额度：<span></span></li>
+                    <li>生效时间：<span></span></li>
+                    <li>到期时间：<span></span></li>
                	</ul>
             </div>                              	                    
        	</div>
@@ -33,20 +34,34 @@
         <script>
         	$(function () {
                	$('.container').fadeIn(300);
+               	function zeroFill(num) {
+               		if(num < 10) {
+               			return '0' + num
+               		}
+               		return num
+               	}
+               	function time(time) {
+               		time = new Date(parseInt(time + '000'));
+               		var year = zeroFill(time.getFullYear()),
+               			month = zeroFill(time.getMonth() + 1),
+               			day = zeroFill(time.getDate()),
+               			houres = zeroFill(time.getHours()),
+               			minutes = zeroFill(time.getMinutes()),
+               			seconds = zeroFill(time.getSeconds());
+               		time = year + '-' + month + '-' + day + ' ' + houres + ':' + minutes + ':' + seconds;
+               		return time
+               	}
 				function getdata() {
-       				var qqnum = $('input').val();
-                   	if(qqnum === '') return $('.result').html('QQ号不能为空').fadeOut(3000);
+       				var apikey = $('input').val();
+                   	if(apikey === '') return $('.result').html('apikey不能为空').fadeOut(3000);
                     // ajax获得数据
-       				$.get('https://v.api.aa1.cn/api/qqgj-v2/', {qq : qqnum}, function (res){
+       				$.get('https://v1.apigpt.cn/key/', {key : apikey}, function (res){
        					if(res.code !== 200) return $('.result').html('操作失败').fadeOut(3000);
-           				$('.data ul li:eq(0) span').html(res.qq)
-                        $('.data ul li:eq(1) span').html(res.money)
-                        if(res.gl) {
-                            $('.data ul li:eq(2) span').html(res.gl)
-                        } else {
-                            $('.data ul li:eq(2) span').html('无')
-                        }
-                     	$('.data ul li:eq(3) span').html(res.ws)
+           				$('.data ul li:eq(0) span').html(res.total_granted)
+                        $('.data ul li:eq(1) span').html(res.total_used)
+                        $('.data ul li:eq(2) span').html(res.total_available)
+                     	$('.data ul li:eq(3) span').html(time(res.effective_at))
+                     	$('.data ul li:eq(4) span').html(time(res.expires_at))
                      	$('.data').fadeIn(500)
                         $('.result').html('操作成功').fadeOut(3000)
                         $('input').val('')                                                    

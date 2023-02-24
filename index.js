@@ -1,41 +1,50 @@
 $(function () {
-    // 初始化 显示
-    $('#homepage').stop().fadeIn(300);
-    $('footer button .text').addClass('texttype');
+    $('#homepage .jumbotron').animate({
+        opacity : 1
+    })
     // 功能链接数据加载
-    $.get('https://lhshilin.github.io/jimu/allFunctionData.json', function (res) {
-        var fnnum = 0;
-        // 数据载入
-        // QQ专区数据输入及输入进全部功能里
-        $(res.QQ).each(function (i, e) {
-            $('#homepage .fn-qq p').append('<a class="col-4"></a>').children('a').eq(i).html(e.name).prop('href', e.url)
-        })
-        fnnum += res.QQ.length;
-        //  信息查询专区数据输入及输入进全部功能里
-        $(res.informationquery).each(function (i, e) {
-            $('#homepage .fn-informationquery .row').append('<a class="col-4"></a>').children('a').eq(i).html(e.name).prop('href', e.url)
-        })
-        fnnum += res.informationquery.length;
-        //  网站专区数据输入及输入进全部功能里
-        $(res.website).each(function (i, e) {
-            $('#homepage .fn-website .row').append('<a class="col-4"></a>').children('a').eq(i).html(e.name).prop('href', e.url)
-        })
-        fnnum += res.website.length;
-        // 文案专区数据输入及输入进全部功能里
-        $(res.copywriting).each(function (i, e) {
-            $('#homepage .fn-copywriting .row').append('<a class="col-4"></a>').children('a').eq(i).html(e.name).prop('href', e.url)
-        })
-        fnnum += res.copywriting.length;
-        // 其他功能专区数据输入及输入进全部功能里
-        $(res.other).each(function (i, e) {
-            $('#homepage .fn-other .row').append('<a class="col-4"></a>').children('a').eq(i).html(e.name).prop('href', e.url)
-        })
-        fnnum += res.other.length;
-        // 输出一共的功能数量
-        $('#homepage .func-num span').html(fnnum)
-
-        mysteriouCode(res)
-    });
+    $.ajax({
+        url : 'https://lhshilin.github.io/jimu/allFunctionData.json',
+        type : 'get',
+        dataType : 'json',
+        success : function (res) {
+            var fnnum = 0,
+                aElement = '<a class="col-4"></a>';
+            // 数据载入
+            // QQ专区数据输入及输入进全部功能里
+            $(res.QQ).each(function (i, e) {
+                $('#homepage .fn-qq p').append(aElement).children('a').eq(i).html(e.name).attr('href', e.url)
+            })
+            fnnum += res.QQ.length;
+            //  信息查询专区数据输入及输入进全部功能里
+            $(res.informationquery).each(function (i, e) {
+                $('#homepage .fn-informationquery .row').append(aElement).children('a').eq(i).html(e.name).attr('href', e.url)
+            })
+            fnnum += res.informationquery.length;
+            //  网站专区数据输入及输入进全部功能里
+            $(res.website).each(function (i, e) {
+                $('#homepage .fn-website .row').append(aElement).children('a').eq(i).html(e.name).attr('href', e.url)
+            })
+            fnnum += res.website.length;
+            // 文案专区数据输入及输入进全部功能里
+            $(res.copywriting).each(function (i, e) {
+                $('#homepage .fn-copywriting .row').append(aElement).children('a').eq(i).html(e.name).attr('href', e.url)
+            })
+            fnnum += res.copywriting.length;
+            // 其他功能专区数据输入及输入进全部功能里
+            $(res.other).each(function (i, e) {
+                $('#homepage .fn-other .row').append(aElement).children('a').eq(i).html(e.name).attr('href', e.url)
+            })
+            fnnum += res.other.length;
+            // 输出一共的功能数量
+            $('#homepage .func-num span').html(fnnum)
+            $('#homepage').stop().fadeIn(300);
+            mysteriouCode(res)
+        },
+        error : function (err) {
+            alert('无网络')
+        }
+    })
     // 更新日志数据输入
     $.get('https://lhshilin.github.io/jimu/log.json', function (res) {
         $(res).each(function (i, v) {
@@ -102,7 +111,7 @@ $(function () {
                    // 页面隐藏显示切换
                 $('#showregion > div').eq(i).stop().fadeIn(300).siblings().hide()
                 // 文字效果切换
-                  $(e).find('.text span').css({
+                $(e).find('.text span').css({
                     fontSize : '.6rem',
                     color : '#fedcba',
                     backgroundColor : 'cornflowerblue'
@@ -186,7 +195,7 @@ $(function () {
     function mysteriouCode(res) {
         function mysteriouCodeUrl() {
             $(res.mysteriouCode).each(function (i, e) {
-                $('#homepage .fn-mysteriouCode .row').append('<a class="col-4"></a>').children('a').eq(i).html(e.name).prop('href', e.url)
+                $('#homepage .fn-mysteriouCode .row').append('<a class="col-4"></a>').children('a').eq(i).html(e.name).attr('href', e.url)
             })
             // 输出一共的功能数量
             var funcNum = parseInt($('#homepage .func-num span').html())
