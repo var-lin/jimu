@@ -8,7 +8,7 @@ $(function () {
         type : 'get',
         dataType : 'json',
         success : function (res) {
-            $('#homepage .row p').css('height', 'auto')
+            $('#homepage .row p').css('height', 'auto').html('')
             var fnnum = 0,
                 aElement = '<a class="col-4"></a>';
             // 数据载入
@@ -27,6 +27,11 @@ $(function () {
                 $('#homepage .fn-website .row').append(aElement).children('a').eq(i).html(e.name).attr('href', e.url)
             })
             fnnum += res.website.length;
+            //  热搜榜专区数据输入及输入进全部功能里
+            $(res.hotSearchList).each(function (i, e) {
+                $('#homepage .fn-hotSearchList .row').append(aElement).children('a').eq(i).html(e.name).attr('href', e.url)
+            })
+            fnnum += res.website.length;
             // 文案专区数据输入及输入进全部功能里
             $(res.copywriting).each(function (i, e) {
                 $('#homepage .fn-copywriting .row').append(aElement).children('a').eq(i).html(e.name).attr('href', e.url)
@@ -43,7 +48,7 @@ $(function () {
             mysteriouCode(res)
         },
         error : function (err) {
-            alert('无网络')
+            $('#homepage .row p').html('请检查网络...')
         }
     })
     // 更新日志数据输入

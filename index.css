@@ -292,6 +292,7 @@ footer button .text span {
 
 .update button {
     border-radius: 5px;
+    padding: 5px 10px;
 }
 .update .updatebtnleft {
     background-color: #faa;

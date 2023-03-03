@@ -33,6 +33,19 @@
         {"name" : "域名拦截检测", "url" : "./function/webSiteZone/domainNameInterceptionDetection.html"},
         {"name" : "网址缩短", "url" : "./function/webSiteZone/shortenUrl.html"}
     ],
+    "hotSearchList" : [
+        {"name" : "微博热搜榜", "url" : "./function/hotSearchListZone/blogHotSearch.html"},
+        {"name" : "虎扑步行街热搜榜", "url" : "./function/hotSearchListZone/huPuHotSearchList.html"},
+        {"name" : "知乎热搜榜", "url" : "./function/hotSearchListZone/zhiHuHotSearchList.html"},
+        {"name" : "36氪热搜榜", "url" : "./function/hotSearchListZone/36KeHotSearchList.html"},
+        {"name" : "百度热点", "url" : "./function/hotSearchListZone/baiDuHotSearchList.html"},
+        {"name" : "哔哩哔哩热搜榜", "url" : "./function/hotSearchListZone/biliHotSearchList.html"},
+        {"name" : "贴吧热议", "url" : "./function/hotSearchListZone/tieBaHotSearchList.html"},
+        {"name" : "抖音热点", "url" : "./function/hotSearchListZone/douYinHotSearchList.html"},
+        {"name" : "少数派热搜榜", "url" : "./function/hotSearchListZone/ssPaiHotSearchList.html"},
+        {"name" : "IT资讯热榜", "url" : "./function/hotSearchListZone/itInfoHotSearchList.html"},
+        {"name" : "IT资讯最新", "url" : "./function/hotSearchListZone/itNewsHotSearchList.html"}
+    ],
     "copywriting" : [
     	{"name" : "毒鸡汤", "url" : "./function/copyZone/poisonousChickenSoup.html"},
         {"name" : "社会经典语录", "url" : "./function/copyZone/socialClassicQuotations.html"},
@@ -43,7 +56,6 @@
         {"name" : "随机情话", "url" : "./function/copyZone/loveTalk.html"}
     ],
     "other" : [
-       	{"name" : "微博热搜榜", "url" : "./function/other/blogHotSearch.html"},
     	{"name" : "万能翻译", "url" : "./function/other/universalTranslata.html"},
         {"name" : "字符串加密/解密", "url" : "./function/other/stringEncryption&Decryption.html"},
        	{"name" : "md5加密/解密", "url" : "./function/other/md5Encryption&Decryption.html"},

@@ -1,0 +1,148 @@
+<!doctype html>
+<html> 
+    <head> 
+        <meta charset="UTF-8"> 
+        <meta name="viewport" id="viewport" content="width=device-width, initial-scale=1, user-scalable=no"> 
+        <title>积木·微博热搜榜</title>
+        <link rel="icon" type="image/x-icin" href="../../images/logo.ico">
+        <script src="../../tools/jQuery3.6.3_min.js"></script> 
+        <link rel="stylesheet" href="../../tools/bootstrap.min.css">
+        <style>
+        	.result {
+                display: none;
+                position: absolute;
+                top: 10%;
+                left: 50%;
+                transform: translateX(-50%);
+                color: red;
+                text-shadow: 1px 1px #000;
+            }
+            .refresh {
+                position: fixed;
+                bottom: 50%;
+                right: .5rem;  
+                width: 1rem;              
+                font-size: 1.1rem;
+                color: #04f;               
+                text-shadow: 0 -1px 1px green;
+                z-index: 999;             
+            }
+            .container {
+                display: none;
+            }
+            .time {
+                margin: 10px;
+                color: #f40;
+                text-shadow: 1px 1px 1px black;
+            }
+            .data > .row {
+             	margin: 0 auto .5rem;
+                padding: 0;
+                border-bottom: 2px solid black;
+                border-radius: 5px 5px 3px 3px;
+                height: 6rem;
+                background-color: #fffbfa;
+             }
+             .data > .row:last-child {
+                margin-bottom: 1rem;
+            }
+            .data .row .tips {
+                height: 2rem;
+                line-height: 2rem;
+                color: green;
+            }
+            .data .row div:last-child {
+                display: flex;
+                align-items:center;
+                text-align: center;
+            }
+			.data .row .hot {
+             	line-height: 4rem;
+             	color: red;
+           	}
+            #returntop {
+                display: none;
+    			position: fixed;
+    			bottom: 20%;
+    			right: 10px;
+    			width: 2rem;
+                cursor: pointer;
+    			z-index: 999;
+            }
+			.from {
+    			position: fixed;
+    			left: 50%;
+    			bottom: .1rem;
+    			transform: translateX(-50%);
+    			font-size: 10px;
+				color: #666;
+			}
+        </style>
+    </head> 
+    <body>
+		<div class="result text-center"></div>
+      	<a class="refresh" href="javascript: void(0);" onclick="location.reload()">刷新</a>
+    	<div class="container">       		
+            <div class="time text-center">查询时间：<span></span></div>
+            <div class="data">
+
+           	</div>   		                             	                    
+       	</div>
+        <img id="returntop" src="../../images/capslock-fill.svg">
+        <span class="from text-center">接口来自:<a href="https://api.vvhan.com/" target="_blank">韩小韩API</a></span>  
+        <script>
+        	$(function () {
+                $('.result').html('请稍等').fadeIn(1000);
+                // 返回置顶
+                (function () {
+                    $(window).on('scroll', function () {
+                        var htmlheight = $(window).height() / 2;
+                        if($('html').scrollTop() > htmlheight) {
+                            $('#returntop').show()
+                        }else {
+                            $('#returntop').hide()
+                        }
+                    })
+                    $('#returntop').on('click', function () {
+                        $('html').stop().animate({
+                            scrollTop : 0
+                        })
+                    })
+                }());
+                // ajax获得数据
+				(function getdata() {
+       				$.get('https://api.vvhan.com/api/wbhot', function (res){                       
+       					if(!res.success) return $('.result').html('查询失败').fadeOut(5000);
+           				$('.network span').html(res.NetWork);
+                       	$('.time span').html(res.time)
+                        $(res.data).each(function (i, e) {
+                            $('.data').append('<div class="row"><div class="row col-12 tips text-center"><div class="col-2 top">top<span></span></div><div class="col-7">标题</div><div class="col-3">热度</div></div><div class="row col-12"><div class="url col-9"><a></a></div><div class="hot col-3"></div></div></div>')
+                           	$('.data > .row').eq(i).find('.row:eq(0) .top span').html(i + 1)
+                           	$('.data > .row').eq(i).find('.row:eq(1) .url a').html(e.title).prop('href', e.url)
+                           	$('.data > .row').eq(i).find('.row:eq(1) .hot').html(e.hot)
+                        })
+                        $('.container').fadeIn(300)
+                        $('.result').html('查询成功').fadeOut(3000)
+       				})
+   				}());
+               	// 更新日志返回置顶显示隐藏功能
+    			function returnTop() {
+        			$(window).on('scroll', function () {
+            			var htmlheight = $(window).height() / 2;
+        				if($('html').scrollTop() > htmlheight) {
+               				$('#returntop').show()
+            			}else {
+                			$('#returntop').hide()
+            			}
+        			})
+        			$('#returntop').on('click', function () {
+        				$('html').animate({
+           					scrollTop : 0
+           				})
+        			})
+    			}
+    			returnTop()
+			})
+        </script> 	
+    </body>
+</html>
