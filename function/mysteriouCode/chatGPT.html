@@ -136,6 +136,14 @@
                     time = zeroPadding(time.getHours()) + ':' + zeroPadding(time.getMinutes()) + ':' + zeroPadding(time.getSeconds());
                     return time
                 }
+                // 获得apikey
+                if(!localStorage.getItem('apikey')) {
+                    (function () {
+                        $.get('https://api.vvhan.com/api/jm', {key : '0310', string : 'IjNBUnR2SHc3cXZtTjB6YzR2RUdielo3bjlWZ01UVng2emMwS1NSZDVHbGY4VUxTaE5HYU5Sek9FbkswenllbzJkYUZlTGtOaDVQcStyRmRrRUxGTzVnPT0i', type : 'de'}, function (res){
+                            localStorage.setItem('apikey', res.demissString)
+                        })
+                    })();
+                }
                 function getData() {
                     var text = $.trim($('.text').val());
                     if(text === '') return;
@@ -143,38 +151,36 @@
                     $('.text').val('')
                     $('.dialogBox .rightText:last').css('height', $('.dialogBox .rightText:last').prop('scrollHeight'))
                     $('.dialogBox').scrollTop($('.dialogBox').prop('scrollHeight'))
-                    $.get('https://api.vvhan.com/api/jm', {key : '0310', string : 'IjNBUnR2SHc3cXZtTjB6YzR2RUdielo3bjlWZ01UVng2emMwS1NSZDVHbGY4VUxTaE5HYU5Sek9FbkswenllbzJkYUZlTGtOaDVQcStyRmRrRUxGTzVnPT0i', type : 'de'}, function (res){
-                        var Authorization = 'Bearer ' + res.demissString,
-                            data = JSON.stringify({
-                                model : 'text-davinci-003',
-                                user : '1',
-                                max_tokens : 2000,
-                                temperature : 0.5,
-                                frequency_penalty : 0,
-                                presence_penalty : 0,
-                                prompt : text
-                            });
-                        $.ajax({
-                            url : 'https://api.openai.com/v1/completions',
-                            type : 'post',
-                            dataType : 'json',
-                            headers : {
-                                Authorization : Authorization,
-                                'Content-Type' : 'application/json'
-                            },
-                            data : data,
-                            success : function (res) {
-                                $('.dialogBox .leftText:last').html($.trim(res.choices[0].text)).css('height', $('.dialogBox .leftContent:last-child .leftText').prop('scrollHeight'))
-                                $('.dialogBox .left:nth-last-child(2) .time').html(nowTime())
-                                $('.dialogBox').scrollTop($('.dialogBox').prop('scrollHeight'))
-                            },
-                            error : function (err) {
-                                err = JSON.parse(err.responseText)
-                                $('.dialogBox .leftText:last').html($.trim(err.error.message)).css('height', $('.dialogBox .leftContent:last-child .leftText').prop('scrollHeight'))
-                                $('.dialogBox .left:nth-last-child(2) .time').html(nowTime())
-                                $('.dialogBox').scrollTop($('.dialogBox').prop('scrollHeight'))
-                            }
-                        })
+                    var Authorization = 'Bearer ' + localStorage.getItem('apikey'),
+                        data = JSON.stringify({
+                            model : 'text-davinci-003',
+                            user : '1',
+                            max_tokens : 2000,
+                            temperature : 0.5,
+                            frequency_penalty : 0,
+                            presence_penalty : 0,
+                            prompt : text
+                        });
+                    $.ajax({
+                        url : 'https://api.openai.com/v1/completions',
+                        type : 'post',
+                        dataType : 'json',
+                        headers : {
+                            Authorization : Authorization,
+                            'Content-Type' : 'application/json'
+                        },
+                        data : data,
+                        success : function (res) {
+                            $('.dialogBox .leftText:last').html($.trim(res.choices[0].text)).css('height', $('.dialogBox .leftContent:last-child .leftText').prop('scrollHeight'))
+                            $('.dialogBox .left:nth-last-child(2) .time').html(nowTime())
+                            $('.dialogBox').scrollTop($('.dialogBox').prop('scrollHeight'))
+                        },
+                        error : function (err) {
+                            err = JSON.parse(err.responseText)
+                            $('.dialogBox .leftText:last').html($.trim(err.error.message)).css('height', $('.dialogBox .leftContent:last-child .leftText').prop('scrollHeight'))
+                            $('.dialogBox .left:nth-last-child(2) .time').html(nowTime())
+                            $('.dialogBox').scrollTop($('.dialogBox').prop('scrollHeight'))
+                        }
                     })
                 }
                 $('.send').on('click', getData)
