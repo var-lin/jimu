@@ -6,6 +6,18 @@ html {
     padding: 0;
 }
 
+/* 提示样式 */
+
+.result {
+    position: absolute;
+    top: 2%;
+    left: 50%;
+    transform: translateX(-50%);
+    font-weight: bolder;
+    text-align: center;
+    color: red;
+}
+
 /* 更新时间样式 */
 
 .update {
@@ -24,6 +36,7 @@ html {
     border-radius: 25px;
     padding: 10px;
     width: 90%;
+    word-break: break-all;
 }
 
 .header {
