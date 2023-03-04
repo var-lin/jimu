@@ -1,19 +1,28 @@
 [
     {
+        "date" : "2023.03.04.0更新日志",
+        "data" : [
+            "<span class=\"c-f40\">New&nbsp</span>新增“<a href=\"./function/hotSearchListZone/douBanHotSearchList.html\">豆瓣电影排行</a>”功能",
+            "<span class=\"c-f40\">New&nbsp</span>新增“<a href=\"./function/other/refuseClassification.html\">垃圾分类</a>”功能",
+            "<span class=\"c-f40\">New&nbsp</span>新增“<a href=\"./function/informationQueryZone/queryZHUserInformation.html\">知乎用户名信息获取</a>”功能",
+            "<span style=\"color: #055\">注释&nbsp</span>软件的接口都是别人的，所以不知道什么时候功能就会失效"
+        ]
+    },
+    {
         "date" : "2023.03.03.0更新日志",
         "data" : [
-            "<span class=\"c-f40\">New&nbsp</span>新增热搜榜专区",
-            "<span class=\"c-f40\">New&nbsp</span>新增“<a href=\"./function/hotSearchListZone/huPuHotSearchList.html\">虎扑步行街热搜榜</a>”功能",
-            "<span class=\"c-f40\">New&nbsp</span>新增“<a href=\"./function/hotSearchListZone/zhiHuHotSearchList.html\">知乎热搜榜</a>”功能",
-            "<span class=\"c-f40\">New&nbsp</span>新增“<a href=\"./function/hotSearchListZone/36KeHotSearchList.html\">36氪热搜榜</a>”功能",
-            "<span class=\"c-f40\">New&nbsp</span>新增“<a href=\"./function/hotSearchListZone/baiDuHotSearchList.html\">百度热点</a>”功能",
-            "<span class=\"c-f40\">New&nbsp</span>新增“<a href=\"./function/hotSearchListZone/biliHotSearchList.html\">哔哩哔哩热搜榜</a>”功能",
-            "<span class=\"c-f40\">New&nbsp</span>新增“<a href=\"./function/hotSearchListZone/tieBaHotSearchList.html\">贴吧热议</a>”功能",
-            "<span class=\"c-f40\">New&nbsp</span>新增“<a href=\"./function/hotSearchListZone/douYinHotSearchList.html\">抖音热点</a>”功能",
-            "<span class=\"c-f40\">New&nbsp</span>新增“<a href=\"./function/hotSearchListZone/ssPaiHotSearchList.html\">少数派热搜榜</a>”功能",
-            "<span class=\"c-f40\">New&nbsp</span>新增“<a href=\"./function/hotSearchListZone/itInfoHotSearchList.html\">IT资讯热榜</a>”功能",
-            "<span class=\"c-f40\">New&nbsp</span>新增“<a href=\"./function/hotSearchListZone/itNewsHotSearchList.html\">IT资讯最新</a>”功能",
-            "<span style=\"color: #055\">注释&nbsp</span>软件的接口都是别人的，所以不知道什么时候功能就会失效"
+            "新增热搜榜专区",
+            "新增“<a href=\"./function/hotSearchListZone/huPuHotSearchList.html\">虎扑步行街热搜榜</a>”功能",
+            "新增“<a href=\"./function/hotSearchListZone/zhiHuHotSearchList.html\">知乎热搜榜</a>”功能",
+            "新增“<a href=\"./function/hotSearchListZone/36KeHotSearchList.html\">36氪热搜榜</a>”功能",
+            "新增“<a href=\"./function/hotSearchListZone/baiDuHotSearchList.html\">百度热点</a>”功能",
+            "新增“<a href=\"./function/hotSearchListZone/biliHotSearchList.html\">哔哩哔哩热搜榜</a>”功能",
+            "新增“<a href=\"./function/hotSearchListZone/tieBaHotSearchList.html\">贴吧热议</a>”功能",
+            "新增“<a href=\"./function/hotSearchListZone/douYinHotSearchList.html\">抖音热点</a>”功能",
+            "新增“<a href=\"./function/hotSearchListZone/ssPaiHotSearchList.html\">少数派热搜榜</a>”功能",
+            "新增“<a href=\"./function/hotSearchListZone/itInfoHotSearchList.html\">IT资讯热榜</a>”功能",
+            "新增“<a href=\"./function/hotSearchListZone/itNewsHotSearchList.html\">IT资讯最新</a>”功能",
+            "新增“<a href=\"./function/hotSearchListZone/douBanHotSearchList.html\">豆瓣电影排行</a>”功能"
         ]
     },
     {

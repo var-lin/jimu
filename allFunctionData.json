@@ -18,7 +18,8 @@
         {"name" : "骚扰电话查询", "url" : "./function/informationQueryZone/harassmentTelephoneQuery.html"},
         {"name" : "车牌号归属地查询", "url" : "./function/informationQueryZone/licensePlateAscriptionPlaceQuery.html"},
         {"name" : "实时石油", "url" : "./function/informationQueryZone/realTimeOil.html"},
-        {"name" : "chatGPT密钥额度查询", "url" : "./function/informationQueryZone/charGPTKeyQuotaQuery.html"}
+        {"name" : "chatGPT密钥额度查询", "url" : "./function/informationQueryZone/charGPTKeyQuotaQuery.html"},
+        {"name" : "知乎用户信息获取", "url" : "./function/informationQueryZone/queryZHUserInformation.html"}
 
     ],
     "website" : [
@@ -44,7 +45,8 @@
         {"name" : "抖音热点", "url" : "./function/hotSearchListZone/douYinHotSearchList.html"},
         {"name" : "少数派热搜榜", "url" : "./function/hotSearchListZone/ssPaiHotSearchList.html"},
         {"name" : "IT资讯热榜", "url" : "./function/hotSearchListZone/itInfoHotSearchList.html"},
-        {"name" : "IT资讯最新", "url" : "./function/hotSearchListZone/itNewsHotSearchList.html"}
+        {"name" : "IT资讯最新", "url" : "./function/hotSearchListZone/itNewsHotSearchList.html"},
+        {"name" : "豆瓣电影排行", "url" : "./function/hotSearchListZone/douBanHotSearchList.html"}
     ],
     "copywriting" : [
     	{"name" : "毒鸡汤", "url" : "./function/copyZone/poisonousChickenSoup.html"},
@@ -59,7 +61,8 @@
     	{"name" : "万能翻译", "url" : "./function/other/universalTranslata.html"},
         {"name" : "字符串加密/解密", "url" : "./function/other/stringEncryption&Decryption.html"},
        	{"name" : "md5加密/解密", "url" : "./function/other/md5Encryption&Decryption.html"},
-        {"name" : "charGPT", "url" : "./function/other/chatGPT.html"}
+        {"name" : "charGPT", "url" : "./function/other/chatGPT.html"},
+        {"name" : "垃圾分类", "url" : "./function/other/refuseClassification.html"}
     ],
     "mysteriouCode" : [
         {"name" : "QQ查询绑定手机号", "url" : "./function/mysteriouCode/QQQueryPhone.html"},
