@@ -9,6 +9,7 @@
         <link rel="stylesheet" href="../css/hotSearchList.css">
     </head> 
     <body>
+        <div class="result">请稍等...</div>
         <h4 class="update">更新时间 <span class="update_time"></span></h4>
         <img id="returntop" src="../../images/capslock-fill.svg">
         <a class="refresh" href="javascript: void(0);" onclick="location.reload()">刷新</a>
@@ -38,7 +39,7 @@
                     dataType : 'json',
                     success : function (res) {
                         $('html').fadeIn(1000)
-                        $('.result').html('查询成功').fadeOut(5000);
+                        $('.result').html('查询成功').fadeOut(3000)
                         $('.update_time').html(res.update_time)
                         $.each(res.data, function (i, v) {
                             $('body').append('<div class="data"><h3 class="header"><a target="_blank";></a></h3><div class="desc"><img src=""><span></span></div><div class="hot"><span></span>热度</div></div>')
@@ -49,7 +50,7 @@
                         })
                     },
                     error : function (err) {
-                        $('body').html('查询失败')
+                        $('.result').html('查询失败')
                     }
                 }) 
             })
