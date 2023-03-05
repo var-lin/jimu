@@ -1,0 +1,163 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+/* 头部 */
+
+.header {
+    height: 10%;
+    padding: 10px;
+    text-align: center;
+}
+
+.header img {
+    width: 40px;
+}
+
+.header span {
+    font-size: 25px;
+    font-weight: bolder;
+    vertical-align: bottom;
+    margin-left: 5px;
+}
+
+/* 对话框 */
+
+.dialogBox {
+    width: 80%;
+    background-color: #efefef;
+    margin: 10px auto;
+    padding: 10px;
+    border-radius: 15px;
+    overflow: auto;
+}
+
+.dialogBox::-webkit-scrollbar {
+    width: 0;
+}
+
+.dialogBox .left {
+    text-align: left;
+}
+
+.dialogBox .right {
+    text-align: right;
+}
+
+.dialogBox img {
+    width: 40px;
+    margin-top: 10px;
+    border: 5px;
+}
+
+.dialogBox .time {
+    margin: 0 5px;
+}
+
+.dialogBox .leftContent,
+.dialogBox .rightContent {
+    margin: 0 10px;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.dialogBox textarea {
+    width: 100%;
+    height: 1.5rem;
+    border: none;
+    background: none;
+    resize: none;
+}
+
+.dialogBox .leftContent {
+    background-color: #fff;
+    color: #424242;
+}
+
+.dialogBox .rightContent {
+    background-color: skyblue;
+    color: #fff;
+}
+
+/* 输入框 */
+
+.inputBox {
+    position: fixed;
+    bottom: 10px;
+    width: 100%;
+    height: 50px;
+    text-align: center;
+}
+
+.inputBox input {
+    width: 70%;
+    height: 100%;
+    border: none;
+    border-radius: 8px;
+    outline-style: none;
+    background-color: #cfcfcf;
+    padding: 5px 10px;
+}
+
+ .inputBox .send {
+    width: 66px;
+    height: 80%;
+    border: none;
+    background-color: #abf;
+    border-radius: 5px;
+}
+
+/* apikey输入框 */
+
+.apikey {
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 300px;
+    border: 5px solid #add;
+    border-radius: 20px;
+    padding: 10px 20px;
+    background-color: #fff;
+    display: none;
+    z-index: 10000;
+}
+
+.apikey input {
+    width: 100%;
+    margin: auto;
+    border: none;
+    border-bottom: 3px solid #daa;
+    outline-style: none;
+    background: none;
+    padding: 5px;
+    text-align: center;
+    color: #f40;
+}
+
+.apikey .apikeyTip {
+    margin: 5px 0;
+    font-size: 8px;
+    color: #666;
+    text-align: center;
+}
+
+.apikey button {
+    margin: 10px auto;
+    float: right;
+}
+
+/* 遮掩层 */
+
+.cover {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 10000px;
+    height: 10000px;
+    background-color: #999;
+    display: none;
+    opacity: .5;
+    z-index: 9999;
+}

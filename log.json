@@ -1,11 +1,20 @@
 [
     {
+        "date" : "2023.03.05.0更新日志",
+        "data" : [
+            "新增“<a href=\"./function/other/wordCountDetection.html\">字数检测</a>”功能",
+            "<span class=\"c-f40\">New&nbsp</span>热搜榜专区功能添加排名",
+            "<span class=\"c-f40\">New&nbsp</span>修复功能数量显示错误",
+            "<span style=\"color: #055\">注释&nbsp</span>软件的接口都是别人的，所以不知道什么时候功能就会失效"
+        ]
+    },
+    {
         "date" : "2023.03.04.0更新日志",
         "data" : [
-            "<span class=\"c-f40\">New&nbsp</span>新增“<a href=\"./function/hotSearchListZone/douBanHotSearchList.html\">豆瓣电影排行</a>”功能",
-            "<span class=\"c-f40\">New&nbsp</span>新增“<a href=\"./function/other/refuseClassification.html\">垃圾分类</a>”功能",
-            "<span class=\"c-f40\">New&nbsp</span>新增“<a href=\"./function/informationQueryZone/queryZHUserInformation.html\">知乎用户名信息获取</a>”功能",
-            "<span class=\"c-f40\">New&nbsp</span>修复热搜榜专区文字溢出格子",
+            "新增“<a href=\"./function/hotSearchListZone/douBanHotSearchList.html\">豆瓣电影排行</a>”功能",
+            "新增“<a href=\"./function/other/refuseClassification.html\">垃圾分类</a>”功能",
+            "新增“<a href=\"./function/informationQueryZone/queryZHUserInformation.html\">知乎用户名信息获取</a>”功能",
+            "修复热搜榜专区文字溢出格子",
             "<span style=\"color: #055\">注释&nbsp</span>软件的接口都是别人的，所以不知道什么时候功能就会失效"
         ]
     },

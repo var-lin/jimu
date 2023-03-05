@@ -39,6 +39,11 @@ html {
     word-break: break-all;
 }
 
+.topIndex {
+    text-align: center;
+    color: #999;
+}
+
 .header {
     text-align: center;
 }
@@ -61,7 +66,7 @@ html {
     float: left;
     margin-right: 10px;
     border-radius: 10px;
-    width: 250px;
+    width: 200px;
 }
 
 .desc span {

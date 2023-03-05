@@ -31,7 +31,7 @@ $(function () {
             $(res.hotSearchList).each(function (i, e) {
                 $('#homepage .fn-hotSearchList .row').append(aElement).children('a').eq(i).html(e.name).attr('href', e.url)
             })
-            fnnum += res.website.length;
+            fnnum += res.hotSearchList.length;
             // 文案专区数据输入及输入进全部功能里
             $(res.copywriting).each(function (i, e) {
                 $('#homepage .fn-copywriting .row').append(aElement).children('a').eq(i).html(e.name).attr('href', e.url)

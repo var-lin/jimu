@@ -1,0 +1,70 @@
+<!doctype html>
+<html> 
+    <head> 
+        <meta charset="UTF-8"> 
+        <meta name="viewport" id="viewport" content="width=device-width, initial-scale=1, user-scalable=no"> 
+        <title>积木·字数检测</title>
+        <link rel="icon" type="image/x-icin" href="../../images/logo.ico">
+        <script src="../../tools/jQuery3.6.3_min.js"></script>
+        <link rel="stylesheet" href="../../tools/bootstrap.min.css">
+        <link rel="stylesheet" href="../css/function.css">
+        <style>
+            textarea {
+                width: 100%;
+                height: 400px;
+                border-radius: 15px;
+                background: none;
+                resize: none;
+            }
+            
+            .data ul li {
+                color: #f40;
+            }
+        </style>
+    </head> 
+    <body>
+		<div class="result text-center"></div>
+    	<div class="container">
+       		<textarea type="text" placeholder="请输入需要检测的文本" required></textarea>
+            <div class="text-center" style="margin: 20px 0;">
+            	<button class="btn btn-secondary">查询</button>
+            </div>
+            <div class="notes text-center">
+            	<div>#无反应请检测网络#</div>
+            </div>
+            <div class="data">
+            	查询结果
+               	<ul>
+               		<li></li>
+               	</ul>
+            </div>                              	                    
+       	</div>
+        <span class="from text-center">接口来自:<a href="https://api.lewz.cn/" target="_blank">酷酷API</a></span>  
+        <script>
+        	$(function () {
+               	$('.container').fadeIn(300);
+				function getdata() {
+       				var text = $('textarea').val();
+                   	if(text === '') return $('.result').html('文本不能为空').fadeOut(3000);
+                    // ajax获得数据
+       				$.get('https://api.lewz.cn/api/zishu', {msg : text}, function (res){
+           				$('.data ul li:eq(0)').html(res)
+                     	$('.data').fadeIn(500)
+                        $('.result').html('操作成功').fadeOut(3000)
+                        $('textarea').val('')                                                    
+       				})
+   				}
+				$('button').click(function () {
+            		$('.result').html('请稍等').fadeIn(1000)
+   					getdata()        			
+   				})
+         		$(window).on('keydown', function (e) {
+               		if(e.keyCode === 13) {
+                        $('.result').html('请稍等').fadeIn(1000)
+                        getdata()
+                    }
+               	})
+			})
+        </script> 	
+    </body>
+</html>

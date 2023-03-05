@@ -63,6 +63,7 @@
        	{"name" : "md5加密/解密", "url" : "./function/other/md5Encryption&Decryption.html"},
         {"name" : "charGPT", "url" : "./function/other/chatGPT.html"},
         {"name" : "垃圾分类", "url" : "./function/other/refuseClassification.html"}
+        {"name" : "字数检测", "url" : "./function/other/wordCountDetection.html"}
     ],
     "mysteriouCode" : [
         {"name" : "QQ查询绑定手机号", "url" : "./function/mysteriouCode/QQQueryPhone.html"},
