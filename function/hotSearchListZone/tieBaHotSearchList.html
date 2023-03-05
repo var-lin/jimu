@@ -42,7 +42,8 @@
                         $('.result').html('查询成功').fadeOut(3000)
                         $('.update_time').html(res.update_time)
                         $.each(res.data, function (i, v) {
-                            $('body').append('<div class="data"><h3 class="header"><a target="_blank";></a></h3><div class="desc"><img src=""><span></span></div><div class="hot"><span></span></div></div>')
+                            $('body').append('<div class="data"><h4 class="topIndex">top<span></span></h4><h3 class="header"><a target="_blank";></a></h3><div class="desc"><img src=""><span></span></div><div class="hot"><span></span></div></div>')
+                            $('.data').eq(i).find('.topIndex span').html(v.index)
                             $('.data').eq(i).find('.header a').html(v.title).attr('href', v.url)
                             $('.data').eq(i).find('.desc img').attr('src', v.pic)
                             $('.data').eq(i).find('.desc span').html(v.desc)
