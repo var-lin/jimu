@@ -3,17 +3,16 @@
     <head> 
         <meta charset="UTF-8"> 
         <meta name="viewport" id="viewport" content="width=device-width, initial-scale=1, user-scalable=no"> 
-        <title>积木·IT资讯最新</title>
+        <title>积木·微信状态歌词热度榜</title>
         <link rel="icon" type="image/x-icin" href="../../images/logo.ico">
-        <script src="../../tools/jQuery3.6.3_min.js"></script>
+        <script src="../../tools/jQuery3.6.3_min.js"></script> 
         <link rel="stylesheet" href="../css/hotSearchList.css">
     </head> 
     <body>
         <div class="result">请稍等...</div>
-        <h4 class="update">更新时间 <span class="update_time"></span></h4>
         <img id="returntop" src="../../images/capslock-fill.svg">
         <a class="refresh" href="javascript: void(0);" onclick="location.reload()">刷新</a>
-        <span class="from">接口来自:<a href="https://api.vvhan.com/" target="_blank">韩小韩API</a></span>
+        <span class="from">接口来自:<a href="https://api.wer.plus/product/" target="_blank">一铭API</a></span>
         <script>
             $(function () {
                 // 返回置顶
@@ -34,20 +33,22 @@
                 }());
                 // 获取显示数据
                 $.ajax({
-                    url : 'https://api.vvhan.com/api/hotlist?type=itNews',
+                    url : 'https://api.wer.plus/api/wxtop',
                     type : 'get',
                     dataType : 'json',
                     success : function (res) {
                         $('.update').show()
                         $('.result').html('查询成功').fadeOut(3000)
-                        $('.update_time').html(res.update_time)
+                        var index = 1;
                         $.each(res.data, function (i, v) {
-                            $('body').append('<div class="data"><h4 class="topIndex">top<span></span></h4><h3 class="header"><a target="_blank";></a></h3><div class="desc"><img src=""><span></span></div><div class="hot"><span></span></div></div>')
-                            $('.data').eq(i).find('.topIndex span').html(v.index)
-                            $('.data').eq(i).find('.header a').html(v.title).attr('href', v.url)
-                            $('.data').eq(i).find('.desc img').attr('src', v.pic)
-                            $('.data').eq(i).find('.desc span').html(v.desc)
-                            $('.data').eq(i).find('.hot span').html(v.hot)
+                            $('body').append('<div class="data"><h4 class="topIndex">top<span></span></h4><h3 class="header">歌名：<span></span></h3><div class="desc"><img src="">歌手：<span></span><br>专辑：<span></span></div><div class="hot"><span></span></div></div>')
+                            $('.data').eq(i).find('.topIndex span').html(index)
+                            index ++;
+                            $('.data').eq(i).find('.header span:eq(0)').html(v.song)
+                            
+                            $('.data').eq(i).find('.desc img').attr('src', v.cover)
+                            $('.data').eq(i).find('.desc span:eq(0)').html(v.singer)
+                            $('.data').eq(i).find('.desc span:eq(1)').html(v.album)
                         })
                     },
                     error : function (err) {

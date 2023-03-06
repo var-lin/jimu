@@ -7,7 +7,7 @@ body {
 }
 
 a {
-    z-index: 99;
+    z-index: 9;
 }
 
 /* logo */
@@ -87,6 +87,48 @@ a {
 }
 
 /* 首页样式 */
+
+    /* 导航栏 */
+
+.naviga {
+    position: fixed;
+    left: 5px;
+    top: 5px;
+    padding: 10px;
+    background-color: #fff;
+    border-radius: 10px;
+    line-height: 0;
+    cursor: pointer;
+    z-index: 99;
+}
+
+.navigaBar {
+    position: fixed;
+    left: -280px;
+    top: 0;
+    padding: 20px 0 7%;
+    background-color: #fff;
+    width: 280px;
+    height: 100%;
+    border-radius: 0 25px 25px 0;
+    z-index: 999;
+}
+
+.navigaBar ul {
+    margin: 0 auto;
+    padding: 0;
+    width: 80%;
+    list-style: none;
+}
+
+.navigaBar ul li {
+    margin: 10px 0;
+    padding: 5px 10px;
+    background-color: rgba(150, 220, 250, 1.0);
+    border-radius: 10px;
+    font-weight: bolder;
+    cursor: pointer;
+}
 
     /* 首页顶部样式 */
    

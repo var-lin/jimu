@@ -19,7 +19,8 @@
         {"name" : "车牌号归属地查询", "url" : "./function/informationQueryZone/licensePlateAscriptionPlaceQuery.html"},
         {"name" : "实时石油", "url" : "./function/informationQueryZone/realTimeOil.html"},
         {"name" : "chatGPT密钥额度查询", "url" : "./function/informationQueryZone/charGPTKeyQuotaQuery.html"},
-        {"name" : "知乎用户信息获取", "url" : "./function/informationQueryZone/queryZHUserInformation.html"}
+        {"name" : "知乎用户信息获取", "url" : "./function/informationQueryZone/queryZHUserInformation.html"},
+        {"name" : "百度百科", "url" : "./function/informationQueryZone/baiduEncyclopedia.html"}
 
     ],
     "website" : [
@@ -46,7 +47,8 @@
         {"name" : "少数派热搜榜", "url" : "./function/hotSearchListZone/ssPaiHotSearchList.html"},
         {"name" : "IT资讯热榜", "url" : "./function/hotSearchListZone/itInfoHotSearchList.html"},
         {"name" : "IT资讯最新", "url" : "./function/hotSearchListZone/itNewsHotSearchList.html"},
-        {"name" : "豆瓣电影排行", "url" : "./function/hotSearchListZone/douBanHotSearchList.html"}
+        {"name" : "豆瓣电影排行", "url" : "./function/hotSearchListZone/douBanHotSearchList.html"},
+        {"name" : "微信状态歌词热度榜", "url" : "./function/hotSearchListZone/weChatStatusSongPopularityList.html"}
     ],
     "copywriting" : [
     	{"name" : "毒鸡汤", "url" : "./function/copyZone/poisonousChickenSoup.html"},
@@ -62,6 +64,7 @@
         {"name" : "字符串加密/解密", "url" : "./function/other/stringEncryption&Decryption.html"},
        	{"name" : "md5加密/解密", "url" : "./function/other/md5Encryption&Decryption.html"},
         {"name" : "charGPT", "url" : "./function/other/chatGPT.html"},
+        {"name" : "小爱同学聊天", "url" : "./function/other/xiaoAiClassmatesChat.html"},
         {"name" : "垃圾分类", "url" : "./function/other/refuseClassification.html"},
         {"name" : "字数检测", "url" : "./function/other/wordCountDetection.html"}
     ],

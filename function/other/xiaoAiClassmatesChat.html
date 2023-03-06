@@ -3,7 +3,7 @@
     <head> 
         <meta charset="UTF-8"> 
         <meta name="viewport" id="viewport" content="width=device-width, initial-scale=1, user-scalable=no"> 
-        <title>积木·chatGPT</title>
+        <title>积木·小爱同学聊天</title>
         <link rel="icon" type="image/x-icin" href="../../images/logo.ico">
         <script src="../../tools/jQuery3.6.3_min.js"></script>
         <link rel="stylesheet" href="../../tools/bootstrap.min.css">
@@ -11,23 +11,24 @@
     </head> 
     <body>
 		<div class="header">
-            <img src="../../images/chatGPT.png" alt="log"><span>chatGPT</span>
+            <img src="../../images/xiaoAi.webp" alt="log"><span>小爱同学</span>
         </div>
         <div class="dialogBox">
             <p class="left">
-                <img src="../../images/chatGPT.png" alt="chatGPT-log">
+                <img src="../../images/xiaoAi.webp" alt="chatGPT-log">
                 <span class="time"></span>
             </p>
             <p class="leftContent">
-                <textarea class="leftText" disabled>您需要什么帮助呢？(国内用户需要科学上网)</textarea>
+                <textarea class="leftText" disabled>聊点什么呢？</textarea>
             </p>
         </div>
         <div class="inputBox">
             <input class="text" type="text" placeholder="请输入内容">
             <button class="send">发送</button>
         </div>
+        <div class="cover"></div>
         <script>
-        	$(function () {
+            $(function () {
                 $('.dialogBox').css('height', ($(window).height()) * 0.8)
                 $('.dialogBox .left:first-child .time').html(nowTime())
                 $('.dialogBox .leftText:first-child').css('height', $('.dialogBox .leftText:first-child').prop('scrollHeight'))
@@ -42,58 +43,40 @@
                     time = zeroPadding(time.getHours()) + ':' + zeroPadding(time.getMinutes()) + ':' + zeroPadding(time.getSeconds());
                     return time
                 }
-                // 获得apikey
-                if(!localStorage.getItem('chatGPTapikey')) {
-                    (function () {
-                        $.get('https://api.vvhan.com/api/jm', {key : '0310', string : 'IjNBUnR2SHc3cXZtTjB6YzR2RUdielo3bjlWZ01UVng2emMwS1NSZDVHbGY4VUxTaE5HYU5Sek9FbkswenllbzJkYUZlTGtOaDVQcStyRmRrRUxGTzVnPT0i', type : 'de'}, function (res){
-                            localStorage.setItem('chatGPTapikey', res.demissString)
-                        })
-                    })();
-                }
+                // 获得回复消息
                 function getData() {
                     var text = $.trim($('.text').val());
                     if(text === '') return;
-                    $('.dialogBox').append('<p class="right"><span class="time">' + nowTime() + '</span><img src="../../images/logo.png" alt="logo"></p><p class="rightContent"><textarea class="rightText" disabled>' + text +'</textarea></p><p class="left"><img src="../../images/chatGPT.png" alt="chatGPT-log"><span class="time"></span></p><p class="leftContent"><textarea class="leftText" disabled>chatGPT正在思考中...</textarea></p>')
+                    $('.dialogBox').append('<p class="right"><span class="time">' + nowTime() + '</span><img src="../../images/logo.png" alt="logo"></p><p class="rightContent"><textarea class="rightText" disabled>' + text +'</textarea></p><p class="left"><img src="../../images/xiaoAi.webp" alt="xiaoAi-log"><span class="time"></span></p><p class="leftContent"><textarea class="leftText" disabled>小爱正在正在思考中...</textarea></p>')
                     $('.text').val('')
                     $('.dialogBox .rightText:last').css('height', $('.dialogBox .rightText:last').prop('scrollHeight'))
                     $('.dialogBox').scrollTop($('.dialogBox').prop('scrollHeight'))
-                    var Authorization = 'Bearer ' + localStorage.getItem('chatGPTapikey'),
-                        data = JSON.stringify({
-                            model : 'text-davinci-003',
-                            user : '1',
-                            max_tokens : 2000,
-                            temperature : 0.5,
-                            frequency_penalty : 0,
-                            presence_penalty : 0,
-                            prompt : text
-                        });
                     $.ajax({
-                        url : 'https://api.openai.com/v1/completions',
-                        type : 'post',
-                        dataType : 'json',
-                        headers : {
-                            Authorization : Authorization,
-                            'Content-Type' : 'application/json'
+                        url : 'https://api.lewz.cn/api/xiaoai',
+                        type : 'get',
+                        data : {
+                            msg : text
                         },
-                        data : data,
                         success : function (res) {
-                            $('.dialogBox .leftText:last').html($.trim(res.choices[0].text)).css('height', $('.dialogBox .leftContent:last-child .leftText').prop('scrollHeight'))
+                            $('.dialogBox .leftText:last').html($.trim(res)).css('height', $('.dialogBox .leftContent:last-child .leftText').prop('scrollHeight'))
                             $('.dialogBox .left:nth-last-child(2) .time').html(nowTime())
                             $('.dialogBox').scrollTop($('.dialogBox').prop('scrollHeight'))
                         },
                         error : function (err) {
-                            err = JSON.parse(err.responseText)
-                            $('.dialogBox .leftText:last').html($.trim(err.error.message)).css('height', $('.dialogBox .leftContent:last-child .leftText').prop('scrollHeight'))
+                            $('.dialogBox .leftText:last').html($.trim(err)).css('height', $('.dialogBox .leftContent:last-child .leftText').prop('scrollHeight'))
                             $('.dialogBox .left:nth-last-child(2) .time').html(nowTime())
                             $('.dialogBox').scrollTop($('.dialogBox').prop('scrollHeight'))
                         }
                     })
                 }
                 $('.send').on('click', getData)
-                $(window).on('keydown', function (e) {
+                $('.apikeyInput').on('keydown', function (e) {
+                    if(e.keyCode == 13) $('.apikeyBtn').click();
+                })
+                $('.text').on('keydown', function (e) {
                     if(e.keyCode == 13) getData();
                 })
-			})
+            })
         </script> 	
     </body>
 </html>

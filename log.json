@@ -1,11 +1,21 @@
 [
     {
+        "date" : "2023.03.06.0更新日志",
+        "data" : [
+            "<span class=\"c-f40\">New&nbsp</span>新增“<a href=\"./function/informationQueryZone/baiduEncyclopedia.html\">百度百科</a>”功能",
+            "<span class=\"c-f40\">New&nbsp</span>新增“<a href=\"./function/hotSearchListZone/weChatStatusSongPopularityList.html\">微信状态歌词热度榜</a>”功能",
+            "<span class=\"c-f40\">New&nbsp</span>新增“<a href=\"./function/other/xiaoAiClassmatesChat.html\">小爱同学聊天</a>”功能",
+            "<span class=\"c-f40\">New&nbsp</span>首页添加功能导航栏跳转",
+            "<span class=\"c-f40\">New&nbsp</span>修复“<a href=\"./function/other/chatGPT.html\">charGPT</a>”功能问候语显示不全bug",
+            "<span style=\"color: #055\">注释&nbsp</span>软件的接口都是别人的，所以不知道什么时候功能就会失效"
+        ]
+    },
+    {
         "date" : "2023.03.05.0更新日志",
         "data" : [
-            "<span class=\"c-f40\">New&nbsp</span>新增“<a href=\"./function/other/wordCountDetection.html\">字数检测</a>”功能",
-            "<span class=\"c-f40\">New&nbsp</span>热搜榜专区功能添加排名",
-            "<span class=\"c-f40\">New&nbsp</span>修复功能数量显示错误",
-            "<span style=\"color: #055\">注释&nbsp</span>软件的接口都是别人的，所以不知道什么时候功能就会失效"
+            "新增“<a href=\"./function/other/wordCountDetection.html\">字数检测</a>”功能",
+            "热搜榜专区功能添加排名",
+            "修复功能数量显示错误"
         ]
     },
     {

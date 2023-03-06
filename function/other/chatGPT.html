@@ -19,7 +19,7 @@
                 <span class="time"></span>
             </p>
             <p class="leftContent">
-                <textarea class="leftText" disabled>您需要什么帮助呢？（国内用户需要科学上网）</textarea>
+                <textarea class="leftText" disabled>您需要什么帮助呢？(国内用户需要科学上网)</textarea>
             </p>
         </div>
         <div class="inputBox">
@@ -42,6 +42,7 @@
             $(function () {
                 $('.dialogBox').css('height', ($(window).height()) * 0.8)
                 $('.dialogBox .left:first-child .time').html(nowTime())
+                $('.dialogBox .leftText:first-child').css('height', $('.dialogBox .leftText:first-child').prop('scrollHeight'))
                 function nowTime() {
                     var time = new Date();
                     function zeroPadding(num) {

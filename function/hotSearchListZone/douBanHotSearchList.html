@@ -38,7 +38,7 @@
                     type : 'get',
                     dataType : 'json',
                     success : function (res) {
-                        $('html').fadeIn(1000)
+                        $('.update').show()
                         $('.result').html('查询成功').fadeOut(3000)
                         $('.update_time').html(res.time)
                         var index = 1;

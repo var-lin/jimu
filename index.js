@@ -1,7 +1,38 @@
 $(function () {
     $('#homepage .jumbotron').animate({
         opacity : 1
-    })
+    });
+    // 导航栏
+    (function () {
+        function clear() {
+            $('#homepage-head .cover').hide()
+            $('body').css('overflow', 'visible')
+            $('.navigaBar').stop().animate({
+                left : -280
+            })
+        }
+        $('.navigaBar ul').on('click', function (e) {
+            // $(e.target).on('click', function () {
+                clear()
+                $('html').animate({
+                    scrollTop : $('.jumbotron').eq($('.navigaBar ul li').index(e.target)).offset().top
+                })
+            // })
+        })
+        // $('.jumbotron').each(function (i, e) {
+        //     $(e)
+        // })
+        $('.naviga').on('click', function () {
+            $('#homepage-head .cover').show()
+            $('body').css('overflow', 'hidden')
+            $('.navigaBar').stop().animate({
+                left : 0
+            })
+            $('#homepage-head .cover').on('click', function () {
+                clear()
+            })
+        })
+    })();
     // 功能链接数据加载
     $.ajax({
         url : 'https://lhshilin.github.io/jimu/allFunctionData.json',
@@ -200,6 +231,7 @@ $(function () {
     // mysteriouCode
     function mysteriouCode(res) {
         function mysteriouCodeUrl() {
+            $('.navigaBar ul').append('<li style="color: #a0a;">秘密区</li>')
             $(res.mysteriouCode).each(function (i, e) {
                 $('#homepage .fn-mysteriouCode .row').append('<a class="col-4"></a>').children('a').eq(i).html(e.name).attr('href', e.url)
             })
@@ -225,6 +257,7 @@ $(function () {
                         $('.mysteriouCode').fadeIn(300)
                         $('.cover').show()
                         $('body').css('overflow', 'hidden')
+                        $('.mysteriouCode input').focus()
                         $(window).on('keydown', function (e) {
                             if(e.keyCode === 13) {
                                 $('.mysteriouCode .mysteriouCodeRight').click()
@@ -255,6 +288,9 @@ $(function () {
                         mysteriouCodeUrl()
                         localStorage.setItem('mysteriouCode', 'true')
                         clear()
+                        $('html').animate({
+                            'scrollTop' : $('html').prop('scrollHeight')
+                        })
                     } else {
                         $('.mysteriouCode .mysteriouCodeTip .meg').html('密码错误')
                     }
