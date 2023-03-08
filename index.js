@@ -2,36 +2,55 @@ $(function () {
     $('#homepage .jumbotron').animate({
         opacity : 1
     });
-    // 导航栏
+    // 侧边导航栏
     (function () {
         function clear() {
-            $('#homepage-head .cover').hide()
+            $('#homepage .cover').hide()
             $('body').css('overflow', 'visible')
-            $('.navigaBar').stop().animate({
+            $('.sidebar').stop().animate({
                 left : -280
-            })
+            }, 300)
+            $('.sidebarBn img').css('transform', 'rotate(0deg)')
         }
-        $('.navigaBar ul').on('click', function (e) {
-            // $(e.target).on('click', function () {
-                clear()
-                $('html').animate({
-                    scrollTop : $('.jumbotron').eq($('.navigaBar ul li').index(e.target)).offset().top
-                })
-            // })
+        $('.sidebar .navigaBar').on('click', function (e) {
+            clear()
+            $('html').animate({
+                scrollTop : $('.jumbotron').eq($('.sidebar .navigaBar li').index(e.target)).offset().top
+            })
         })
-        // $('.jumbotron').each(function (i, e) {
-        //     $(e)
-        // })
-        $('.naviga').on('click', function () {
-            $('#homepage-head .cover').show()
+        $('.sidebarBn').on('click', function () {
+            $('.sidebarBn img').css('transform', 'rotate(90deg)')
+            $('#homepage .cover').show()
             $('body').css('overflow', 'hidden')
-            $('.navigaBar').stop().animate({
+            $('.sidebar').stop().animate({
                 left : 0
-            })
-            $('#homepage-head .cover').on('click', function () {
+            }, 300)
+            $('#homepage .cover').on('click', function () {
                 clear()
             })
         })
+        function down() {
+            $(this).css('background-color', '#ccc')
+        }
+        function up() {
+            $(this).css('background-color', '#fff')
+        }
+        $('.sidebarBn').on({
+            mousedown : down,
+            mouseup : up,
+            touchstart : down,
+            touchend : up
+        })
+    })();
+    // loadding效果
+    var loadding = (function () {
+        var rotateDeg = 0,
+            timer = setInterval(function () {
+                rotateDeg ++;
+                $('#homepage .jumbotron p img').css('transform', 'rotate(' + rotateDeg + 'deg)')
+            }, 0);
+        console.log(rotateDeg)
+        return timer
     })();
     // 功能链接数据加载
     $.ajax({
@@ -74,12 +93,16 @@ $(function () {
             })
             fnnum += res.other.length;
             // 输出一共的功能数量
-            $('#homepage .func-num span').html(fnnum)
-            $('#homepage').stop().fadeIn(300);
+            $('.fn-num span').html(fnnum)
             mysteriouCode(res)
         },
         error : function (err) {
-            $('#homepage .row p').html('请检查网络...')
+            clearInterval(loadding)
+            $('#homepage .row p img').css('transform', 'rotate(0deg)').attr('src', './images/bug.svg')
+            $('#homepage .fn-num').hide()
+            $('#logo').on('click', function () {
+                location.reload()
+            })
         }
     })
     // 更新日志数据输入
@@ -93,7 +116,7 @@ $(function () {
     });
     // 获得软件已运行时间 pastTime
     (function () {       
-        var pasttimeevents = $('#homepage .pasttime span'),
+        var pasttimeevents = $('.sidebar .pasttime span'),
         // 设置发布时间
             old_time = new Date(2022, 0, 16),
             new_time,         
@@ -231,13 +254,13 @@ $(function () {
     // mysteriouCode
     function mysteriouCode(res) {
         function mysteriouCodeUrl() {
-            $('.navigaBar ul').append('<li style="color: #a0a;">秘密区</li>')
+            $('.sidebar .navigaBar').append('<li style="color: #a0a;">秘密区</li>')
             $(res.mysteriouCode).each(function (i, e) {
                 $('#homepage .fn-mysteriouCode .row').append('<a class="col-4"></a>').children('a').eq(i).html(e.name).attr('href', e.url)
             })
             // 输出一共的功能数量
-            var funcNum = parseInt($('#homepage .func-num span').html())
-            $('#homepage .func-num span').html(funcNum + res.mysteriouCode.length)
+            var funcNum = parseInt($('.fn-num span').html())
+            $('.fn-num span').html(funcNum + res.mysteriouCode.length)
             $('.fn-mysteriouCode').show()
         }
         if(!localStorage.getItem('mysteriouCode')) {
@@ -255,7 +278,7 @@ $(function () {
                         count = 0;
                         clearInterval(timer)
                         $('.mysteriouCode').fadeIn(300)
-                        $('.cover').show()
+                        $('body > .cover').show()
                         $('body').css('overflow', 'hidden')
                         $('.mysteriouCode input').focus()
                         $(window).on('keydown', function (e) {
@@ -270,7 +293,7 @@ $(function () {
             }
             function clear() {
                 $('.mysteriouCode').hide(300)
-                $('.cover').hide()
+                $('body > .cover').hide()
                 $('body').css('overflow', 'visible')
                 $(window).on('keydown', null)
             }

@@ -88,21 +88,30 @@ a {
 
 /* 首页样式 */
 
-    /* 导航栏 */
+    /* 侧边栏 */
 
-.naviga {
+.sidebarBn {
     position: fixed;
-    left: 5px;
-    top: 5px;
+    left: 0px;
+    top: 25%;
     padding: 10px;
     background-color: #fff;
-    border-radius: 10px;
+    border-radius: 0 10px 10px 0;
     line-height: 0;
     cursor: pointer;
+    overflow-y: auto;
     z-index: 99;
 }
 
-.navigaBar {
+.sidebarBn img {
+    transition: all .3s;
+}
+
+.sidebarBn:hover img {
+    transform: scale(1.3);
+}
+
+.sidebar {
     position: fixed;
     left: -280px;
     top: 0;
@@ -114,36 +123,54 @@ a {
     z-index: 999;
 }
 
-.navigaBar ul {
+.sidebar .navigaBar {
     margin: 0 auto;
-    padding: 0;
+    padding: 5px;
     width: 80%;
+    background-color: rgba(150, 220, 250, 1.0);
+    border-radius: 15px;
     list-style: none;
 }
 
-.navigaBar ul li {
+.sidebar .navigaBar li {
     margin: 10px 0;
-    padding: 5px 10px;
-    background-color: rgba(150, 220, 250, 1.0);
-    border-radius: 10px;
+    padding: 5px;
     font-weight: bolder;
     cursor: pointer;
 }
 
-    /* 首页顶部样式 */
-   
-#homepage #homepage-head {
-    margin: .5rem;
-    font-size: .8rem;
-    color: #f40;
+.sidebar .about {
+    position: absolute;
+    bottom: 8%;
 }
 
-#homepage #homepage-head span {
+.sidebar .about button {
+    margin-left: 10px;
+    padding: 10px;
+    border: none;
+    border-radius: 10px;
+    font-weight: bolder;
+    float: left;
+}
+   
+.sidebar .pasttime {
+    margin-bottom: 10px;
+    text-align: center;
+    font-size: .8rem;
+    color: #f40;
+    display: inline-block;
+}
+
+.sidebar .pasttime span {
     margin: 0 .2rem;
     color: #999;
 }
 
+    /* 首页顶部样式 */
 
+#homepage {
+    margin-top: 20px;
+}
 
 #homepage .jumbotron {
     opacity: 0;
@@ -165,6 +192,12 @@ a {
     height: 200px;
 }
 
+#homepage .jumbotron p img {
+    margin: 0 auto;
+    width: 50px;
+    line-height: 200px;
+}
+
     /* 首页分区a链接样式 */
 
 #homepage .row .jumbotron .row a {
@@ -175,6 +208,16 @@ a {
 
 #homepage .fntop {
     margin-top: 7%;
+}
+
+.fn-num {
+    color: #f40;
+    text-align: center;
+}
+
+.fn-num span {
+    margin: 0 5px;
+    color: #424242;
 }
 
 /* 更新日志 */

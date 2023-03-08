@@ -19,18 +19,24 @@ $(function () {
     }
     // 判断最新版本
     $.get('https://lhshilin.github.io/jimu/update.json', function (res) {
-        if(version === res.updateV) {
-            console.log('已经是最新版本')
-        }else if(localStorage.getItem('updateTip') == 'true' || localStorage.getItem('updateV') !== res.updateV) {
-            var updateAndroidUrl = 'https://lhshilin.github.io/jimu/download/积木_' + res.updateV + '.apk';
+        function showUpdate() {
+            $('.sidebar .about button').html('有新版本').css('color', '#f40')
             $('.update').stop().fadeIn(1500)
-            $('.cover').show()
+            $('body > .cover').show()
             $('body').css('overflow', 'hidden')
         }
+        if(version === res.updateV) {
+            $('.sidebar .about button').html('已最新版本')
+        }else if(localStorage.getItem('updateTip') == 'true' || localStorage.getItem('updateV') !== res.updateV) {
+            showUpdate()
+        } else {
+            $('.sidebar .about button').on('click', showUpdate)
+        }
+        var updateAndroidUrl = 'https://lhshilin.github.io/jimu/download/积木_' + res.updateV + '.apk';
         $('.update .androidUrl a').prop('href', updateAndroidUrl).children('span').html(updateAndroidUrl)
         $('.update .updatebtnleft').on('click', function () {
             $('.update').stop().fadeOut(300)
-            $('.cover').hide()
+            $('body > .cover').hide()
             $('body').css('overflow', 'visible')
             localStorage.setItem('updateTip', 'false')
             localStorage.setItem('updateV', res.updateV)

@@ -37,7 +37,7 @@
                    	if(text === '') return $('.result').html('内容不能为空').fadeOut(3000);
                     // ajax获得数据
        				$.get('https://api.wer.plus/api/dub', {t : text}, function (res){
-       					// if(!res.code = 200) return $('.result').html('操作失败').fadeOut(3000);
+       					if(res.data.text === null) return $('.result').html('未查到').fadeOut(3000);
            				$('.data ul li:eq(0) a').attr('href', res.data.img_url).children('img').attr('src', res.data.img_url)
                         $('.data ul li:eq(1) span').html(res.data.text)
                      	$('.data').fadeIn(500)
