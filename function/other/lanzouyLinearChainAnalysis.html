@@ -25,17 +25,23 @@
             </div>
             <div class="notes text-center">
                 <div>#无反应请检测网络#</div>
-            	<div>#解析链接可以点击复制噢~#</div>
+                <div>#解析链接可以点击复制噢~#</div>
+            	<div>#只能解析单解析噢~#</div>
             </div>
             <div class="data">
             	查询结果
                	<ul>
                     <li>原链接<br><span></span></li>
+                    <li>文件名：<span></span></li>
+                    <li>作者：<span></span></li>
+                    <li>发布时间：<span></span></li>
+                    <li>文件大小：<span></span></li>
+                    <li>描述：<span></span></li>
                		<li>解析链接<br><span id="result" data-clipboard-target="#result"></span></li>
                	</ul>
             </div>                              	                    
        	</div>
-        <span class="from text-center">接口来自:<a href="https://api.aa1.cn/" target="_blank">夏柔API</a></span>  
+        <span class="from text-center">接口来自:<a href="https://apis.jxcxin.cn/" target="_blank">StoreAPI</a></span>  
         <script>
         	$(function () {
                	$('.container').fadeIn(300);
@@ -45,17 +51,27 @@
                    	if(url === '') return $('.result').html('蓝奏云链接不能为空').fadeOut(3000);
                     // ajax获得数据
                     $.ajax({
-                        url : 'https://tool.bitefu.net/lanzou',
+                        url : 'https://apis.jxcxin.cn/api/lanzou',
                         type : 'get',
-                        dataType : 'jsonp',
+                        dataType : 'json',
                         data : {
                             url : url,
                             pwd : pwd
                         },
                         success : function (res) {
-                            if(res.status !== 1) return $('.result').html(res.info).fadeOut(3000);
+                            console.log(res)
+                            if(res.code !== 200) return $('.result').html(res.msg).fadeOut(3000);
                             $('.data ul li:eq(0) span').html(url)
-                            $('.data ul li:eq(1) span').html(res.info)
+                            $('.data ul li:eq(1) span').html(res.data.name)
+                            $('.data ul li:eq(2) span').html(res.data.author)
+                            $('.data ul li:eq(3) span').html(res.data.time)
+                            $('.data ul li:eq(4) span').html(res.data.size)
+                            if(res.data.describe) {
+                                $('.data ul li:eq(5) span').html(res.data.describe)
+                            } else {
+                                $('.data ul li:eq(5) span').html('无')
+                            }
+                            $('.data ul li:eq(6) span').html(res.data.url)
                             $('.data').fadeIn(500)
                             $('.result').html('操作成功').fadeOut(3000)
                             $('input').val('')

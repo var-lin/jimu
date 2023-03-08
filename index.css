@@ -123,6 +123,19 @@ a {
     transform: scale(1.3);
 }
 
+/* ip签名档样式 */
+
+.ipSignatureFile {
+    text-align: center;
+}
+
+.ipSignatureFile img {
+    width: 90%;
+    border-radius: 20px;
+}
+
+/* 侧边栏样式 */
+
 .sidebar {
     position: fixed;
     left: -280px;

@@ -40,6 +40,7 @@
         <div class="cover"></div>
         <script>
             $(function () {
+                var key = true;
                 $('.dialogBox').css('height', ($(window).height()) * 0.8)
                 $('.dialogBox .left:first-child .time').html(nowTime())
                 $('.dialogBox .leftText:first-child').css('height', $('.dialogBox .leftText:first-child').prop('scrollHeight'))
@@ -67,8 +68,17 @@
                         $('body').css('overflow', 'visible')
                     }
                 })
+                function returnData(data) {
+                    $('.dialogBox .leftText:last').html($.trim(data)).css('height', $('.dialogBox .leftContent:last-child .leftText').prop('scrollHeight'))
+                    $('.dialogBox .left:nth-last-child(2) .time').html(nowTime())
+                    $('.dialogBox').scrollTop($('.dialogBox').prop('scrollHeight'))
+                    key = true;
+                    $('.send').on('click', getData)
+                }
                 // 得到回复信息
                 function getData() {
+                    key = false;
+                    $('.send').off('click')
                     var text = $.trim($('.text').val());
                     if(text === '') return;
                     $('.dialogBox').append('<p class="right"><span class="time">' + nowTime() + '</span><img src="../../images/logo.png" alt="logo"></p><p class="rightContent"><textarea class="rightText" disabled>' + text +'</textarea></p><p class="left"><img src="../../images/chatGPT.png" alt="chatGPT-log"><span class="time"></span></p><p class="leftContent"><textarea class="leftText" disabled>chatGPT正在思考中...</textarea></p>')
@@ -95,15 +105,11 @@
                         },
                         data : data,
                         success : function (res) {
-                            $('.dialogBox .leftText:last').html($.trim(res.choices[0].text)).css('height', $('.dialogBox .leftContent:last-child .leftText').prop('scrollHeight'))
-                            $('.dialogBox .left:nth-last-child(2) .time').html(nowTime())
-                            $('.dialogBox').scrollTop($('.dialogBox').prop('scrollHeight'))
+                            returnData(res.choices[0].text)
                         },
                         error : function (err) {
                             err = JSON.parse(err.responseText)
-                            $('.dialogBox .leftText:last').html($.trim(err.error.message)).css('height', $('.dialogBox .leftContent:last-child .leftText').prop('scrollHeight'))
-                            $('.dialogBox .left:nth-last-child(2) .time').html(nowTime())
-                            $('.dialogBox').scrollTop($('.dialogBox').prop('scrollHeight'))
+                            returnData(err.error.message)
                         }
                     })
                 }
@@ -141,11 +147,8 @@
                     }
                 })
                 $('.send').on('click', getData)
-                $('.apikeyInput').on('keydown', function (e) {
-                    if(e.keyCode == 13) $('.apikeyBtn').click();
-                })
                 $('.text').on('keydown', function (e) {
-                    if(e.keyCode == 13) getData();
+                    if(e.keyCode == 13 && key) getData();
                 })
             })
         </script> 	
