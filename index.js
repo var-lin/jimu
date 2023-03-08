@@ -2,6 +2,22 @@ $(function () {
     $('#homepage .jumbotron').animate({
         opacity : 1
     });
+    // 更新日志返回置顶显示隐藏功能 toupDateReturnTop
+    (function () {
+        $(window).on('scroll', function () {
+            var htmlheight = $(window).height() / 2;
+            if($('html').scrollTop() > htmlheight) {
+                $('#returntop').show()
+            }else {
+                $('#returntop').hide()
+            }
+        })
+        $('#returntop').on('click', function () {
+            $('html').stop().animate({
+                scrollTop : 0
+            })
+        })
+    }());
     // 侧边导航栏
     (function () {
         function clear() {
@@ -49,7 +65,6 @@ $(function () {
                 rotateDeg ++;
                 $('#homepage .jumbotron p img').css('transform', 'rotate(' + rotateDeg + 'deg)')
             }, 0);
-        console.log(rotateDeg)
         return timer
     })();
     // 功能链接数据加载
@@ -93,13 +108,12 @@ $(function () {
             })
             fnnum += res.other.length;
             // 输出一共的功能数量
-            $('.fn-num span').html(fnnum)
+            $('.fn-num span').html(fnnum).show()
             mysteriouCode(res)
         },
         error : function (err) {
             clearInterval(loadding)
             $('#homepage .row p img').css('transform', 'rotate(0deg)').attr('src', './images/bug.svg')
-            $('#homepage .fn-num').hide()
             $('#logo').on('click', function () {
                 location.reload()
             })
@@ -145,22 +159,6 @@ $(function () {
         }
         caleTimeDiff()
         setInterval(caleTimeDiff, 999)
-    }());
-    // 更新日志返回置顶显示隐藏功能 toupDateReturnTop
-    (function () {
-        $(window).on('scroll', function () {
-            var htmlheight = $(window).height() / 2;
-            if($('html').scrollTop() > htmlheight && $('#toupdate').css('display') != 'none') {
-                $('#toupdate #returntop').show()
-            }else {
-                $('#toupdate #returntop').hide()
-            }
-        })
-        $('#toupdate #returntop').on('click', function () {
-            $('html').stop().animate({
-                scrollTop : 0
-            })
-        })
     }());
     // 底部按钮切换功能 footerBtnType
     (function () {

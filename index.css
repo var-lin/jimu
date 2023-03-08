@@ -10,6 +10,18 @@ a {
     z-index: 9;
 }
 
+/* 返回置顶按钮样式 */
+
+#returntop {
+    display: none;
+    position: fixed;
+    top: 60%;
+    right: 10px;
+    width: 2rem;
+    cursor: pointer;
+    z-index: 999;
+}
+
 /* logo */
 
 #logo {
@@ -93,7 +105,7 @@ a {
 .sidebarBn {
     position: fixed;
     left: 0px;
-    top: 25%;
+    top: 10%;
     padding: 10px;
     background-color: #fff;
     border-radius: 0 10px 10px 0;
@@ -166,7 +178,7 @@ a {
     color: #999;
 }
 
-    /* 首页顶部样式 */
+    /* 首页样式 */
 
 #homepage {
     margin-top: 20px;
@@ -218,6 +230,7 @@ a {
 .fn-num span {
     margin: 0 5px;
     color: #424242;
+    display: none;
 }
 
 /* 更新日志 */
@@ -255,18 +268,6 @@ a {
 
 #toupdate .c-f40 {
     color: #f40;
-}
-
-    /* 返回置顶按钮样式 */
-
-#toupdate #returntop {
-    display: none;
-    position: fixed;
-    top: 60%;
-    right: 10px;
-    width: 2rem;
-    cursor: pointer;
-    z-index: 999;
 }
 
 /* 底部样式 */
@@ -398,5 +399,5 @@ footer button .text span {
     background-color: #999;
     display: none;
     opacity: .5;
-    z-index: 9999;
+    z-index: 99999;
 }
