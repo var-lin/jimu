@@ -33,10 +33,6 @@
             </div>
             <div class="data">
             	查询结果
-                <ul>
-                    <li><a target="_blank"></a></li>
-                    <li><span>打开链接复制url后面的链接</span></li>
-                </ul>
                	<ul style="display: none;">
                   	<li><a target="_blank"><img></a></li>
                     <li>歌手：<span></span></li>
@@ -53,10 +49,6 @@
 				function getdata() {
        				var url = $('input').val();
                    	if(url === '') return $('.result').html('QQ音乐分享链接不能为空').fadeOut(3000);
-                    $('.data ul:eq(0) li a').attr('href', 'https://apis.jxcxin.cn/api/qqmusic?url=' + url).html('https://apis.jxcxin.cn/api/qqmusic?url=' + url)
-                    $('.data').fadeIn(500)
-                    $('.result').html('操作成功').fadeOut(3000)
-                    $('input').val('')
                     $.get('https://apis.jxcxin.cn/api/qqmusic', {url : url}, function (res){
                         if(res.code !== 200) return $('.result').html(res.msg).fadeOut(3000);
                         $('.data ul:eq(0)').hide()
