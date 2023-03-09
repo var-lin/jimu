@@ -51,8 +51,6 @@
                    	if(url === '') return $('.result').html('QQ音乐分享链接不能为空').fadeOut(3000);
                     $.get('https://apis.jxcxin.cn/api/qqmusic', {url : url}, function (res){
                         if(res.code !== 200) return $('.result').html(res.msg).fadeOut(3000);
-                        $('.data ul:eq(0)').hide()
-                        $('.data ul:eq(1)').show()
                         $('.data ul li:eq(0) a').attr('href', res.pic).children('img').attr('src', res.pic)
                         $('.data ul li:eq(1) span').html(res.author)
                         $('.data ul li:eq(2) span').html(res.albumname)
