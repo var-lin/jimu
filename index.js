@@ -75,7 +75,7 @@ $(function () {
         success : function (res) {
             $('#homepage .row p').css('height', 'auto').html('')
             var fnnum = 0,
-                aElement = '<a class="col-4"></a>';
+                aElement = '<a class="col-4" target="_blank"></a>';
             // 数据载入
             // QQ专区数据输入及输入进全部功能里
             $(res.QQ).each(function (i, e) {
@@ -254,7 +254,7 @@ $(function () {
         function mysteriouCodeUrl() {
             $('.sidebar .navigaBar').append('<li style="color: #a0a;">秘密区</li>')
             $(res.mysteriouCode).each(function (i, e) {
-                $('#homepage .fn-mysteriouCode .row').append('<a class="col-4"></a>').children('a').eq(i).html(e.name).attr('href', e.url)
+                $('#homepage .fn-mysteriouCode .row').append('<a class="col-4" target="_blank"></a>').children('a').eq(i).html(e.name).attr('href', e.url)
             })
             // 输出一共的功能数量
             var funcNum = parseInt($('.fn-num span').html())

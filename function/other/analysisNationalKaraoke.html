@@ -1,0 +1,76 @@
+<!doctype html>
+<html> 
+    <head> 
+        <meta charset="UTF-8"> 
+        <meta name="viewport" id="viewport" content="width=device-width, initial-scale=1, user-scalable=no"> 
+        <title>积木·全民K歌解析</title>
+        <link rel="icon" type="image/x-icin" href="../../images/logo.ico">
+        <script src="../../tools/jQuery3.6.3_min.js"></script>
+        <link rel="stylesheet" href="../../tools/bootstrap.min.css">
+        <link rel="stylesheet" href="../css/function.css">
+        <style>
+            .data ul li {
+                word-break: break-all;
+            }
+
+            .data ul li img {
+                width: 150px;
+                border-radius: 10px;
+            }
+        </style>
+    </head> 
+    <body>
+		<div class="result text-center"></div>
+    	<div class="container">
+       		<input type="url" class="form-control" placeholder="请输入需要查询的全民k歌分享链接" required>            
+            <div class="text-center" style="margin: 20px 0;">
+            	<button class="btn btn-secondary">解析</button>
+            </div>
+            <div class="notes text-center">
+            	<div>#无反应请检测网络#</div>
+            </div>
+            <div class="data">
+            	查询结果
+               	<ul>
+                    <li><a target="_blank"><img></a></li>
+                    <li>用户名称：<span></span></li>
+                    <li>内容：<span></span></li>
+                    <li>封面<br><a target="_blank"><img></a></li>
+                    <li>音乐直链链接<br><a target="_blank"></a></li>
+               	</ul>
+            </div>                              	                    
+       	</div>
+        <span class="from text-center">接口来自:<a href="https://apis.jxcxin.cn/" target="_blank">Store API</a></span>  
+        <script>
+        	$(function () {
+               	$('.container').fadeIn(300);
+				function getdata() {
+       				var url = $('input').val();
+                   	if(url === '') return $('.result').html('全民k歌分享链接不能为空').fadeOut(3000);
+                    // ajax获得数据
+       				$.get('https://apis.jxcxin.cn/api/kge', {url : url}, function (res){
+       					if(res.code !== 200) return $('.result').html(res.msg).fadeOut(3000);
+                        $('.data ul li:eq(0) a').attr('href', res.avatar).children('img').attr('src', res.avatar)
+                        $('.data ul li:eq(1) span').html(res.nick)
+                        $('.data ul li:eq(2) span').html(res.content)
+                        $('.data ul li:eq(3) a').attr('href', res.cover).children('img').attr('src', res.cover)
+                        $('.data ul li:eq(4) a').html(res.playurl).attr('href', res.playurl)
+                     	$('.data').fadeIn(500)
+                        $('.result').html('操作成功').fadeOut(3000)
+                        $('input').val('')                                                    
+       				})
+   				}
+				$('.btn-secondary').click(function () {
+            		$('.result').html('请稍等').fadeIn(1000)
+   					getdata()        			
+   				})
+         		$(window).on('keydown', function (e) {
+               		if(e.keyCode === 13) {
+                        $('.result').html('请稍等').fadeIn(1000)
+                        getdata()
+                    }
+               	})
+			})
+        </script> 	
+    </body>
+</html>

@@ -3,39 +3,31 @@
     <head> 
         <meta charset="UTF-8"> 
         <meta name="viewport" id="viewport" content="width=device-width, initial-scale=1, user-scalable=no"> 
-        <title>积木·蓝奏云直链解析</title>
+        <title>积木·微信运动刷步</title>
         <link rel="icon" type="image/x-icin" href="../../images/logo.ico">
         <script src="../../tools/jQuery3.6.3_min.js"></script>
         <link rel="stylesheet" href="../../tools/bootstrap.min.css">
         <link rel="stylesheet" href="../css/function.css">
-        <style>
-            .data ul li {
-                word-break: break-all;
-            }
-        </style>
     </head> 
     <body>
 		<div class="result text-center"></div>
     	<div class="container">
-            <input type="url" class="form-control" placeholder="请输入需要解析的蓝奏云链接" required>
-       		<input type="text" class="form-control" placeholder="请输入需要解析的蓝奏云链接密码(没有则不填)" style="margin-top: 20px;">
+            <input type="text" class="form-control" placeholder="请输入需要刷步的Zeep Life账号" required>
+            <input type="password" class="form-control" placeholder="请输入需要刷步的Zeep Life密码" style="margin-top: 20px;">
+       		<input type="number" class="form-control" placeholder="请输入刷入的步数" style="margin-top: 20px;">
             <div class="text-center" style="margin: 20px 0;">
-            	<button class="btn btn-secondary">查询</button>
+            	<button class="btn btn-secondary">刷入</button>
             </div>
             <div class="notes text-center">
                 <div>#无反应请检测网络#</div>
-            	<div>#只能单文件解析噢~#</div>
+                <div>#需要刷的步数，建议5万以内，太多容易被封7天排行榜！#</div>
             </div>
             <div class="data">
             	查询结果
                	<ul>
-                    <li>原链接<br><span></span></li>
-                    <li>文件名：<span></span></li>
-                    <li>作者：<span></span></li>
-                    <li>发布时间：<span></span></li>
-                    <li>文件大小：<span></span></li>
-                    <li>描述：<span></span></li>
-               		<li>解析链接<br><a target="_blank"></a></li>
+                    <li><span></span></li>
+                    <li>刷入步数：<span></span></li>
+                    <li>结果：<span></span></li>
                	</ul>
             </div>                              	                    
        	</div>
@@ -44,31 +36,27 @@
         	$(function () {
                	$('.container').fadeIn(300);
 				function getdata() {
-                    var url = $('input:eq(0)').val();
-       				var pwd = $('input:eq(1)').val();
-                   	if(url === '') return $('.result').html('蓝奏云链接不能为空').fadeOut(3000);
+                    var user = $('input:eq(0)').val(),
+                        password = $('input:eq(1)').val(),
+                        step = $('input:eq(2)').val();
+                    if(user === '') return $('.result').html('账号不能为空').fadeOut(3000);
+                    if(password === '') return $('.result').html('密码不能为空').fadeOut(3000);
+                   	if(step === '') return $('.result').html('步数不能为空').fadeOut(3000);
                     // ajax获得数据
                     $.ajax({
-                        url : 'https://apis.jxcxin.cn/api/lanzou',
+                        url : 'https://apis.jxcxin.cn/api/mi',
                         type : 'get',
                         dataType : 'json',
                         data : {
-                            url : url,
-                            pwd : pwd
+                            user : user,
+                            password : password,
+                            step : step
                         },
                         success : function (res) {
-                            if(res.code !== 200) return $('.result').html(res.msg).fadeOut(3000);
-                            $('.data ul li:eq(0) span').html(url)
-                            $('.data ul li:eq(1) span').html(res.data.name)
-                            $('.data ul li:eq(2) span').html(res.data.author)
-                            $('.data ul li:eq(3) span').html(res.data.time)
-                            $('.data ul li:eq(4) span').html(res.data.size)
-                            if(res.data.describe) {
-                                $('.data ul li:eq(5) span').html(res.data.describe)
-                            } else {
-                                $('.data ul li:eq(5) span').html('无')
-                            }
-                            $('.data ul li:eq(6) a').html(res.data.url).attr('href', res.data.url)
+                            if(res.code !== '200') return $('.result').html(res.msg).fadeOut(3000);
+                            $('.data ul li:eq(0) span').html(res.user)
+                            $('.data ul li:eq(1) span').html(res.step)
+                            $('.data ul li:eq(2) span').html(res.msg)
                             $('.data').fadeIn(500)
                             $('.result').html('操作成功').fadeOut(3000)
                             $('input').val('')
