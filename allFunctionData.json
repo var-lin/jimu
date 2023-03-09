@@ -73,8 +73,8 @@
         {"name" : "微信运动步数", "url" : "./function/other/wechatMovementBrushStep.html"},
         {"name" : "短视频去水印解析", "url" : "./function/other/shortVideoDe_watermarkingAnalysis.html"},
         {"name" : "蓝奏云直链解析", "url" : "./function/other/lanzouyLinearChainAnalysis.html"},
+        {"name" : "QQ音乐直链解析", "url" : "./function/other/QQMusicLinearChainAnalysis.html"},
         {"name" : "酷我音乐直链解析", "url" : "./function/other/kuwoLinearChainAnalysis.html"},
-        {"name" : "网易云音乐直链解析", "url" : "./function/other/wyyLinearChainAnalysis.html"},
         {"name" : "全面k歌解析", "url" : "./function/other/analysisNationalKaraoke.html"}
     ],
     "mysteriouCode" : [
