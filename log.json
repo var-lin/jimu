@@ -1,13 +1,29 @@
 [
     {
+        "date" : "2023.03.10.0更新日志",
+        "data" : [
+            "<span class=\"c-f40\">New&nbsp</span>新增“<a href=\"./function/informationQueryZone/bilibiliFanFollowQuery.html\">哔哩哔哩关注粉丝查询</a>”功能",
+            "<span class=\"c-f40\">New&nbsp</span>新增“<a href=\"./function/hotSearchListZone/QQMuiceHotSearchList.html\">QQ音乐巅峰榜</a>”功能",
+            "<span class=\"c-f40\">New&nbsp</span>新增“<a href=\"./function/other/wechatMovementBrushStep.html\">微信运动步数</a>”功能",
+            "<span class=\"c-f40\">New&nbsp</span>新增“<a href=\"./function/other/shortVideoDe_watermarkingAnalysis.html\">短视频去水印解析</a>”功能",
+            "<span class=\"c-f40\">New&nbsp</span>新增“<a href=\"./function/other/lanzouyLinearChainAnalysis.html\">蓝奏云直链解析</a>”功能",
+            "<span class=\"c-f40\">New&nbsp</span>新增“<a href=\"./function/other/kuwoLinearChainAnalysis.html\">酷我音乐直链解析</a>”功能",
+            "<span class=\"c-f40\">New&nbsp</span>新增“<a href=\"./function/other/wyyLinearChainAnalysis.html\">网易云音乐直链解析</a>”功能",
+            "<span class=\"c-f40\">New&nbsp</span>新增“<a href=\"./function/other/analysisNationalKaraoke.html\">全面k歌解析</a>”功能",
+            "<span class=\"c-f40\">New&nbsp</span>新增“<a href=\"./function/other/QQTranslata.html\">QQ翻译</a>”功能",
+            "<span class=\"c-f40\">New&nbsp</span>添加loadding效果",
+            "<span class=\"c-f40\">New&nbsp</span>侧边栏添加检测版本更新按钮",
+            "<span style=\"color: #055\">注释&nbsp</span>软件的接口都是别人的，所以不知道什么时候功能就会失效"
+        ]
+    },
+    {
         "date" : "2023.03.06.0更新日志",
         "data" : [
-            "<span class=\"c-f40\">New&nbsp</span>新增“<a href=\"./function/informationQueryZone/baiduEncyclopedia.html\">百度百科</a>”功能",
-            "<span class=\"c-f40\">New&nbsp</span>新增“<a href=\"./function/hotSearchListZone/weChatStatusSongPopularityList.html\">微信状态歌词热度榜</a>”功能",
-            "<span class=\"c-f40\">New&nbsp</span>新增“<a href=\"./function/other/xiaoAiClassmatesChat.html\">小爱同学聊天</a>”功能",
-            "<span class=\"c-f40\">New&nbsp</span>首页添加功能导航栏跳转",
-            "<span class=\"c-f40\">New&nbsp</span>修复“<a href=\"./function/other/chatGPT.html\">charGPT</a>”功能问候语显示不全bug",
-            "<span style=\"color: #055\">注释&nbsp</span>软件的接口都是别人的，所以不知道什么时候功能就会失效"
+            "新增“<a href=\"./function/informationQueryZone/baiduEncyclopedia.html\">百度百科</a>”功能",
+            "新增“<a href=\"./function/hotSearchListZone/weChatStatusSongPopularityList.html\">微信状态歌词热度榜</a>”功能",
+            "新增“<a href=\"./function/other/xiaoAiClassmatesChat.html\">小爱同学聊天</a>”功能",
+            "修复“<a href=\"./function/other/chatGPT.html\">charGPT</a>”功能问候语显示不全bug",
+            "首页添加功能导航栏跳转"
         ]
     },
     {
