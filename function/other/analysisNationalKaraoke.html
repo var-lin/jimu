@@ -6,6 +6,7 @@
         <title>积木·全民K歌解析</title>
         <link rel="icon" type="image/x-icin" href="../../images/logo.ico">
         <script src="../../tools/jQuery3.6.3_min.js"></script>
+        <script src="../../tools/clipboard.min.js"></script>
         <link rel="stylesheet" href="../../tools/bootstrap.min.css">
         <link rel="stylesheet" href="../css/function.css">
         <style>
@@ -36,7 +37,7 @@
                     <li>用户名称：<span></span></li>
                     <li>内容：<span></span></li>
                     <li>封面<br><a target="_blank"><img></a></li>
-                    <li>音乐直链链接<br><a target="_blank"></a></li>
+                    <li>音乐直链链接<br><a target="_blank" id="result1" data-clipboard-target="#result1"></a></li>
                	</ul>
             </div>                              	                    
        	</div>
@@ -70,6 +71,12 @@
                         getdata()
                     }
                	})
+                // 解析链接点击复制
+                new Clipboard('#result1', {
+                    '#result1': function(trigger) {
+                        return trigger.nextElementSibling
+                    }
+                })
 			})
         </script> 	
     </body>

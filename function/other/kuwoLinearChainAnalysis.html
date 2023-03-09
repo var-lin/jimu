@@ -6,6 +6,7 @@
         <title>积木·酷我音乐直链解析</title>
         <link rel="icon" type="image/x-icin" href="../../images/logo.ico">
         <script src="../../tools/jQuery3.6.3_min.js"></script>
+        <script src="../../tools/clipboard.min.js"></script>
         <link rel="stylesheet" href="../../tools/bootstrap.min.css">
         <link rel="stylesheet" href="../css/function.css">
         <style>
@@ -27,7 +28,8 @@
             	<button class="btn btn-secondary">解析</button>
             </div>
             <div class="notes text-center">
-            	<div>#无反应请检测网络#</div>
+                <div>#无反应请检测网络#</div>
+            	<div>#解析链接点击复制#</div>
             </div>
             <div class="data">
             	查询结果
@@ -36,9 +38,9 @@
                     <li>歌名：<span></span></li>
                     <li>作者：<span></span></li>
                     <li>歌曲ID：<span></span></li>
-                    <li>音乐直链<br><a target="_blank"></a></li>
-                    <li>mv直链<br><a target="_blank"></a></li>
-                    <li>歌词直链<br><a target="_blank"></a></li>
+                    <li>音乐直链<br><a target="_blank" id="result1" data-clipboard-target="#result1"></a></li>
+                    <li>mv直链<br><a target="_blank" id="result2" data-clipboard-target="#result2"></a></li>
+                    <li>歌词直链<br><a target="_blank" id="result3" data-clipboard-target="#result3"></a></li>
                	</ul>
             </div>                              	                    
        	</div>
@@ -79,6 +81,22 @@
                         getdata()
                     }
                	})
+                // 解析点击复制
+                new Clipboard('#result1', {
+                    '#result1': function(trigger) {
+                        return trigger.nextElementSibling
+                    }
+                });
+                new Clipboard('#result2', {
+                    '#result2': function(trigger) {
+                        return trigger.nextElementSibling
+                    }
+                });
+                new Clipboard('#result3', {
+                    '#result3': function(trigger) {
+                        return trigger.nextElementSibling
+                    }
+                })
 			})
         </script> 	
     </body>

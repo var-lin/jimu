@@ -6,6 +6,7 @@
         <title>积木·蓝奏云直链解析</title>
         <link rel="icon" type="image/x-icin" href="../../images/logo.ico">
         <script src="../../tools/jQuery3.6.3_min.js"></script>
+        <script src="../../tools/clipboard.min.js"></script>
         <link rel="stylesheet" href="../../tools/bootstrap.min.css">
         <link rel="stylesheet" href="../css/function.css">
         <style>
@@ -24,6 +25,7 @@
             </div>
             <div class="notes text-center">
                 <div>#无反应请检测网络#</div>
+                <div>#解析链接点击复制#</div>
             	<div>#只能单文件解析噢~#</div>
             </div>
             <div class="data">
@@ -35,7 +37,7 @@
                     <li>发布时间：<span></span></li>
                     <li>文件大小：<span></span></li>
                     <li>描述：<span></span></li>
-               		<li>解析链接<br><a target="_blank"></a></li>
+               		<li>解析链接<br><a target="_blank" id="result1" data-clipboard-target="#result1"></a></li>
                	</ul>
             </div>                              	                    
        	</div>
@@ -88,6 +90,12 @@
                         getdata()
                     }
                	});
+                // 解析链接点击复制
+                new Clipboard('#result1', {
+                    '#result1': function(trigger) {
+                        return trigger.nextElementSibling
+                    }
+                })
 			})
         </script> 	
     </body>

@@ -6,6 +6,7 @@
         <title>积木·短视频去水印解析</title>
         <link rel="icon" type="image/x-icin" href="../../images/logo.ico">
         <script src="../../tools/jQuery3.6.3_min.js"></script>
+        <script src="../../tools/clipboard.min.js"></script>
         <link rel="stylesheet" href="../../tools/bootstrap.min.css">
         <link rel="stylesheet" href="../css/function.css">
         <style>
@@ -28,6 +29,7 @@
             </div>
             <div class="notes text-center">
                 <div>#无反应请检测网络#</div>
+                <div>#解析链接点击复制#</div>
             	<div>#支持抖音,皮皮虾,火山,微视,微博,绿洲,最右,轻视频,快手,全民小视频,巴塞电影,陌陌,Before避风,开眼,Vue Vlog 小咖秀,皮皮搞笑,西瓜短视频去水印解析#</div>
             </div>
             <div class="data">
@@ -38,7 +40,7 @@
                     <li>视频作者：<span></span></li>
                     <li>视频点赞量：<span></span></li>
                     <li>视频标题<br><span></span></li>
-                    <li>解析链接<br><a target="_blank"></a></li>
+                    <li>解析链接<br><a target="_blank" id="result1" data-clipboard-target="#result1"></a></li>
                     <li>作者年龄：<span></span></li>
                     <li>作者ID：<span></span></li>
                     <li>视频发布时间：<span></span></li>
@@ -46,7 +48,7 @@
                     <li>所在城市：<span></span></li>
                     <li>背景音乐作者：<span></span></li>
                     <li>背景音乐作者头像<br><a target="_blank"><img alt="作者头像"></a></li>
-                    <li>背景音乐解析<br><a target="_blank"></a></li>
+                    <li>背景音乐解析<br><a target="_blank" id="result2" data-clipboard-target="#result2"></a></li>
                	</ul>
             </div>                              	                    
        	</div>
@@ -97,6 +99,17 @@
                         getdata()
                     }
                	})
+                // 解析链接点击复制
+                new Clipboard('#result1', {
+                    '#result1': function(trigger) {
+                        return trigger.nextElementSibling
+                    }
+                });
+                new Clipboard('#result2', {
+                    '#result2': function(trigger) {
+                        return trigger.nextElementSibling
+                    }
+                })
 			})
         </script> 	
     </body>

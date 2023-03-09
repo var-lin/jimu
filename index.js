@@ -108,7 +108,7 @@ $(function () {
             })
             fnnum += res.other.length;
             // 输出一共的功能数量
-            $('.fn-num span').html(fnnum).show()
+            $('.fn-num span').html(fnnum).parent('.fn-num').show()
             mysteriouCode(res)
         },
         error : function (err) {

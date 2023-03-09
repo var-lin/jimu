@@ -6,6 +6,7 @@
         <title>积木·网易云音乐直链解析</title>
         <link rel="icon" type="image/x-icin" href="../../images/logo.ico">
         <script src="../../tools/jQuery3.6.3_min.js"></script>
+        <script src="../../tools/clipboard.min.js"></script>
         <link rel="stylesheet" href="../../tools/bootstrap.min.css">
         <link rel="stylesheet" href="../css/function.css">
     </head> 
@@ -22,7 +23,7 @@
             <div class="data">
             	查询结果
                	<ul>
-                  	<li>直链解析链接<br><a target="_blank"></a></li>                               
+                  	<li>直链解析链接<br><a target="_blank" id="result1" data-clipboard-target="#result1"></a></li>                               
                	</ul>
             </div>                              	                    
        	</div>
@@ -50,6 +51,12 @@
                         getdata()
                     }
                	})
+                // 解析链接点击复制
+                new Clipboard('#result1', {
+                    '#result1': function(trigger) {
+                        return trigger.nextElementSibling
+                    }
+                })
 			})
         </script> 	
     </body>

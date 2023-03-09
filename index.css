@@ -105,7 +105,7 @@ a {
 .sidebarBn {
     position: fixed;
     left: 0px;
-    top: 10%;
+    top: 15%;
     padding: 10px;
     background-color: #fff;
     border-radius: 0 10px 10px 0;
@@ -214,13 +214,13 @@ a {
 }
 
 #homepage .jumbotron p {
-    height: 200px;
+    height: 250px;
 }
 
 #homepage .jumbotron p img {
     margin: 0 auto;
     width: 50px;
-    line-height: 200px;
+    line-height: 250px;
 }
 
     /* 首页分区a链接样式 */
@@ -238,12 +238,12 @@ a {
 .fn-num {
     color: #f40;
     text-align: center;
+    display: none;
 }
 
 .fn-num span {
     margin: 0 5px;
     color: #424242;
-    display: none;
 }
 
 /* 更新日志 */
