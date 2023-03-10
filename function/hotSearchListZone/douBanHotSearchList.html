@@ -41,11 +41,9 @@
                         $('.update').show()
                         $('.result').html('查询成功').fadeOut(3000)
                         $('.update_time').html(res.time)
-                        var index = 1;
                         $.each(res.data, function (i, v) {
                             $('body').append('<div class="data"><h4 class="topIndex">top<span></span></h4><h3 class="header"><a target="_blank";></a></h3><div class="desc"><img src=""><span></span></div><div class="hot">评分 <span></span><span></span></div></div>')
-                            $('.data').eq(i).find('.topIndex span').html(index)
-                            index ++;
+                            $('.data').eq(i).find('.topIndex span').html(i + 1)
                             $('.data').eq(i).find('.header a').html(v.title).attr('href', v.info.url)
                             $('.data').eq(i).find('.desc img').attr('src', v.info.imgurl)
                             $('.data').eq(i).find('.desc span').html(v.info.yanyuan)

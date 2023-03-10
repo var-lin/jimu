@@ -3,42 +3,41 @@
     <head> 
         <meta charset="UTF-8"> 
         <meta name="viewport" id="viewport" content="width=device-width, initial-scale=1, user-scalable=no"> 
-        <title>积木·网址缩短</title>
+        <title>积木·小米域名检测</title>
         <link rel="icon" type="image/x-icin" href="../../images/logo.ico">
         <script src="../../tools/jQuery3.6.3_min.js"></script>
-        <script src="../../tools/clipboard.min.js"></script>
         <link rel="stylesheet" href="../../tools/bootstrap.min.css">
         <link rel="stylesheet" href="../css/function.css">
     </head> 
     <body>
 		<div class="result text-center"></div>
 	   	<div class="container">
-	       	<input type="url" class="form-control" placeholder="请输入需要缩短的网址" required>            
+	       	<input type="url" class="form-control" placeholder="请输入需要检测的域名" required>            
 	        <div class="text-center" style="margin: 20px 0;">
 	           	<button class="btn btn-secondary">缩短</button>
 	        </div>
            	<div class="notes text-center">
                 <div>#无反应请检测网络#</div>
-              	<div>#必须是完整的网址加上https://#</div>
-                <div>#网址点击可复制哦~#</div>
             </div>
 	        <div class="data text-center">
-	         	<div>缩短后的网址</div>
-               	<div id="result" data-clipboard-target="#result"></div>
+                <div>域名</div>
+                <div id="result"></div>
+	         	<div>结果</div>
+               	<div id="result"></div>
            	</div> 
         </div>
-        <span class="from text-center">接口来自:<a href="https://api.uomg.com/" target="_blank">UomgAPI</a></span>  
+        <span class="from text-center">接口来自:<a href="http://res.abeim.cn/api/" target="_blank">Abeim API</a></span>  
         <script>
         	$(function () {
                	$('.container').stop().fadeIn(300);
                 // ajax获得数据
 				function getdata() {
        				var url = $('input').val();
-                   	if(url === '') return $('.result').html('请输入网址').fadeOut(3000);
-       				$.get('https://api.uomg.com/api/long2dwz', {url : url, dwzapi : 'tcn'}, function (res){
-                        res = JSON.parse(res)
-                        if(res.code !== 1) return $('.result').html(res.msg).fadeOut(3000);
-            			$('.data div:eq(1)').html(res.ae_url)
+                   	if(url === '') return $('.result').html('请输入域名').fadeOut(3000);
+       				$.get('http://res.abeim.cn/api-check_mi_url', {url : url}, function (res){
+                        if(res.code !== 200) return $('.result').html(res.msg).fadeOut(3000);
+                        $('.data div:eq(1)').html(res.url)
+            			$('.data div:eq(3)').html(res.status)
                      	$('.data').fadeIn(500)
                         $('.result').html('操作成功').fadeOut(3000)
                         $('input').val('')           
@@ -54,12 +53,6 @@
                         getdata()
                     }
                	})
-                // 网址点击复制
-         		new Clipboard('#result', {
-    				'#result': function(trigger) {
-        				return trigger.nextElementSibling
-    				}
-				})
 			})
         </script> 	
     </body>

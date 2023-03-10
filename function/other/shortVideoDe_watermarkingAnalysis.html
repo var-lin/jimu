@@ -57,28 +57,26 @@
         	$(function () {
                	$('.container').fadeIn(300);
                 function ifData(data, ele) {
-                    if(data) {
-                        $(ele).html(data)
-                    } else {
-                        $(ele).parent('li').hide()
-                    }
+                    data ? $(ele).html(data) : $(ele).parent().hide()
                 }
 				function getdata() {
        				var url = $('input').val();
                    	if(url === '') return $('.result').html('链接不能为空').fadeOut(3000);
                     // ajax获得数据
        				$.get('https://apis.jxcxin.cn/api/video', {url : url}, function (res){
-       					if(res.code !== 200) return $('.result').html(res.msg).fadeOut(3000);
+                        if(res.code !== 200) return $('.result').html(res.msg).fadeOut(3000);
+       					if(res.data.url == null) return $('.result').html('解析失败').fadeOut(3000);
                         $('.data ul li:eq(0) a').attr('href', res.data.avatar).children('img').attr('src', res.data.avatar)
                         $('.data ul li:eq(1) a').attr('href', res.data.cover).children('img').attr('src', res.data.cover)
                         ifData(res.data.author, '.data ul li:eq(2) span')
                         ifData(res.data.like, '.data ul li:eq(3) span')
                         ifData(res.data.title, '.data ul li:eq(4) span')
                         $('.data ul li:eq(5) a').attr('href', res.data.url).html(res.data.url)
-                        console.log(res.data.url)
                         ifData(res.data.age, '.data ul li:eq(6) span')
                         ifData(res.data.uid, '.data ul li:eq(7) span')
-                        ifData(res.data.time, '.data ul li:eq(8) span')
+                        var time = new Date(parseInt(res.data.time + '000'))
+                        time = time.getFullYear() + '-' + time.getMonth() + '-' + time.getDay();
+                        ifData(time, '.data ul li:eq(8) span')
                         ifData(res.data.sex, '.data ul li:eq(9) span')
                         ifData(res.data.city, '.data ul li:eq(10) span')
                         ifData(res.data.music.author, '.data ul li:eq(11) span')

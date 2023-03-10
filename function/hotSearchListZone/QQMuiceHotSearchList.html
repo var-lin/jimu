@@ -47,11 +47,9 @@
                         $('.update').show()
                         $('.result').html('查询成功').fadeOut(3000)
                         $('.update_time').html(res.update_time)
-                        var index = 1;
                         $.each(res.data, function (i, v) {
                             $('body').append('<div class="data"><h4 class="topIndex">top<span></span></h4><h3 class="header"><a target="_blank";></a></h3><div class="desc">歌手名：<span></span><br>专辑：<span></span><br>歌曲ID：<span></span><br></div></div>')
-                            $('.data').eq(i).find('.topIndex span').html(index)
-                            index ++;
+                            $('.data').eq(i).find('.topIndex span').html(i + 1)
                             $('.data').eq(i).find('.header a').html(v.songname).attr('href', v.link)
                             $('.data').eq(i).find('.desc span:eq(0)').html(v.name)
                             $('.data').eq(i).find('.desc span:eq(1)').html(v.albumname)

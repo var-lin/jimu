@@ -39,13 +39,10 @@
                     success : function (res) {
                         $('.update').show()
                         $('.result').html('查询成功').fadeOut(3000)
-                        var index = 1;
                         $.each(res.data, function (i, v) {
                             $('body').append('<div class="data"><h4 class="topIndex">top<span></span></h4><h3 class="header">歌名：<span></span></h3><div class="desc"><img src="">歌手：<span></span><br>专辑：<span></span></div><div class="hot"><span></span></div></div>')
-                            $('.data').eq(i).find('.topIndex span').html(index)
-                            index ++;
+                            $('.data').eq(i).find('.topIndex span').html(i + 1)
                             $('.data').eq(i).find('.header span:eq(0)').html(v.song)
-                            
                             $('.data').eq(i).find('.desc img').attr('src', v.cover)
                             $('.data').eq(i).find('.desc span:eq(0)').html(v.singer)
                             $('.data').eq(i).find('.desc span:eq(1)').html(v.album)
