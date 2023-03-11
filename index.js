@@ -18,7 +18,7 @@ $(function () {
             })
         })
     }());
-    // 侧边导航栏
+    // 侧边栏
     (function () {
         function clear() {
             $('#homepage .cover').hide()
@@ -67,6 +67,60 @@ $(function () {
             }, 0);
         return timer
     })();
+    // 获得软件已运行时间 pastTime
+    (function () {       
+        var pasttimeevents = $('.sidebar .pasttime span'),
+        // 设置发布时间
+            old_time = new Date(2022, 0, 16),
+            new_time,         
+            day, 
+            leave_day, 
+            hour, 
+            leave_hour, 
+            minute,
+            second;
+        function caleTimeDiff() {
+            // 获取最新时间
+            new_time = new Date()         
+            // 计算时间差(差多少秒)
+            diff_time = (new_time - old_time) / 1000;       
+            day = Math.floor(diff_time / (3600 * 24));
+            leave_day = diff_time % (3600 * 24);
+            hour = Math.floor(leave_day / (3600));
+            leave_hour = leave_day % (3600);
+            minute = Math.floor(leave_hour / 60);
+            second = Math.floor(leave_hour % 60);        
+            // 时间输出
+            pasttimeevents.eq(0).html(day)
+            pasttimeevents.eq(1).html(hour)
+            pasttimeevents.eq(2).html(minute)
+            pasttimeevents.eq(3).html(second)
+        }
+        caleTimeDiff()
+        setInterval(caleTimeDiff, 999)
+    }());
+    // 底部按钮切换功能 footerBtnType
+    (function () {
+        $('footer button').each(function (i, e) {
+            $(this).click(function () {
+                   // 点击底部按钮返回滚动条置顶
+                $('html').scrollTop(0)
+                   // 页面隐藏显示切换
+                $('#showregion > div').eq(i).stop().fadeIn(300).siblings().hide()
+                // 文字效果切换
+                $(e).find('.text span').css({
+                    fontSize : '.6rem',
+                    color : '#fedcba',
+                    backgroundColor : 'cornflowerblue'
+                })
+                $(e).siblings().find('.text span').css({
+                    fontSize : '.5rem',
+                    color : '#fff',
+                    backgroundColor : 'transparent'
+                })
+            })
+        })
+    }());
     // 功能链接数据加载
     $.ajax({
         url : 'https://lhshilin.github.io/jimu/allFunctionData.json',
@@ -128,60 +182,6 @@ $(function () {
             })          
         })
     });
-    // 获得软件已运行时间 pastTime
-    (function () {       
-        var pasttimeevents = $('.sidebar .pasttime span'),
-        // 设置发布时间
-            old_time = new Date(2022, 0, 16),
-            new_time,         
-            day, 
-            leave_day, 
-            hour, 
-            leave_hour, 
-            minute,
-            second;
-        function caleTimeDiff() {
-            // 获取最新时间
-            new_time = new Date()         
-            // 计算时间差(差多少秒)
-            diff_time = (new_time - old_time) / 1000;       
-            day = Math.floor(diff_time / (3600 * 24));
-            leave_day = diff_time % (3600 * 24);
-            hour = Math.floor(leave_day / (3600));
-            leave_hour = leave_day % (3600);
-            minute = Math.floor(leave_hour / 60);
-            second = Math.floor(leave_hour % 60);        
-            // 时间输出
-            pasttimeevents.eq(0).html(day)
-            pasttimeevents.eq(1).html(hour)
-            pasttimeevents.eq(2).html(minute)
-            pasttimeevents.eq(3).html(second)
-        }
-        caleTimeDiff()
-        setInterval(caleTimeDiff, 999)
-    }());
-    // 底部按钮切换功能 footerBtnType
-    (function () {
-        $('footer button').each(function (i, e) {
-            $(this).click(function () {
-                   // 点击底部按钮返回滚动条置顶
-                $('html').scrollTop(0)
-                   // 页面隐藏显示切换
-                $('#showregion > div').eq(i).stop().fadeIn(300).siblings().hide()
-                // 文字效果切换
-                $(e).find('.text span').css({
-                    fontSize : '.6rem',
-                    color : '#fedcba',
-                    backgroundColor : 'cornflowerblue'
-                })
-                $(e).siblings().find('.text span').css({
-                    fontSize : '.5rem',
-                    color : '#fff',
-                    backgroundColor : 'transparent'
-                })
-            })
-        })
-    }());
     // 打赏二维码切换效果
     $('#reward button').eq(0).click(function () {
         $(this).addClass('btn-success').siblings('button').removeClass('btn-primary')
