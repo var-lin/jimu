@@ -1,6 +1,6 @@
 [
     {
-        "date" : "2023.???.0更新日志",
+        "date" : "2023.03.12.0更新日志",
         "data" : [
             "<span class=\"c-f40\">New&nbsp</span>新增“<a href=\"./function/qqZone/qqGroupIdkeyQuery.html\">QQ群idkey查询</a>”功能",
             "<span class=\"c-f40\">New&nbsp</span>新增“<a href=\"./function/qqZone/qqForceCrowd.html\">跳转QQ群</a>”功能",
