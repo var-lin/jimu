@@ -12,7 +12,7 @@
     <body>
 		<div class="result text-center"></div>
 	   	<div class="container">
-	       	<input type="text" class="form-control" placeholder="请输入需要查询的域名" required>            
+	       	<input type="url" class="form-control" placeholder="请输入需要查询的域名" required>            
 	        <div class="text-center" style="margin: 20px 0;">
 	           	<button class="btn btn-secondary">查询域名</button>
 	        </div>
@@ -28,12 +28,13 @@
         <script>
         	$(function () {
                	$('.container').fadeIn(300);
+                $('input:eq(0)').focus();
                 // ajax获得数据
 				function getdata() {
        				var url = $('input').val();
-                   	if(url === '') return $('.result').html('请输入域名').fadeOut(3000);
+                   	// if(url === '') return $('.result').html('请输入域名').fadeOut(3000);
        				$.get('https://api.vvhan.com/api/dm', {url:url}, function (res){
-       					if(!res.success) return $('.result').html('获取失败').fadeOut(3000);
+       					if(!res.success) return $('.result').html(res.message).fadeOut(3000);
             			$('.data span').eq(0).html(res.domain).siblings().html(res.message)
                      	$('.data').fadeIn(500)
                         $('.result').html('操作成功').fadeOut(3000)

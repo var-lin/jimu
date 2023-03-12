@@ -71,12 +71,13 @@
         <script>
         	$(function () {
                	$('.container').fadeIn(300);
+                $('input:eq(0)').focus();
                 // ajax获得数据
 				function getdata() {
        				var ip = $('input').val();
                    	if(ip === '') return $('.result').html('请输入要查询网站的域名或ip').fadeOut(3000);
        				$.get('https://api.qqsuu.cn/api/dm-port', {ip : ip, apiKey : 'a4be7c080fb67a0dc76f9b75fc7f161b'}, function (res){
-       					if(res.code !== 200) return $('.result').html(res.meg).fadeOut(3000);
+       					if(res.code !== 200) return $('.result').html(res.msg + '请联系作者').fadeOut(3000);
            				$('.data .ip span').html(res.host)
                         $('.data ul li:eq(0) span').html(res.port['21'])
                         $('.data ul li:eq(1) span').html(res.port['22'])

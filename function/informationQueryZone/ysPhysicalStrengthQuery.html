@@ -63,6 +63,7 @@
         <script>
         	$(function () {
                	$('.container').fadeIn(300);
+                $('input:eq(0)').focus();
                 // ajax获得数据
 				function getdata() {
        				var qq = $('input:eq(0)').val(),
@@ -70,7 +71,7 @@
                         cookie = $('input:eq(2)').val();
                    	if(qq === '') return $('.result').html('还是写上QQ号吧,会很方便的').fadeOut(3000);
                     $.get('http://www.Dreamling.xyz/API/mihoyou/ys/get_real_time_raft/api.php', {qq : qq, uid : uid, cookie : cookie, format : 'mixed'}, function (res){
-                        if(res.code !== 200) return $('.result').html('查询失败').fadeOut(3000);
+                        if(res.code !== 200) return $('.result').html(res.data.state).fadeOut(3000);
                         $('.data ul li:eq(0) img').attr('src', res.imageurl)
                         $('.data ul li:eq(1) span').html(res.uid)
                         $('.data ul li:eq(3) span').html(res.data['原粹树脂']['现有'])

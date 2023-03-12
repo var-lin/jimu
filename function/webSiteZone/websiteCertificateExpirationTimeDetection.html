@@ -35,6 +35,7 @@
         <script>
         	$(function () {
                	$('.container').fadeIn(300);
+                $('input:eq(0)').focus();
                 function timeCorrect(time) {
                     var date = new Date(time);
                     date = date.getFullYear() + '-' + date.getMonth() + '-' + date.getDay();
@@ -45,7 +46,7 @@
        				var url = $('input').val();
                     if(url === '') return $('.result').html('请输入网站链接').fadeOut(3000);
        				$.get('https://zj.v.api.aa1.cn/api/https/', {url : url}, function (res){
-       					if(res.code !== 1 || res.result !== 200) return $('.result').html('查询失败').fadeOut(3000);
+       					if(res.code !== 1 || res.result !== 200 || !res.Start_date) return $('.result').html('查询失败').fadeOut(3000);
                         $('.data ul li:eq(0) span').html(url)
                         $('.data ul li:eq(1) span').html(res.Issuer)
                      	$('.data ul li:eq(2) span').html(timeCorrect(res.Start_date))

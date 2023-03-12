@@ -38,6 +38,7 @@
                     type : 'get',
                     dataType : 'json',
                     success : function (res) {
+                        if(!res.success) return $('.result').html('查询失败').fadeOut(3000);
                         $('.update').show()
                         $('.result').html('查询成功').fadeOut(3000)
                         $('.update_time').html(res.time)

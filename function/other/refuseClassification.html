@@ -31,6 +31,7 @@
         <script>
         	$(function () {
                	$('.container').fadeIn(300);
+                $('input:eq(0)').focus();
 				function getdata() {
        				var name = $('input').val();
                    	if(name === '') return $('.result').html('垃圾名不能为空').fadeOut(3000);

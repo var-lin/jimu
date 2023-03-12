@@ -35,8 +35,9 @@
         <script>
         	$(function () {
                	$('.container').fadeIn(300);
+                $('input:eq(0)').focus();
                 function ifData(data, ele) {
-                    data ? $(ele).html(data) : $(ele).parent().hide()
+                    data ? $(ele).html(data).parent().show() : $(ele).parent().hide()
                 }
                 // ajax获得数据
 				function getdata() {

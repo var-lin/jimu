@@ -34,12 +34,13 @@
         <script>
         	$(function () {
                	$('.container').fadeIn(300);
+                $('input:eq(0)').focus();
 				function getdata() {
        				var qqgroupnum = $('input').val();
                    	if(qqgroupnum === '') return $('.result').html('QQ群号不能为空').fadeOut(3000);
                     // ajax获得数据
        				$.get('http://res.abeim.cn/api-qq.qun.key', {qun : qqgroupnum}, function (res){
-       					if(res.code !== 200) return $('.result').html('操作失败').fadeOut(3000);
+       					if(res.code !== 200) return $('.result').html(res.msg).fadeOut(3000);
            				$('.data ul li:eq(0) span').html(res.qun)
                         $('.data ul li:eq(1) span').html(res.key)
                      	$('.data ul li:eq(2) a').attr('href', res.url).html(res.url)

@@ -30,12 +30,13 @@
         <script>
         	$(function () {
                	$('.container').fadeIn(300);
+                $('textarea:eq(0)').focus();
                 // ajax获得数据
 				function getdata() {
        				var text = $('textarea').val();
                    	if(text === '') return $('.result').html('请输入内容').fadeOut(3000);
        				$.get('https://apis.jxcxin.cn/api/fanyi', {msg : text}, function (res){
-       					if(res.code !== 200) return $('.result').html('获取失败').fadeOut(3000);
+       					if(res.code !== 200) return $('.result').html(res.msg).fadeOut(3000);
             			$('.data div:eq(0) span').html(res.content)
                      	$('.data div:eq(1) span').html(res.result)
                      	$('.data').fadeIn(500)

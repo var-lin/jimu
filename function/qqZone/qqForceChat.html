@@ -26,6 +26,7 @@
         <script>
         	$(function () {
                	$('.container').fadeIn(300);
+                $('input:eq(0)').focus();
                 // 跳转官网接口
 				$('button').click(function () {             
                 	if($('input').val() === '') return $('.result').html('请输入QQ号').fadeIn(1000).fadeOut(3000);

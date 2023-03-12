@@ -33,12 +33,13 @@
         <script>
         	$(function () {
                	$('.container').fadeIn(300);
+                $('input:eq(0)').focus();
 				function getdata() {
        				var qqnum = $('input').val();
                    	if(qqnum === '') return $('.result').html('QQ号不能为空').fadeOut(3000);
                     // ajax获得数据
        				$.get('https://v.api.aa1.cn/api/qqgj-v2/', {qq : qqnum}, function (res){
-       					if(res.code !== 200) return $('.result').html('操作失败').fadeOut(3000);
+       					if(res.code !== 200 || res.money === '元') return $('.result').html('操作失败').fadeOut(3000);
            				$('.data ul li:eq(0) span').html(res.qq)
                         $('.data ul li:eq(1) span').html(res.money)
                         if(res.gl) {

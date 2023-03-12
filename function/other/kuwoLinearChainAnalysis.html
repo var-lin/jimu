@@ -48,22 +48,29 @@
         <script>
         	$(function () {
                	$('.container').fadeIn(300);
+                $('input:eq(0)').focus();
+                function ifData(data, ele) {
+                    data ? $(ele).html(data).parent().show() : $(ele).parent().hide()
+                }
 				function getdata() {
        				var id = $('input').val();
                    	if(id === '') return $('.result').html('酷我音乐ID不能为空').fadeOut(3000);
                     // ajax获得数据
        				$.get('https://apis.jxcxin.cn/api/kuwo', {id : id, type : 'json'}, function (res){
        					if(res.code !== 200) return $('.result').html(res.msg).fadeOut(3000);
-                        $('.data ul li:eq(0) a').attr('href', res.pic).children('img').attr('src', res.pic)
-                        $('.data ul li:eq(1) span').html(res.name)
-                        $('.data ul li:eq(2) span').html(res.author)
+                        if(res.pic) {
+                            $('.data ul li:eq(0) a').attr('href', res.pic).children('img').attr('src', res.pic)
+                        } else {
+                            $('.data ul li:eq(0)').hide()
+                        }
+                        ifData(res.name, '.data ul li:eq(1) span')
+                        ifData(res.author, '.data ul li:eq(2) span')
                         $('.data ul li:eq(3) span').html(id)
                         $('.data ul li:eq(4) a').html(res.url).attr('href', res.url)
                         if(res.mvurl.indexOf('http') >= 0) {
                             $('.data ul li:eq(5) a').html(res.mvurl).attr('href', res.mvurl)
                         } else {
-                            $('.data ul li:eq(5) a').remove()
-                            $('.data ul li:eq(5)').append('：<span>'+ res.mvurl + '</span>')
+                            $('.data ul li:eq(5) a').html(res.mvurl)
                         }
                         $('.data ul li:eq(6) a').html(res.lrc).attr('href', res.lrc)
                      	$('.data').fadeIn(500)

@@ -33,6 +33,7 @@
         <script>
         	$(function () {
                	$('.container').fadeIn(300);
+                $('input:eq(0)').focus();
 				function getdata() {
        				var qqnum = $('input').val();
                    	if(qqnum === '') return $('.result').html('QQ号不能为空').fadeOut(3000);

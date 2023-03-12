@@ -36,12 +36,13 @@
         <script>
             $(function () {
                 $('.container').fadeIn(300);
+                $('input:eq(0)').focus();
                 function getdata() {
                     var tel = $('input').val();
                     if(tel === '') return $('.result').html('手机号不能为空').fadeOut(3000);
                     // ajax获得数据
                     $.get('https://zj.v.api.aa1.cn/api/saorao/', {phone : tel}, function (res){
-                        if(!res.success) return $('.result').html('操作失败').fadeOut(3000);
+                        if(!res.success) return $('.result').html(res.message).fadeOut(3000);
                         $('.data ul li:eq(0) span').html(res.tel)
                         $('.data ul li:eq(1) span:eq(0)').html(res.info.province).siblings('span').html(res.info.city)
                         $('.data ul li:eq(2) span').html(res.info.operator)

@@ -31,12 +31,12 @@
             	<!-- 字符串加密输入框 -->
             	<div id="encryption">
             		<textarea class="form-control text-center" placeholder="请输入需要加密的内容"></textarea>
-            		<input type="text" class="form-control" placeholder="请输入加密的密码" required>
+            		<input type="number" class="form-control" placeholder="请输入加密的密码" required>
             	</div>
                	<!-- 字符串解密输入框 -->
             	<div id="decryption" style="display: none;">
             		<textarea class="form-control text-center" placeholder="请输入需要解密的内容"></textarea>
-            		<input type="text" class="form-control" placeholder="请输入解密的密码" required>
+            		<input type="number" class="form-control" placeholder="请输入解密的密码" required>
             	</div>
             </div>
          	
@@ -57,6 +57,7 @@
         <script>
         	$(function () {
                	$('.container').fadeIn(300);
+                $('textarea:eq(0)').focus();
                 // 切换解密加密 switchbtn
                 (function () {
                     $('.switch button').each(function (i, e) {
@@ -82,7 +83,7 @@
                        	var string = $('#encryption textarea').val();
                    		var key = $('#encryption input').val()
                         $.get('https://api.vvhan.com/api/jm', {key:key,string:string,type:'en'}, function (res){
-                            if(!res.success) return $('.result').html('操作失败').fadeOut(3000);
+                            if(!res.success) return $('.result').html(res.message).fadeOut(3000);
                             $('.result').html('操作成功').fadeOut(3000)
                          	$('#result').html(res.enmissString)
                             $('#encryption textarea').val('')
@@ -95,7 +96,7 @@
                        	var string = $('#decryption textarea').val();
                    		var key = $('#decryption input').val();
                         $.get('https://api.vvhan.com/api/jm', {key:key,string:string,type:'de'}, function (res){
-                            if(!res.success) return $('.result').html('操作失败').fadeOut(3000);
+                            if(!res.success) return $('.result').html(res.message).fadeOut(3000);
                             $('.result').html('操作成功').fadeOut(3000)
                          	$('#result').html(res.demissString)
                             $('#decryption textarea').val('')

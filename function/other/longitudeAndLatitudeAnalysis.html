@@ -37,19 +37,23 @@
         <script>
         	$(function () {
                	$('.container').fadeIn(300);
+                $('input:eq(0)').focus();
 				function getdata() {
-                    var longitud = $('input:eq(0)').val();
-       				var latitude = $('input:eq(1)').val();
+                    var longitud = $('input:eq(0)').val(),
+                        latitude = $('input:eq(1)').val();
+                    function ifData(data, ele) {
+                        data ? $(ele).html(data).parent().show() : $(ele).parent().hide()
+                    }
                    	if(longitud === '' && latitude === '') return $('.result').html('请输入要解析的经纬度').fadeOut(3000);
                     // ajax获得数据
        				$.get('http://res.abeim.cn/api-location_geocoder_address', {lng : longitud, lat : latitude}, function (res){
        					if(res.code !== 200) return $('.result').html(res.msg).fadeOut(3000);
            				$('.data ul li:eq(0) span').html(res.data.location)
-                        $('.data ul li:eq(1) span').html(res.data.province)
-                        $('.data ul li:eq(2) span').html(res.data.city)
-                        $('.data ul li:eq(3) span').html(res.data.district)
-                        $('.data ul li:eq(4) span').html(res.data.street)
-                        $('.data ul li:eq(5) span').html(res.data.title)
+                        ifData(res.data.province, '.data ul li:eq(1) span')
+                        ifData(res.data.city, '.data ul li:eq(2) span')
+                        ifData(res.data.district, '.data ul li:eq(3) span')
+                        ifData(res.data.street, '.data ul li:eq(4) span')
+                        ifData(res.data.title, '.data ul li:eq(5) span')
                         $('.data ul li:eq(6) span').html(res.data.recommend)
                      	$('.data').fadeIn(500)
                         $('.result').html('操作成功').fadeOut(3000)

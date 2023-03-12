@@ -33,7 +33,8 @@
         <span class="from text-center">接口来自:<a href="https://api.vvhan.com/" target="_blank">韩小韩API</a></span>
         <script>
         	$(function () {
-               	$('.container').fadeIn(300)
+               	$('.container').fadeIn(300);
+                $('input:eq(0)').focus();
 				function getdata() {
        				var ip = $('input').val();
                    	if(ip === '') return $('.result').html('ip不能为空').fadeOut(3000);

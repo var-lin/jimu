@@ -32,13 +32,14 @@
         <script>
         	$(function () {
                	$('.container').fadeIn(300);
+                $('input:eq(0)').focus();
                 // ajax获得数据
 				function getdata() {
        				var qqnum = $('input').val();
                    	if(qqnum === '') return $('.result').html('QQ号不能为空').fadeOut(3000);
        				$.get('https://v.api.aa1.cn/api/api-qq-fangke/index.php', {qq:qqnum}, function (res){
                         res = JSON.parse(res)
-       					if(res.code !== '1') return $('.result').html('操作失败').fadeOut(3000);
+       					if(res.code !== '1') return $('.result').html(res.error).fadeOut(3000);
            				$('.data ul li:eq(0) span').html(res.qq)
                      	$('.data ul li:eq(1) span').html(res.fangke)
                         $('.data ul li:eq(2) span').html(res.all)                                                       

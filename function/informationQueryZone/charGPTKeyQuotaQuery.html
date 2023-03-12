@@ -34,6 +34,7 @@
         <script>
         	$(function () {
                	$('.container').fadeIn(300);
+                $('input:eq(0)').focus();
                	function zeroFill(num) {
                		if(num < 10) {
                			return '0' + num
@@ -56,7 +57,7 @@
                    	if(apikey === '') return $('.result').html('apikey不能为空').fadeOut(3000);
                     // ajax获得数据
        				$.get('https://v1.apigpt.cn/key/', {key : apikey}, function (res){
-       					if(res.code !== 200) return $('.result').html('操作失败').fadeOut(3000);
+       					if(res.code !== 200) return $('.result').html(res.msg).fadeOut(3000);
            				$('.data ul li:eq(0) span').html(res.total_granted)
                         $('.data ul li:eq(1) span').html(res.total_used)
                         $('.data ul li:eq(2) span').html(res.total_available)

@@ -43,15 +43,23 @@
         <script>
         	$(function () {
                	$('.container').fadeIn(300);
-                $.get('https://v.api.aa1.cn/api/api-miyu/index.php', function (res){
-                    res = JSON.parse(res)
-                    if(res.code !== '1') return $('.result').html('生成失败').fadeOut(3000);
-                    $('.data ul li:eq(0) span').html(res.mt)
-                    $('.data ul li:eq(1) span').html(res.lx)
-                    $('.data ul li:eq(2) span').html(res.ts)
-                    $('.data ul li:eq(3) span').html(res.md)
-                    $('.result').html('生成成功').fadeOut(3000)
-                    $('input').val('')                                                    
+                $.ajax({
+                    url : 'https://v.api.aa1.cn/api/api-miyu/index.php',
+                    type : 'get',
+                    dataType : 'json',
+                    success : function (res) {
+                        if(res.code !== '1') return $('.result').html('生成失败').fadeOut(3000);
+                        $('.data ul li:eq(0) span').html(res.mt)
+                        $('.data ul li:eq(1) span').html(res.lx)
+                        $('.data ul li:eq(2) span').html(res.ts)
+                        $('.data ul li:eq(3) span').html(res.md)
+                        $('.result').html('生成成功').fadeOut(3000)
+                        $('input').val('')
+                    },
+                    error : function (err) {
+                        $('.data').html('请刷新')
+                        $('.result').html('再刷新试试').fadeOut(3000);
+                    }
                 })
                 // 谜题显示
 				function showMD() {

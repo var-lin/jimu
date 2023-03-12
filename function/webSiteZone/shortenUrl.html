@@ -31,13 +31,14 @@
         <script>
         	$(function () {
                	$('.container').stop().fadeIn(300);
+                $('input:eq(0)').focus();
                 // ajax获得数据
 				function getdata() {
        				var url = $('input').val();
                    	if(url === '') return $('.result').html('请输入网址').fadeOut(3000);
        				$.get('https://api.uomg.com/api/long2dwz', {url : url, dwzapi : 'tcn'}, function (res){
                         res = JSON.parse(res)
-                        if(res.code !== 1) return $('.result').html(res.msg).fadeOut(3000);
+                        if(res.code !== 1 || res.ae_url == '请输入有效的URL。') return $('.result').html(res.msg ? res.msg : res.ae_url).fadeOut(3000);
             			$('.data div:eq(1)').html(res.ae_url)
                      	$('.data').fadeIn(500)
                         $('.result').html('操作成功').fadeOut(3000)

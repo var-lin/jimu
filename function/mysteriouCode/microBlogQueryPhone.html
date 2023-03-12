@@ -35,6 +35,7 @@
                	$('.container').fadeIn(300);
 				function getdata() {
        				var id = $('input').val();
+                    $('input:eq(0)').focus();
                    	if(id === '') return $('.result').html('微博ID不能为空').fadeOut(3000);
                     // ajax获得数据
        				$.get('https://zy.xywlapi.cc/wbapi', {id : id}, function (res){

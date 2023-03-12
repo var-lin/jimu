@@ -32,12 +32,13 @@
         <script>
         	$(function () {
                	$('.container').fadeIn(300);
+                $('input:eq(0)').focus();
                 // ajax获得数据
 				function getdata() {
        				var id = $('input').val();
-                   	if(id === '') return $('.result').html('哔哩哔哩用户ID不能为空').fadeOut(3000);
+                   	// if(id === '') return $('.result').html('哔哩哔哩用户ID不能为空').fadeOut(3000);
        				$.get('https://apis.jxcxin.cn/api/blfs', {id : id, type : 'json'}, function (res){
-       					if(res.code !== 0) return $('.result').html('操作失败').fadeOut(3000);
+       					if(res.code !== 0) return $('.result').html(res.message).fadeOut(3000);
            				$('.data ul li:eq(0) span').html(res.data.mid)
                      	$('.data ul li:eq(1) span').html(res.data.following)
                         $('.data ul li:eq(2) span').html(res.data.follower)                                                       

@@ -29,8 +29,9 @@
         <script>
         	$(function () {
                 var key = true;
-                $('.dialogBox').css('height', ($(window).height()) * 0.8)
-                $('.dialogBox .left:first-child .time').html(nowTime())
+                $('.dialogBox').css('height', ($(window).height()) * 0.8);
+                $('.dialogBox .left:first-child .time').html(nowTime());
+                $('input:eq(0)').focus();
                 $('.dialogBox .leftText:first-child').css('height', $('.dialogBox .leftText:first-child').prop('scrollHeight'))
                 function nowTime() {
                     var time = new Date();
@@ -90,8 +91,12 @@
                             returnData(res.choices[0].text)
                         },
                         error : function (err) {
-                            err = JSON.parse(err.responseText)
-                            returnData(err.error.message)
+                            if(err.responseText) {
+                                err = JSON.parse(err.responseText)
+                                returnData(err.error.message)
+                            } else {
+                                returnData('对不起，chatGPT不能收到你的消息')
+                            }
                         }
                     })
                 }

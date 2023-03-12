@@ -37,6 +37,7 @@
         <script>
         	$(function () {
                	$('.container').fadeIn(300);
+                $('input:eq(0)').focus();
 				function getdata() {
        				var idcard = $('input').val();
                    	if(idcard === '') return $('.result').html('身份证号码不能为空').fadeOut(3000);

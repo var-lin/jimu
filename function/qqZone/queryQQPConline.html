@@ -27,12 +27,13 @@
         <script>
         	$(function () {
                	$('.container').fadeIn(300);
+                $('input:eq(0)').focus();
                 // ajax获得数据
 				function getdata() {
        				var qqnum = $('input').val();
                    	if(qqnum === '') return $('.result').html('请输入QQ号').fadeOut(3000);
        				$.get('https://api.vvhan.com/api/qqcode', {qq:qqnum}, function (res){
-       					if(!res.success) return $('.result').html('获取失败').fadeOut(3000);
+       					if(!res.success) return $('.result').html(res.message).fadeOut(3000);
             			$('.data span').eq(0).html(qqnum).siblings().html(res.state)
                      	$('.data').fadeIn(500)
                         $('.result').html('操作成功').fadeOut(3000)

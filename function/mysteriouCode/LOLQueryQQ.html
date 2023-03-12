@@ -33,6 +33,7 @@
         <script>
         	$(function () {
                	$('.container').fadeIn(300);
+                $('input:eq(0)').focus();
 				function getdata() {
        				var LOLname = $('input').val();
                    	if(LOLname === '') return $('.result').html('LOL昵称不能为空').fadeOut(3000);
