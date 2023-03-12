@@ -8,6 +8,15 @@
         <script src="../../tools/jQuery3.6.3_min.js"></script>
         <link rel="stylesheet" href="../../tools/bootstrap.min.css">
         <link rel="stylesheet" href="../css/function.css">
+        <style>
+            .marTop {
+                margin-top: 20px;
+            }
+
+            .marBottom {
+                margin-bottom: 20px;
+            }
+        </style>
     </head> 
     <body>
 		<div class="result text-center"></div>
@@ -26,7 +35,27 @@
             <div class="data">
             	查询结果
                	<ul>
-               		<li><img width="100%"></li>
+                    <li style="margin: 10px 0;"><img style="border-radius: 10px;width: 100%;"></li>
+                    <li>uid：<span></span></li>
+                    <li class="marTop">原粹树脂</li>
+                    <li>现有：<span></span></li>
+                    <li>上限：<span></span></li>
+                    <li class="marBottom">全部恢复时间：<span></span></li>
+                    <li class="marTop">洞天财瓮-洞天宝钱</li>
+                    <li>现有：<span></span></li>
+                    <li>上限：<span></span></li>
+                    <li>预计到达存储上限：<span></span></li>
+                    <li class="marBottom">全部恢复时间：<span></span></li>
+                    <li class="marTop">每日委托任务</li>
+                    <li>已做：<span></span></li>
+                    <li>总数：<span></span></li>
+                    <li class="marBottom"><span></span></li>
+                    <li class="marTop">值得铭记的强敌</li>
+                    <li>剩余：<span></span></li>
+                    <li class="marBottom">总数：<span></span></li>
+                    <li class="marTop">参数质变仪</li>
+                    <li><span></span></li>
+               		<li>剩余天数：<span></span></li>
                	</ul>
             </div>                              	                    
        	</div>
@@ -42,7 +71,30 @@
                    	if(qq === '') return $('.result').html('还是写上QQ号吧,会很方便的').fadeOut(3000);
                     $.get('http://www.Dreamling.xyz/API/mihoyou/ys/get_real_time_raft/api.php', {qq : qq, uid : uid, cookie : cookie, format : 'mixed'}, function (res){
                         if(res.code !== 200) return $('.result').html('查询失败').fadeOut(3000);
-                        $('.data ul li:eq(0) img').attr('src', res.imageurl) 
+                        $('.data ul li:eq(0) img').attr('src', res.imageurl)
+                        $('.data ul li:eq(1) span').html(res.uid)
+                        $('.data ul li:eq(3) span').html(res.data['原粹树脂']['现有'])
+                        $('.data ul li:eq(4) span').html(res.data['原粹树脂']['上限'])
+                        $('.data ul li:eq(5) span').html(res.data['原粹树脂']['全部恢复时间'])
+                        $('.data ul li:eq(7) span').html(res.data['洞天财瓮-洞天宝钱']['现有'])
+                        $('.data ul li:eq(8) span').html(res.data['洞天财瓮-洞天宝钱']['上限'])
+                        $('.data ul li:eq(9) span').html(res.data['洞天财瓮-洞天宝钱']['预计到达存储上限'])
+                        $('.data ul li:eq(10) span').html(res.data['洞天财瓮-洞天宝钱']['全部恢复时间'])
+                        $('.data ul li:eq(12) span').html(res.data['每日委托任务']['已做'])
+                        $('.data ul li:eq(13) span').html(res.data['每日委托任务']['总数'])
+                        if(res.data['每日委托任务']['奖励领取']) {
+                            $('.data ul li:eq(14) span').html('奖励已领取')
+                        } else {
+                            $('.data ul li:eq(14) span').html('奖励未领取')
+                        }
+                        $('.data ul li:eq(16) span').html(res.data['值得铭记的强敌']['剩余'])
+                        $('.data ul li:eq(17) span').html(res.data['值得铭记的强敌']['总数'])
+                        if(res.data['参数质变仪']['能否使用']) {
+                            $('.data ul li:eq(19) span').html('可以使用')
+                        } else {
+                            $('.data ul li:eq(19) span').html('不能使用')
+                        }
+                        $('.data ul li:eq(20) span').html(res.data['参数质变仪']['天'])
                         $('.data').fadeIn(500)
                         $('.result').html('操作成功').fadeOut(3000)
                         $('input').val('')
