@@ -27,18 +27,36 @@
         	$(function () {
                	$('.container').fadeIn(300);
                 $('input:eq(0)').focus();
-                // 跳转官方接口
-				$('button').click(function () {               	
-                	if($('input').val() === '') return $('.result').html('请输入QQ号').fadeIn(1000).fadeOut(3000);
-                  	location.href = 'http://res.abeim.cn/api-qq.qun?qun=' + $('input').val();
-                    $('.result').html('操作成功,没跳转检测QQ号或者功能有问题了').fadeIn(1000).fadeOut(5000)                   
-                    $('.force span').html($('input').val())
-                    $('.force').fadeIn(300)
-                    $('input').val('');       
-   				})
-         		$(window).on('keydown', function (e) {
-               		if(e.keyCode === 13) $('button').click();
-               	})
+                // 获取数据
+                function getData() {
+                    if($('input').val() === '') return $('.result').html('请输入QQ群号').fadeOut(3000);
+                    var url = 'http://res.abeim.cn/api-qq.qun?qun=' + $('input:eq(0)').val();
+                    $.ajax({
+                        url : url,
+                        type : 'get',
+                        dataType : 'json',
+                        success : function (res) {
+                            $('.result').html(res.msg).fadeOut(3000);
+                        },
+                        error : function (err) {
+                            location.href = url;
+                            $('.result').html('跳转成功').fadeOut(5000)
+                            $('.force span').html($('input').val())
+                            $('.force').fadeIn(300)
+                            $('input').val(''); 
+                        }
+                    })
+                }
+                $('button').on('click', function () {
+                    $('.result').html('请稍等').fadeIn(1000)
+                    getData()
+                })
+                $(window).on('keydown', function (e) {
+                    if(e.keyCode === 13) {
+                        $('.result').html('请稍等').fadeIn(1000)
+                        getData()
+                    }
+                })
 			})
         </script> 	
     </body>
