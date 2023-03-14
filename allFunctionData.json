@@ -25,8 +25,7 @@
         {"name" : "网易云听歌记录查询", "url" : "./function/informationQueryZone/wyyListeningRecord.html"},
         {"name" : "实时石油", "url" : "./function/informationQueryZone/realTimeOil.html"},
         {"name" : "百度百科", "url" : "./function/informationQueryZone/baiduEncyclopedia.html"},
-        {"name" : "成语查询", "url" : "./function/informationQueryZone/idiomQuery.html"},
-        {"name" : "历史上的今天", "url" : "./function/informationQueryZone/todayInHistory.html"}
+        {"name" : "成语查询", "url" : "./function/informationQueryZone/idiomQuery.html"}
     ],
     "website" : [
     	{"name" : "查询网站标题", "url" : "./function/webSiteZone/queryWebSiteTitle.html"},
@@ -44,6 +43,7 @@
         {"name" : "短链接还原", "url" : "./function/webSiteZone/shortUrlRestore.html"}
     ],
     "hotSearchList" : [
+        {"name" : "历史上的今天", "url" : "./function/hotSearchListZone/todayInHistory.html"},
         {"name" : "微博热搜榜", "url" : "./function/hotSearchListZone/blogHotSearch.html"},
         {"name" : "豆瓣电影排行", "url" : "./function/hotSearchListZone/douBanHotSearchList.html"},
         {"name" : "QQ音乐巅峰榜", "url" : "./function/hotSearchListZone/QQMuiceHotSearchList.html"},
