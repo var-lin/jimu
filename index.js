@@ -2,7 +2,48 @@ $(function () {
     $('#homepage .jumbotron').animate({
         opacity : 1
     });
-    // 更新日志返回置顶显示隐藏功能 toupDateReturnTop
+    // 代刷网下拉
+    (function () {
+        if(!localStorage.getItem('replaceBrushStyle')) {
+            localStorage.setItem('replaceBrushStyle', 'none')
+        }
+        var key = localStorage.getItem('replaceBrushStyle'),
+            imgEle = $('#homepage .replaceBrush h5 span img'),
+            imgdown = './images/caret-down-square.svg',
+            imgup = './images/caret-up-square.svg';
+        $('#homepage .replaceBrush .replaceBrush-content').css('display', key)
+        if(key == 'none') {
+            $(imgEle).attr('src', imgdown)
+        } else {
+            $(imgEle).attr('src', imgup)
+        }
+        $('#homepage .replaceBrush h5').on('click', function () {
+            $('#homepage .replaceBrush .replaceBrush-content').stop().slideToggle(300)
+            if(key == 'none') {
+                key = 'block';
+                localStorage.setItem('replaceBrushStyle', 'block')
+                $(imgEle).attr('src', imgup)
+            } else {
+                key = 'none';
+                localStorage.setItem('replaceBrushStyle', 'none')
+                $(imgEle).attr('src', imgdown)
+            }
+        })
+    })();
+    // 时间段提示内容获取
+    $.ajax({
+        url : 'https://v.api.aa1.cn/api/time-tx/index.php',
+        type : 'get',
+        dataType : 'json',
+        success : function (res) {
+            if(res.code !== 1) return $('.timeTip').html('接口可能失效啦~')
+            $('.timeTip').html(res.msg)
+        },
+        error : function (err){
+            $('timeTip').html('请检测网络')
+        }
+    })
+    // 返回置顶显示隐藏功能 toupDateReturnTop
     (function () {
         $(window).on('scroll', function () {
             var htmlheight = $(window).height() / 2;
@@ -31,7 +72,7 @@ $(function () {
         $('.sidebar .navigaBar').on('click', function (e) {
             clear()
             $('html').animate({
-                scrollTop : $('.jumbotron').eq($('.sidebar .navigaBar li').index(e.target)).offset().top
+                scrollTop : $('.jumbotron').eq($(e.target).index()).offset().top
             })
         })
         $('.sidebarBn').on('click', function () {
@@ -194,59 +235,53 @@ $(function () {
     // 点击复制功能 copy
     (function () {       
         // QQ复制按钮
-        var authorQQcopybtn = new Clipboard('#authorQQcopybtn'),
+        var urlClipboardLeftBtn = new Clipboard('#homepage .replaceBrush .replaceBrush-content .urlClipboard .leftBtn'),
+            urlClipboardRightBtn = new Clipboard('#homepage .replaceBrush .replaceBrush-content .urlClipboard .rightBtn'),
+            authorQQcopybtn = new Clipboard('#authorQQcopybtn'),
             authorQQmailcopybtn = new Clipboard('#authorQQmailcopybtn'),
             authorQQCommunicationGroup = new Clipboard('#authorQQCommunicationGroup'),
             sourceCodeDownload = new Clipboard('#sourceCodeDownload'),
             androidDownload = new Clipboard('#androidDownload'),
             lanzouyunDownload = new Clipboard('#lanzouyunDownload');
+        // 代刷网左复制按钮
+        urlClipboardLeftBtn.on('success', function(e) {
+            e.clearSelection();
+            $('#homepage .replaceBrush .replaceBrush-content .urlClipboard .leftBtn').html('复制成功')
+        })
+        // 代刷网右复制按钮
+        urlClipboardRightBtn.on('success', function(e) {
+            e.clearSelection();
+            $('#homepage .replaceBrush .replaceBrush-content .urlClipboard .rightBtn').html('复制成功')
+        })
         // QQ号复制按钮
         authorQQcopybtn.on('success', function(e) {
             e.clearSelection();
             $('#authorQQcopybtn').html('复制成功')
         })
-        authorQQcopybtn.on('error', function(e) {
-            $('#authorQQcopybtn').html('复制失败')
-        })
           // QQ邮箱复制按钮
         authorQQmailcopybtn.on('success', function(e) {
             e.clearSelection();
             $('#authorQQmailcopybtn').html('复制成功')
-        });
-        authorQQmailcopybtn.on('error', function(e) {
-            $('#authorQQmailcopybtn').html('复制失败')
         })
         // QQ交流群号复制按钮
         authorQQCommunicationGroup.on('success', function(e) {
             e.clearSelection();
             $('#authorQQCommunicationGroup').html('复制成功')
-        });
-        authorQQCommunicationGroup.on('error', function(e) {
-            $('#authorQQCommunicationGroup').html('复制失败')
-        })
-        // pc端下载链接点击复制
+        },)
+        // 积木pc端下载链接点击复制
         sourceCodeDownload.on('success', function(e) {
             e.clearSelection();
             $('#sourceCodeDownload').html('复制成功')
         })
-        sourceCodeDownload.on('error', function(e) {
-            $('#sourceCodeDownload').html('复制失败')
-        })
-        // 安卓版下载链接点击复制
+        // 积木安卓版下载链接点击复制
         androidDownload.on('success', function(e) {
             e.clearSelection();
             $('#androidDownload').html('复制成功')
         })
-        androidDownload.on('error', function(e) {
-            $('#androidDownload').html('复制失败')
-        })
-          // 蓝奏云备用下载链接点击复制
-           lanzouyunDownload.on('success', function(e) {
+        // 蓝奏云备用下载链接点击复制
+        lanzouyunDownload.on('success', function(e) {
             e.clearSelection();
             $('#lanzouyunDownload').html('复制成功')
-        })
-        lanzouyunDownload.on('error', function(e) {
-            $('#lanzouyunDownload').html('复制失败')
         })
     }());
     // mysteriouCode

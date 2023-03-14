@@ -19,11 +19,10 @@
     <body>
         <div class="container-fluid">
             <!-- 返回置顶 -->
-            <img id="returntop" src="images/capslock-fill.svg" alt="置顶图片" title="置顶">
+            <img id="returntop" src="images/capslock-fill.svg" alt="置顶" title="置顶">
             <!-- logo -->
-            <img id="logo" src="./images/logo.png" alt="logo图片" title="logo">
+            <img id="logo" src="./images/logo.png" alt="logo" title="logo">
             <!-- 联系作者 -->
-            <button id="author" class="contact btn btn-success" data-toggle="modal" data-target="#exampleModal">联系作者</button>  
             <div class="modal fade" id="exampleModal">
                 <div class="modal-dialog">
                     <div class="modal-content">
@@ -64,8 +63,8 @@
                             <p id="reward" class="text-center">
                                 <button class="btn btn-success">微信打赏</button>
                                 <button class="btn">支付宝打赏</button>
-                                <img src="https://lhshilin.github.io/jimu/images/wxcode.png" alt="微信打赏二维码图片" title="微信打赏二维码">
-                                <img src="https://lhshilin.github.io/jimu/images/zfbcode.jpg" alt="支付宝打赏二维码图片" title="支付宝打赏二维码">                                   
+                                <img src="https://lhshilin.github.io/jimu/images/wxcode.png" alt="微信打赏二维码" title="微信打赏二维码">
+                                <img src="https://lhshilin.github.io/jimu/images/zfbcode.jpg" alt="支付宝打赏二维码" title="支付宝打赏二维码">                                   
                             </p>
                         </div>
                         <div class="modal-footer">
@@ -80,7 +79,7 @@
                 <div id="homepage" class="container">
                     <!-- 导航栏 -->
                     <div class="sidebarBn">
-                        <img src="./images/justify.svg" alt="功能导航栏图片" title="功能导航栏">
+                        <img src="./images/justify.svg" alt="功能导航栏" title="功能导航栏">
                     </div>
                     <div class="sidebar">
                         <div class="ipSignatureFile">
@@ -110,9 +109,32 @@
                             </li>
                         </ul>
                         <div class="about">
-                            <button>检测更新</button>
+                            <button class="checkUpdateBtn">检测更新</button>
+                            <button class="authorBtn" data-toggle="modal" data-target="#exampleModal">联系作者</button>
                         </div>
                     </div>
+                    <div class="replaceBrush">
+                        <h5 class="text-center" style="cursor: pointer;margin: 0;">
+                            <span>代刷网分享</span>
+                            <span><img src="" alt="代刷网内容下拉" style="vertical-align: -3px;width: 1.25rem;"></span>
+                        </h5>
+                        <div class="replaceBrush-content marginTop" style="display: none;">
+                            <div class="replaceBrush-header marginTop" style="text-indent: 2rem;color: #424242;">
+                                免费领Q名片赞，空间访客，等免费业务！还有永久Q钻专区，影视会员专区，游戏业务专区，粉丝关注专区，实物包邮专区，抖音快手业务，甚至还有网课代看业务！快来看看满足你需求的专区吧！！！ 下单网址：
+                                <a href="https://xyz.auu8.com/qsu4ih" target="_blank">https://xyz.auu8.com/qsu4ih</a>
+                            </div>
+                            <div class="replaceBrush-down marginTop" style="color: #999;text-align: center;">
+                                安卓苹果APP下载页
+                                <br>
+                                <a href="http://lhshilin.kkxdn.com/?mod=app&id=15018" target="_blank">http://lhshilin.kkxdn.com/?mod=app&id=15018</a>
+                            </div>
+                            <div class="urlClipboard marginTop">
+                                <button class="leftBtn btn btn-info" style="float: left;margin-left: 10px;" data-clipboard-target=".replaceBrush-header a">网站网址复制</button>
+                                <button class="rightBtn btn btn-info" style="float: right;margin-right: 10px;" data-clipboard-target=".replaceBrush-down a">下载网址复制</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="timeTip">时间段提示</div>
                     <div class="row fn-qq">
                         <div class="jumbotron col-12" style="background-image: linear-gradient(#fdd, #dff);">
                             <h4><span class="fnHeadBorder" style="color: #dc3545;border-color: #dc3545;">QQ专区</span></h4>                         
@@ -124,7 +146,8 @@
                     </div>
                     <div class="row fn-informationquery">
                         <div class="jumbotron col-12" style="background-image: linear-gradient(#ddd, #dff);">
-                            <h4><span class="fnHeadBorder" style="color: #6c757d;border-color: #6c757d;">信息查询专区</span></h4>                      <hr class="my-4">
+                            <h4><span class="fnHeadBorder" style="color: #6c757d;border-color: #6c757d;">信息查询专区</span></h4>
+                            <hr class="my-4">
                             <p class="row">
                                 <img src="./images/arrow-clockwise.svg" alt="Loadding" title="Loadding">
                             </p>                         
@@ -191,7 +214,7 @@
             <footer class="row">                              
                 <button id="homepagebtn" class="col-6">
                      <p class="icon">
-                        <img src="./images/layers-fill.svg" alt="首页图片" title="首页">
+                        <img src="./images/layers-fill.svg" alt="首页" title="首页">
                     </p>
                      <p class="text cornflowerblue">
                         <span class="texttype" style="font-size: .6rem;color: #fedcba;background-color: cornflowerblue;">首页</span>
@@ -199,7 +222,7 @@
                 </button>
                 <button id="toupdatelogobtn" class="col-6">
                     <p class="icon">
-                        <img src="./images/calendar2-check-fill.svg" alt="更新日志图片" title="更新日志">
+                        <img src="./images/calendar2-check-fill.svg" alt="更新日志" title="更新日志">
                     </p>
                     <p class="text">
                         <span>更新日志</span>

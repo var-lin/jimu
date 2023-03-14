@@ -1,0 +1,127 @@
+<!doctype html>
+<html> 
+    <head> 
+        <meta charset="UTF-8"> 
+        <meta name="viewport" id="viewport" content="width=device-width, initial-scale=1, user-scalable=no"> 
+        <title>积木·历史上的今天</title>
+        <link rel="icon" type="image/x-icin" href="../../images/logo.ico">
+        <script src="../../tools/jQuery3.6.3_min.js"></script> 
+        <link rel="stylesheet" href="../../tools/bootstrap.min.css">
+        <style>
+        	.result {
+                display: none;
+                position: absolute;
+                top: 10%;
+                left: 50%;
+                transform: translateX(-50%);
+                color: red;
+                text-shadow: 1px 1px #000;
+            }
+            .refresh {
+                position: fixed;
+                bottom: 50%;
+                right: .5rem;  
+                width: 1rem;              
+                font-size: 1.1rem;
+                color: #04f;               
+                text-shadow: 0 -1px 1px green;
+                z-index: 999;             
+            }
+            .container {
+                display: none;
+            }
+            .time {
+                margin: 10px;
+                color: #f40;
+                text-shadow: 1px 1px 1px black;
+           }
+            .data > .row {
+             	margin: 0 auto .5rem;
+                padding: 0;
+                border-bottom: 2px solid black;
+                border-radius: 5px 5px 3px 3px;
+                height: 6rem;
+                background-color: #fffbfa;
+            }
+            .data > .row .row {
+                margin: 0 auto;
+            }
+            .data > .row .row:nth-child(2) {
+                color: cornflowerblue;
+                text-shadow: 1px 1px 1px #abcdef;
+            }
+            .data > .row .row:last-child {
+                font-weight: bolder;
+                color: #456;
+            }
+			.data > .row:last-child {
+                margin-bottom: 1rem;
+            }
+            #returntop {
+                display: none;
+    			position: fixed;
+    			bottom: 20%;
+    			right: 10px;
+    			width: 2rem;
+                cursor: pointer;
+    			z-index: 999;
+            }
+			.from {
+    			position: fixed;
+    			left: 50%;
+    			bottom: .1rem;
+    			transform: translateX(-50%);
+    			font-size: 10px;
+				color: #666;
+			}
+        </style>
+    </head> 
+    <body>
+		<div class="result text-center"></div>
+      	<a class="refresh" href="javascript: void(0);" onclick="location.reload()">刷新</a>
+    	<div class="container">       		
+            <div class="time text-center">今天：<span></span></div>
+            <div class="data">
+				
+           	</div>   		                             	                    
+       	</div>
+        <img id="returntop" src="../../images/capslock-fill.svg">
+        <span class="from text-center">接口来自:<a href="https://api.oick.cn/" target="_blank">零七生活API</a></span>  
+        <script>
+        	$(function () {
+                $('.result').html('请稍等(有时候不稳定)').fadeIn(1000);
+                // ajax获得数据
+				(function () {
+       				$.get('https://api.oick.cn/lishi/api.php', function (res){
+       					if(res.code !== "1") return $('.result').html('查询失败').fadeOut(5000);
+                       	$('.time span').html(res.day)
+                        $(res.result).each(function (i, e) {
+                            $('.data').append('<div class="row text-center"><div class="row col-12 time">时间：<span></span></div><div class="row">事件</div><div class="row col-12"></div></div>')
+                           	$('.data > .row').eq(i).find('.row:eq(0) span').html(e.date)
+                           	$('.data > .row').eq(i).find('.row:eq(2)').html(e.title)
+                        })
+                        $('.container').fadeIn(300)
+                        $('.result').html('查询成功').fadeOut(3000)
+       				})
+   				}());
+               	// 更新日志返回置顶显示隐藏功能
+    			function returnTop() {
+        			$(window).on('scroll', function () {
+            			var htmlheight = $(window).height() / 2;
+        				if($('html').scrollTop() > htmlheight) {
+               				$('#returntop').show()
+            			}else {
+                			$('#returntop').hide()
+            			}
+        			})
+        			$('#returntop').on('click', function () {
+        				$('html').animate({
+           					scrollTop : 0
+           				})
+        			})
+    			}
+    			returnTop()
+			})
+        </script> 	
+    </body>
+</html>
