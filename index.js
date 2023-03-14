@@ -40,9 +40,9 @@ $(function () {
             $('.timeTip').html(res.msg)
         },
         error : function (err){
-            $('timeTip').html('请检测网络')
+            $('timeTip').html('请检查网络')
         }
-    })
+    });
     // 返回置顶显示隐藏功能 toupDateReturnTop
     (function () {
         $(window).on('scroll', function () {
