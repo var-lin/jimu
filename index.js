@@ -232,6 +232,49 @@ $(function () {
         $(this).addClass('btn-primary').siblings('button').removeClass('btn-success')
         $('#reward img').eq(1).stop().fadeIn(500).siblings('img').hide()
     });
+    // 反馈功能 feedback
+    (function () {
+        var key = true;
+        $('#feedback').on('click', function () {
+            $('.feedbackBox').fadeIn(500)
+            $('body > .cover').show()
+            $('body').css('overflow', 'hidden')
+            $('.feedbackBox input:eq(0)').focus()
+        })
+        $('.feedbackBox input:eq(1)').on('keydown', function (e) {
+            if(e.keyCode == 13) send()
+        })
+        $('.feedbackBox button:eq(0)').on('click', function () {
+            $('.feedbackBox').hide(500)
+            $('body > .cover').hide()
+            $('body').css('overflow', 'visible')
+        })
+        $('.feedbackBox button:eq(1)').on('click', send)
+        function send() {
+            if(key) {
+                key = false;
+                $.ajax({
+                    url : 'https://api.yuxli.cn/api/mail.php',
+                    type : 'get',
+                    dataType : 'json',
+                    data : {
+                        address : '1352058684@qq.com',
+                        name : $('.feedbackBox input:eq(0)').val(),
+                        certno : $('.feedbackBox input:eq(1)').val()
+                    },
+                    success : function (res) {
+                        $('.feedbackBox .message').html('反馈成功')
+                        $('.feedbackBox input').val('')
+                        key = true;
+                    },
+                    error : function (err) {
+                        $('.feedbackBox .message').html('反馈失败，可能发送反馈接口有问题，请在侧边栏点击联系作者')
+                        key = true;
+                    }
+                })
+            }
+        }
+    })();
     // 点击复制功能 copy
     (function () {       
         // QQ复制按钮
@@ -310,7 +353,7 @@ $(function () {
                     if(count == 3) {
                         count = 0;
                         clearInterval(timer)
-                        $('.mysteriouCode').fadeIn(300)
+                        $('.mysteriouCode').fadeIn(500)
                         $('body > .cover').show()
                         $('body').css('overflow', 'hidden')
                         $('.mysteriouCode input').focus()
@@ -325,7 +368,7 @@ $(function () {
                 return timer
             }
             function clear() {
-                $('.mysteriouCode').hide(300)
+                $('.mysteriouCode').hide(500)
                 $('body > .cover').hide()
                 $('body').css('overflow', 'visible')
                 $(window).on('keydown', null)

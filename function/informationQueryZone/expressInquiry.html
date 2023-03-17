@@ -3,7 +3,7 @@
     <head> 
         <meta charset="UTF-8"> 
         <meta name="viewport" id="viewport" content="width=device-width, initial-scale=1, user-scalable=no"> 
-        <title>积木·哔哩哔哩粉丝关注查询</title>
+        <title>积木·快递查询</title>
         <link rel="icon" type="image/x-icin" href="../../images/logo.ico">
         <script src="../../tools/jQuery3.6.3_min.js"></script>
         <link rel="stylesheet" href="../../tools/bootstrap.min.css">
@@ -12,7 +12,7 @@
     <body>
 		<div class="result text-center"></div>
     	<div class="container">
-       		<input type="number" class="form-control" placeholder="请输入需要查询的哔哩哔哩用户ID" required>            
+       		<input type="text" class="form-control" placeholder="请输入需要查询的快递单号" required>            
             <div class="text-center" style="margin: 20px 0;">
             	<button class="btn btn-secondary">查询</button>
             </div>
@@ -22,26 +22,26 @@
             <div class="data">
             	查询结果
                	<ul>
-               		<li>哔哩哔哩用户ID：<span></span></li>                                
-                    <li>关注数量：<span></span></li>  
-                    <li>粉丝数量：<span></span></li>                                
+               		<li>快递运营商：<span></span></li>                                
+                    <li>快递单号：<span></span></li>  
+                    <li>物流信息：<span></span></li>                                
                	</ul>
             </div>                              	                    
        	</div>
-        <span class="from text-center">接口来自:<a href="https://apis.jxcxin.cn/" target="_blank">Store API</a></span>  
+        <span class="from text-center">接口来自:<a href="https://xiaoapi.cn/" target="_blank">慕名API</a></span>  
         <script>
         	$(function () {
                	$('.container').fadeIn(300);
                 $('input:eq(0)').focus();
                 // ajax获得数据
 				function getdata() {
-       				var id = $('input').val();
-                   	if(id === '') return $('.result').html('哔哩哔哩用户ID不能为空').fadeOut(3000);
-       				$.get('https://apis.jxcxin.cn/api/blfs', {id : id, type : 'json'}, function (res){
-       					if(res.code !== 0) return $('.result').html(res.message).fadeOut(3000);
-           				$('.data ul li:eq(0) span').html(res.data.mid)
-                     	$('.data ul li:eq(1) span').html(res.data.following)
-                        $('.data ul li:eq(2) span').html(res.data.follower)                                                       
+       				var text = $('input').val();
+                   	if(text === '') return $('.result').html('快递单号不能为空').fadeOut(3000);
+       				$.get('https://xiaoapi.cn/API/zs_kd.php', {num : text}, function (res){
+       					if(res.code !== 200) return $('.result').html(res.msg).fadeOut(3000);
+           				$('.data ul li:eq(0) span').html(res.name)
+                     	$('.data ul li:eq(1) span').html(res.dh)
+                        $('.data ul li:eq(2) span').html(res.msg)                                                       
                      	$('.data').fadeIn(500)
                         $('.result').html('操作成功').fadeOut(3000)
                         $('input').val('')                                                    

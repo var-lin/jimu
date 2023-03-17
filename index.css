@@ -13,6 +13,8 @@ a {
 /* 时间段提示样式 */
 
 .timeTip {
+    position: fixed;
+    top: 0;
     padding: 5px 10px;
     border-top: 5px solid #d70;
     border-radius: 3px;
@@ -22,6 +24,7 @@ a {
     text-align: center;
     white-space: nowrap;
     overflow-x: scroll;
+    z-index: 999;
 }
 
 .timeTip::-webkit-scrollbar {
@@ -44,9 +47,25 @@ a {
 
 #logo {
     position: fixed;
-    bottom: 10%;
+    bottom: 15%;
     right: 10px;
     width: 40px;
+    opacity: .9;
+    z-index: 999;
+}
+
+/* 反馈按钮 */
+
+#feedback {
+    position: fixed;
+    bottom: 7%;
+    right: 0;
+    padding: 10px;
+    border: none;
+    background-color: #fff;
+    border-radius: 8px;
+    color: #424242;
+    font-weight: bold;
     opacity: .9;
     z-index: 999;
 }
@@ -220,7 +239,7 @@ a {
 
 #homepage .replaceBrush {
     position: relative;
-    margin: 10px 0;
+    margin: 45px 0 10px;
     padding: 10px 15px;
     background-color: #bdb;
     border-radius: 10px;
@@ -291,6 +310,7 @@ a {
 /* 更新日志 */
 
 #toupdate {
+    margin-top: 45px;
     display: none;
 }
 
@@ -442,6 +462,43 @@ footer button .text span {
 .update .updatebtnright {
     background-color: #afa;
     float: right;
+}
+
+/* 反馈框 */
+
+.feedbackBox {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    width: 350px;
+    transform: translate(-50%, -50%);
+    padding: 20px;
+    border-radius: 20px;
+    background-color: #fff;
+    text-align: center;
+    display: none;
+    z-index: 10000;
+}
+
+.feedbackBox input {
+    margin: 10px auto;
+    padding: 10px;
+    border: 2px solid #424242;
+    border-radius: 10px;
+    width: 280px;
+    text-align: center;
+}
+
+.feedbackBox button {
+    margin-left: 10px;
+    padding: 10px;
+}
+
+.feedbackBox .message {
+    margin-top: 10px;
+    text-align: center;
+    font-size: 12px;
+    color: red;
 }
 
 /* 遮掩层 */
