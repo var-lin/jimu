@@ -254,16 +254,16 @@ $(function () {
             if(key) {
                 key = false;
                 $.ajax({
-                    url : 'https://api.yuxli.cn/api/mail.php',
+                    url : 'https://api.yuxli.cn/api/mail/mail.php',
                     type : 'get',
-                    dataType : 'json',
+                    dataType : 'text',
                     data : {
                         address : '1352058684@qq.com',
                         name : $('.feedbackBox input:eq(0)').val(),
                         certno : $('.feedbackBox input:eq(1)').val()
                     },
                     success : function (res) {
-                        $('.feedbackBox .message').html('反馈成功')
+                        $('.feedbackBox .message').html(res)
                         $('.feedbackBox input').val('')
                         key = true;
                     },
