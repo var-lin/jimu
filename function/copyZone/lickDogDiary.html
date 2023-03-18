@@ -1,0 +1,48 @@
+<!doctype html>
+<html> 
+    <head> 
+        <meta charset="UTF-8"> 
+        <meta name="viewport" id="viewport" content="width=device-width, initial-scale=1, user-scalable=no"> 
+        <title>积木·舔狗日记</title>
+        <link rel="icon" type="image/x-icin" href="../../images/logo.ico">
+        <script src="../../tools/jQuery3.6.3_min.js"></script>
+        <script src="../../tools/clipboard.min.js"></script>
+        <link rel="stylesheet" href="../../tools/bootstrap.min.css">
+        <link rel="stylesheet" href="../css/function.css">
+    </head> 
+    <body>
+		<div class="result text-center"></div>
+	   	<div class="container">
+           	<div class="notes text-center">
+              	<div>#无反应请检测网络#</div>
+                <div>#如果网络没问题，或许就是功能不能用了了#</div>
+            </div>
+	        <div class="data text-center" style="margin-top: 30%;">
+	         	<div id="result" data-clipboard-target="#result"></div>
+                <div style="color: #999;font-size: .8rem;text-shadow: none;">#可以点击复制噢~#</div>
+           	</div> 
+        </div>
+        <a class="refresh" href="javascript: void(0);" onclick="location.reload()">刷新</a>
+        <span class="from text-center">接口来自:<a href="https://api.oick.cn/yulu/" target="_blank">零七生活API</a></span>  
+        <script>
+        	$(function () {
+               	$('.container').fadeIn(300);
+                $('.result').html('请稍等').fadeIn(1000);
+                // ajax获得数据
+				(function () {
+       				$.get('https://api.oick.cn/dog/api.php', function (res){
+            			$('#result').html(res)
+                     	$('.data').fadeIn(500)
+                        $('.result').html('操作成功').fadeOut(3000)      
+       				})
+   				}());
+                // 文字点击复制
+         		new Clipboard('#result', {
+    				'#result': function(trigger) {
+        				return trigger.nextElementSibling
+    				}
+				});
+			})
+        </script> 	
+    </body>
+</html>

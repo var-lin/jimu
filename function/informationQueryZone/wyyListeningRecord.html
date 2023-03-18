@@ -1,0 +1,101 @@
+<!doctype html>
+<html> 
+    <head> 
+        <meta charset="UTF-8"> 
+        <meta name="viewport" id="viewport" content="width=device-width, initial-scale=1, user-scalable=no"> 
+        <title>积木·网易云听歌记录查询</title>
+        <link rel="icon" type="image/x-icin" href="../../images/logo.ico">
+        <script src="../../tools/jQuery3.6.3_min.js"></script>
+        <link rel="stylesheet" href="../../tools/bootstrap.min.css">
+        <link rel="stylesheet" href="../css/function.css">
+        <style>
+            .data ul {
+                padding: 10px;
+                border: 3px solid #999;
+                border-radius: 10px;
+            }
+
+            /* 返回置顶 */
+
+            #returntop {
+                display: none;
+                position: fixed;
+                top: 60%;
+                right: 10px;
+                width: 2rem;
+                cursor: pointer;
+                z-index: 999;
+            }
+        </style>
+    </head> 
+    <body>
+		<div class="result text-center"></div>
+        <img id="returntop" src="../../images/capslock-fill.svg">
+    	<div class="container">
+       		<input type="number" class="form-control" placeholder="请输入需要查询的网易云音乐用户ID" required>            
+            <div class="text-center" style="margin: 20px 0;">
+            	<button class="btn btn-secondary">查询</button>
+            </div>
+            <div class="notes text-center">
+            	<div>#无反应请检测网络#</div>
+            </div>
+            <div class="data">
+            	查询结果
+            </div>                              	                    
+       	</div>
+        <span class="from text-center">接口来自:<a href="https://res.abeim.cn/api/" target="_blank">Abeim API</a></span>  
+        <script>
+        	$(function () {
+               	$('.container').fadeIn(300);
+                $('input:eq(0)').focus();
+                // 返回置顶
+                (function () {
+                    $(window).on('scroll', function () {
+                        var htmlheight = $(window).height() / 2;
+                        if($('html').scrollTop() > htmlheight) {
+                            $('#returntop').show()
+                        }else {
+                            $('#returntop').hide()
+                        }
+                    })
+                    $('#returntop').on('click', function () {
+                        $('html').stop().animate({
+                            scrollTop : 0
+                        })
+                    })
+                }());
+                // ajax获得数据
+				function getdata() {
+       				var id = $('input').val();
+                   	if(id === '') return $('.result').html('网易云音乐用户ID不能为空').fadeOut(3000);
+       				$.get('http://res.abeim.cn/api-music_163_record', {UserId : id, t : 'all'}, function (res){
+       					if(res.code !== 200) return $('.result').html(res.msg).fadeOut(3000);
+                        $.each(res.data, function (i, v) {
+                            $('.data').append('<ul><li>top<span></span></li><li>音乐ID：<span></span></li><li>歌曲名称：<span></span></li><li>作者id：<span></span></li><li>作者名称：<span></span></li><li>专辑id：<span></span></li><li>专辑名称<br><span></span></li></ul>')
+                            $('.data ul').eq(i).find('li:eq(0) span').html(i + 1)
+                            $('.data ul').eq(i).find('li:eq(1) span').html(v.music_id)
+                            $('.data ul').eq(i).find('li:eq(2) span').html(v.music_name)
+                            $('.data ul').eq(i).find('li:eq(3) span').html(v.author_id)
+                            $('.data ul').eq(i).find('li:eq(4) span').html(v.author_name)
+                            $('.data ul').eq(i).find('li:eq(5) span').html(v.album_id)
+                            $('.data ul').eq(i).find('li:eq(6) span').html(v.album_name)
+                        })
+                     	$('.data').fadeIn(500)
+                        $('.result').html('操作成功').fadeOut(3000)
+                        $('input').val('')                                                    
+       				})
+   				}
+				$('button').click(function () {
+            		$('.result').html('请稍等').fadeIn(1000)
+   					getdata()        			
+   				})
+         		$(window).on('keydown', function (e) {
+               		if(e.keyCode === 13) {
+                        $('.result').html('请稍等').fadeIn(1000)
+                        getdata()
+                    }
+               	})
+			})
+        </script> 	
+    </body>
+</html>

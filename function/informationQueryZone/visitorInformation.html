@@ -1,0 +1,57 @@
+<!doctype html>
+<html> 
+    <head> 
+        <meta charset="UTF-8"> 
+        <meta name="viewport" id="viewport" content="width=device-width, initial-scale=1, user-scalable=no"> 
+        <title>积木·访客相关信息获取</title>
+        <link rel="icon" type="image/x-icin" href="../../images/logo.ico">
+        <script src="../../tools/jQuery3.6.3_min.js"></script>
+        <link rel="stylesheet" href="../../tools/bootstrap.min.css">
+        <link rel="stylesheet" href="../css/function.css">
+    </head> 
+    <body>
+    	<div class="result text-center"></div>
+    	<div class="container">
+       		<a class="refresh" href="javascript: void(0);" onclick="location.reload()">刷新</a>
+            <div class="notes text-center">
+           		<div>#无反应请检测网络,或功能有问题了#</div>
+        	</div>
+            <div class="data" style="margin-top: 25%;">
+            	查询结果
+               	<ul>
+               		<li>浏览器名称：<span></span></li>
+                    <li>浏览器版本号：<span></span></li>
+                    <li>系统：<span></span></li>
+                    <li>ip地址：<span></span></li>
+                    <li>查询时间：<span></span> <span></span></li>
+                    <li>所在地：<span></span></li>
+                    <li>天气情况</li>
+                    <li><span></span><span></span><span></span><span></span></li>
+                    <li>提示!!!</li> 
+                    <li style="text-shadow: 1px 1px 1px #f40;"></li>                 
+               	</ul>
+            </div>                              	                    
+       	</div>
+        <span class="from text-center">接口来自:<a href="https://api.vvhan.com/" target="_blank">韩小韩API</a></span>  
+        <script>
+        	$(function () {
+               	$('.container').fadeIn(300);
+                // ajax获得数据
+				(function () {       
+       				$.get('https://api.vvhan.com/api/visitor.info', function (res){    			
+           				$('.data ul li:eq(0) span').html(res.browser)
+            			$('.data ul li:eq(1) span').html(res.browser_ver)
+            			$('.data ul li:eq(2) span').html(res.system)
+                     	$('.data ul li:eq(3) span').html(res.ip)
+                        $('.data ul li:eq(4) span:eq(0)').html(res.time).siblings().html(res.week)
+                        $('.data ul li:eq(5) span').html(res.location)
+                        $('.data ul li:eq(7) span:eq(0)').html(res.tq).siblings('span:eq(0)').html(res.fl).siblings('span:eq(1)').html(res.high).siblings('span:eq(2)').html(res.low)
+                        $('.data ul li:eq(9)').html(res.tip)
+                        $('.result').html('查询成功').fadeIn(500).fadeOut(3000)
+                        $('.data').fadeIn(1000)
+       				})
+   				}());
+			})
+        </script> 	
+    </body>
+</html>

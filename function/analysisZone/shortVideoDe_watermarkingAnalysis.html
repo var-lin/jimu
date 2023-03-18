@@ -1,0 +1,115 @@
+<!doctype html>
+<html> 
+    <head> 
+        <meta charset="UTF-8"> 
+        <meta name="viewport" id="viewport" content="width=device-width, initial-scale=1, user-scalable=no"> 
+        <title>积木·短视频去水印解析</title>
+        <link rel="icon" type="image/x-icin" href="../../images/logo.ico">
+        <script src="../../tools/jQuery3.6.3_min.js"></script>
+        <script src="../../tools/clipboard.min.js"></script>
+        <link rel="stylesheet" href="../../tools/bootstrap.min.css">
+        <link rel="stylesheet" href="../css/function.css">
+        <style>
+            .data ul li {
+                word-break: break-all;
+            }
+
+            .data ul li img {
+                width: 150px;
+                border-radius: 10px;
+            }
+        </style>
+    </head> 
+    <body>
+		<div class="result text-center"></div>
+    	<div class="container">
+       		<input type="url" class="form-control" placeholder="请输入需要解析的链接" required>            
+            <div class="text-center" style="margin: 20px 0;">
+            	<button class="btn btn-secondary">解析</button>
+            </div>
+            <div class="notes text-center">
+                <div>#无反应请检测网络#</div>
+                <div>#解析链接点击复制#</div>
+            	<div>#支持抖音,皮皮虾,火山,微视,微博,绿洲,最右,轻视频,快手,全民小视频,巴塞电影,陌陌,Before避风,开眼,Vue Vlog 小咖秀,皮皮搞笑,西瓜短视频去水印解析#</div>
+            </div>
+            <div class="data">
+            	查询结果
+               	<ul>
+                    <li>作者头像<br><a target="_blank"><img alt="作者头像"></a></li>
+                    <li>视频封面<br><a target="_blank"><img alt="视频封面"></a></li>
+                    <li>视频作者：<span></span></li>
+                    <li>视频点赞量：<span></span></li>
+                    <li>视频标题<br><span></span></li>
+                    <li>解析链接<br><a target="_blank" id="result1" data-clipboard-target="#result1"></a></li>
+                    <li>作者年龄：<span></span></li>
+                    <li>作者ID：<span></span></li>
+                    <li>视频发布时间：<span></span></li>
+                    <li>作者性别：<span></span></li>
+                    <li>所在城市：<span></span></li>
+                    <li>背景音乐作者：<span></span></li>
+                    <li>背景音乐作者头像<br><a target="_blank"><img alt="作者头像"></a></li>
+                    <li>背景音乐解析<br><a target="_blank" id="result2" data-clipboard-target="#result2"></a></li>
+               	</ul>
+            </div>                              	                    
+       	</div>
+        <span class="from text-center">接口来自:<a href="https://apis.jxcxin.cn/" target="_blank">Store API</a></span>  
+        <script>
+        	$(function () {
+               	$('.container').fadeIn(300);
+                $('input:eq(0)').focus();
+                function ifData(data, ele) {
+                    data ? $(ele).html(data).parent().show() : $(ele).parent().hide()
+                }
+				function getdata() {
+       				var url = $('input').val();
+                   	if(url === '') return $('.result').html('链接不能为空').fadeOut(3000);
+                    // ajax获得数据
+       				$.get('https://apis.jxcxin.cn/api/video', {url : url}, function (res){
+                        if(res.code !== 200) return $('.result').html(res.msg).fadeOut(3000);
+       					if(res.data.url == null) return $('.result').html('解析失败').fadeOut(3000);
+                        $('.data ul li:eq(0) a').attr('href', res.data.avatar).children('img').attr('src', res.data.avatar)
+                        $('.data ul li:eq(1) a').attr('href', res.data.cover).children('img').attr('src', res.data.cover)
+                        ifData(res.data.author, '.data ul li:eq(2) span')
+                        ifData(res.data.like, '.data ul li:eq(3) span')
+                        ifData(res.data.title, '.data ul li:eq(4) span')
+                        $('.data ul li:eq(5) a').attr('href', res.data.url).html(res.data.url)
+                        ifData(res.data.age, '.data ul li:eq(6) span')
+                        ifData(res.data.uid, '.data ul li:eq(7) span')
+                        var time = new Date(parseInt(res.data.time + '000'))
+                        time = time.getFullYear() + '-' + time.getMonth() + '-' + time.getDay();
+                        ifData(time, '.data ul li:eq(8) span')
+                        ifData(res.data.sex, '.data ul li:eq(9) span')
+                        ifData(res.data.city, '.data ul li:eq(10) span')
+                        ifData(res.data.music.author, '.data ul li:eq(11) span')
+                        $('.data ul li:eq(12) a').attr('href', res.data.music.avatar).children('img').attr('src', res.data.music.avatar)
+                        $('.data ul li:eq(13) a').attr('href', res.data.music.url).html(res.data.music.url)
+                     	$('.data').fadeIn(500)
+                        $('.result').html('操作成功').fadeOut(3000)
+                        $('input').val('')
+       				})
+   				}
+				$('.btn-secondary').click(function () {
+            		$('.result').html('请稍等').fadeIn(1000)
+   					getdata()        			
+   				})
+         		$(window).on('keydown', function (e) {
+               		if(e.keyCode === 13) {
+                        $('.result').html('请稍等').fadeIn(1000)
+                        getdata()
+                    }
+               	})
+                // 解析链接点击复制
+                new Clipboard('#result1', {
+                    '#result1': function(trigger) {
+                        return trigger.nextElementSibling
+                    }
+                });
+                new Clipboard('#result2', {
+                    '#result2': function(trigger) {
+                        return trigger.nextElementSibling
+                    }
+                })
+			})
+        </script> 	
+    </body>
+</html>

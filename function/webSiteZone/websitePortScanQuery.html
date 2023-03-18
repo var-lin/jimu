@@ -1,0 +1,121 @@
+<!doctype html>
+<html> 
+    <head> 
+        <meta charset="UTF-8"> 
+        <meta name="viewport" id="viewport" content="width=device-width, initial-scale=1, user-scalable=no"> 
+        <title>积木·网站端口扫描查询</title>
+        <link rel="icon" type="image/x-icin" href="../../images/logo.ico">
+        <script src="../../tools/jQuery3.6.3_min.js"></script>
+        <link rel="stylesheet" href="../../tools/bootstrap.min.css">
+        <link rel="stylesheet" href="../css/function.css">
+        <style>
+            .data ul {
+                width: 80%;
+                height: 100%;
+                margin: 0 auto;
+            }
+
+            .data ul::after {
+                content: "";
+                display: block;
+                clear: both;
+            }
+            .data ul li {
+                width: 50%;
+                float: left;
+            }
+        </style>
+    </head> 
+    <body>
+		<div class="result text-center"></div>
+    	<div class="container">
+       		<input type="text" class="form-control" placeholder="请输入需要查询网站的域名或ip" required>            
+            <div class="text-center" style="margin: 20px 0;">
+            	<button class="btn btn-secondary">查询</button>
+            </div>
+            <div class="notes text-center">
+                <div>#无反应请检测网络#</div>
+            	<div>#不需要加https://#</div>
+                <div>#如果查询失败可能是被锁ip禁用了#</div>
+                <div>#可以联系作者ip添加到白名单#</div>
+            </div>
+            <div class="data">
+            	查询结果
+                <div class="ip" style="text-align: center;">域名或ip：<span></span></div>
+               	<ul>
+                    <li>21：<span></span></li>
+                    <li>22：<span></span></li>
+                    <li>23：<span></span></li>
+                    <li>25：<span></span></li>
+                    <li>79：<span></span></li>
+                    <li>80：<span></span></li>
+                    <li>110：<span></span></li>
+                    <li>135：<span></span></li>
+                    <li>137：<span></span></li>
+                    <li>138：<span></span></li>
+                    <li>139：<span></span></li>
+                    <li>143：<span></span></li>
+                    <li>443：<span></span></li>
+                    <li>445：<span></span></li>
+                    <li>888：<span></span></li>
+                    <li>1433：<span></span></li>
+                    <li>3306：<span></span></li>
+                    <li>3311：<span></span></li>
+                    <li>3312：<span></span></li>
+                    <li>3389：<span></span></li>
+                    <li>8888：<span></span></li>
+               	</ul>
+            </div>                              	                    
+       	</div>
+        <span class="from text-center">接口来自:<a href="https://api.qqsuu.cn/" target="_blank">大米API</a></span>  
+        <script>
+        	$(function () {
+               	$('.container').fadeIn(300);
+                $('input:eq(0)').focus();
+                // ajax获得数据
+				function getdata() {
+       				var ip = $('input').val();
+                   	if(ip === '') return $('.result').html('请输入要查询网站的域名或ip').fadeOut(3000);
+       				$.get('https://api.qqsuu.cn/api/dm-port', {ip : ip, apiKey : 'a4be7c080fb67a0dc76f9b75fc7f161b'}, function (res){
+       					if(res.code !== 200) return $('.result').html(res.msg + '请联系作者').fadeOut(3000);
+           				$('.data .ip span').html(res.host)
+                        $('.data ul li:eq(0) span').html(res.port['21'])
+                        $('.data ul li:eq(1) span').html(res.port['22'])
+                        $('.data ul li:eq(2) span').html(res.port['23'])
+                        $('.data ul li:eq(3) span').html(res.port['25'])
+                     	$('.data ul li:eq(4) span').html(res.port['79'])
+                        $('.data ul li:eq(5) span').html(res.port['80'])
+                        $('.data ul li:eq(6) span').html(res.port['110'])
+                        $('.data ul li:eq(7) span').html(res.port['135'])
+                        $('.data ul li:eq(8) span').html(res.port['137'])
+                        $('.data ul li:eq(9) span').html(res.port['138'])
+                        $('.data ul li:eq(10) span').html(res.port['139'])
+                        $('.data ul li:eq(11) span').html(res.port['143'])
+                        $('.data ul li:eq(12) span').html(res.port['443'])
+                        $('.data ul li:eq(13) span').html(res.port['445'])
+                        $('.data ul li:eq(14) span').html(res.port['888'])
+                        $('.data ul li:eq(15) span').html(res.port['1433'])
+                        $('.data ul li:eq(16) span').html(res.port['3306'])
+                        $('.data ul li:eq(17) span').html(res.port['3311'])
+                        $('.data ul li:eq(18) span').html(res.port['3312'])
+                        $('.data ul li:eq(19) span').html(res.port['3389'])
+                        $('.data ul li:eq(20) span').html(res.port['8888'])
+                     	$('.data').fadeIn(500)
+                        $('.result').html('操作成功').fadeOut(3000)
+                        $('input').val('')                                                    
+       				})
+   				}
+				$('button').click(function () {
+            		$('.result').html('请稍等(有点慢)').fadeIn(1000)
+   					getdata()
+   				})
+         		$(window).on('keydown', function (e) {
+               		if(e.keyCode === 13) {
+                        $('.result').html('请稍等(有点慢)').fadeIn(1000)
+                        getdata()
+                    }
+               	})
+			})
+        </script> 	
+    </body>
+</html>

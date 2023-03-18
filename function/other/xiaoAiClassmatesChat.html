@@ -1,0 +1,87 @@
+<!doctype html>
+<html> 
+    <head> 
+        <meta charset="UTF-8"> 
+        <meta name="viewport" id="viewport" content="width=device-width, initial-scale=1, user-scalable=no"> 
+        <title>积木·小爱同学聊天</title>
+        <link rel="icon" type="image/x-icin" href="../../images/logo.ico">
+        <script src="../../tools/jQuery3.6.3_min.js"></script>
+        <link rel="stylesheet" href="../../tools/bootstrap.min.css">
+        <link rel="stylesheet" href="../css/chatGPT.css">
+    </head> 
+    <body>
+		<div class="header">
+            <img src="../../images/xiaoAi.webp" alt="log"><span>小爱同学</span>
+        </div>
+        <div class="dialogBox">
+            <p class="left">
+                <img src="../../images/xiaoAi.webp" alt="chatGPT-log">
+                <span class="time"></span>
+            </p>
+            <p class="leftContent">
+                <textarea class="leftText" disabled>聊点什么呢？</textarea>
+            </p>
+        </div>
+        <div class="inputBox">
+            <input class="text" type="text" placeholder="请输入内容">
+            <button class="send">发送</button>
+        </div>
+        <div class="cover"></div>
+        <script>
+            $(function () {
+                var key = true;
+                $('.dialogBox').css('height', ($(window).height()) * 0.8);
+                $('.dialogBox .left:first-child .time').html(nowTime());
+                $('input:eq(0)').focus();
+                $('.dialogBox .leftText:first-child').css('height', $('.dialogBox .leftText:first-child').prop('scrollHeight'))
+                function nowTime() {
+                    var time = new Date();
+                    function zeroPadding(num) {
+                        if(num < 10) {
+                            return '0' + num
+                        }
+                        return num
+                    }
+                    time = zeroPadding(time.getHours()) + ':' + zeroPadding(time.getMinutes()) + ':' + zeroPadding(time.getSeconds());
+                    return time
+                }
+                function returnData(data) {
+                    $('.dialogBox .leftText:last').html($.trim(data)).css('height', $('.dialogBox .leftContent:last-child .leftText').prop('scrollHeight'))
+                    $('.dialogBox .left:nth-last-child(2) .time').html(nowTime())
+                    $('.dialogBox').scrollTop($('.dialogBox').prop('scrollHeight'))
+                    key = true;
+                    $('.send').on('click', getData)
+                }
+                // 获得回复消息
+                function getData() {
+                    key = false;
+                    $('.send').off('click')
+                    var text = $.trim($('.text').val());
+                    if(text === '') return;
+                    $('.dialogBox').append('<p class="right"><span class="time">' + nowTime() + '</span><img src="../../images/logo.png" alt="logo"></p><p class="rightContent"><textarea class="rightText" disabled>' + text +'</textarea></p><p class="left"><img src="../../images/xiaoAi.webp" alt="xiaoAi-log"><span class="time"></span></p><p class="leftContent"><textarea class="leftText" disabled>小爱正在正在思考中...</textarea></p>')
+                    $('.text').val('')
+                    $('.dialogBox .rightText:last').css('height', $('.dialogBox .rightText:last').prop('scrollHeight'))
+                    $('.dialogBox').scrollTop($('.dialogBox').prop('scrollHeight'))
+                    $.ajax({
+                        url : 'https://api.lewz.cn/api/xiaoai',
+                        type : 'get',
+                        data : {
+                            msg : text
+                        },
+                        success : function (res) {
+                            returnData(res)
+                        },
+                        error : function (err) {
+                            returnData('小爱不能接收到的你消息~')
+
+                        }
+                    })
+                }
+                $('.send').on('click', getData)
+                $('.text').on('keydown', function (e) {
+                    if(e.keyCode == 13 && key) getData();
+                })
+            })
+        </script> 	
+    </body>
+</html>
