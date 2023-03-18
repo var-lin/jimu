@@ -88,12 +88,12 @@
         {"name" : "小爱同学聊天", "url" : "./function/analysisZone/xiaoAiClassmatesChat.html"},
         {"name" : "charGPT", "url" : "./function/other/chatGPT.html"},
         {"name" : "经纬度解析", "url" : "./function/analysisZone/longitudeAndLatitudeAnalysis.html"},
-        {"name" : "短视频去水印解析", "url" : "./function/analysisZone/shortVideoDe_watermarkingAnalysis.html"},
-        {"name" : "蓝奏云直链解析", "url" : "./function/analysisZone/lanzouyLinearChainAnalysis.html"},
-        {"name" : "网易云音乐直链解析", "url" : "./function/analysisZone/wyyLinearChainAnalysis.html"},
-        {"name" : "QQ音乐直链解析", "url" : "./function/analysisZone/QQMusicLinearChainAnalysis.html"},
-        {"name" : "酷我音乐直链解析", "url" : "./function/analysisZone/kuwoLinearChainAnalysis.html"},
-        {"name" : "全民k歌解析", "url" : "./function/analysisZone/analysisNationalKaraoke.html"}
+        {"name" : "短视频去水印解析", "url" : "./function/other/shortVideoDe_watermarkingAnalysis.html"},
+        {"name" : "蓝奏云直链解析", "url" : "./function/other/lanzouyLinearChainAnalysis.html"},
+        {"name" : "网易云音乐直链解析", "url" : "./function/other/wyyLinearChainAnalysis.html"},
+        {"name" : "QQ音乐直链解析", "url" : "./function/other/QQMusicLinearChainAnalysis.html"},
+        {"name" : "酷我音乐直链解析", "url" : "./function/other/kuwoLinearChainAnalysis.html"},
+        {"name" : "全民k歌解析", "url" : "./function/other/analysisNationalKaraoke.html"}
     ],
     "mysteriouCode" : [
         {"name" : "QQ查询绑定手机号", "url" : "./function/mysteriouCode/QQQueryPhone.html"},
@@ -104,6 +104,5 @@
         {"name" : "手机号查询微博ID", "url" : "./function/mysteriouCode/PhoneQueryMicroBlog.html"},
         {"name" : "随机身份证", "url" : "./function/mysteriouCode/randomIDCard.html"},
         {"name" : "charGPT(内置keyapi)", "url" : "./function/mysteriouCode/chatGPT.html"}
-        
     ]
 }
