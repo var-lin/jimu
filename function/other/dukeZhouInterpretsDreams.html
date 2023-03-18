@@ -41,10 +41,10 @@
        				$.get('https://api.qqsuu.cn/api/dm-dream', {word : text, num : 1}, function (res){
                         res = JSON.parse(res);
        					if(res.code !== 200) return $('.result').html(res.msg).fadeOut(3000);
-           				$('.data ul li:eq(0) span').html(res.data.list.id)
-                        $('.data ul li:eq(1) span').html(res.data.list.type)
-                        $('.data ul li:eq(2) span').html(res.data.list.title)
-                        $('.data ul li:eq(3) span').html(res.data.list.result)
+           				$('.data ul li:eq(0) span').html(res.data.list[0].id)
+                        $('.data ul li:eq(1) span').html(res.data.list[0].type)
+                        $('.data ul li:eq(2) span').html(res.data.list[0].title)
+                        $('.data ul li:eq(3) span').html($.trim(res.data.list[0].result))
                      	$('.data').fadeIn(500)
                         $('.result').html('操作成功').fadeOut(3000)
                         $('input').val('')                                                    
