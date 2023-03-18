@@ -85,7 +85,7 @@
     "other" : [
         {"name" : "万能翻译", "url" : "./function/other/universalTranslata.html"},
     	{"name" : "QQ翻译", "url" : "./function/other/QQTranslata.html"},
-        {"name" : "微信运动步数", "url" : "./function/analysisZone/wechatMovementBrushStep.html"},
+        {"name" : "微信运动步数", "url" : "./function/other/wechatMovementBrushStep.html"},
         {"name" : "随机谜题", "url" : "./function/other/randomRiddle.html"},
         {"name" : "周公解梦", "url" : "./function/other/dukeZhouInterpretsDreams.html"},
         {"name" : "垃圾分类", "url" : "./function/other/refuseClassification.html"},
@@ -94,7 +94,7 @@
         {"name" : "地址转换经纬度", "url" : "./function/other/addressToLongitudeAndLatitude.html"},
         {"name" : "字符串加密/解密", "url" : "./function/other/stringEncryption&Decryption.html"},
         {"name" : "md5加密/解密", "url" : "./function/other/md5Encryption&Decryption.html"},
-        {"name" : "小爱同学聊天", "url" : "./function/analysisZone/xiaoAiClassmatesChat.html"},
+        {"name" : "小爱同学聊天", "url" : "./function/other/xiaoAiClassmatesChat.html"},
         {"name" : "charGPT", "url" : "./function/other/chatGPT.html"}
     ],
     "mysteriouCode" : [
