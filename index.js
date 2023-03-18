@@ -187,10 +187,12 @@ $(function () {
                 $('#homepage .fn-website .row').append(aElement).children('a').eq(i).html(e.name).attr('href', e.url)
             })
             fnnum += res.website.length;
-            //  解析专区数据输入及输入进全部功能里
-            $(res.analysis).each(function (i, e) {
-                $('#homepage .fn-analysis .row').append(aElement).children('a').eq(i).html(e.name).attr('href', e.url)
-            })
+            if(res.analysis) {
+                //  解析专区数据输入及输入进全部功能里
+                $(res.analysis).each(function (i, e) {
+                    $('#homepage .fn-analysis .row').append(aElement).children('a').eq(i).html(e.name).attr('href', e.url)
+                })
+            }
             fnnum += res.analysis.length;
             //  热搜榜专区数据输入及输入进全部功能里
             $(res.hotSearchList).each(function (i, e) {

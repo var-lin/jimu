@@ -43,6 +43,15 @@
         {"name" : "网址缩短", "url" : "./function/webSiteZone/shortenUrl.html"},
         {"name" : "短链接还原", "url" : "./function/webSiteZone/shortUrlRestore.html"}
     ],
+    "analysis" : [
+        {"name" : "经纬度解析", "url" : "./function/analysisZone/longitudeAndLatitudeAnalysis.html"},
+        {"name" : "短视频去水印解析", "url" : "./function/analysisZone/shortVideoDe_watermarkingAnalysis.html"},
+        {"name" : "蓝奏云直链解析", "url" : "./function/analysisZone/lanzouyLinearChainAnalysis.html"},
+        {"name" : "网易云音乐直链解析", "url" : "./function/analysisZone/wyyLinearChainAnalysis.html"},
+        {"name" : "QQ音乐直链解析", "url" : "./function/analysisZone/QQMusicLinearChainAnalysis.html"},
+        {"name" : "酷我音乐直链解析", "url" : "./function/analysisZone/kuwoLinearChainAnalysis.html"},
+        {"name" : "全民k歌解析", "url" : "./function/analysisZone/analysisNationalKaraoke.html"}
+    ],
     "hotSearchList" : [
         {"name" : "历史上的今天", "url" : "./function/hotSearchListZone/todayInHistory.html"},
         {"name" : "微博热搜榜", "url" : "./function/hotSearchListZone/blogHotSearch.html"},
@@ -76,23 +85,18 @@
     "other" : [
         {"name" : "万能翻译", "url" : "./function/other/universalTranslata.html"},
     	{"name" : "QQ翻译", "url" : "./function/other/QQTranslata.html"},
+        {"name" : "微信运动步数", "url" : "./function/analysisZone/wechatMovementBrushStep.html"},
+        {"name" : "随机谜题", "url" : "./function/other/randomRiddle.html"},
+        {"name" : "周公解梦", "url" : "./function/other/dukeZhouInterpretsDreams.html"}
         {"name" : "垃圾分类", "url" : "./function/other/refuseClassification.html"},
         {"name" : "字数检测", "url" : "./function/other/wordCountDetection.html"},
         {"name" : "文本相似度对比(测试中)", "url" : "./function/other/textSimilarityComparison.html"},
-        {"name" : "随机谜题", "url" : "./function/other/randomRiddle.html"},
+        {"name" : "地址转换经纬度", "url" : "./function/other/addressToLongitudeAndLatitude.html"},
         {"name" : "字符串加密/解密", "url" : "./function/other/stringEncryption&Decryption.html"},
         {"name" : "md5加密/解密", "url" : "./function/other/md5Encryption&Decryption.html"},
-        {"name" : "地址转换经纬度", "url" : "./function/other/addressToLongitudeAndLatitude.html"},
-       	{"name" : "经纬度解析", "url" : "./function/other/longitudeAndLatitudeAnalysis.html"},
-        {"name" : "charGPT", "url" : "./function/other/chatGPT.html"},
-        {"name" : "小爱同学聊天", "url" : "./function/other/xiaoAiClassmatesChat.html"},
-        {"name" : "微信运动步数", "url" : "./function/other/wechatMovementBrushStep.html"},
-        {"name" : "短视频去水印解析", "url" : "./function/other/shortVideoDe_watermarkingAnalysis.html"},
-        {"name" : "蓝奏云直链解析", "url" : "./function/other/lanzouyLinearChainAnalysis.html"},
-        {"name" : "网易云音乐直链解析", "url" : "./function/other/wyyLinearChainAnalysis.html"},
-        {"name" : "QQ音乐直链解析", "url" : "./function/other/QQMusicLinearChainAnalysis.html"},
-        {"name" : "酷我音乐直链解析", "url" : "./function/other/kuwoLinearChainAnalysis.html"},
-        {"name" : "全民k歌解析", "url" : "./function/other/analysisNationalKaraoke.html"}
+        {"name" : "小爱同学聊天", "url" : "./function/analysisZone/xiaoAiClassmatesChat.html"},
+        {"name" : "charGPT", "url" : "./function/other/chatGPT.html"}
+        
     ],
     "mysteriouCode" : [
         {"name" : "QQ查询绑定手机号", "url" : "./function/mysteriouCode/QQQueryPhone.html"},
