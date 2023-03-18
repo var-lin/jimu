@@ -39,7 +39,8 @@
                    	if(text === '') return $('.result').html('请输入遇见梦').fadeOut(3000);
                     // ajax获得数据
        				$.get('https://api.qqsuu.cn/api/dm-dream', {word : text, num : 1}, function (res){
-       					if(res.success !== 200) return $('.result').html(res.msg).fadeOut(3000);
+                        res = JSON.parse(res);
+       					if(res.code !== 200) return $('.result').html(res.msg).fadeOut(3000);
            				$('.data ul li:eq(0) span').html(res.data.list.id)
                         $('.data ul li:eq(1) span').html(res.data.list.type)
                         $('.data ul li:eq(2) span').html(res.data.list.title)
