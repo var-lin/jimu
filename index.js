@@ -8,7 +8,7 @@ $(function () {
             localStorage.setItem('replaceBrushStyle', 'none')
         }
         var key = localStorage.getItem('replaceBrushStyle'),
-            imgEle = $('#homepage .replaceBrush h5 span img'),
+            imgEle = $('#homepage .replaceBrush h6 span img'),
             imgdown = './images/caret-down-square.svg',
             imgup = './images/caret-up-square.svg';
         $('#homepage .replaceBrush .replaceBrush-content').css('display', key)
@@ -17,7 +17,7 @@ $(function () {
         } else {
             $(imgEle).attr('src', imgup)
         }
-        $('#homepage .replaceBrush h5').on('click', function () {
+        $('#homepage .replaceBrush h6').on('click', function () {
             $('#homepage .replaceBrush .replaceBrush-content').stop().slideToggle(300)
             if(key == 'none') {
                 key = 'block';
@@ -239,14 +239,16 @@ $(function () {
     });
     // 反馈功能 feedback
     (function () {
-        var key = true;
+        var key = true,
+            name,
+            certno;
         $('#feedback').on('click', function () {
             $('.feedbackBox').fadeIn(500)
             $('body > .cover').show()
             $('body').css('overflow', 'hidden')
             $('.feedbackBox input:eq(0)').focus()
         })
-        $('.feedbackBox input:eq(1)').on('keydown', function (e) {
+        $('.feedbackBox input').on('keydown', function (e) {
             if(e.keyCode == 13) send()
         })
         $('.feedbackBox button:eq(0)').on('click', function () {
@@ -257,15 +259,26 @@ $(function () {
         $('.feedbackBox button:eq(1)').on('click', send)
         function send() {
             if(key) {
-                key = false;
+                key = false,
+                name = $('.feedbackBox input:eq(0)').val(),
+                certno = $('.feedbackBox input:eq(1)').val();
+                $('.feedbackBox .message').html('请稍等');
+                if(name == '') {
+                    key = true;
+                    return $('.feedbackBox .message').html('请输入标题');
+                }
+                if(certno == '') {
+                    key = true;
+                    return $('.feedbackBox .message').html('请输入内容');
+                }
                 $.ajax({
                     url : 'https://api.yuxli.cn/api/mail/mail.php',
                     type : 'get',
                     dataType : 'text',
                     data : {
                         address : '1352058684@qq.com',
-                        name : $('.feedbackBox input:eq(0)').val(),
-                        certno : $('.feedbackBox input:eq(1)').val()
+                        name : name,
+                        certno : certno
                     },
                     success : function (res) {
                         $('.feedbackBox .message').html(res)
