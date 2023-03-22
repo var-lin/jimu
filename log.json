@@ -1,14 +1,20 @@
 [
     {
+        "date" : "未定",
+        "data" : [
+            "<span class=\"c-f40\">New </span>侧边栏新增“功能输入框保存上次输入的数据”",
+            "<span style=\"color: #055\">注释&nbsp</span>软件的接口都是别人的，所以不知道什么时候功能就会失效"
+        ]
+    },
+    {
         "date" : "2023.03.20.0更新日志",
         "data" : [
-            "<span class=\"c-f40\">New </span>新增“<a href=\"./function/informationQueryZone/expressInquiry.html\">快递查询</a>”功能",
-            "<span class=\"c-f40\">New </span>新增“<a href=\"./function/copyZone/celebrityQuotes.html\">名人名言</a>”功能",
-            "<span class=\"c-f40\">New </span>新增“<a href=\"./function/other/dukeZhouInterpretsDreams.html\">周公解梦</a>”功能",
-            "<span class=\"c-f40\">New </span>新增“<a href=\"./function/other/textSimilarityComparison.html\">文本相似度对比</a>”功能",
-            "<span class=\"c-f40\">New </span>首页新增解析专区",
-            "<span class=\"c-f40\">New </span>首页增加反馈功能",
-            "<span style=\"color: #055\">注释&nbsp</span>软件的接口都是别人的，所以不知道什么时候功能就会失效"
+            "新增“<a href=\"./function/informationQueryZone/expressInquiry.html\">快递查询</a>”功能",
+            "新增“<a href=\"./function/copyZone/celebrityQuotes.html\">名人名言</a>”功能",
+            "新增“<a href=\"./function/other/dukeZhouInterpretsDreams.html\">周公解梦</a>”功能",
+            "新增“<a href=\"./function/other/textSimilarityComparison.html\">文本相似度对比</a>”功能",
+            "首页新增解析专区",
+            "首页增加反馈功能"
         ]
     },
     {
