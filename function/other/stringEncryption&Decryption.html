@@ -57,6 +57,16 @@
         <script>
         	$(function () {
                	$('.container').fadeIn(300);
+                var dataRtention1 = localStorage.getItem('stringEncryption&Decryption1'),
+                    dataRtention2 = localStorage.getItem('stringEncryption&Decryption2'),
+                    dataRtention3 = localStorage.getItem('stringEncryption&Decryption3'),
+                    dataRtention4 = localStorage.getItem('stringEncryption&Decryption4');
+                if(localStorage.getItem('dataRtention') === 'true' && dataRtention1 || dataRtention3) {
+                    $('textarea:eq(0)').val(dataRtention1)
+                    $('input:eq(0)').val(dataRtention2)
+                    $('textarea:eq(1)').val(dataRtention3)
+                    $('input:eq(1)').val(dataRtention4)
+                }
                 $('textarea:eq(0)').focus();
                 // 切换解密加密 switchbtn
                 (function () {
@@ -80,10 +90,12 @@
                     }
                 	// 加密方法
                 	function encryption() {
-                       	var string = $('#encryption textarea').val();
-                   		var key = $('#encryption input').val()
+                       	var string = $('#encryption textarea').val(),
+                   		   key = $('#encryption input').val();
                         $.get('https://api.vvhan.com/api/jm', {key:key,string:string,type:'en'}, function (res){
                             if(!res.success) return $('.result').html(res.message).fadeOut(3000);
+                            localStorage.setItem('stringEncryption&Decryption1', string)
+                            localStorage.setItem('stringEncryption&Decryption2', key)
                             $('.result').html('操作成功').fadeOut(3000)
                          	$('#result').html(res.enmissString)
                             $('#encryption textarea').val('')
@@ -93,10 +105,12 @@
                    	}
                     // 解密方法
        				function decryption() {
-                       	var string = $('#decryption textarea').val();
-                   		var key = $('#decryption input').val();
+                       	var string = $('#decryption textarea').val(),
+                   		   key = $('#decryption input').val();
                         $.get('https://api.vvhan.com/api/jm', {key:key,string:string,type:'de'}, function (res){
                             if(!res.success) return $('.result').html(res.message).fadeOut(3000);
+                            localStorage.setItem('stringEncryption&Decryption3', string)
+                            localStorage.setItem('stringEncryption&Decryption4', key)
                             $('.result').html('操作成功').fadeOut(3000)
                          	$('#result').html(res.demissString)
                             $('#decryption textarea').val('')

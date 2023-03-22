@@ -1,5 +1,7 @@
 body {
-     background-image: linear-gradient(#fafaff, #fffafa);
+    margin: 0;
+    padding: 0;
+    background-image: linear-gradient(#fafaff, #fffafa);
 }
 
 #showregion > div {
@@ -8,6 +10,10 @@ body {
 
 a {
     z-index: 9;
+}
+
+ul {
+    list-style: none;
 }
 
 /* 时间段提示样式 */
@@ -150,24 +156,13 @@ a {
     transform: scale(1.3);
 }
 
-/* ip签名档样式 */
-
-.ipSignatureFile {
-    text-align: center;
-}
-
-.ipSignatureFile img {
-    width: 90%;
-    border-radius: 20px;
-}
-
 /* 侧边栏样式 */
 
 .sidebar {
     position: fixed;
     left: -280px;
     top: 0;
-    padding: 20px 0 7%;
+    padding: 20px 0 10%;
     width: 280px;
     height: 100%;
     border-radius: 0 25px 25px 0;
@@ -178,6 +173,17 @@ a {
 
 .sidebar::-webkit-scrollbar {
     display: none;
+}
+
+/* ip签名档样式 */
+
+.sidebar .ipSignatureFile {
+    text-align: center;
+}
+
+.sidebar .ipSignatureFile img {
+    width: 90%;
+    border-radius: 20px;
 }
 
 .sidebar .pasttime {
@@ -193,13 +199,14 @@ a {
     color: #999;
 }
 
+    /* 侧边栏导航栏样式 */
+
 .sidebar .navigaBar {
     margin: 0 auto;
     padding: 5px;
     width: 80%;
     background-color: rgba(150, 220, 250, 1.0);
     border-radius: 15px;
-    list-style: none;
 }
 
 .sidebar .navigaBar li {
@@ -209,12 +216,38 @@ a {
     cursor: pointer;
 }
 
+    /* 侧边栏设置样式 */
+
+.sidebar .setting {
+    margin-top: 10px;
+    padding: 0 10px;
+    background-color: #eee;
+}
+
+.sidebar .setting li {
+    padding: 10px 0;
+    cursor: pointer;
+}
+
+.sidebar .setting span {
+    margin-right: 10px;
+    color: #424242;
+}
+
+.sidebar .setting input {
+    width: 1rem;
+    height: 1rem;
+    vertical-align: -3px;
+}
+
+    /* 侧边栏底部样式 */
+
 .sidebar .about {
-    position: absolute;
+    position: fixed;
     bottom: 7%;
     padding: 15px;
     border-radius: 10px 10px 0 0;
-    width: 100%;
+    width: 280px;
     background-color: #eee;
 }
 
@@ -324,7 +357,6 @@ a {
 }
 
 #toupdate > ul {
-    list-style: none;
     border-left: 1px solid #aaa;
 }
 

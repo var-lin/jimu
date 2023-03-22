@@ -210,6 +210,18 @@ $(function () {
             // 输出一共的功能数量
             $('.fn-num span').html(fnnum).parent().show()
             mysteriouCode(res)
+            // 侧边栏设置
+            $('sidebar .setting').show()
+            if(!localStorage.getItem('dataRtention')) {
+                localStorage.setItem('dataRtention', true)
+            }
+            var dataRtention = localStorage.getItem('dataRtention') === "true";
+            $('.sidebar .setting li:eq(0) input').prop('checked', dataRtention)
+            $('.sidebar .setting li:eq(0)').on('click', function () {
+                $(this).children('input').prop('checked', !dataRtention)
+                localStorage.setItem('dataRtention', !dataRtention)
+                dataRtention = !dataRtention;
+            })
         },
         error : function (err) {
             clearInterval(loadding)
@@ -375,10 +387,10 @@ $(function () {
                         $('body > .cover').show()
                         $('body').css('overflow', 'hidden')
                         $('.mysteriouCode input').focus()
-                        $(window).on('keydown', function (e) {
+                        $('.mysteriouCode input').on('keydown', function (e) {
                             if(e.keyCode === 13) {
                                 $('.mysteriouCode .mysteriouCodeRight').click()
-                                $(window).on('keydown', null)
+                                $('.mysteriouCode input').on('keydown', null)
                             }
                         })
                     }
@@ -389,7 +401,7 @@ $(function () {
                 $('.mysteriouCode').hide(500)
                 $('body > .cover').hide()
                 $('body').css('overflow', 'visible')
-                $(window).on('keydown', null)
+                $('.mysteriouCode input').on('keydown', null)
             }
             $('.mysteriouCode .mysteriouCodeLeft').on('click', function () {
                 clear()

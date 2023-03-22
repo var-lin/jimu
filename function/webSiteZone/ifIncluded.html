@@ -34,6 +34,10 @@
         <script>
         	$(function () {
                	$('.container').fadeIn(300);
+                var dataRtention = localStorage.getItem('ifIncluded');
+                if(localStorage.getItem('dataRtention') === 'true' && dataRtention) {
+                    $('input').val(dataRtention)
+                }
                 $('input:eq(0)').focus();
                 // ajax获得数据
 				function getdata() {
@@ -41,6 +45,7 @@
                     if(url === '') return $('.result').html('请输入域名').fadeOut(3000);
        				$.get('https://api.vvhan.com/api/siteor', {url:url}, function (res){
        					if(!res.success) return $('.result').html(res.message).fadeOut(3000);
+                        localStorage.setItem('ifIncluded', url)
                         $('.data ul li:eq(0) span').html(res.url)
                         $('.data ul li:eq(1) span').html(res.data.baidu)
                      	$('.data ul li:eq(2) span').html(res.data.sougou)

@@ -32,6 +32,10 @@
         <script>
             $(function () {
                 $('.container').fadeIn(300);
+                var dataRtention = localStorage.getItem('domainNameInterceptionDetection');
+                if(localStorage.getItem('dataRtention') === 'true' && dataRtention) {
+                    $('input').val(dataRtention)
+                }
                 $('input:eq(0)').focus();
                 // ajax获得数据
                 function getdata() {
@@ -39,6 +43,7 @@
                     if(url === '') return $('.result').html('请输入网址').fadeOut(3000);
                     $.get('https://api.oick.cn/t/api.php', {url:url}, function (res){
                         if(res.code !== 1) return $('.result').html(res.msg).fadeOut(3000);
+                        localStorage.setItem('domainNameInterceptionDetection', url)
                         $('.data ul li:eq(0) span').html(res.url)
                         $('.data ul li:eq(1) span').html(res.type)                                                   
                         $('.data').fadeIn(500)

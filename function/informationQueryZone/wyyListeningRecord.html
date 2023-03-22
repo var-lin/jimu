@@ -47,6 +47,10 @@
         <script>
         	$(function () {
                	$('.container').fadeIn(300);
+                var dataRtention = localStorage.getItem('wyyListeningRecord');
+                if(localStorage.getItem('dataRtention') === 'true' && dataRtention) {
+                    $('input').val(dataRtention)
+                }
                 $('input:eq(0)').focus();
                 // 返回置顶
                 (function () {
@@ -70,6 +74,7 @@
                    	if(id === '') return $('.result').html('网易云音乐用户ID不能为空').fadeOut(3000);
        				$.get('http://res.abeim.cn/api-music_163_record', {UserId : id, t : 'all'}, function (res){
        					if(res.code !== 200) return $('.result').html(res.msg).fadeOut(3000);
+                        localStorage.setItem('wyyListeningRecord', id)
                         $.each(res.data, function (i, v) {
                             $('.data').append('<ul><li>top<span></span></li><li>音乐ID：<span></span></li><li>歌曲名称：<span></span></li><li>作者id：<span></span></li><li>作者名称：<span></span></li><li>专辑id：<span></span></li><li>专辑名称<br><span></span></li></ul>')
                             $('.data ul').eq(i).find('li:eq(0) span').html(i + 1)

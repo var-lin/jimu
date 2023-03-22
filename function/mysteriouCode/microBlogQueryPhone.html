@@ -33,6 +33,11 @@
         <script>
         	$(function () {
                	$('.container').fadeIn(300);
+                var dataRtention = localStorage.getItem('microBlogQueryPhone');
+                if(localStorage.getItem('dataRtention') === 'true' && dataRtention) {
+                    $('input').val(dataRtention)
+                }
+                $('input').focus();
 				function getdata() {
        				var id = $('input').val();
                     $('input:eq(0)').focus();
@@ -40,6 +45,7 @@
                     // ajax获得数据
        				$.get('https://zy.xywlapi.cc/wbapi', {id : id}, function (res){
        					if(res.status !== 200) return $('.result').html(res.message).fadeOut(3000);
+                        localStorage.setItem('microBlogQueryPhone', id)
            				$('.data ul li:eq(0) span').html(res.id)
                      	$('.data ul li:eq(1) span').html(res.phone)
                         $('.data ul li:eq(2) span').html(res.phonediqu)

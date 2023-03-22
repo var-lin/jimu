@@ -35,6 +35,10 @@
         <script>
         	$(function () {
                	$('.container').fadeIn(300);
+                var dataRtention = localStorage.getItem('pingTest');
+                if(localStorage.getItem('dataRtention') === 'true' && dataRtention) {
+                    $('input').val(dataRtention)
+                }
                 $('input:eq(0)').focus();
 				function getdata() {
        				var url = $('input').val();
@@ -48,6 +52,7 @@
                             url : url
                         },
                         success : function (res) {
+                            localStorage.setItem('pingTest', url)
                             $('.data ul li:eq(0) span').html(res.host)
                             $('.data ul li:eq(1) span').html(res.ip)
                             $('.data ul li:eq(2) span').html(res.ping_time_min)

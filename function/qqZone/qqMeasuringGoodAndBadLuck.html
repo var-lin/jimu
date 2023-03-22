@@ -38,6 +38,10 @@
         <script>
         	$(function () {
                	$('.container').fadeIn(300);
+                var dataRtention = localStorage.getItem('qqMeasuringGoodAndBadLuck');
+                if(localStorage.getItem('dataRtention') === 'true' && dataRtention) {
+                    $('input').val(dataRtention)
+                }
                 $('input:eq(0)').focus();
                 // ajax获得数据
 				function getdata() {
@@ -52,6 +56,7 @@
                         },
        					success : function (res){
        						if(res.status !== 0) return $('.result').html(res.msg).fadeOut(3000);
+                            localStorage.setItem('qqMeasuringGoodAndBadLuck', qqnum)
                       		$('.data ul li:eq(0) span').html(res.result.qq)        			
            					$('.data ul li:eq(1) span').html(res.result.score)
                      		$('.data ul li:eq(2) span').html(res.result.luck)

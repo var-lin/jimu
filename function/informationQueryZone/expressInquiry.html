@@ -32,6 +32,10 @@
         <script>
         	$(function () {
                	$('.container').fadeIn(300);
+                var dataRtention = localStorage.getItem('expressInquiry');
+                if(localStorage.getItem('dataRtention') === 'true' && dataRtention) {
+                    $('input').val(dataRtention)
+                }
                 $('input:eq(0)').focus();
                 // ajax获得数据
 				function getdata() {
@@ -39,6 +43,7 @@
                    	if(text === '') return $('.result').html('快递单号不能为空').fadeOut(3000);
        				$.get('https://xiaoapi.cn/API/zs_kd.php', {num : text}, function (res){
        					if(res.code !== 200) return $('.result').html(res.msg).fadeOut(3000);
+                        localStorage.setItem('expressInquiry', text)
            				$('.data ul li:eq(0) span').html(res.name)
                      	$('.data ul li:eq(1) span').html(res.dh)
                         $('.data ul li:eq(2) span').html(res.msg)                                                       

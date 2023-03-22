@@ -45,6 +45,10 @@
         <script>
         	$(function () {
                	$('.container').fadeIn(300);
+                var dataRtention = localStorage.getItem('analysisNationalKaraoke');
+                if(localStorage.getItem('dataRtention') === 'true' && dataRtention) {
+                    $('input').val(dataRtention)
+                }
                 $('input:eq(0)').focus();
 				function getdata() {
        				var url = $('input').val();
@@ -52,6 +56,7 @@
                     // ajax获得数据
        				$.get('https://apis.jxcxin.cn/api/kge', {url : url}, function (res){
        					if(res.code !== 200 || !res.cover) return $('.result').html('解析失败').fadeOut(3000);
+                        localStorage.setItem('analysisNationalKaraoke', url)
                         $('.data ul li:eq(0) a').attr('href', res.avatar).children('img').attr('src', res.avatar)
                         $('.data ul li:eq(1) span').html(res.nick)
                         $('.data ul li:eq(2) span').html(res.content)

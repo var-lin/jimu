@@ -56,6 +56,10 @@
         <script>
         	$(function () {
                	$('.container').fadeIn(300);
+                var dataRtention = localStorage.getItem('shortVideoDe_watermarkingAnalysis');
+                if(localStorage.getItem('dataRtention') === 'true' && dataRtention) {
+                    $('input').val(dataRtention)
+                }
                 $('input:eq(0)').focus();
                 function ifData(data, ele) {
                     data ? $(ele).html(data).parent().show() : $(ele).parent().hide()
@@ -67,6 +71,7 @@
        				$.get('https://apis.jxcxin.cn/api/video', {url : url}, function (res){
                         if(res.code !== 200) return $('.result').html(res.msg).fadeOut(3000);
        					if(res.data.url == null) return $('.result').html('解析失败').fadeOut(3000);
+                        localStorage.setItem('shortVideoDe_watermarkingAnalysis', url)
                         $('.data ul li:eq(0) a').attr('href', res.data.avatar).children('img').attr('src', res.data.avatar)
                         $('.data ul li:eq(1) a').attr('href', res.data.cover).children('img').attr('src', res.data.cover)
                         ifData(res.data.author, '.data ul li:eq(2) span')

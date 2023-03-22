@@ -63,13 +63,16 @@
         <script>
         	$(function () {
                	$('.container').fadeIn(300);
+                var dataRtention = localStorage.getItem('ysPhysicalStrengthQuery');
+                if(localStorage.getItem('dataRtention') === 'true' && dataRtention) {
+                    $('input:eq(0)').val(dataRtention)
+                }
                 $('input:eq(0)').focus();
                 // ajax获得数据
 				function getdata() {
        				var qq = $('input:eq(0)').val(),
                         uid = $('input:eq(1)').val(),
                         cookie = $('input:eq(2)').val();
-                        console.log($('input'))
                    	if(qq === '') return $('.result').html('还是写上QQ号吧,会很方便的').fadeOut(3000);
                     $.get('http://www.Dreamling.xyz/API/mihoyou/ys/get_real_time_raft/api.php', {qq : qq, uid : uid, cookie : cookie, format : 'mixed'}, function (res){
                         if(res.code !== 200) {
@@ -78,6 +81,7 @@
                             })
                             return false;
                         }
+                        localStorage.setItem('ysPhysicalStrengthQuery', qq)
                         $('.data ul li:eq(0) img').attr('src', res.imageurl)
                         $('.data ul li:eq(1) span').html(res.uid)
                         $('.data ul li:eq(3) span').html(res.data['原粹树脂']['现有'])

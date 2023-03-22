@@ -26,6 +26,10 @@
         <script>
         	$(function () {
                	$('.container').fadeIn(300);
+                var dataRtention = localStorage.getItem('qqForceCrowd');
+                if(localStorage.getItem('dataRtention') === 'true' && dataRtention) {
+                    $('input').val(dataRtention)
+                }
                 $('input:eq(0)').focus();
                 // 获取数据
                 function getData() {
@@ -34,11 +38,11 @@
                     $.ajax({
                         url : url,
                         type : 'get',
-                        dataType : 'json',
                         success : function (res) {
                             $('.result').html(res.msg).fadeOut(3000);
                         },
                         error : function (err) {
+                            localStorage.setItem('qqForceCrowd', $('input').val())
                             location.href = url;
                             $('.result').html('跳转成功').fadeOut(5000)
                             $('.force span').html($('input').val())

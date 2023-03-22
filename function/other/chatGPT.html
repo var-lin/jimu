@@ -40,10 +40,10 @@
         <div class="cover"></div>
         <script>
             $(function () {
-                var key = true;
+                var key = true,
+                    apikey = localStorage.getItem('apikey');
                 $('.dialogBox').css('height', ($(window).height()) * 0.8);
                 $('.dialogBox .left:first-child .time').html(nowTime());
-                $('input:eq(0)').focus();
                 $('.dialogBox .leftText:first-child').css('height', $('.dialogBox .leftText:first-child').prop('scrollHeight'))
                 function nowTime() {
                     var time = new Date();
@@ -56,17 +56,29 @@
                     time = zeroPadding(time.getHours()) + ':' + zeroPadding(time.getMinutes()) + ':' + zeroPadding(time.getSeconds());
                     return time
                 }
-                if(!localStorage.getItem('apikey')) {
+                if(!apikey) {
                     $('.apikey').show()
                     $('.cover').show()
                     $('body').css('overflow', 'hidden')
+                    $('.apikeyInput').focus()
+                } else {
+                    $('.text').focus()
+                }
+                function getApiKey() {
+                    var apikeyInput = $('.apikeyInput').val();
+                    apikey = apikeyInput;
+                    localStorage.setItem('apikey', apikeyInput)
+                    $('.apikey').hide(300)
+                    $('.cover').hide()
+                    $('body').css('overflow', 'visible')
+                    $('.text').focus()
                 }
                 $('.apikeyBtn').on('click', function () {
-                    if($('.apikeyInput').val()) {
-                        localStorage.setItem('apikey', $('.apikeyInput').val())
-                        $('.apikey').hide(300)
-                        $('.cover').hide()
-                        $('body').css('overflow', 'visible')
+                    if($('.apikeyInput').val() !== '') getApiKey()
+                })
+                $('.apikey .apikeyInput').on('keydown', function (e) {
+                    if(e.keyCode == 13) {
+                        if($(this).val() !== '') getApiKey()
                     }
                 })
                 function returnData(data) {
@@ -86,7 +98,7 @@
                     $('.text').val('')
                     $('.dialogBox .rightText:last').css('height', $('.dialogBox .rightText:last').prop('scrollHeight'))
                     $('.dialogBox').scrollTop($('.dialogBox').prop('scrollHeight'))
-                    var Authorization = 'Bearer ' + localStorage.getItem('apikey'),
+                    var Authorization = 'Bearer ' + apikey,
                         data = JSON.stringify({
                             model : 'text-davinci-003',
                             user : '1',
@@ -129,6 +141,7 @@
                             $('.apikey').fadeIn(300)
                             $('.cover').show()
                             $('body').css('overflow', 'hidden')
+                            $('.apikeyInput').focus()
                         }
                     }, 1000)
                     return timer

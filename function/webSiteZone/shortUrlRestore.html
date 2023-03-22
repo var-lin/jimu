@@ -33,6 +33,10 @@
         <script>
         	$(function () {
                	$('.container').stop().fadeIn(300);
+                var dataRtention = localStorage.getItem('shortUrlRestore');
+                if(localStorage.getItem('dataRtention') === 'true' && dataRtention) {
+                    $('input').val(dataRtention)
+                }
                 $('input:eq(0)').focus();
                 // ajax获得数据
 				function getdata() {
@@ -40,6 +44,7 @@
                    	if(url === '') return $('.result').html('请输入网址').fadeOut(3000);
        				$.get('https://api.vvhan.com/api/short', {url : url}, function (res){
                         if(!res.url) return $('.result').html(res.message).fadeOut(3000);
+                        localStorage.setItem('shortUrlRestore', url)
                         $('.data div:eq(1)').html(res.short)
             			$('.data div:eq(3)').html(res.url)
                      	$('.data').fadeIn(500)

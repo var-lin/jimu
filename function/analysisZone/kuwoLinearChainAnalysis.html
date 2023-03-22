@@ -48,6 +48,10 @@
         <script>
         	$(function () {
                	$('.container').fadeIn(300);
+                var dataRtention = localStorage.getItem('kuwoLinearChainAnalysis');
+                if(localStorage.getItem('dataRtention') === 'true' && dataRtention) {
+                    $('input').val(dataRtention)
+                }
                 $('input:eq(0)').focus();
                 function ifData(data, ele) {
                     data ? $(ele).html(data).parent().show() : $(ele).parent().hide()
@@ -58,6 +62,7 @@
                     // ajax获得数据
        				$.get('https://apis.jxcxin.cn/api/kuwo', {id : id, type : 'json'}, function (res){
        					if(res.code !== 200) return $('.result').html(res.msg).fadeOut(3000);
+                        localStorage.setItem('kuwoLinearChainAnalysis', id)
                         if(res.pic) {
                             $('.data ul li:eq(0) a').attr('href', res.pic).children('img').attr('src', res.pic)
                         } else {

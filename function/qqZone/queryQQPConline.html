@@ -27,6 +27,10 @@
         <script>
         	$(function () {
                	$('.container').fadeIn(300);
+                var dataRtention = localStorage.getItem('queryQQPConline');
+                if(localStorage.getItem('dataRtention') === 'true' && dataRtention) {
+                    $('input').val(dataRtention)
+                }
                 $('input:eq(0)').focus();
                 // ajax获得数据
 				function getdata() {
@@ -34,6 +38,7 @@
                    	if(qqnum === '') return $('.result').html('请输入QQ号').fadeOut(3000);
        				$.get('https://api.vvhan.com/api/qqcode', {qq:qqnum}, function (res){
        					if(!res.success) return $('.result').html(res.message).fadeOut(3000);
+                        localStorage.setItem('queryQQPConline', qqnum)
             			$('.data span').eq(0).html(qqnum).siblings().html(res.state)
                      	$('.data').fadeIn(500)
                         $('.result').html('操作成功').fadeOut(3000)

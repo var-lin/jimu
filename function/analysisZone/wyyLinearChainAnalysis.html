@@ -41,6 +41,10 @@
         <script>
         	$(function () {
                	$('.container').fadeIn(300);
+                var dataRtention = localStorage.getItem('wyyLinearChainAnalysis');
+                if(localStorage.getItem('dataRtention') === 'true' && dataRtention) {
+                    $('input').val(dataRtention)
+                }
                 $('input:eq(0)').focus();
 				function getdata() {
        				var id = $('input').val();
@@ -48,6 +52,7 @@
                     // ajax获得数据
        				$.get('http://res.abeim.cn/api-music_163_jx', {id : id}, function (res){
        					if(res.code !== 200) return $('.result').html(res.msg).fadeOut(3000);
+                        localStorage.setItem('wyyLinearChainAnalysis', id)
                         $('.data ul li:eq(0) span').html(id)
                         $('.data ul li:eq(1) span').html(res.data.type)
                         $('.data ul li:eq(2) span').html(res.data.size)

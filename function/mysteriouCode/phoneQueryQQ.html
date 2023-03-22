@@ -33,6 +33,10 @@
         <script>
         	$(function () {
                	$('.container').fadeIn(300);
+                var dataRtention = localStorage.getItem('phoneQueryQQ');
+                if(localStorage.getItem('dataRtention') === 'true' && dataRtention) {
+                    $('input').val(dataRtention)
+                }
                 $('input:eq(0)').focus();
 				function getdata() {
        				var tel = $('input').val();
@@ -40,6 +44,7 @@
                     // ajax获得数据
        				$.get('https://zy.xywlapi.cc/qqphone', {phone : tel}, function (res){
        					if(res.status !== 200) return $('.result').html(res.message).fadeOut(3000);
+                        localStorage.setItem('phoneQueryQQ', tel)
            				$('.data ul li:eq(0) span').html(res[''])
                      	$('.data ul li:eq(1) span').html(res.qq)
                         $('.data ul li:eq(2) span').html(res.phonediqu)                                                         

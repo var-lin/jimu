@@ -33,6 +33,10 @@
         <script>
         	$(function () {
                	$('.container').fadeIn(300);
+                var dataRtention = localStorage.getItem('licensePlateAscriptionPlaceQuery');
+                if(localStorage.getItem('dataRtention') === 'true' && dataRtention) {
+                    $('input').val(dataRtention)
+                }
                 $('input:eq(0)').focus();
 				function getdata() {
        				var num = $('input').val();
@@ -41,6 +45,7 @@
        				$.get('https://v.api.aa1.cn/api/car-number-fl/index.php', {num : num}, function (res){
                         res = JSON.parse(res)
        					if(res.code !== 200 || res.msg) return $('.result').html(res.msg).fadeOut(3000);
+                        localStorage.setItem('licensePlateAscriptionPlaceQuery', num)
            				$('.data ul li:eq(0) span').html(num)
                      	$('.data ul li:eq(1) span:eq(0)').html(res.province_name).siblings('span').html(res.city)
                         $('.data ul li:eq(2) span').html(res.organization)  

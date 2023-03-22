@@ -37,12 +37,17 @@
         <script>
         	$(function () {
                	$('.container').fadeIn(300);
+                var dataRtention = localStorage.getItem('queryICP');
+                if(localStorage.getItem('dataRtention') === 'true' && dataRtention) {
+                    $('input').val(dataRtention)
+                }
                 $('input:eq(0)').focus();
                 // ajax获得数据
 				function getdata() {
        				var url = $('input').val();
        				$.get('https://api.oick.cn/icp/api.php', {url:url}, function (res){
        					if(res.code != 200) return $('.result').html(res.msg).fadeOut(3000);
+                        localStorage.setItem('queryICP', url)
            				$('.data ul li:eq(1) span').html(res.name)
             			$('.data ul li:eq(2) span').html(res.nature)
             			$('.data ul li:eq(3) span').html(res.icp)

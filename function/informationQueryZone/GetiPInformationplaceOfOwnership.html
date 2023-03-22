@@ -34,6 +34,10 @@
         <script>
         	$(function () {
                	$('.container').fadeIn(300);
+                var dataRtention = localStorage.getItem('GetiPInformationplaceOfOwnership');
+                if(localStorage.getItem('dataRtention') === 'true' && dataRtention) {
+                    $('input').val(dataRtention)
+                }
                 $('input:eq(0)').focus();
 				function getdata() {
        				var ip = $('input').val();
@@ -41,6 +45,7 @@
                     // ajax获得数据
        				$.get('https://api.vvhan.com/api/getIpInfo', {ip:ip}, function (res){
        					if(!res.success) return $('.result').html(res.message).fadeOut(3000);
+                        localStorage.setItem('GetiPInformationplaceOfOwnership', ip)
            				$('.data ul li:eq(0) span').html(res.ip)
                      	$('.data ul li:eq(1) span').html(res.info.lsp)
                         $('.data ul li:eq(2) span').html(res.info.country)

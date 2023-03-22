@@ -10,7 +10,7 @@
         <link rel="stylesheet" href="../css/function.css">
         <style>
 			.data span {
-             	text-shadow: 1px 1px 1px #f40;                      
+             	color: #f40;
 			}
         </style>
     </head> 
@@ -31,12 +31,17 @@
         <script>
         	$(function () {
                	$('.container').fadeIn(300);
+                var dataRtention = localStorage.getItem('checkCrawler');
+                if(localStorage.getItem('dataRtention') === 'true' && dataRtention) {
+                    $('input').val(dataRtention)
+                }
                 $('input:eq(0)').focus();
                 // ajax获得数据
 				function getdata() {
        				var ip = $('input').val();
                    	if(ip === '') return $('.result').html('请输入IP').fadeOut(3000);
        				$.get('https://api.uomg.com/api/ck_spider', {ip:ip}, function (res){
+                        localStorage.setItem('checkCrawler', ip)
                    		$('.data span').eq(0).html(ip)                 	
                    		$('.data span').eq(1).html(res.spider).html(res.msg)         			
                      	$('.data').fadeIn(500)

@@ -30,6 +30,10 @@
         <script>
         	$(function () {
                	$('.container').stop().fadeIn(300);
+                var dataRtention = localStorage.getItem('miDomainNameDetection');
+                if(localStorage.getItem('dataRtention') === 'true' && dataRtention) {
+                    $('input').val(dataRtention)
+                }
                 $('input:eq(0)').focus();
                 // ajax获得数据
 				function getdata() {
@@ -37,6 +41,7 @@
                    	if(url === '') return $('.result').html('请输入域名').fadeOut(3000);
        				$.get('http://res.abeim.cn/api-check_mi_url', {url : url}, function (res){
                         if(res.code !== 200) return $('.result').html(res.msg).fadeOut(3000);
+                        localStorage.setItem('miDomainNameDetection', url)
                         $('.data div:eq(1)').html(res.url)
             			$('.data div:eq(3)').html(res.status)
                      	$('.data').fadeIn(500)

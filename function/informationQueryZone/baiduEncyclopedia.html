@@ -23,7 +23,7 @@
             <div class="data">
             	查询结果
                	<ul>
-                    <li><a target="_blank"><img alt="图片" style="width: 150px;border-radius: 10px;"></a></li>
+                    <li><a target="_blank"><img alt="图片" style="width: 200px;border-radius: 10px;"></a></li>
                     <li><span></span></li>
                	</ul>
             </div>                              	                    
@@ -32,6 +32,10 @@
         <script>
         	$(function () {
                	$('.container').fadeIn(300);
+                var dataRtention = localStorage.getItem('baiduEncyclopedia');
+                if(localStorage.getItem('dataRtention') === 'true' && dataRtention) {
+                    $('input').val(dataRtention)
+                }
                 $('input:eq(0)').focus();
 				function getdata() {
        				var text = $('input').val();
@@ -39,6 +43,7 @@
                     // ajax获得数据
        				$.get('https://api.wer.plus/api/dub', {t : text}, function (res){
        					if(res.data.text === null) return $('.result').html('未查到').fadeOut(3000);
+                        localStorage.setItem('baiduEncyclopedia', text)
            				$('.data ul li:eq(0) a').attr('href', res.data.img_url).children('img').attr('src', res.data.img_url)
                         $('.data ul li:eq(1) span').html(res.data.text)
                      	$('.data').fadeIn(500)
