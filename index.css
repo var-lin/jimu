@@ -162,7 +162,7 @@ ul {
     position: fixed;
     left: -280px;
     top: 0;
-    padding: 20px 0 10%;
+    padding: 20px 0 100px;
     width: 280px;
     height: 100%;
     border-radius: 0 25px 25px 0;
@@ -222,6 +222,7 @@ ul {
     margin-top: 10px;
     padding: 0 10px;
     background-color: #eee;
+    display: none;
 }
 
 .sidebar .setting li {

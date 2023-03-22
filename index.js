@@ -211,7 +211,7 @@ $(function () {
             $('.fn-num span').html(fnnum).parent().show()
             mysteriouCode(res)
             // 侧边栏设置
-            $('sidebar .setting').show()
+            $('.sidebar .setting').show()
             if(!localStorage.getItem('dataRtention')) {
                 localStorage.setItem('dataRtention', true)
             }
