@@ -23,7 +23,7 @@
         {"name" : "知乎用户信息获取", "url" : "./function/informationQueryZone/queryZHUserInformation.html"},
         {"name" : "哔哩哔哩关注粉丝查询", "url" : "./function/informationQueryZone/bilibiliFanFollowQuery.html"},
         {"name" : "网易云听歌记录查询", "url" : "./function/informationQueryZone/wyyListeningRecord.html"},
-        {"name" : "快递查询(测试中)", "url" : "./function/informationQueryZone/expressInquiry.html"},
+        {"name" : "快递查询", "url" : "./function/informationQueryZone/expressInquiry.html"},
         {"name" : "实时石油", "url" : "./function/informationQueryZone/realTimeOil.html"},
         {"name" : "百度百科", "url" : "./function/informationQueryZone/baiduEncyclopedia.html"},
         {"name" : "成语查询", "url" : "./function/informationQueryZone/idiomQuery.html"}
@@ -72,7 +72,7 @@
     "copywriting" : [
     	{"name" : "毒鸡汤", "url" : "./function/copyZone/poisonousChickenSoup.html"},
         {"name" : "一言", "url" : "./function/copyZone/aBriefRemark.html"},
-        {"name" : "名人名言(测试中)", "url" : "./function/copyZone/celebrityQuotes.html"},
+        {"name" : "名人名言", "url" : "./function/copyZone/celebrityQuotes.html"},
         {"name" : "一句污段子", "url" : "./function/copyZone/aDirtyParagraph.html"},
         {"name" : "顺口溜", "url" : "./function/copyZone/doggerel.html"},
         {"name" : "舔狗日记", "url" : "./function/copyZone/lickDogDiary.html"},
@@ -90,7 +90,7 @@
         {"name" : "周公解梦", "url" : "./function/other/dukeZhouInterpretsDreams.html"},
         {"name" : "垃圾分类", "url" : "./function/other/refuseClassification.html"},
         {"name" : "字数检测", "url" : "./function/other/wordCountDetection.html"},
-        {"name" : "文本相似度对比(测试中)", "url" : "./function/other/textSimilarityComparison.html"},
+        {"name" : "文本相似度对比", "url" : "./function/other/textSimilarityComparison.html"},
         {"name" : "地址转换经纬度", "url" : "./function/other/addressToLongitudeAndLatitude.html"},
         {"name" : "字符串加密/解密", "url" : "./function/other/stringEncryption&Decryption.html"},
         {"name" : "md5加密/解密", "url" : "./function/other/md5Encryption&Decryption.html"},
