@@ -5,7 +5,7 @@ body {
 }
 
 #showregion > div {
-    margin-bottom: 4rem;
+    margin: 45px auto 60px;
 }
 
 a {
@@ -53,7 +53,7 @@ ul {
 
 #logo {
     position: fixed;
-    bottom: 15%;
+    bottom: 120px;
     right: 10px;
     width: 40px;
     opacity: .9;
@@ -64,7 +64,7 @@ ul {
 
 #feedback {
     position: fixed;
-    bottom: 7%;
+    bottom: 60px;
     right: 0;
     padding: 10px;
     border: none;
@@ -156,7 +156,7 @@ ul {
     transform: scale(1.3);
 }
 
-/* 侧边栏样式 */
+    /* 侧边栏样式 */
 
 .sidebar {
     position: fixed;
@@ -175,7 +175,7 @@ ul {
     display: none;
 }
 
-/* ip签名档样式 */
+    /* ip签名档样式 */
 
 .sidebar .ipSignatureFile {
     text-align: center;
@@ -245,7 +245,7 @@ ul {
 
 .sidebar .about {
     position: fixed;
-    bottom: 7%;
+    bottom: 60px;
     padding: 15px;
     border-radius: 10px 10px 0 0;
     width: 280px;
@@ -267,13 +267,37 @@ ul {
     float: right;
 }
 
-    /* 首页样式 */
+    /* 历史浏览 */
 
-/* 代刷网样式 */
+#homepage .historyBrowsing {
+    margin: 10px 0;
+    padding: 0;
+    display: none;
+}
+
+#homepage .historyBrowsing::after {
+    content: "";
+    display: block;
+    clear: both;
+}
+
+#homepage .historyBrowsing li {
+    margin: 0 10px 10px 0;
+    float: left;
+}
+
+#homepage .historyBrowsing a {
+    padding: 5px 10px;
+    border-radius: 30px;
+    background-color: #eee;
+    font-size: 12px;
+}
+
+    /* 代刷网样式 */
 
 #homepage .replaceBrush {
     position: relative;
-    margin: 45px 0 10px;
+    margin: 10px 0;
     padding: 10px;
     background-color: #bdb;
     border-radius: 10px;
@@ -290,7 +314,7 @@ ul {
     clear: both;
 }
 
-/* 功能区样式 */
+    /* 功能区样式 */
 
 #homepage .jumbotron {
     opacity: 0;
@@ -326,10 +350,6 @@ ul {
     text-shadow: -2px -2px 3px #ccc;
 }
 
-#homepage .fntop {
-    margin-top: 7%;
-}
-
 .fn-num {
     color: #f40;
     text-align: center;
@@ -344,7 +364,6 @@ ul {
 /* 更新日志 */
 
 #toupdate {
-    margin-top: 45px;
     display: none;
 }
 
@@ -384,7 +403,7 @@ footer {
     position: fixed;
     bottom: 0;
     width: 100%;
-    height: 7%;  
+    height: 60px;  
     opacity: .9;
     z-index: 999;
 }
@@ -451,6 +470,7 @@ footer button .text span {
 }
 
 /* 更新链接弹窗 */
+
 .update {
     position: fixed;
     top: 50%;

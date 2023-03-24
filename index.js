@@ -70,10 +70,17 @@ $(function () {
             $('.sidebarBn img').css('transform', 'rotate(0deg)')
         }
         $('.sidebar .navigaBar').on('click', function (e) {
-            clear()
-            $('html').animate({
-                scrollTop : $('.jumbotron').eq($(e.target).index()).offset().top
-            })
+            var target = e.target;
+            if(target !== this) {
+                $(target).css('background-color', '#fff')
+                setTimeout(function () {
+                    $(target).css('background-color', '')
+                }, 500)
+                clear()
+                $('html').animate({
+                    scrollTop : $('.jumbotron').eq($(target).index()).offset().top
+                })
+            }
         })
         $('.sidebarBn').on('click', function () {
             $('.sidebarBn img').css('transform', 'rotate(90deg)')
@@ -93,10 +100,10 @@ $(function () {
             $(this).css('background-color', '#fff')
         }
         $('.sidebarBn').on({
-            mousedown : down,
-            mouseup : up,
-            touchstart : down,
-            touchend : up
+            'mousedown' : down,
+            'mouseup' : up,
+            'touchstart' : down,
+            'touchend' : up
         })
     })();
     // loadding效果
@@ -174,37 +181,37 @@ $(function () {
             // 数据载入
             // QQ专区数据输入及输入进全部功能里
             $(res.QQ).each(function (i, e) {
-                $('#homepage .fn-qq p').append(aElement).children('a').eq(i).html(e.name).attr('href', e.url)
+                $('#homepage .fn-qq p').append(aElement).children('a:last').html(e.name).attr('href', e.url)
             })
             fnnum += res.QQ.length;
             //  信息查询专区数据输入及输入进全部功能里
             $(res.informationquery).each(function (i, e) {
-                $('#homepage .fn-informationquery .row').append(aElement).children('a').eq(i).html(e.name).attr('href', e.url)
+                $('#homepage .fn-informationquery .row').append(aElement).children('a:last').html(e.name).attr('href', e.url)
             })
             fnnum += res.informationquery.length;
             //  网站专区数据输入及输入进全部功能里
             $(res.website).each(function (i, e) {
-                $('#homepage .fn-website .row').append(aElement).children('a').eq(i).html(e.name).attr('href', e.url)
+                $('#homepage .fn-website .row').append(aElement).children('a:last').html(e.name).attr('href', e.url)
             })
             fnnum += res.website.length;
             //  解析专区数据输入及输入进全部功能里
             $(res.analysis).each(function (i, e) {
-                $('#homepage .fn-analysis .row').append(aElement).children('a').eq(i).html(e.name).attr('href', e.url)
+                $('#homepage .fn-analysis .row').append(aElement).children('a:last').html(e.name).attr('href', e.url)
             })
             fnnum += res.analysis.length;
             //  热搜榜专区数据输入及输入进全部功能里
             $(res.hotSearchList).each(function (i, e) {
-                $('#homepage .fn-hotSearchList .row').append(aElement).children('a').eq(i).html(e.name).attr('href', e.url)
+                $('#homepage .fn-hotSearchList .row').append(aElement).children('a:last').html(e.name).attr('href', e.url)
             })
             fnnum += res.hotSearchList.length;
             // 文案专区数据输入及输入进全部功能里
             $(res.copywriting).each(function (i, e) {
-                $('#homepage .fn-copywriting .row').append(aElement).children('a').eq(i).html(e.name).attr('href', e.url)
+                $('#homepage .fn-copywriting .row').append(aElement).children('a:last').html(e.name).attr('href', e.url)
             })
             fnnum += res.copywriting.length;
             // 其他功能专区数据输入及输入进全部功能里
             $(res.other).each(function (i, e) {
-                $('#homepage .fn-other .row').append(aElement).children('a').eq(i).html(e.name).attr('href', e.url)
+                $('#homepage .fn-other .row').append(aElement).children('a:last').html(e.name).attr('href', e.url)
             })
             fnnum += res.other.length;
             // 输出一共的功能数量
@@ -212,16 +219,94 @@ $(function () {
             mysteriouCode(res)
             // 侧边栏设置
             $('.sidebar .setting').show()
-            if(!localStorage.getItem('dataRtention')) {
-                localStorage.setItem('dataRtention', true)
+            function setting(e, dataName, tacitConsent, addClick) {
+                if(!localStorage.getItem(dataName)) {
+                    localStorage.setItem(dataName, tacitConsent)
+                }
+                var boolean = localStorage.getItem(dataName) === 'true';
+                $(e).children('input').prop('checked', boolean)
+                $(e).on('click', function () {
+                    $(this).children('input').prop('checked', !boolean)
+                    localStorage.setItem(dataName, !boolean)
+                    boolean = !boolean;
+                    addClick()
+                })
             }
-            var dataRtention = localStorage.getItem('dataRtention') === "true";
-            $('.sidebar .setting li:eq(0) input').prop('checked', dataRtention)
-            $('.sidebar .setting li:eq(0)').on('click', function () {
-                $(this).children('input').prop('checked', !dataRtention)
-                localStorage.setItem('dataRtention', !dataRtention)
-                dataRtention = !dataRtention;
+            // 隐藏历史浏览
+            setting('.sidebar .setting li:eq(0)', 'historyBrowsing', true, function () {
+                if(localStorage.getItem('historyBrowsing') === "true") {
+                    $('#homepage .historyBrowsing').show()
+                } else {
+                    $('#homepage .historyBrowsing').hide()
+                }
             })
+            if(localStorage.getItem('historyBrowsing') === "true") {
+                $('#homepage .historyBrowsing').show()
+            }
+            if(!localStorage.getItem('historyBrowsingList')) {
+                localStorage.setItem('historyBrowsingList', "{}")
+            }
+            var historyBrowsingList = JSON.parse(localStorage.getItem('historyBrowsingList')),
+                ele = '<li><a target="_black"></a></li>',
+                timer;
+            if(historyBrowsingList !== {}) {
+                for(var key in historyBrowsingList) {
+                    $('#homepage .historyBrowsing').append(ele).find('a:last').attr('href', historyBrowsingList[key]).html(key)
+                }
+            }
+            function removeHistoryBrowsing(e) {
+                timer = setTimeout(function () {
+                    $(e).parent().remove()
+                    delete historyBrowsingList[$(e).html()]
+                    localStorage.setItem('historyBrowsingList', JSON.stringify(historyBrowsingList))
+                }, 1000);
+            }
+            function removeHistoryBrowsingAll() {
+                timer = setTimeout(function () {
+                    $('#homepage .historyBrowsing').html('')
+                    historyBrowsingList = {};
+                    localStorage.setItem('historyBrowsingList', "{}")
+                }, 2000)
+            }
+            $('#homepage .historyBrowsing').on({
+                'mousedown' : function (e) {
+                    if(e.target == this) {
+                        removeHistoryBrowsingAll()
+                    } else {
+                        removeHistoryBrowsing(e.target)
+                    }
+                },
+                'touchstart' : function (e) {
+                    if(e.target == this) {
+                        removeHistoryBrowsingAll()
+                    } else {
+                        removeHistoryBrowsing(e.target)
+                    }
+                },
+                'mouseup' : function () {
+                    clearTimeout(timer)
+                },
+                'touchend' : function () {
+                    clearTimeout(timer)
+                }
+            })
+            $('#homepage .jumbotron .row a').on('click', function () {
+                var fnName = $(this).html(),
+                    fnHref = $(this).attr('href'),
+                    count = 0;
+                $.each($('#homepage .historyBrowsing li a'), function (i, e) {
+                    if($(e).html() == fnName) {
+                        count ++
+                    }
+                })
+                if(count == 0) {
+                    historyBrowsingList[fnName] = fnHref;
+                    $('#homepage .historyBrowsing').append(ele).find('a:last').attr('href', fnHref).html(fnName)
+                    localStorage.setItem('historyBrowsingList', JSON.stringify(historyBrowsingList))
+                }
+            })
+            // 功能输入框保存上次输入的数据
+            setting('.sidebar .setting li:eq(1)', 'dataRtention', true)
         },
         error : function (err) {
             clearInterval(loadding)
@@ -236,7 +321,7 @@ $(function () {
         $(res).each(function (i, v) {
             $('#toupdate').append('<ul class="row"><li><span class="update-date">' + v.date + '</span><ul class="update-content"></ul></li></ul>')         
             $(v.data).each(function (index, value) {
-                $('#toupdate > ul > li > ul').eq(i).append('<li></li>').children('li').eq(index).html(value)
+                $('#toupdate > ul > li > ul').eq(i).append('<li></li>').children('li:last').html(value)
             })          
         })
     });
