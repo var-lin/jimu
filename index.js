@@ -89,8 +89,19 @@ $(function () {
                 ele = '<li><a target="_black"></a></li>',
                 timer;
             if(historyBrowsingList !== {}) {
+                var count = 0;
                 for(var key in historyBrowsingList) {
-                    $('#homepage .historyBrowsing').append(ele).find('a:last').attr('href', historyBrowsingList[key]).html(key)
+                    $.each($('#homepage .jumbotron .row a'), function (i, e) {
+                        if($(e).html() == key) count ++;
+                    })
+                    if(count == 1) {
+                        count = 0;
+                        $('#homepage .historyBrowsing').append(ele).find('a:last').attr('href', historyBrowsingList[key]).html(key)
+                    } else {
+                        count = 0;
+                        delete historyBrowsingList[key];
+                        localStorage.setItem('historyBrowsingList', JSON.stringify(historyBrowsingList))
+                    }
                 }
             }
             function removeHistoryBrowsing(e) {
