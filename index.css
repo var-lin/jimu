@@ -212,6 +212,7 @@ ul {
 .sidebar .navigaBar li {
     margin: 10px 0;
     padding: 5px;
+    border-radius: 15px;
     font-weight: bolder;
     cursor: pointer;
 }
