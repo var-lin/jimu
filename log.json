@@ -4,6 +4,7 @@
         "data" : [
             "<span class=\"c-f40\">New </span>侧边栏新增“显示/隐藏历史浏览”",
             "<span class=\"c-f40\">New </span>侧边栏新增“功能输入框保存上次输入的数据”",
+            "<span class=\"c-f40\">New </span>优化代码逻辑结构",
             "<span style=\"color: #055\">注释&nbsp</span>软件的接口都是别人的，所以不知道什么时候功能就会失效"
         ]
     },

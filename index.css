@@ -162,7 +162,7 @@ ul {
     position: fixed;
     left: -280px;
     top: 0;
-    padding: 20px 0 100px;
+    padding: 20px 0 120px;
     width: 280px;
     height: 100%;
     border-radius: 0 25px 25px 0;
@@ -221,18 +221,19 @@ ul {
 .sidebar .setting {
     margin-top: 10px;
     padding: 0 10px;
-    background-color: #eee;
+    background-color: #eef;
     display: none;
 }
 
 .sidebar .setting li {
     padding: 10px 0;
+    text-align: right;
     cursor: pointer;
 }
 
-.sidebar .setting span {
-    margin-right: 10px;
+.sidebar .setting div {
     color: #424242;
+    float: left;
 }
 
 .sidebar .setting input {
