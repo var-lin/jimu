@@ -2,9 +2,9 @@
     {
         "date" : "未定",
         "data" : [
+            "<span class=\"c-f40\">New </span>新增“<a href=\"./function/webSiteZone/screenshotOfWebsite.html\">网站截图</a>”功能",
             "<span class=\"c-f40\">New </span>新增“<a href=\"./function/analysisZone/ksVideoAnalysis.html\">快手视频解析</a>”功能",
             "<span class=\"c-f40\">New </span>新增“<a href=\"./function/hotSearchListZone/biliDailyDramaUpdateList.html\">哔哩当日番剧更新列表</a>”功能",
-            "<span class=\"c-f40\">New </span>新增“<a href=\"./function/other/screenshotOfWebsite.html\">网站截图</a>”功能",
             "<span class=\"c-f40\">New </span>侧边栏新增“显示/隐藏历史浏览”",
             "<span class=\"c-f40\">New </span>侧边栏新增“功能输入框保存上次输入的数据”",
             "<span class=\"c-f40\">New </span>优化代码逻辑结构",
