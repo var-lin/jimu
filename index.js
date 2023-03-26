@@ -199,7 +199,8 @@ $(function () {
             if(key) {
                 key = false,
                 name = $('.feedbackBox input:eq(0)').val(),
-                certno = $('.feedbackBox input:eq(1)').val();
+                certno = $('.feedbackBox input:eq(1)').val(),
+                email = $('.feedbackBox input:eq(2)').val();
                 $('.feedbackBox .message').html('请稍等');
                 if(name == '') {
                     key = true;
@@ -209,6 +210,10 @@ $(function () {
                     key = true;
                     return $('.feedbackBox .message').html('请输入内容');
                 }
+                if(email == '' || email.indexOf('@') != 1) {
+                    key = true;
+                    return $('.feedbackBox .message').html('请输入正常的邮箱联系方式,方便回复你');
+                }
                 $.ajax({
                     url : 'https://api.yuxli.cn/api/mail/mail.php',
                     type : 'get',
@@ -216,7 +221,7 @@ $(function () {
                     data : {
                         address : '1352058684@qq.com',
                         name : name,
-                        certno : certno
+                        certno : certno + ' 联系方式：' + email
                     },
                     success : function (res) {
                         $('.feedbackBox .message').html(res)
