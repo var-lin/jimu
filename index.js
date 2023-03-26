@@ -140,19 +140,22 @@ $(function () {
                     clearTimeout(timer)
                 }
             })
-            $('#homepage .jumbotron .row a').on('click', function () {
-                var fnName = $(this).html(),
-                    fnHref = $(this).attr('href'),
-                    count = 0;
-                $.each($('#homepage .historyBrowsing li a'), function (i, e) {
-                    if($(e).html() == fnName) {
-                        count ++
+            $('#homepage .jumbotron .row').on('click', function (e) {
+                var target = e.target;
+                if(target != this) {
+                    var fnName = $(target).html(),
+                        fnHref = $(target).attr('href'),
+                        count = 0;
+                    $.each($('#homepage .historyBrowsing li a'), function (i, e) {
+                        if($(e).html() == fnName) {
+                            count ++
+                        }
+                    })
+                    if(count == 0) {
+                        historyBrowsingList[fnName] = fnHref;
+                        $('#homepage .historyBrowsing').append(ele).find('a:last').attr('href', fnHref).html(fnName)
+                        localStorage.setItem('historyBrowsingList', JSON.stringify(historyBrowsingList))
                     }
-                })
-                if(count == 0) {
-                    historyBrowsingList[fnName] = fnHref;
-                    $('#homepage .historyBrowsing').append(ele).find('a:last').attr('href', fnHref).html(fnName)
-                    localStorage.setItem('historyBrowsingList', JSON.stringify(historyBrowsingList))
                 }
             })
             // 功能输入框保存上次输入的数据
