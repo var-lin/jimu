@@ -62,7 +62,7 @@
         {"name" : "微信状态歌词热度榜", "url" : "./function/hotSearchListZone/weChatStatusSongPopularityList.html"},
         {"name" : "抖音热点", "url" : "./function/hotSearchListZone/douYinHotSearchList.html"},
         {"name" : "哔哩哔哩热搜榜", "url" : "./function/hotSearchListZone/biliHotSearchList.html"},
-        {"name" : "哔哩当日番剧更新列表", "url" : "./function/hotSearchListZone/biliDailyDramaUpdateList.html"},
+        {"name" : "哔哩当日番剧更新列表(测试中)", "url" : "./function/hotSearchListZone/biliDailyDramaUpdateList.html"},
         {"name" : "百度热点", "url" : "./function/hotSearchListZone/baiDuHotSearchList.html"},
         {"name" : "知乎热搜榜", "url" : "./function/hotSearchListZone/zhiHuHotSearchList.html"},
         {"name" : "贴吧热议", "url" : "./function/hotSearchListZone/tieBaHotSearchList.html"},
