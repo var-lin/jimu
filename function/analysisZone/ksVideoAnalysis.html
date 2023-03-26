@@ -51,15 +51,25 @@
        				var url = $('input').val();
                    	if(url === '') return $('.result').html('快手分享链接不能为空').fadeOut(3000);
                     // ajax获得数据
-       				$.get('https://api.wer.plus/api/vks', {url : url}, function (res){
-       					if(res.code !== 200) return $('.result').html(res.msg).fadeOut(3000);
-                        localStorage.setItem('ksVideoAnalysis', url)
-                        $('.data ul li:eq(0) a').html(url).attr('href', url)
-                        $('.data ul li:eq(1) a').html(res.url).attr('href', res.url)
-                     	$('.data').fadeIn(500)
-                        $('.result').html('操作成功').fadeOut(3000)
-                        $('input').val('')                                                    
-       				})
+                    $.ajax({
+                        url : 'https://api.wer.plus/api/vks',
+                        type : 'get',
+                        dataType : 'json',
+                        data : {
+                            url : url
+                        },
+                        success : function (res) {
+                            localStorage.setItem('ksVideoAnalysis', url)
+                            $('.data ul li:eq(0) a').html(url).attr('href', url)
+                            $('.data ul li:eq(1) a').html(res.url).attr('href', res.url)
+                            $('.data').fadeIn(500)
+                            $('.result').html('操作成功').fadeOut(3000)
+                            $('input').val('')
+                        },
+                        error : function (err) {
+                            $('.result').html(err.responseText.msg).fadeOut(3000)
+                        }
+                    })
    				}
 				$('.btn-secondary').click(function () {
             		$('.result').html('请稍等').fadeIn(1000)
