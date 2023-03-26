@@ -46,6 +46,7 @@
     "analysis" : [
         {"name" : "经纬度解析", "url" : "./function/analysisZone/longitudeAndLatitudeAnalysis.html"},
         {"name" : "短视频去水印解析", "url" : "./function/analysisZone/shortVideoDe_watermarkingAnalysis.html"},
+        {"name" : "快手视频解析(测试中)", "url" : "./function/analysisZone/ksVideoAnalysis.html"},
         {"name" : "蓝奏云直链解析", "url" : "./function/analysisZone/lanzouyLinearChainAnalysis.html"},
         {"name" : "网易云音乐直链解析", "url" : "./function/analysisZone/wyyLinearChainAnalysis.html"},
         {"name" : "QQ音乐直链解析", "url" : "./function/analysisZone/QQMusicLinearChainAnalysis.html"},
@@ -60,6 +61,7 @@
         {"name" : "微信状态歌词热度榜", "url" : "./function/hotSearchListZone/weChatStatusSongPopularityList.html"},
         {"name" : "抖音热点", "url" : "./function/hotSearchListZone/douYinHotSearchList.html"},
         {"name" : "哔哩哔哩热搜榜", "url" : "./function/hotSearchListZone/biliHotSearchList.html"},
+        {"name" : "哔哩当日番剧更新列表(测试中)", "url" : "./function/hotSearchListZone/biliDailyDramaUpdateList.html"},
         {"name" : "百度热点", "url" : "./function/hotSearchListZone/baiDuHotSearchList.html"},
         {"name" : "知乎热搜榜", "url" : "./function/hotSearchListZone/zhiHuHotSearchList.html"},
         {"name" : "贴吧热议", "url" : "./function/hotSearchListZone/tieBaHotSearchList.html"},
@@ -91,6 +93,7 @@
         {"name" : "垃圾分类", "url" : "./function/other/refuseClassification.html"},
         {"name" : "字数检测", "url" : "./function/other/wordCountDetection.html"},
         {"name" : "文本相似度对比", "url" : "./function/other/textSimilarityComparison.html"},
+        {"name" : "网站截图(测试中)", "url" : "./function/other/screenshotOfWebsite.html"},
         {"name" : "地址转换经纬度", "url" : "./function/other/addressToLongitudeAndLatitude.html"},
         {"name" : "字符串加密/解密", "url" : "./function/other/stringEncryption&Decryption.html"},
         {"name" : "md5加密/解密", "url" : "./function/other/md5Encryption&Decryption.html"},
