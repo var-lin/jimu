@@ -43,6 +43,9 @@
                         url : 'https://xiaobapi.top/api/xb/api/bilibili_short_url.php',
                         type : 'get',
                         dataType : 'text',
+                        data : {
+                            url : url
+                        },
                         success : function (res) {
                             if(res.indexOf('http')) return $('.result').html(res).fadeOut(3000);
                             localStorage.setItem('biliShortenUrl', url)
