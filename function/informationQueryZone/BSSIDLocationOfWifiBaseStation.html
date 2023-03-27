@@ -44,8 +44,7 @@
        				var id = $('input').val();
                    	if(id === '') return $('.result').html('BSSID不能为空').fadeOut(3000);
        				$.get('https://api.pearktrue.cn/api/map/wifi.php', {bssid : id}, function (res){
-                        res = JSON.parse(res);
-       					if(res.code !== 200) return $('.result').html(res.msg).fadeOut(3000);
+       					if(res.code !== '200') return $('.result').html(res.msg).fadeOut(3000);
                         localStorage.setItem('BSSIDLocationOfWifiBaseStation', id)
            				$('.data ul li:eq(0) span').html(res.data.bssid)
                      	$('.data ul li:eq(1) span').html(res.data.lng)

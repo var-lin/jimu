@@ -39,14 +39,22 @@
 				function getdata() {
        				var url = $('input').val();
                    	if(url === '') return $('.result').html('请输入网址').fadeOut(3000);
-       				$.get('https://xiaobapi.top/api/xb/api/bilibili_short_url.php', {url : url}, function (res){
-                        if(res.indexOf('http')) return $('.result').html(res).fadeOut(3000);
-                        localStorage.setItem('biliShortenUrl', url)
-            			$('.data div:eq(1)').html(res)
-                     	$('.data').fadeIn(500)
-                        $('.result').html('操作成功').fadeOut(3000)
-                        $('input').val('')           
-       				})
+                    $.ajax({
+                        url : 'https://xiaobapi.top/api/xb/api/bilibili_short_url.php',
+                        type : 'get',
+                        dataType : 'text',
+                        success : function (res) {
+                            if(res.indexOf('http')) return $('.result').html(res).fadeOut(3000);
+                            localStorage.setItem('biliShortenUrl', url)
+                            $('.data div:eq(1)').html(res)
+                            $('.data').fadeIn(500)
+                            $('.result').html('操作成功').fadeOut(3000)
+                            $('input').val('')
+                        },
+                        error : function (err) {
+                            $('.result').html(err.responseText).fadeOut(3000)
+                        }
+                    })
    				}
 				$('button').click(function () {
             		$('.result').fadeIn(1000).html('请稍等')      	

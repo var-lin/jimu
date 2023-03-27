@@ -44,8 +44,7 @@
        				var id = $('input').val();
                    	if(id === '') return $('.result').html('车牌号不能为空').fadeOut(3000);
        				$.get('https://api.pearktrue.cn/api/xj/cp.php', {cp : id}, function (res){
-                        res = JSON.parse(res);
-       					if(res.code !== 200) return $('.result').html(res.msg).fadeOut(3000);
+       					if(res.code !== '200' || res.data.xjfx == null) return $('.result').html('查询失败').fadeOut(3000);
                         localStorage.setItem('vehicleLicensePlateUnluckyInquiry', id)
            				$('.data ul li:eq(0) span').html(res.data.cp)
                         $('.data ul li:eq(1) span:eq(0)').html(res.data.wxsl)
@@ -53,7 +52,11 @@
                      	$('.data ul li:eq(1) span:eq(2)').html(res.data.wxyy)
                         $('.data ul li:eq(2) span').html(res.data.xjfx)
                         $('.data ul li:eq(3) span').html(res.data.zrgx)
-                        $('.data ul li:eq(4) span').html(res.data.place)
+                        if(res.data.place) {
+                            $('.data ul li:eq(4) span').html(res.data.place)
+                        } else {
+                            $('.data ul li:eq(4)').hide()
+                        }
                      	$('.data').fadeIn(500)
                         $('.result').html('操作成功').fadeOut(3000)
                         $('input').val('')                                                    

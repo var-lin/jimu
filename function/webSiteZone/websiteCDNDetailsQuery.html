@@ -23,7 +23,6 @@
             </div>
             <div class="notes text-center">
                 <div>#无反应请检测网络#</div>
-                <div>#不要加https://#</div>
             </div>
             <div class="data">
                 查询结果
@@ -47,13 +46,12 @@
                     var url = $('input').val();
                     if(url === '') return $('.result').html('请输入网址').fadeOut(3000);
                     $.get('https://api.pearktrue.cn/api/website/cdn.php', {url : url}, function (res){
-                        res = JSON.parse(res);
-                        if(res.code !== 200) return $('.result').html(res.msg).fadeOut(3000);
+                        if(res.code !== '200') return $('.result').html(res.msg).fadeOut(3000);
                         localStorage.setItem('websiteCDNDetailsQuery', url)
                         $('.data ul li:eq(0) span').html(res.website)
                         $('.data ul li:eq(1) span').html(res.count)
                         $.each(res.data, function (i, e) {
-                            $('.data ul').append('<li class=".mrTop">主机名：<span></span></li><li class="count">个数：<span></span></li><li class="cdn">cdn：<span></span></li><li class="ip">远程IP：<span></span></li>')
+                            $('.data ul').append('<li class="mrTop">主机名：<span></span></li><li class="count">个数：<span></span></li><li class="cdn">cdn：<span></span></li><li class="remoteip">远程IP：<span></span></li>')
                             $('.data ul .mrTop:last span').html(e.hostname)
                             $('.data ul .count:last span').html(e.count)
                             $('.data ul .cdn:last span').html(e.cdn)

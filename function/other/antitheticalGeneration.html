@@ -41,8 +41,7 @@
                    	if(text === '') return $('.result').html('请输入上联').fadeOut(3000);
                     // ajax获得数据
        				$.get('https://api.pearktrue.cn/api/duilian', {word : text}, function (res){
-                        res = JSON.parse(res);
-       					if(res.code !== 200) return $('.result').html(res.msg).fadeOut(3000);
+       					if(res.code !== '200') return $('.result').html(res.msg).fadeOut(3000);
                         localStorage.setItem('antitheticalGeneration', text)
            				$('.data ul li:eq(0) span').html(res.data.up)
                      	$('.data ul li:eq(1) span').html(res.data.under)
