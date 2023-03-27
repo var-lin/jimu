@@ -53,7 +53,7 @@
                         $('.data ul li:eq(2) span').html(res.data.xjfx)
                         $('.data ul li:eq(3) span').html(res.data.zrgx)
                         if(res.data.place) {
-                            $('.data ul li:eq(4) span').html(res.data.place)
+                            $('.data ul li:eq(4)').show().children('span').html(res.data.place)
                         } else {
                             $('.data ul li:eq(4)').hide()
                         }
