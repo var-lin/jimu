@@ -64,7 +64,7 @@
        					if(res.code !== 200) return $('.result').html(res.msg).fadeOut(3000);
                         localStorage.setItem('kuwoLinearChainAnalysis', id)
                         if(res.pic) {
-                            $('.data ul li:eq(0) a').attr('href', res.pic).children('img').attr('src', res.pic)
+                            $('.data ul li:eq(0)').show().children('a').attr('href', res.pic).children('img').attr('src', res.pic)
                         } else {
                             $('.data ul li:eq(0)').hide()
                         }

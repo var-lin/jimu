@@ -31,7 +31,6 @@
                 // ajax获得数据
 				(function () {
        				$.get('https://v.api.aa1.cn/api/api-wenan-mingrenmingyan/index.php', {aa1 : 'json'}, function (res){
-                        console.log(res)
             			$('#result').html(res[0].mingrenmingyan)
                      	$('.data').fadeIn(500)
                         $('.result').html('操作成功').fadeOut(3000)       
