@@ -194,6 +194,11 @@
                         }) 
                     }
                 })
+                $('.header span').on('dblclick', function () {
+                    chatRecords = [];
+                    localStorage.setItem('chatGPTChatRecords', "[]");
+                    $('.dialogBox').html('')
+                })
                 $('.send').on('click', getData)
                 $('.text').on('keydown', function (e) {
                     if(e.keyCode == 13 && key) getData();
