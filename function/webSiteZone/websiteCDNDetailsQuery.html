@@ -50,6 +50,10 @@
                         localStorage.setItem('websiteCDNDetailsQuery', url)
                         $('.data ul li:eq(0) span').html(res.website)
                         $('.data ul li:eq(1) span').html(res.count)
+                        $('.data ul .mrTop').remove();
+                        $('.data ul .count').remove();
+                        $('.data ul .cdn').remove();
+                        $('.data ul .remoteip').remove();
                         $.each(res.data, function (i, e) {
                             $('.data ul').append('<li class="mrTop">主机名：<span></span></li><li class="count">个数：<span></span></li><li class="cdn">cdn：<span></span></li><li class="remoteip">远程IP：<span></span></li>')
                             $('.data ul .mrTop:last span').html(e.hostname)
