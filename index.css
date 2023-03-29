@@ -18,7 +18,7 @@ ul {
 
 /* 时间段提示样式 */
 
-.timeTip {
+.brief-remark {
     position: fixed;
     top: 0;
     padding: 5px 10px;
@@ -33,7 +33,7 @@ ul {
     z-index: 999;
 }
 
-.timeTip::-webkit-scrollbar {
+.brief-remark::-webkit-scrollbar {
     display: none;
 }
 

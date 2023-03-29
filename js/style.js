@@ -32,15 +32,14 @@ $(function () {
     })();
     // 时间段提示内容获取
     $.ajax({
-        url : 'https://v.api.aa1.cn/api/time-tx/index.php',
+        url : 'https://v1.hitokoto.cn/',
         type : 'get',
         dataType : 'json',
         success : function (res) {
-            if(res.code !== 1) return $('.timeTip').html('接口可能失效啦~')
-            $('.timeTip').html(res.msg)
+            $('.brief-remark').html(res.hitokoto)
         },
         error : function (err){
-            $('timeTip').html('请检查网络')
+            $('.brief-remark').html('接口可能失效啦~请联系作者修复哈')
         }
     });
     // 返回置顶显示隐藏功能 toupDateReturnTop
