@@ -44,7 +44,8 @@
                    	if(tel === '') return $('.result').html('手机号不能为空').fadeOut(3000);
                     // ajax获得数据
        				$.get('https://api.vvhan.com/api/phone', {tel:tel}, function (res){
-       					if(!res.success) return $('.result').html(res.message).fadeOut(3000);
+                        if(!res.success) return $('.result').html(res.message).fadeOut(3000);
+       					if(res.local) return $('.result').html('查询失败').fadeOut(3000);
                         localStorage.setItem('queryTelAttribution', tel)
            				$('.data ul li:eq(0) span').html(res.tel)
                      	$('.data ul li:eq(1) span').html(res.info.local)
