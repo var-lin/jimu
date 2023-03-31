@@ -58,27 +58,23 @@ $(function () {
             mysteriouCode(res)
             // 侧边栏设置
             $('.sidebar .setting').show()
-            function setting(e, dataName, tacitConsent, addClick) {
-                if(!localStorage.getItem(dataName)) {
-                    localStorage.setItem(dataName, tacitConsent)
-                }
-                var boolean = localStorage.getItem(dataName) === 'true';
-                $(e).children('input').prop('checked', boolean)
+            function setting(e, dataName, tacitConsent, target, addClick) {
+                if(!localStorage.getItem(dataName)) localStorage.setItem(dataName, tacitConsent);
+                var key = localStorage.getItem(dataName) === 'true';
+                if(target) key ? $(target).show() : $(target).hide();
+                $(e).children('input').prop('checked', key)
                 $(e).on('click', function () {
-                    $(this).children('input').prop('checked', !boolean)
-                    localStorage.setItem(dataName, !boolean)
-                    boolean = !boolean;
-                    addClick()
+                    $(this).children('input').prop('checked', !key)
+                    localStorage.setItem(dataName, !key)
+                    key = !key;
+                    if(target) key ? $(target).show() : $(target).hide();
+                    addClick(key)
                 })
             }
+            // 功能输入框保存上次输入的数据
+            setting('.sidebar .setting li:eq(0)', 'dataRtention', true)
             // 隐藏历史浏览
-            setting('.sidebar .setting li:eq(0)', 'historyBrowsing', true, function () {
-                if(localStorage.getItem('historyBrowsing') === "true") {
-                    $('#homepage .historyBrowsing').show()
-                } else {
-                    $('#homepage .historyBrowsing').hide()
-                }
-            })
+            setting('.sidebar .setting li:eq(1)', 'historyBrowsing', true, '#homepage .historyBrowsing')
             if(localStorage.getItem('historyBrowsing') === "true") {
                 $('#homepage .historyBrowsing').show()
             }
@@ -158,8 +154,6 @@ $(function () {
                     }
                 }
             })
-            // 功能输入框保存上次输入的数据
-            setting('.sidebar .setting li:eq(1)', 'dataRtention', true)
         },
         error : function (err) {
             clearInterval(loadding)
