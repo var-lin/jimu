@@ -29,11 +29,31 @@
         <div class="cover"></div>
         <script>
             $(function () {
-                var key = true;
+                var key = true,
+                chatRecords = JSON.parse(localStorage.getItem('xiaoAi-chatRecords')),
+                text = localStorage.getItem('xiaoAi-text');
                 $('.dialogBox').css('height', ($(window).height()) * 0.8);
                 $('.dialogBox .left:first-child .time').html(nowTime());
-                $('input:eq(0)').focus();
                 $('.dialogBox .leftText:first-child').css('height', $('.dialogBox .leftText:first-child').prop('scrollHeight'))
+                text ? $('input:eq(0)').val(text) : null;
+                $('input:eq(0)').focus().on('input', function () {
+                    localStorage.setItem('xiaoAi-text', $(this).val())
+                });
+                if(chatRecords && chatRecords !== []) {
+                    $.each(chatRecords, function (i, e) {
+                        if(e.spokesman == 'left') {
+                            $('.dialogBox').append('<p class="right"><span class="time">' + e.time + '</span><img src="../../images/logo.png" alt="logo"></p><p class="rightContent"><textarea class="rightText" disabled>' + e.text +'</textarea></p>')
+                            $('.dialogBox .rightText:last').css('height', $('.dialogBox .rightText:last').prop('scrollHeight'))
+                        } else {
+                            $('.dialogBox').append('<p class="left"><img src="../../images/xiaoAi.webp" alt="chatGPT-log"><span class="time">' + e.time + '</span></p><p class="leftContent"><textarea class="leftText" disabled>' + e.text + '</textarea></p>')
+                            $('.dialogBox .leftText:last').css('height', $('.dialogBox .leftText:last').prop('scrollHeight'))
+                        }
+                    })
+                    $('.dialogBox').scrollTop($('.dialogBox').prop('scrollHeight'))
+                } else {
+                    localStorage.setItem('xiaoAi-chatRecords', "[]");
+                    chatRecords = [];
+                }
                 function nowTime() {
                     var time = new Date();
                     function zeroPadding(num) {
@@ -42,12 +62,19 @@
                         }
                         return num
                     }
-                    time = zeroPadding(time.getHours()) + ':' + zeroPadding(time.getMinutes()) + ':' + zeroPadding(time.getSeconds());
+                    time = time.getFullYear() + '年' + (time.getMonth() + 1) + '月' + time.getDate() + '日 ' + zeroPadding(time.getHours()) + ':' + zeroPadding(time.getMinutes()) + ':' + zeroPadding(time.getSeconds());
                     return time
                 }
                 function returnData(data) {
+                    var time = nowTime();
+                    chatRecords.push({
+                        spokesman : 'right',
+                        time : time,
+                        text : data
+                    });
+                    localStorage.setItem('xiaoAi-chatRecords', JSON.stringify(chatRecords));
                     $('.dialogBox .leftText:last').html($.trim(data)).css('height', $('.dialogBox .leftContent:last-child .leftText').prop('scrollHeight'))
-                    $('.dialogBox .left:nth-last-child(2) .time').html(nowTime())
+                    $('.dialogBox .left:nth-last-child(2) .time').html(time)
                     $('.dialogBox').scrollTop($('.dialogBox').prop('scrollHeight'))
                     key = true;
                     $('.send').on('click', getData)
@@ -58,7 +85,15 @@
                     $('.send').off('click')
                     var text = $.trim($('.text').val());
                     if(text === '') return;
-                    $('.dialogBox').append('<p class="right"><span class="time">' + nowTime() + '</span><img src="../../images/logo.png" alt="logo"></p><p class="rightContent"><textarea class="rightText" disabled>' + text +'</textarea></p><p class="left"><img src="../../images/xiaoAi.webp" alt="xiaoAi-log"><span class="time"></span></p><p class="leftContent"><textarea class="leftText" disabled>小爱正在正在思考中...</textarea></p>')
+                    var time = nowTime();
+                    chatRecords.push({
+                        spokesman : 'left',
+                        time : time,
+                        text : text
+                    });
+                    localStorage.setItem('xiaoAi-chatRecords', JSON.stringify(chatRecords));
+                    localStorage.setItem('xiaoAi-text', '');
+                    $('.dialogBox').append('<p class="right"><span class="time">' + time + '</span><img src="../../images/logo.png" alt="logo"></p><p class="rightContent"><textarea class="rightText" disabled>' + text +'</textarea></p><p class="left"><img src="../../images/xiaoAi.webp" alt="xiaoAi-log"><span class="time"></span></p><p class="leftContent"><textarea class="leftText" disabled>小爱正在正在思考中...</textarea></p>')
                     $('.text').val('')
                     $('.dialogBox .rightText:last').css('height', $('.dialogBox .rightText:last').prop('scrollHeight'))
                     $('.dialogBox').scrollTop($('.dialogBox').prop('scrollHeight'))
@@ -77,6 +112,13 @@
                         }
                     })
                 }
+                $('.header span').on('dblclick', function () {
+                    chatRecords = [];
+                    localStorage.setItem('xiaoAi-chatRecords', "[]");
+                    $('.dialogBox').html('')
+                    $('input:eq(0)').val('')
+                    localStorage.setItem('xiaoAi-text', '')
+                })
                 $('.send').on('click', getData)
                 $('.text').on('keydown', function (e) {
                     if(e.keyCode == 13 && key) getData();
