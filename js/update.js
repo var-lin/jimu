@@ -1,8 +1,8 @@
 $(function () {
     // 当前版本信息写入
     var version = '2023.03.20.0',
-        sourceCodeUrl = 'https://lhshilin.gitee.io/jimu/download/积木' + version + '版本源码.zip',
-        androidUrl = 'https://lhshilin.gitee.io/jimu/download/积木_' + version + '.apk';
+        sourceCodeUrl = 'https://lhshilin.github.io/jimu/download/积木' + version + '版本源码.zip',
+        androidUrl = 'https://lhshilin.github.io/jimu/download/积木_' + version + '.apk';
     $('#sourceCodeDownload').attr('data-clipboard-text', sourceCodeUrl)
     $('#sourceCode a').attr({
         href : sourceCodeUrl,
@@ -18,7 +18,7 @@ $(function () {
         localStorage.setItem('updateTip', 'true')
     }
     // 判断最新版本
-    $.get('https://lhshilin.gitee.io/jimu/update.json', function (res) {
+    $.get('https://lhshilin.github.io/jimu/update.json', function (res) {
         function showUpdate() {
             $('.sidebar .about .checkUpdateBtn').html('有新版本').css('color', '#f40')
             $('.update').stop().fadeIn(1500)
@@ -32,7 +32,7 @@ $(function () {
         } else {
             $('.sidebar .about .checkUpdateBtn').on('click', showUpdate)
         }
-        var updateAndroidUrl = 'https://lhshilin.gitee.io/jimu/download/积木_' + res.updateV + '.apk';
+        var updateAndroidUrl = 'https://lhshilin.github.io/jimu/download/积木_' + res.updateV + '.apk';
         $('.update .androidUrl a').prop('href', updateAndroidUrl).children('span').html(updateAndroidUrl)
         $('.update .updatebtnleft').on('click', function () {
             $('.update').stop().fadeOut(300)

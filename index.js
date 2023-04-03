@@ -10,7 +10,7 @@ $(function () {
     })();
     // 功能链接数据加载
     $.ajax({
-        url : './allFunctionData.json',
+        url : 'https://lhshilin.github.io/jimu/allFunctionData.json',
         type : 'get',
         dataType : 'json',
         success : function (res) {
@@ -161,7 +161,7 @@ $(function () {
         }
     })
     // 更新日志数据输入
-    $.get('https://lhshilin.gitee.io/jimu/log.json', function (res) {
+    $.get('https://lhshilin.github.io/jimu/log.json', function (res) {
         $(res).each(function (i, v) {
             $('#toupdate').append('<ul class="row"><li><span class="update-date">' + v.date + '</span><ul class="update-content"></ul></li></ul>')         
             $(v.data).each(function (index, value) {
