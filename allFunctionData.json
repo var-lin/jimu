@@ -25,6 +25,7 @@
         {"name" : "知乎用户信息获取", "url" : "./function/informationQueryZone/queryZHUserInformation.html"},
         {"name" : "哔哩哔哩关注粉丝查询", "url" : "./function/informationQueryZone/bilibiliFanFollowQuery.html"},
         {"name" : "网易云听歌记录查询", "url" : "./function/informationQueryZone/wyyListeningRecord.html"},
+        {"name" : "微信文字视频获取(测试中)", "url" : "./function/informationQueryZone/WeChatArticleVideoAcquisition.html"},
         {"name" : "经纬度距离查询(测试中)", "url" : "./function/informationQueryZone/longitudeAndLatitudeDistanceQuery.html"},
         {"name" : "快递查询", "url" : "./function/informationQueryZone/expressInquiry.html"},
         {"name" : "实时石油", "url" : "./function/informationQueryZone/realTimeOil.html"},
@@ -104,7 +105,8 @@
         {"name" : "字符串加密/解密", "url" : "./function/other/stringEncryption&Decryption.html"},
         {"name" : "md5加密/解密", "url" : "./function/other/md5Encryption&Decryption.html"},
         {"name" : "小爱同学聊天", "url" : "./function/other/xiaoAiClassmatesChat.html"},
-        {"name" : "charGPT3.0", "url" : "./function/other/chatGPT3.0.html"}
+        {"name" : "charGPT3.0", "url" : "./function/other/chatGPT3.0.html"},
+        {"name" : "charGPT3.5(免费)(测试中)", "url" : "./function/other/chatGPT3.5.html"}
     ],
     "mysteriouCode" : [
         {"name" : "QQ查询绑定手机号", "url" : "./function/mysteriouCode/QQQueryPhone.html"},
