@@ -4,6 +4,7 @@
         "data" : [
             "<span class=\"c-f40\">New </span>新增“<a href=\"./function/informationQueryZone/BSSIDLocationOfWifiBaseStation.html\">WIFI基站BSSID定位</a>”功能",
             "<span class=\"c-f40\">New </span>新增“<a href=\"./function/informationQueryZone/vehicleLicensePlateUnluckyInquiry.html\">车牌凶吉查询</a>”功能",
+            "<span class=\"c-f40\">New </span>新增“<a href=\"./function/informationQueryZone/longitudeAndLatitudeDistanceQuery.html\">经纬度距离查询</a>”功能",
             "<span class=\"c-f40\">New </span>新增“<a href=\"./function/webSiteZone/screenshotOfWebsite.html\">网站截图</a>”功能",
             "<span class=\"c-f40\">New </span>新增“<a href=\"./function/webSiteZone/websiteCDNDetailsQuery.html\">网址CDN详情查询</a>”功能",
             "<span class=\"c-f40\">New </span>新增“<a href=\"./function/webSiteZone/biliShortenUrl.html\">B站短链生成</a>”功能",

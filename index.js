@@ -52,7 +52,7 @@ $(function () {
             $(res.other).each(function (i, e) {
                 $('#homepage .fn-other .row').append(aElement).children('a:last').html(e.name).attr('href', e.url)
             })
-            fnnum += res.other.length;
+            // fnnum += res.other.length;
             // 输出一共的功能数量
             $('.fn-num span').html(fnnum).parent().show()
             mysteriouCode(res)
@@ -75,9 +75,6 @@ $(function () {
             setting('.sidebar .setting li:eq(0)', 'dataRtention', true)
             // 隐藏历史浏览
             setting('.sidebar .setting li:eq(1)', 'historyBrowsing', true, '#homepage .historyBrowsing')
-            if(localStorage.getItem('historyBrowsing') === "true") {
-                $('#homepage .historyBrowsing').show()
-            }
             if(!localStorage.getItem('historyBrowsingList')) {
                 localStorage.setItem('historyBrowsingList', "{}")
             }
