@@ -1,0 +1,152 @@
+<!doctype html>
+<html> 
+    <head> 
+        <meta charset="UTF-8"> 
+        <meta name="viewport" id="viewport" content="width=device-width, initial-scale=1, user-scalable=no"> 
+        <title>积木·chatGPT3.0</title>
+        <link rel="icon" type="image/x-icin" href="../../images/logo.ico">
+        <script src="../../tools/jQuery3.6.3_min.js"></script>
+        <link rel="stylesheet" href="../../tools/bootstrap.min.css">
+        <link rel="stylesheet" href="../css/chatGPT.css">
+    </head> 
+    <body>
+		<div class="header">
+            <img src="../../images/chatGPT.png" alt="log"><span>chatGPT3.0</span>
+        </div>
+        <div class="dialogBox">
+            <p class="left">
+                <img src="../../images/chatGPT.png" alt="chatGPT-log">
+                <span class="time"></span>
+            </p>
+            <p class="leftContent">
+                <textarea class="leftText" disabled>您需要什么帮助呢？</textarea>
+            </p>
+        </div>
+        <div class="inputBox">
+            <input class="text" type="text" placeholder="请输入内容">
+            <button class="send">发送</button>
+        </div>
+        <script>
+        	$(function () {
+                var key = true,
+                    chatRecords = JSON.parse(localStorage.getItem('chatGPT3.0-chatRecords')),
+                    text = localStorage.getItem('chatGPT-text');
+                $('.dialogBox').css('height', ($(window).height()) * 0.8);
+                $('.dialogBox .left:first-child .time').html(nowTime());
+                $('.dialogBox .leftText:first-child').css('height', $('.dialogBox .leftText:first-child').prop('scrollHeight'))
+                text ? $('input:eq(0)').val(text) : null;
+                $('input:eq(0)').focus().on('input', function () {
+                    localStorage.setItem('chatGPT3.0-text', $(this).val())
+                });
+                if(chatRecords && chatRecords !== []) {
+                    $.each(chatRecords, function (i, e) {
+                        if(e.spokesman == 'left') {
+                            $('.dialogBox').append('<p class="right"><span class="time">' + e.time + '</span><img src="../../images/logo.png" alt="logo"></p><p class="rightContent"><textarea class="rightText" disabled>' + e.text +'</textarea></p>')
+                            $('.dialogBox .rightText:last').css('height', $('.dialogBox .rightText:last').prop('scrollHeight'))
+                        } else {
+                            $('.dialogBox').append('<p class="left"><img src="../../images/chatGPT.png" alt="chatGPT-log"><span class="time">' + e.time + '</span></p><p class="leftContent"><textarea class="leftText" disabled>' + e.text + '</textarea></p>')
+                            $('.dialogBox .leftText:last').css('height', $('.dialogBox .leftText:last').prop('scrollHeight'))
+                        }
+                    })
+                    $('.dialogBox').scrollTop($('.dialogBox').prop('scrollHeight'))
+                } else {
+                    localStorage.setItem('chatGPT3.0-chatRecords', "[]");
+                    chatRecords = [];
+                }
+                function nowTime() {
+                    var time = new Date();
+                    function zeroPadding(num) {
+                        if(num < 10) {
+                            return '0' + num
+                        }
+                        return num
+                    }
+                    time = time.getFullYear() + '年' + (time.getMonth() + 1) + '月' + time.getDate() + '日 ' + zeroPadding(time.getHours()) + ':' + zeroPadding(time.getMinutes()) + ':' + zeroPadding(time.getSeconds());
+                    return time
+                }
+                // 获得apikey
+                if(!localStorage.getItem('chatGPT3.0apikey')) {
+                    (function () {
+                        $.get('https://api.vvhan.com/api/jm', {key : '0310', string : 'IjNBUnR2SHc3cXZtTjB6YzR2RUdielo3bjlWZ01UVng2emMwS1NSZDVHbGY4VUxTaE5HYU5Sek9FbkswenllbzJkYUZlTGtOaDVQcStyRmRrRUxGTzVnPT0i', type : 'de'}, function (res){
+                            localStorage.setItem('chatGPT3.0apikey', res.demissString)
+                        })
+                    })();
+                }
+                function returnData(data) {
+                    var time = nowTime();
+                    chatRecords.push({
+                        spokesman : 'right',
+                        time : time,
+                        text : data
+                    });
+                    localStorage.setItem('chatGPT3.0-chatRecords', JSON.stringify(chatRecords));
+                    $('.dialogBox .leftText:last').html($.trim(data)).css('height', $('.dialogBox .leftContent:last-child .leftText').prop('scrollHeight'))
+                    $('.dialogBox .left:nth-last-child(2) .time').html(time)
+                    $('.dialogBox').scrollTop($('.dialogBox').prop('scrollHeight'))
+                    key = true;
+                    $('.send').on('click', getData)
+                }
+                function getData() {
+                    key = false;
+                    $('.send').off('click')
+                    var text = $.trim($('.text').val());
+                    if(text === '') return;
+                    var time = nowTime();
+                    chatRecords.push({
+                        spokesman : 'left',
+                        time : time,
+                        text : text
+                    });
+                    localStorage.setItem('chatGPT3.0-chatRecords', JSON.stringify(chatRecords));
+                    localStorage.setItem('chatGPT3.0-text', '')
+                    $('.dialogBox').append('<p class="right"><span class="time">' + time + '</span><img src="../../images/logo.png" alt="logo"></p><p class="rightContent"><textarea class="rightText" disabled>' + text +'</textarea></p><p class="left"><img src="../../images/chatGPT.png" alt="chatGPT-log"><span class="time"></span></p><p class="leftContent"><textarea class="leftText" disabled>chatGPT正在思考中...</textarea></p>')
+                    $('.text').val('')
+                    $('.dialogBox .rightText:last').css('height', $('.dialogBox .rightText:last').prop('scrollHeight'))
+                    $('.dialogBox').scrollTop($('.dialogBox').prop('scrollHeight'))
+                    var Authorization = 'Bearer ' + localStorage.getItem('chatGPT3.0apikey'),
+                        data = JSON.stringify({
+                            model : 'text-davinci-003',
+                            user : '1',
+                            max_tokens : 2000,
+                            temperature : 0.5,
+                            frequency_penalty : 0,
+                            presence_penalty : 0,
+                            prompt : text
+                        });
+                    $.ajax({
+                        url : 'https://api.openai.com/v1/completions',
+                        type : 'post',
+                        dataType : 'json',
+                        headers : {
+                            Authorization : Authorization,
+                            'Content-Type' : 'application/json'
+                        },
+                        data : data,
+                        success : function (res) {
+                            returnData(res.choices[0].text)
+                        },
+                        error : function (err) {
+                            if(err.responseText) {
+                                err = JSON.parse(err.responseText)
+                                returnData(err.error.message)
+                            } else {
+                                returnData('对不起，chatGPT不能收到你的消息')
+                            }
+                        }
+                    })
+                }
+                $('.header span').on('dblclick', function () {
+                    chatRecords = [];
+                    localStorage.setItem('chatGPT3.0-chatRecords', "[]");
+                    $('.dialogBox').html('')
+                    $('input:eq(0)').val('')
+                    localStorage.setItem('chatGPT3.0-text', '')
+                })
+                $('.send').on('click', getData)
+                $(window).on('keydown', function (e) {
+                    if(e.keyCode == 13 && key) getData();
+                })
+			})
+        </script> 	
+    </body>
+</html>
