@@ -10,6 +10,7 @@
             "<span class=\"c-f40\">New </span>新增“<a href=\"./function/webSiteZone/websiteCDNDetailsQuery.html\">网址CDN详情查询</a>”功能",
             "<span class=\"c-f40\">New </span>新增“<a href=\"./function/webSiteZone/biliShortenUrl.html\">B站短链生成</a>”功能",
             "<span class=\"c-f40\">New </span>新增“<a href=\"./function/analysisZone/ksVideoAnalysis.html\">快手视频解析</a>”功能",
+            "<span class=\"c-f40\">New </span>新增“<a href=\"./function/analysisZone/QQMusicLosslessDownload.html\">QQ音乐无损下载</a>”功能",
             "<span class=\"c-f40\">New </span>新增“<a href=\"./function/hotSearchListZone/biliDailyDramaUpdateList.html\">哔哩当日番剧更新列表</a>”功能",
             "<span class=\"c-f40\">New </span>新增“<a href=\"./function/other/antitheticalGeneration.html\">对联生成</a>”功能",
             "<span class=\"c-f40\">New </span>新增“<a href=\"./function/other/chatGPT3.5.html\">chatGPT3.5(免费)</a>”功能",

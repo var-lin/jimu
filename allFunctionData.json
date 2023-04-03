@@ -57,6 +57,7 @@
         {"name" : "蓝奏云直链解析", "url" : "./function/analysisZone/lanzouyLinearChainAnalysis.html"},
         {"name" : "网易云音乐直链解析", "url" : "./function/analysisZone/wyyLinearChainAnalysis.html"},
         {"name" : "QQ音乐直链解析", "url" : "./function/analysisZone/QQMusicLinearChainAnalysis.html"},
+        {"name" : "QQ音乐无损下载(测试中)", "url" : "./function/analysisZone/QQMusicLosslessDownload.html"},
         {"name" : "酷我音乐直链解析", "url" : "./function/analysisZone/kuwoLinearChainAnalysis.html"},
         {"name" : "全民k歌解析", "url" : "./function/analysisZone/analysisNationalKaraoke.html"}
     ],
