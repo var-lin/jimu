@@ -52,7 +52,7 @@ $(function () {
             $(res.other).each(function (i, e) {
                 $('#homepage .fn-other .row').append(aElement).children('a:last').html(e.name).attr('href', e.url)
             })
-            // fnnum += res.other.length;
+            fnnum += res.other.length;
             // 输出一共的功能数量
             $('.fn-num span').html(fnnum).parent().show()
             mysteriouCode(res)
