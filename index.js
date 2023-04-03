@@ -10,7 +10,7 @@ $(function () {
     })();
     // 功能链接数据加载
     $.ajax({
-        url : 'https://lhshilin.gitee.io/jimu/allFunctionData.json',
+        url : './allFunctionData.json',
         type : 'get',
         dataType : 'json',
         success : function (res) {
