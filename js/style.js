@@ -31,17 +31,39 @@ $(function () {
         })
     })();
     // 时间段提示内容获取
-    $.ajax({
-        url : 'https://v1.hitokoto.cn/',
-        type : 'get',
-        dataType : 'json',
-        success : function (res) {
-            $('.brief-remark').html(res.hitokoto)
-        },
-        error : function (err){
-            $('.brief-remark').html('接口可能失效啦~请联系作者修复哈')
-        }
-    });
+    (function () {
+        var date = new Date(),
+            dateYear = date.getFullYear(),
+            dateMonth = (date.getMonth() + 1) <= 9 ? '0' + (date.getMonth() + 1) : '' + (date.getMonth() + 1),
+            dateDay = date.getDate() <= 9 ? '0' + date.getDate() : '' + date.getDate();
+        date = dateYear + dateMonth + dateDay;
+        $.get('https://www.mxnzp.com/api/holiday/single/' + date, {ignoreHoliday : false, app_id : 'jlfmcnsgqikmmejf', app_secret : 'Rnp4ZkJ4NHVVWnhvcC9MRTJLYWZtZz09'}, function (res) {
+            if(res.code == 1 && res.data.lunarCalendar == '三月初十') {
+                var text = '今天是作者的生日哦,那就祝自己生日快乐吧!🎉🎉🎉',
+                    text_len = text.length;
+                $('.brief-remark').html('')
+                for (var i = 0; i < text_len; i ++) {
+                    (function (i) {
+                        setTimeout(function () {
+                            $('.brief-remark').html($('.brief-remark').html() + text[i])
+                        }, 100 * i)
+                    }(i));
+                }
+            } else {
+                $.ajax({
+                    url : 'https://v1.hitokoto.cn/',
+                    type : 'get',
+                    dataType : 'json',
+                    success : function (res) {
+                        $('.brief-remark').html(res.hitokoto)
+                    },
+                    error : function (err){
+                        $('.brief-remark').html('接口可能失效啦~请联系作者修复哈')
+                    }
+                });
+            }
+        })
+    }());
     // 返回置顶显示隐藏功能 toupDateReturnTop
     (function () {
         $(window).on('scroll', function () {

@@ -27,6 +27,7 @@
         {"name" : "网易云听歌记录查询", "url" : "./function/informationQueryZone/wyyListeningRecord.html"},
         {"name" : "微信文字视频获取(测试中)", "url" : "./function/informationQueryZone/WeChatArticleVideoAcquisition.html"},
         {"name" : "经纬度距离查询(测试中)", "url" : "./function/informationQueryZone/longitudeAndLatitudeDistanceQuery.html"},
+        {"name" : "全国重名查询(测试中)", "url" : "./function/informationQueryZone/nationalDuplicateNameQuery.html"},
         {"name" : "快递查询", "url" : "./function/informationQueryZone/expressInquiry.html"},
         {"name" : "实时石油", "url" : "./function/informationQueryZone/realTimeOil.html"},
         {"name" : "百度百科", "url" : "./function/informationQueryZone/baiduEncyclopedia.html"},
