@@ -161,42 +161,36 @@ $(function () {
                     }
                 })
             }
-            $('.search .search-box input').on({
-                'input' : function () {
-                    clearTimeout(timer)
-                    var timer = setTimeout(function () {
-                        $('.search .search-content').html('')
-                        var text = $('.search .search-box input').val(),
-                            mysteriouCode = localStorage.getItem('mysteriouCode') === 'true';
-                        if(text == '') {
-                            $('.search .search-content').hide()
-                            return;
-                        }
-                        $.each(res, function (i, v) {
-                            if(i == 'mysteriouCode') {
-                                if(mysteriouCode) {
-                                    searchEach(v, text)
-                                }
-                            } else {
+            function search() {
+                clearTimeout(timer)
+                var timer = setTimeout(function () {
+                    $('.search .search-content').html('')
+                    var text = $('.search .search-box input').val(),
+                        mysteriouCode = localStorage.getItem('mysteriouCode') === 'true';
+                    if(text == '') {
+                        $('.search .search-content').hide()
+                        return;
+                    }
+                    $.each(res, function (i, v) {
+                        if(i == 'mysteriouCode') {
+                            if(mysteriouCode) {
                                 searchEach(v, text)
                             }
-                        })
-                        if($('.search .search-content').html() == '') {
-                            $('.search .search-content').html('<li class="search-tip">未搜索到功能</li>')
                         } else {
-                            var searchHeight = $('.search .search-content').prop('scrollHeight') <= 190;
-                            searchHeight ? $('.search .search-content').css('height', 'auto') : $('.search .search-content').css('height', '190px')
+                            searchEach(v, text)
                         }
-                    }, 500)
-                },
-                'focus' : function () {
-                    $('.search .search-content').show()
-                },
-                'blur' : function () {
-                    if($('.search .search-content').html().indexOf('<li class="search-tip">未搜索到功能</li>') >= 0) {
-                        $('.search .search-content').hide()
+                    })
+                    if($('.search .search-content').html() == '') {
+                        $('.search .search-content').html('<li class="search-tip">未搜索到功能</li>')
                     }
-                }
+                    var searchHeight = $('.search .search-content').prop('scrollHeight') <= 190;
+                    searchHeight ? $('.search .search-content').css('height', 'auto') : $('.search .search-content').css('height', '190px')
+                    $('.search .search-content').show()
+                }, 500)
+            }
+            $('.search .search-box input').on({
+                'input' : search,
+                'focus' : search
             })
             $('.search .search-box img').on('click', function () {
                 $('.search .search-box input').val('')

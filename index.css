@@ -304,6 +304,10 @@ input::-webkit-search-cancel-button {
     display: none;
 }
 
+.search .search-content li a {
+    display: block;
+}
+
 .search .search-tip {
     text-align: center;
 }
