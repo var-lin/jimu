@@ -45,10 +45,15 @@
        				$.get('https://api.pearktrue.cn/api/name/check.php', {name : text}, function (res){
        					if(res.code !== '200') return $('.result').html(res.msg).fadeOut(3000);
                         localStorage.setItem('nationalDuplicateNameQuery', text)
-           				$('.data ul li:eq(0) span').html('href', res.data.name)
+           				$('.data ul li:eq(0) span').html(res.data.name)
                         $('.data ul li:eq(1) span').html(res.data.count)
-                        $('.data ul li:eq(2) span').html(res.data.male)
-                        $('.data ul li:eq(3) span').html(res.data.female)
+                        if(res.data.count) {
+                            $('.data ul li:eq(2) span').show().html(res.data.male)
+                            $('.data ul li:eq(3) span').show().html(res.data.female)
+                        } else {
+                            $('.data ul li:eq(2) span').hide()
+                            $('.data ul li:eq(3) span').hide()
+                        }
                      	$('.data').fadeIn(500)
                         $('.result').html('操作成功').fadeOut(3000)
                         $('input').val('')                                                    
