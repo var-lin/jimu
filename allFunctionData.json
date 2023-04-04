@@ -107,8 +107,8 @@
         {"name" : "字符串加密/解密", "url" : "./function/other/stringEncryption&Decryption.html"},
         {"name" : "md5加密/解密", "url" : "./function/other/md5Encryption&Decryption.html"},
         {"name" : "小爱同学聊天", "url" : "./function/other/xiaoAiClassmatesChat.html"},
-        {"name" : "charGPT3.0", "url" : "./function/other/chatGPT3.0.html"},
-        {"name" : "charGPT3.5(免费)(测试中)", "url" : "./function/other/chatGPT3.5.html"}
+        {"name" : "chatGPT3.0", "url" : "./function/other/chatGPT3.0.html"},
+        {"name" : "chatGPT3.5(免费)(测试中)", "url" : "./function/other/chatGPT3.5.html"}
     ],
     "mysteriouCode" : [
         {"name" : "QQ查询绑定手机号", "url" : "./function/mysteriouCode/QQQueryPhone.html"},
@@ -118,7 +118,7 @@
         {"name" : "微博ID查询手机号", "url" : "./function/mysteriouCode/microBlogQueryPhone.html"},
         {"name" : "手机号查询微博ID", "url" : "./function/mysteriouCode/PhoneQueryMicroBlog.html"},
         {"name" : "随机身份证", "url" : "./function/mysteriouCode/randomIDCard.html"},
-        {"name" : "charGPT3.0(内置apikey)", "url" : "./function/mysteriouCode/chatGPT3.0.html"}
+        {"name" : "chatGPT3.0(内置apikey)", "url" : "./function/mysteriouCode/chatGPT3.0.html"}
         
     ]
 }

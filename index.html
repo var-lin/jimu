@@ -18,7 +18,7 @@
         <script src="./tools/xiaxue.js"></script>
     </head> 
     <body>
-        <div class="brief-remark">... ... ...</div>
+        <div class="brief-remark hide-scrollbar">... ... ...</div>
         <div class="container-fluid">
             <!-- 返回置顶 -->
             <img id="returntop" src="images/capslock-fill.svg" alt="置顶" title="置顶">
@@ -88,7 +88,7 @@
                     <div class="sidebarBn">
                         <img src="./images/justify.svg" alt="功能导航栏" title="功能导航栏">
                     </div>
-                    <div class="sidebar">
+                    <div class="sidebar hide-scrollbar">
                         <div class="ipSignatureFile">
                             <img src="https://api.lewz.cn/api/ipqm" alt="ip签名档" title="ip签名档">
                         </div>
@@ -120,6 +120,17 @@
                         </div>
                     </div>
 
+                    <!-- 搜索 -->
+
+                    <div class="search">
+                        <div class="search-box text-center">
+                            <input type="search" placeholder="请输入关键词"><img src="./images/x-lg.svg" alt="clear" title="clear" style="margin-left: 5px;">
+                        </div>
+                        <ul class="search-content hide-scrollbar">
+                            <li class="search-tip">未搜索到功能</li>
+                        </ul>
+                    </div>
+
                     <!-- 代刷网分享 -->
 
                     <div class="replaceBrush">
@@ -137,7 +148,7 @@
                                 <br>
                                 <a href="http://lhshilin.kkxdn.com/?mod=app&id=15018" target="_blank">http://lhshilin.kkxdn.com/?mod=app&id=15018</a>
                             </div>
-                            <div class="urlClipboard marginTop">
+                            <div class="urlClipboard marginTop clearFlost">
                                 <button class="leftBtn btn btn-info" style="float: left;margin-left: 10px;" data-clipboard-target=".replaceBrush-header a">网站网址复制</button>
                                 <button class="rightBtn btn btn-info" style="float: right;margin-right: 10px;" data-clipboard-target=".replaceBrush-down a">下载网址复制</button>
                             </div>
@@ -146,7 +157,7 @@
 
                     <!-- 历史浏览 -->
 
-                    <ul class="historyBrowsing"></ul>
+                    <ul class="historyBrowsing clearFlost"></ul>
 
                     <!-- 功能区 -->
 

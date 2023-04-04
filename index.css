@@ -16,6 +16,27 @@ ul {
     list-style: none;
 }
 
+input[type=search] {
+    -webkit-appearance: textfield;
+    -webkit-box-sizing: content-box;
+    font-family: inherit;
+    font-size: 100%;
+}
+input::-webkit-search-decoration,
+input::-webkit-search-cancel-button {
+    display: none;
+}
+
+.hide-scrollbar::-webkit-scrollbar {
+    display: none;
+}
+
+.clearFlost::after {
+    content: "";
+    display: block;
+    clear: both;
+}
+
 /* 时间段提示样式 */
 
 .brief-remark {
@@ -31,10 +52,6 @@ ul {
     white-space: nowrap;
     overflow-x: scroll;
     z-index: 999;
-}
-
-.brief-remark::-webkit-scrollbar {
-    display: none;
 }
 
 /* 返回置顶按钮样式 */
@@ -171,10 +188,6 @@ ul {
     z-index: 999;
 }
 
-.sidebar::-webkit-scrollbar {
-    display: none;
-}
-
     /* ip签名档样式 */
 
 .sidebar .ipSignatureFile {
@@ -269,30 +282,30 @@ ul {
     float: right;
 }
 
-    /* 历史浏览 */
+    /* 搜索 */
 
-#homepage .historyBrowsing {
-    margin: 10px 0;
-    padding: 0;
+.search .search-box input {
+    border: 1px solid #999;
+    width: 90%;
+    height: 2rem;
+    border-radius: 5px;
+    background: none;
+    text-align: center;
+    outline: none;
+}
+
+.search .search-content {
+    position: absolute;
+    padding: 5px 30px;
+    border-radius: 10px;
+    background-color: #fff;
+    overflow-y: scroll;
+    z-index: 99;
     display: none;
 }
 
-#homepage .historyBrowsing::after {
-    content: "";
-    display: block;
-    clear: both;
-}
-
-#homepage .historyBrowsing li {
-    margin: 0 10px 10px 0;
-    float: left;
-}
-
-#homepage .historyBrowsing a {
-    padding: 5px 10px;
-    border-radius: 30px;
-    background-color: #eee;
-    font-size: 12px;
+.search .search-tip {
+    text-align: center;
 }
 
     /* 代刷网样式 */
@@ -310,10 +323,24 @@ ul {
     margin-top: 10px;
 }
 
-#homepage .replaceBrush .replaceBrush-content .urlClipboard::after {
-    content: "";
-    display: block;
-    clear: both;
+    /* 历史浏览 */
+
+#homepage .historyBrowsing {
+    margin: 10px 0;
+    padding: 0;
+    display: none;
+}
+
+#homepage .historyBrowsing li {
+    margin: 0 10px 10px 0;
+    float: left;
+}
+
+#homepage .historyBrowsing a {
+    padding: 5px 10px;
+    border-radius: 30px;
+    background-color: #eee;
+    font-size: 12px;
 }
 
     /* 功能区样式 */
@@ -557,6 +584,7 @@ footer button .text span {
 }
 
 /* 遮掩层 */
+
 .cover {
     position: fixed;
     top: 0;

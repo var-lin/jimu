@@ -133,7 +133,8 @@ $(function () {
                     clearTimeout(timer)
                 }
             })
-            $('#homepage .jumbotron .row').on('click', function (e) {
+            // 点击添加历史浏览函数
+            function addHistoryBrowsing(e) {
                 var target = e.target;
                 if(target != this) {
                     var fnName = $(target).html(),
@@ -150,6 +151,64 @@ $(function () {
                         localStorage.setItem('historyBrowsingList', JSON.stringify(historyBrowsingList))
                     }
                 }
+            }
+            // 首页搜索功能
+            $('.search .search-content').css('width', $('.search .search-box').width())
+            function searchEach(v, text) {
+                $.each(v, function (i, v) {
+                    if(v.name.indexOf(text) >= 0) {
+                        $('.search .search-content').append('<li><a target="_black"></a></li>').find('a:last').html(v.name).attr('href', v.url)
+                    }
+                })
+            }
+            $('.search .search-box input').on({
+                'input' : function () {
+                    clearTimeout(timer)
+                    var timer = setTimeout(function () {
+                        $('.search .search-content').html('')
+                        var text = $('.search .search-box input').val(),
+                            mysteriouCode = localStorage.getItem('mysteriouCode') === 'true';
+                        if(text == '') {
+                            $('.search .search-content').hide()
+                            return;
+                        }
+                        $.each(res, function (i, v) {
+                            if(i == 'mysteriouCode') {
+                                if(mysteriouCode) {
+                                    searchEach(v, text)
+                                }
+                            } else {
+                                searchEach(v, text)
+                            }
+                        })
+                        if($('.search .search-content').html() == '') {
+                            $('.search .search-content').html('<li class="search-tip">未搜索到功能</li>')
+                        } else {
+                            var searchHeight = $('.search .search-content').prop('scrollHeight') <= 190;
+                            searchHeight ? $('.search .search-content').css('height', 'auto') : $('.search .search-content').css('height', '190px')
+                        }
+                    }, 500)
+                },
+                'focus' : function () {
+                    $('.search .search-content').show()
+                },
+                'blur' : function () {
+                    if($('.search .search-content').html().indexOf('<li class="search-tip">未搜索到功能</li>') >= 0) {
+                        $('.search .search-content').hide()
+                    }
+                }
+            })
+            $('.search .search-box img').on('click', function () {
+                $('.search .search-box input').val('')
+                $('.search .search-content').html('')
+                $('.search .search-content').hide()
+            })
+            $('.search .search-content').on('click', function (e) {
+                addHistoryBrowsing(e)
+            })
+            // 点击功能里功能新增到历史浏览
+            $('#homepage .jumbotron .row').on('click', function (e) {
+                addHistoryBrowsing(e)
             })
         },
         error : function (err) {
