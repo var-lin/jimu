@@ -183,8 +183,6 @@ $(function () {
                     if($('.search .search-content').html() == '') {
                         $('.search .search-content').html('<li class="search-tip">未搜索到功能</li>')
                     }
-                    var searchHeight = $('.search .search-content').prop('scrollHeight') <= 190;
-                    searchHeight ? $('.search .search-content').css('height', 'auto') : $('.search .search-content').css('height', '190px')
                     $('.search .search-content').show()
                 }, 500)
             }
