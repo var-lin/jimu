@@ -47,12 +47,12 @@
                         localStorage.setItem('nationalDuplicateNameQuery', text)
            				$('.data ul li:eq(0) span').html(res.data.name)
                         $('.data ul li:eq(1) span').html(res.data.count)
-                        if(res.data.count) {
-                            $('.data ul li:eq(2) span').show().html(res.data.male)
-                            $('.data ul li:eq(3) span').show().html(res.data.female)
+                        if(res.data.count == 0) {
+                            $('.data ul li:eq(2)').hide()
+                            $('.data ul li:eq(3)').hide()
                         } else {
-                            $('.data ul li:eq(2) span').hide()
-                            $('.data ul li:eq(3) span').hide()
+                            $('.data ul li:eq(2)').show().children('span').html(res.data.male)
+                            $('.data ul li:eq(3)').show().children('span').html(res.data.female)
                         }
                      	$('.data').fadeIn(500)
                         $('.result').html('操作成功').fadeOut(3000)
