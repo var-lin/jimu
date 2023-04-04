@@ -38,7 +38,7 @@
 				function getdata() {
                     // ajax获得数据
        				$.get('https://api.wya6.cn/api/Random_ID_card', {return : 'json', apiKey : 'b69c9f92ebc8b30fad8d9e391a37b301'}, function (res){
-       					if(res.code !== 200) return $('.result').html('操作失败').fadeOut(3000);
+       					if(res.code !== 200) return $('.result').html('生成失败').fadeOut(3000);
            				$('.data ul li:eq(0) span').html(res.time)
                         $('.data ul li:eq(1) span').html(res.data.sex)
                         $('.data ul li:eq(2) span').html(res.data.zodiac)
@@ -47,7 +47,7 @@
                         $('.data ul li:eq(5) span').html(res.data.address)
                         $('.data ul li:eq(6) span').html(res.data.identity_card)
                      	$('.data').fadeIn(500)
-                        $('.result').html('操作成功').fadeOut(3000)
+                        $('.result').html('生成成功').fadeOut(3000)
                         $('input').val('')
        				})
    				}
