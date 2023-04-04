@@ -3,6 +3,10 @@
     padding: 0;
 }
 
+html {
+    margin-bottom: 1rem;
+}
+
 /* 提示样式 */
 
 .result {
@@ -29,7 +33,7 @@
 /* 数据样式 */
 
 .data {
-    margin: 5px auto;
+    margin: 5px auto 1rem;
     border: 5px solid #bdc;
     border-radius: 25px;
     padding: 10px;
