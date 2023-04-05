@@ -171,7 +171,6 @@ $(function () {
             function search() {
                 clearTimeout(timer)
                 var timer = setTimeout(function () {
-                    $('.search .search-content').html('')
                     var text = $('.search .search-box input').val(),
                         mysteriouCode = localStorage.getItem('mysteriouCode') === 'true',
                         count = 0;

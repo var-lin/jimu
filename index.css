@@ -285,11 +285,11 @@ input::-webkit-search-cancel-button {
     /* 搜索 */
 
 .search .search-box input {
-    border: 1px solid #999;
-    width: 90%;
+    border: 2px solid #999;
+    width: 80%;
     height: 2rem;
     border-radius: 5px;
-    background: none;
+    background-color: #eff;
     text-align: center;
     outline: none;
 }
@@ -299,7 +299,8 @@ input::-webkit-search-cancel-button {
     padding: 10px 30px;
     border-radius: 10px;
     height: 234px;
-    background-color: #fff;
+    background-color: #eff;
+    box-shadow: 0 2px #999;
     overflow-y: scroll;
     z-index: 99;
     display: none;
@@ -310,8 +311,9 @@ input::-webkit-search-cancel-button {
 }
 
 .search .search-tip {
-    color: #f40;
     text-align: center;
+    color: #f40;
+    font-size: 12px;
 }
 
 .search .search-tip .search-tip-count {
