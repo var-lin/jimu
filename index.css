@@ -296,9 +296,9 @@ input::-webkit-search-cancel-button {
 
 .search .search-content {
     position: absolute;
-    padding: 5px 30px;
+    padding: 10px 30px;
     border-radius: 10px;
-    height: 200px;
+    height: 234px;
     background-color: #fff;
     overflow-y: scroll;
     z-index: 99;
