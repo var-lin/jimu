@@ -85,6 +85,13 @@ textarea {
     margin-top: 20px !important;
 }
 
+.copy {
+    color: #f40;
+    text-align: center;
+    word-wrap: break-word;
+    word-break: break-all;
+}
+
 #returntop {
     display: none;
     position: fixed;
