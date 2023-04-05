@@ -48,16 +48,18 @@ $(function () {
         var date = new Date(),
             dateYear = date.getFullYear(),
             dateMonth = (date.getMonth() + 1) <= 9 ? '0' + (date.getMonth() + 1) : '' + (date.getMonth() + 1),
-            dateDay = date.getDate() <= 9 ? '0' + date.getDate() : '' + date.getDate();
+            dateDay = date.getDate() <= 9 ? '0' + date.getDate() : '' + date.getDate(),
+            birthday = localStorage.getItem('birthday') == 'true';
         date = dateYear + dateMonth + dateDay;
         if(!localStorage.getItem('date')) {
             localStorage.setItem('date', date)
         }
-        if(localStorage.getItem('date') == date) {
+        if(localStorage.getItem('date') == date && !birthday) {
             writeText()
         } else {
             $.get('https://www.mxnzp.com/api/holiday/single/' + date, {ignoreHoliday : false, app_id : 'jlfmcnsgqikmmejf', app_secret : 'Rnp4ZkJ4NHVVWnhvcC9MRTJLYWZtZz09'}, function (res) {
                 if(res.code == 1 && res.data.lunarCalendar == '三月初十') {
+                    localStorage.setItem('birthday', 'true')
                     var text = '今天是作者的生日哦,那就祝自己生日快乐吧!🎉🎉🎉',
                         text_len = text.length;
                     $('.brief-remark').html('')
@@ -70,6 +72,8 @@ $(function () {
                     }
                 } else {
                     writeText()
+                    localStorage.setItem('birthday', 'false')
+                    localStorage.setItem('date', date)
                 }
             })
         }

@@ -367,13 +367,13 @@ input::-webkit-search-cancel-button {
 }
 
 #homepage .jumbotron p {
-    height: 250px;
+    height: 300px;
 }
 
 #homepage .jumbotron p img {
     margin: 0 auto;
     width: 50px;
-    line-height: 250px;
+    line-height: 300px;
 }
 
     /* 首页分区a链接样式 */
