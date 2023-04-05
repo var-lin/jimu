@@ -1,0 +1,68 @@
+<!doctype html>
+<html> 
+    <head> 
+        <meta charset="UTF-8"> 
+        <meta name="viewport" id="viewport" content="width=device-width, initial-scale=1, user-scalable=no"> 
+        <title>积木·地址转换经纬度</title>
+        <link rel="icon" type="image/x-icin" href="../../images/logo.ico">
+        <script src="../../tools/jQuery3.6.3_min.js"></script>
+        <link rel="stylesheet" href="../../tools/bootstrap.min.css">
+        <link rel="stylesheet" href="../css/function.css">
+    </head> 
+    <body>
+		<div class="result text-center"></div>
+    	<div class="container">
+       		<input type="text" class="form-control" placeholder="请输入需要转换的地址" required>            
+            <div class="text-center" style="margin: 20px 0;">
+            	<button class="btn btn-secondary">转换</button>
+            </div>
+            <div class="notes text-center">
+                <div>#无反应请检测网络#</div>
+            </div>
+            <div class="data">
+            	查询结果
+               	<ul>
+               		<li>经度：<span></span></li>
+                    <li>纬度：<span></span></li>
+                    <li>地址：<span></span></li>
+               	</ul>
+            </div>                              	                    
+       	</div>
+        <span class="from text-center">接口来自:<a href="http://res.abeim.cn/api/" target="_blank">Abeim API</a></span>  
+        <script>
+        	$(function () {
+               	$('.container').fadeIn(300);
+                var dataRtention = localStorage.getItem('addressToLongitudeAndLatitude');
+                if(localStorage.getItem('dataRtention') === 'true' && dataRtention) {
+                    $('input').val(dataRtention)
+                }
+                $('input:eq(0)').focus();
+				function getdata() {
+       				var text = $('input').val();
+                   	if(text === '') return $('.result').html('请输入要转换的地址').fadeOut(3000);
+                    // ajax获得数据
+       				$.get('http://res.abeim.cn/api-location_address_geocoder', {address : text}, function (res){
+       					if(res.code !== 200) return $('.result').html(res.msg).fadeOut(3000);
+                        localStorage.setItem('addressToLongitudeAndLatitude', text)
+           				$('.data ul li:eq(0) span').html(res.data.lng)
+                     	$('.data ul li:eq(1) span').html(res.data.lat)
+                        $('.data ul li:eq(2) span').html(res.data.city + res.data.district + res.data.name)
+                     	$('.data').fadeIn(500)
+                        $('.result').html('操作成功').fadeOut(3000)
+                        $('input').val('')                                                    
+       				})
+   				}
+				$('button').click(function () {
+            		$('.result').html('请稍等').fadeIn(1000)
+   					getdata()
+   				})
+         		$(window).on('keydown', function (e) {
+               		if(e.keyCode === 13) {
+                        $('.result').html('请稍等').fadeIn(1000)
+                        getdata()
+                    }
+               	})
+			})
+        </script> 	
+    </body>
+</html>

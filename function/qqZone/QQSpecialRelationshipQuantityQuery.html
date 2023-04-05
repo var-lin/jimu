@@ -1,0 +1,78 @@
+<!doctype html>
+<html> 
+    <head> 
+        <meta charset="UTF-8"> 
+        <meta name="viewport" id="viewport" content="width=device-width, initial-scale=1, user-scalable=no"> 
+        <title>积木·QQ特别关心数量查询</title>
+        <link rel="icon" type="image/x-icin" href="../../images/logo.ico">
+        <script src="../../tools/jQuery3.6.3_min.js"></script>
+        <link rel="stylesheet" href="../../tools/bootstrap.min.css">
+        <link rel="stylesheet" href="../css/function.css">
+    </head> 
+    <body>
+		<div class="result text-center"></div>
+    	<div class="container">
+            <input type="number" class="form-control" placeholder="请输入需要查询的QQ号" required>
+            <input type="text" class="form-control" placeholder="请输入查询的QQ号的skey" required style="margin-top: 20px;">
+       		<input type="text" class="form-control" placeholder="请输入查询的QQ号的pskey" required style="margin-top: 20px;">
+            <div class="text-center" style="margin: 20px 0;">
+            	<button class="btn btn-secondary">查询</button>
+            </div>
+            <div class="notes text-center">
+            	<div>#无反应请检测网络#</div>
+            </div>
+            <div class="data">
+            	查询结果
+               	<ul>
+               		<li>QQ号：<span></span></li>
+                    <li>特别关心数量：<span></span></li>
+               	</ul>
+            </div>                              	                    
+       	</div>
+        <span class="from text-center">接口来自:<a href="https://api.pearktrue.cn/" target="_blank">Pear API</a></span>  
+        <script>
+        	$(function () {
+               	$('.container').fadeIn(300);
+                var dataRtention1 = localStorage.getItem('QQSpecialRelationshipQuantityQuery1');
+                    dataRtention1 = localStorage.getItem('QQSpecialRelationshipQuantityQuery2');
+                    dataRtention1 = localStorage.getItem('QQSpecialRelationshipQuantityQuery3');
+                if(localStorage.getItem('dataRtention') === 'true' && dataRtention1) {
+                    $('input:eq(0)').val(dataRtention1)
+                    $('input:eq(1)').val(dataRtention2)
+                    $('input:eq(2)').val(dataRtention3)
+                }
+                $('input:eq(0)').focus();
+				function getdata() {
+                    var qqnum = $('input:eq(0)').val();
+                        skey = $('input:eq(1)').val();
+                        pskey = $('input:eq(2)').val();
+                    if(qqnum === '') return $('.result').html('QQ号不能为空').fadeOut(3000);
+                    if(skey === '') return $('.result').html('skey不能为空').fadeOut(3000);
+                   	if(pskey === '') return $('.result').html('pskey不能为空').fadeOut(3000);
+                    // ajax获得数据
+       				$.get('https://api.pearktrue.cn/api/qq/tbgx.php', {qq : qqnum, skey : skey, pskey : pskey}, function (res){
+       					if(res.code !== '200') return $('.result').html(res.msg).fadeOut(3000);
+                        localStorage.setItem('QQSpecialRelationshipQuantityQuery1', qqnum)
+                        localStorage.setItem('QQSpecialRelationshipQuantityQuery2', skey)
+                        localStorage.setItem('QQSpecialRelationshipQuantityQuery3', pskey)
+           				$('.data ul li:eq(0) span').html(res.qq)
+                        $('.data ul li:eq(1) span').html(res.fans)
+                     	$('.data').fadeIn(500)
+                        $('.result').html('操作成功').fadeOut(3000)
+                        $('input').val('')                                                    
+       				})
+   				}
+				$('button').click(function () {
+            		$('.result').html('请稍等').fadeIn(1000)
+   					getdata()        			
+   				})
+         		$(window).on('keydown', function (e) {
+               		if(e.keyCode === 13) {
+                        $('.result').html('请稍等').fadeIn(1000)
+                        getdata()
+                    }
+               	})
+			})
+        </script> 	
+    </body>
+</html>

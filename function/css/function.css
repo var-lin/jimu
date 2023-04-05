@@ -6,6 +6,7 @@
     transform: translateX(-50%);
     color: red;
 }
+
 .refresh {
     position: fixed;
     top: 50%;
@@ -15,9 +16,11 @@
     color: #04f;
     z-index: 999;
 }
+
 .container {
     display: none;
 }
+
 input {
     text-align: center;
  	margin-top: 100px;
@@ -25,24 +28,29 @@ input {
     box-shadow: 0 -1px 1px black;
     outline: none;
 }
+
 textarea {
     text-align: center;
    	margin-top: 2rem;
     box-shadow: 0 -1px 1px black;
     outline: none;
 }
+
 .btn {
    	height: 50px;
     box-shadow: 0 2px 2px black;
     outline: none;
 }
+
 .notes {
     margin-top: 1rem;
 }
+
 .notes div {
     font-size: 0.7rem;
     color: #aaa;
 }
+
 .data {
 	display: none;
    	width: 90%;
@@ -54,25 +62,39 @@ textarea {
    	text-align: center;
    	background-color: #eee;
     box-shadow: 1px 1px 1px black;
+    word-break: break-all;
 }
+
 .data div span {
     color: #f40;
 }
+
 .data ul {
   	padding: 0;
 }
+
 .data ul li {
     list-style: none;
 }
+
 .data ul li span {
     color: #f40;
 }
-#result {
-    color: #f40;
-    text-align: center;
-    word-wrap: break-word;
-    word-break: break-all;
+
+.data ul .marTop {
+    margin-top: 20px !important;
 }
+
+#returntop {
+    display: none;
+    position: fixed;
+    top: 60%;
+    right: 10px;
+    width: 2rem;
+    cursor: pointer;
+    z-index: 999;
+}
+
 .from {
     position: fixed;
     left: 50%;

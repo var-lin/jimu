@@ -1,0 +1,76 @@
+<!doctype html>
+<html> 
+    <head> 
+        <meta charset="UTF-8"> 
+        <meta name="viewport" id="viewport" content="width=device-width, initial-scale=1, user-scalable=no"> 
+        <title>积木·AI画图</title>
+        <link rel="icon" type="image/x-icin" href="../../images/logo.ico">
+        <script src="../../tools/jQuery3.6.3_min.js"></script>
+        <script src="../../tools/clipboard.min.js"></script>
+        <link rel="stylesheet" href="../../tools/bootstrap.min.css">
+        <link rel="stylesheet" href="../css/function.css">
+    </head> 
+    <body>
+		<div class="result text-center"></div>
+    	<div class="container">
+       		<input type="text" class="form-control" placeholder="请输入描述画图内容" required>            
+            <div class="text-center" style="margin: 20px 0;">
+            	<button class="btn btn-secondary">生成</button>
+            </div>
+            <div class="notes text-center">
+                <div>#无反应请检测网络#</div>
+                <div>#图片链接点击跳转自动复制图片链接#</div>
+            </div>
+            <div class="data">
+            	查询结果
+               	<ul>
+                    <li>描述内容：<span></span></li>
+               		<li>画图图片链接<br><a target="_blank" id="result" data-clipboard-target="#result"></a></li>
+                    <li>画图结果<br><a target="_blank"><img alt="AI画图" style="width: 90%;border-radius: 10px;"></a></li>
+               	</ul>
+            </div>                              	                    
+       	</div>
+        <span class="from text-center">接口来自:<a href="https://api.wer.plus/" target="_blank">一铭API</a></span>  
+        <script>
+        	$(function () {
+               	$('.container').fadeIn(300);
+                var dataRtention = localStorage.getItem('AIDrawing');
+                if(localStorage.getItem('dataRtention') === 'true' && dataRtention) {
+                    $('input').val(dataRtention)
+                }
+                $('input:eq(0)').focus();
+				function getdata() {
+       				var text = $('input').val();
+                   	if(text === '') return $('.result').html('请输入描述画图内容').fadeOut(3000);
+                    // ajax获得数据
+       				$.get('https://api.wer.plus/api/aiw', {pra : text}, function (res){
+       					if(res.code !== 200) return $('.result').html(res.data.status).fadeOut(3000);
+                        localStorage.setItem('AIDrawing', text)
+                        $('.data ul li:eq(0) span').html(text)
+           				$('.data ul li:eq(1) a').html(res.url).attr('href', res.url)
+                     	$('.data ul li:eq(2) a').attr('href', res.url).children('img').attr('src', res.url)
+                     	$('.data').fadeIn(500)
+                        $('.result').html('操作成功').fadeOut(3000)
+                        $('input').val('')                                                    
+       				})
+   				}
+				$('button').click(function () {
+            		$('.result').html('请稍等').fadeIn(1000)
+   					getdata()
+   				})
+         		$(window).on('keydown', function (e) {
+               		if(e.keyCode === 13) {
+                        $('.result').html('请稍等').fadeIn(1000)
+                        getdata()
+                    }
+               	})
+                // 画图图片链接点击复制
+                new Clipboard('#result', {
+                    '#result': function(trigger) {
+                        return trigger.nextElementSibling
+                    }
+                })
+			})
+        </script> 	
+    </body>
+</html>
