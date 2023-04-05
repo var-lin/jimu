@@ -159,13 +159,14 @@ $(function () {
             }
             // 首页搜索功能
             $('.search .search-content').css('width', $('.search .search-box').width())
-            function searchEach(v, text) {
+            function searchEach(v, text, count) {
                 $.each(v, function (i, v) {
                     if(v.name.indexOf(text) >= 0) {
                         $('.search .search-content').append('<li><a target="_black"></a></li>').find('a:last').html(v.name).attr('href', v.url)
                         count ++;
                     }
                 })
+                return count
             }
             function search() {
                 clearTimeout(timer)
@@ -182,16 +183,15 @@ $(function () {
                     $.each(res, function (i, v) {
                         if(i == 'mysteriouCode') {
                             if(mysteriouCode) {
-                                searchEach(v, text)
-                                count ++;
+                                count = searchEach(v, text, count)
                             }
                         } else {
-                            searchEach(v, text)
-                            count ++;
+                            count = searchEach(v, text, count)
                         }
                     })
                     if(count) {
                         $('.search .search-content .search-tip .search-tip-count').html(count)
+                        count = 0;
                     } else {
                         $('.search .search-content .search-tip').html('未搜索到功能')
                     }
