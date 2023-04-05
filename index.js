@@ -23,6 +23,11 @@ $(function () {
                 $('#homepage .fn-qq p').append(aElement).children('a:last').html(e.name).attr('href', e.url)
             })
             fnnum += res.QQ.length;
+            // 使用工具数据输入及输入进全部功能里
+            $(res.usingTools).each(function (i, e) {
+                $('#homepage .fn-usingTools p').append(aElement).children('a:last').html(e.name).attr('href', e.url)
+            })
+            fnnum += res.usingTools.length;
             //  信息查询专区数据输入及输入进全部功能里
             $(res.informationquery).each(function (i, e) {
                 $('#homepage .fn-informationquery .row').append(aElement).children('a:last').html(e.name).attr('href', e.url)

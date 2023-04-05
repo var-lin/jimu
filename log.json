@@ -2,6 +2,13 @@
     {
         "date" : "预计2023.04.29",
         "data" : [
+            "<span class=\"c-f40\">New </span>新增“<a href=\"./function/qqZone/QQSpecialRelationshipQuantityQuery.html\">QQ特别关心数量查询</a>”功能",
+            "<span class=\"c-f40\">New </span>新增“<a href=\"./function/usingTools/AIDrawing.html\">AI画图</a>”功能",
+            "<span class=\"c-f40\">New </span>新增“<a href=\"./function/usingTools/imageCompression.html\">图片压缩</a>”功能",
+            "<span class=\"c-f40\">New </span>新增“<a href=\"./function/usingTools/imageConversionLineDraft.html\">图片转换线稿</a>”功能",
+            "<span class=\"c-f40\">New </span>新增“<a href=\"./function/usingTools/nationalDayPortrait.html\">生成国庆头像</a>”功能",
+            "<span class=\"c-f40\">New </span>新增“<a href=\"./function/usingTools/generationOfOneInchBareheadedPhotos.html\">一寸免冠照片生成</a>”功能",
+            "<span class=\"c-f40\">New </span>新增“<a href=\"./function/usingTools/antitheticalGeneration.html\">对联生成</a>”功能",
             "<span class=\"c-f40\">New </span>新增“<a href=\"./function/informationQueryZone/BSSIDLocationOfWifiBaseStation.html\">WIFI基站BSSID定位</a>”功能",
             "<span class=\"c-f40\">New </span>新增“<a href=\"./function/informationQueryZone/vehicleLicensePlateUnluckyInquiry.html\">车牌凶吉查询</a>”功能",
             "<span class=\"c-f40\">New </span>新增“<a href=\"./function/informationQueryZone/WeChatArticleVideoAcquisition.html\">微信文字视频获取</a>”功能",
@@ -13,9 +20,10 @@
             "<span class=\"c-f40\">New </span>新增“<a href=\"./function/analysisZone/ksVideoAnalysis.html\">快手视频解析</a>”功能",
             "<span class=\"c-f40\">New </span>新增“<a href=\"./function/analysisZone/QQMusicLosslessDownload.html\">QQ音乐无损下载</a>”功能",
             "<span class=\"c-f40\">New </span>新增“<a href=\"./function/hotSearchListZone/biliDailyDramaUpdateList.html\">哔哩当日番剧更新列表</a>”功能",
-            "<span class=\"c-f40\">New </span>新增“<a href=\"./function/other/antitheticalGeneration.html\">对联生成</a>”功能",
+            "<span class=\"c-f40\">New </span>新增“<a href=\"./function/copyZone/ys&bhRecordedUtterance.html\">原神、崩坏语录</a>”功能",
             "<span class=\"c-f40\">New </span>新增“<a href=\"./function/other/chatGPT3.5.html\">chatGPT3.5(免费)</a>”功能",
             "<span class=\"c-f40\">New </span>首页新增搜索功能",
+            "<span class=\"c-f40\">New </span>首页新增“实用工具”",
             "<span class=\"c-f40\">New </span>侧边栏新增“显示/隐藏历史浏览”",
             "<span class=\"c-f40\">New </span>侧边栏新增“功能输入框保存上次输入的数据”",
             "<span class=\"c-f40\">New </span>优化代码逻辑结构",
@@ -29,7 +37,7 @@
             "新增“<a href=\"./function/informationQueryZone/expressInquiry.html\">快递查询</a>”功能",
             "新增“<a href=\"./function/copyZone/celebrityQuotes.html\">名人名言</a>”功能",
             "新增“<a href=\"./function/other/dukeZhouInterpretsDreams.html\">周公解梦</a>”功能",
-            "新增“<a href=\"./function/other/textSimilarityComparison.html\">文本相似度对比</a>”功能",
+            "新增“<a href=\"./function/usingTools/textSimilarityComparison.html\">文本相似度对比</a>”功能",
             "首页新增解析专区",
             "首页增加反馈功能"
         ]
@@ -63,8 +71,8 @@
             "新增“<a href=\"./function/copyZone/makeUpTheNumberOnEarth.html\">我在人间凑数的日子</a>”功能",
             "新增“<a href=\"./function/copyZone/aDirtyParagraph.html\">一句污段子</a>”功能",
             "新增“<a href=\"./function/other/randomRiddle.html\">随机谜题</a>”功能",
-            "新增“<a href=\"./function/other/addressToLongitudeAndLatitude.html\">地址转换经纬度</a>”功能",
-            "新增“<a href=\"./function/other/longitudeAndLatitudeAnalysis.html\">经纬度解析</a>”功能",
+            "新增“<a href=\"./function/usingTools/addressToLongitudeAndLatitude.html\">地址转换经纬度</a>”功能",
+            "新增“<a href=\"./function/usingTools/longitudeAndLatitudeAnalysis.html\">经纬度解析</a>”功能",
             "新增“<a href=\"./function/other/wyyLinearChainAnalysis.html\">网易云音乐直链解析</a>”功能",
             "修复“<a href=\"./function/other/shortVideoDe_watermarkingAnalysis.html\">短视频去水印解析</a>”功能乱报解析成功bug",
             "修复“<a href=\"./function/webSiteZone/pingTest.html\">ping测试</a>”功能ip错误无反应"
@@ -75,13 +83,13 @@
         "data" : [
             "新增“<a href=\"./function/informationQueryZone/bilibiliFanFollowQuery.html\">哔哩哔哩关注粉丝查询</a>”功能",
             "新增“<a href=\"./function/hotSearchListZone/QQMuiceHotSearchList.html\">QQ音乐巅峰榜</a>”功能",
-            "新增“<a href=\"./function/other/wechatMovementBrushStep.html\">微信运动步数</a>”功能",
+            "新增“<a href=\"./function/usingTools/wechatMovementBrushStep.html\">微信刷运动步数</a>”功能",
             "新增“<a href=\"./function/other/shortVideoDe_watermarkingAnalysis.html\">短视频去水印解析</a>”功能",
             "新增“<a href=\"./function/other/lanzouyLinearChainAnalysis.html\">蓝奏云直链解析</a>”功能",
             "新增“<a href=\"./function/other/QQMusicLinearChainAnalysis.html\">QQ音乐直链解析</a>”功能",
             "新增“<a href=\"./function/other/kuwoLinearChainAnalysis.html\">酷我音乐直链解析</a>”功能",
             "新增“<a href=\"./function/other/analysisNationalKaraoke.html\">全民k歌解析</a>”功能",
-            "新增“<a href=\"./function/other/QQTranslata.html\">QQ翻译</a>”功能",
+            "新增“<a href=\"./function/usingTools/QQTranslata.html\">QQ翻译</a>”功能",
             "添加loadding效果",
             "侧边栏添加ip签名档图片",
             "侧边栏添加检测版本更新按钮"
@@ -100,7 +108,7 @@
     {
         "date" : "2023.03.05.0更新日志",
         "data" : [
-            "新增“<a href=\"./function/other/wordCountDetection.html\">字数检测</a>”功能",
+            "新增“<a href=\"./function/usingTools/wordCountDetection.html\">字数检测</a>”功能",
             "热搜榜专区功能添加排名",
             "修复功能数量显示错误"
         ]
@@ -154,7 +162,7 @@
             "恢复“<a href=\"./function/webSiteZone/shortenUrl.html\">网址缩短</a>”功能",
             "恢复“<a href=\"./function/qqZone/queryQQSpaceVisitors.html\">查询QQ访客情况</a>”功能",
             "恢复“<a href=\"./function/qqZone/QQEvaluation.html\">QQ估价</a>”功能",
-            "恢复“<a href=\"./function/other/md5Encryption&Decryption.html\">md5加密/解密</a>”功能",
+            "恢复“<a href=\"./function/usingTools/md5Encryption&Decryption.html\">md5加密/解密</a>”功能",
             "修复“<a href=\"./function/webSiteZone/ifIncluded.html\">判断域名是否被收录</a>”功能查询失败",
             "修复“<a href=\"./function/qqZone/qqForceChat.html\">QQ强制聊天</a>”功能打开后白屏(2023.01.31.999)",
             "优化代码逻辑",
@@ -187,7 +195,7 @@
             "调整功能页面在pc端的位置",
             "修复安卓版下载链接复制后未显示复制成功",
             "修复“<a href=\"./function/informationQueryZone/queryICP.html\">ICP备案查询</a>”查询失败",
-            "修复“<a href=\"./function/other/stringEncryption&Decryption.html\">字符串加密/解密</a>”切换按钮UI变形",
+            "修复“<a href=\"./function/usingTools/stringEncryption&Decryption.html\">字符串加密/解密</a>”切换按钮UI变形",
             "删除本地源代码文件减少文件大小",
             "删除失效功能\"查询QQ空间访客\"",
             "删除失效功能\"QQ估价(娱乐)\"",
@@ -200,7 +208,7 @@
             "删除失效功能\"土味情话\"",
             "删除失效功能\"伤感语录\"",
             "删除失效功能\"MD5加密/解密\"",
-            "文字加密/解密改名为“<a href=\"./function/other/stringEncryption&Decryption.html\">字符串加密/解密</a>”",
+            "文字加密/解密改名为“<a href=\"./function/usingTools/stringEncryption&Decryption.html\">字符串加密/解密</a>”",
             "优化代码逻辑"
         ]
     },
@@ -266,7 +274,7 @@
     {
        	"date" : "2022.01.28更新日志",
         "data" : [
-        	"新增“<a href=\"./function/other/MD5Encryption&Decryption.html\">MD5加密/解密</a>”功能",
+        	"新增“<a href=\"./function/usingTools/MD5Encryption&Decryption.html\">MD5加密/解密</a>”功能",
         	"将“查询相关文字”改为“文案专区”"
         ]
     },
@@ -316,15 +324,15 @@
        	"date" : "2022.01.23更新日志",
         "data" : [
         	"新增“<a href=\"./function/webSiteZone/queryDomainNameRegistration.html\">域名注册查询</a>”功能",
-           	"新增“<a href=\"./function/other/textEncryption&Decryption.html\">文字加密/解密</a>”功能",
+           	"新增“<a href=\"./function/usingTools/textEncryption&Decryption.html\">文字加密/解密</a>”功能",
             "新增“<a href=\"./function/webSiteZone/queryWebSiteTitle.html\">查询网站标题</a>”功能",
-            "“<a href=\"./function/other/universalTranslata.html\">万能翻译</a>”功能输入框外框样式修改"
+            "“<a href=\"./function/usingTools/universalTranslata.html\">万能翻译</a>”功能输入框外框样式修改"
         ]
     },
     {
        	"date" : "2022.01.22更新日志",
         "data" : [
-        	"新增“<a href=\"./function/other/universalTranslata.html\">万能翻译</a>”功能",
+        	"新增“<a href=\"./function/usingTools/universalTranslata.html\">万能翻译</a>”功能",
            	"新增“<a href=\"./function/qqZone/queryQQPConline.html\">QQ电脑在线查询</a>”功能",
            	"删除本地框架，利用网络框架(减少软件大小，所以没网络加载不出来页面，其实软件功能也无论如何都需要网络支持都能使用)",
             "删除本地图片，利用网络图片(减少软件大小，所以页面底栏图片没做动画，换了另一种效果样式)",
