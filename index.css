@@ -310,7 +310,12 @@ input::-webkit-search-cancel-button {
 }
 
 .search .search-tip {
+    color: #f40;
     text-align: center;
+}
+
+.search .search-tip .search-tip-count {
+    color: #999;
 }
 
     /* 代刷网样式 */

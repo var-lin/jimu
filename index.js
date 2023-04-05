@@ -163,6 +163,7 @@ $(function () {
                 $.each(v, function (i, v) {
                     if(v.name.indexOf(text) >= 0) {
                         $('.search .search-content').append('<li><a target="_black"></a></li>').find('a:last').html(v.name).attr('href', v.url)
+                        count ++;
                     }
                 })
             }
@@ -171,22 +172,28 @@ $(function () {
                 var timer = setTimeout(function () {
                     $('.search .search-content').html('')
                     var text = $('.search .search-box input').val(),
-                        mysteriouCode = localStorage.getItem('mysteriouCode') === 'true';
+                        mysteriouCode = localStorage.getItem('mysteriouCode') === 'true',
+                        count = 0;
                     if(text == '') {
                         $('.search .search-content').hide()
                         return;
                     }
+                    $('.search .search-content').html('<li class="search-tip">共搜索到 <span class="search-tip-count"></span> 个功能</li>')
                     $.each(res, function (i, v) {
                         if(i == 'mysteriouCode') {
                             if(mysteriouCode) {
                                 searchEach(v, text)
+                                count ++;
                             }
                         } else {
                             searchEach(v, text)
+                            count ++;
                         }
                     })
-                    if($('.search .search-content').html() == '') {
-                        $('.search .search-content').html('<li class="search-tip">未搜索到功能</li>')
+                    if(count) {
+                        $('.search .search-content .search-tip .search-tip-count').html(count)
+                    } else {
+                        $('.search .search-content .search-tip').html('未搜索到功能')
                     }
                     $('.search .search-content').show()
                 }, 500)
