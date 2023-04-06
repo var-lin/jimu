@@ -8,6 +8,34 @@ $(function () {
             }, 0);
         return timer
     })();
+    // 侧边栏设置
+    function setting(e, dataName, tacitConsent, target, callback) {
+        if(!localStorage.getItem(dataName)) localStorage.setItem(dataName, tacitConsent);
+        var key = localStorage.getItem(dataName) === 'true';
+        if(target) key ? $(target).show() : $(target).hide();
+        $(e).children('input').prop('checked', key)
+        $(e).on('click', function () {
+            $(this).children('input').prop('checked', !key)
+            localStorage.setItem(dataName, !key)
+            key = !key;
+            if(target) key ? $(target).show() : $(target).hide();
+            if(callback) callback(key)
+        })
+        if(callback) callback(key)
+    }
+    // 功能输入框保存上次输入的数据
+    setting('.sidebar .setting li:eq(0)', 'dataRtention', true)
+    // 显示/隐藏历史浏览
+    setting('.sidebar .setting li:eq(1)', 'historyBrowsing', true, '#homepage .historyBrowsing')
+    // 显示/隐藏下雪动画
+    setting('.sidebar .setting li:eq(2)', 'xiaxue', true, null, function (key) {
+        if(key) {
+            $('body').append('<canvas class="xiaxue"></canvas>')
+            $("canvas.xiaxue").let_it_snow()
+        } else {
+            $('canvas.xiaxue').remove()
+        }
+    })
     // 功能链接数据加载
     $.ajax({
         url : 'https://lhshilin.github.io/jimu/allFunctionData.json',
@@ -61,25 +89,7 @@ $(function () {
             // 输出一共的功能数量
             $('.fn-num span').html(fnnum).parent().show()
             mysteriouCode(res)
-            // 侧边栏设置
-            $('.sidebar .setting').show()
-            function setting(e, dataName, tacitConsent, target, addClick) {
-                if(!localStorage.getItem(dataName)) localStorage.setItem(dataName, tacitConsent);
-                var key = localStorage.getItem(dataName) === 'true';
-                if(target) key ? $(target).show() : $(target).hide();
-                $(e).children('input').prop('checked', key)
-                $(e).on('click', function () {
-                    $(this).children('input').prop('checked', !key)
-                    localStorage.setItem(dataName, !key)
-                    key = !key;
-                    if(target) key ? $(target).show() : $(target).hide();
-                    addClick(key)
-                })
-            }
-            // 功能输入框保存上次输入的数据
-            setting('.sidebar .setting li:eq(0)', 'dataRtention', true)
-            // 隐藏历史浏览
-            setting('.sidebar .setting li:eq(1)', 'historyBrowsing', true, '#homepage .historyBrowsing')
+            // 历史浏览
             if(!localStorage.getItem('historyBrowsingList')) {
                 localStorage.setItem('historyBrowsingList', "{}")
             }
@@ -102,6 +112,64 @@ $(function () {
                     }
                 }
             }
+            // 首页搜索功能
+            $('.search .search-box input').removeAttr('readonly')
+            $('.search .search-content').css('width', $('.search .search-box').width())
+            function searchEach(v, text, count) {
+                $.each(v, function (i, v) {
+                    if(v.name.indexOf(text) >= 0) {
+                        $('.search .search-content').append('<li><a target="_black"></a></li>').find('a:last').html(v.name).attr('href', v.url)
+                        count ++;
+                    }
+                })
+                return count
+            }
+            function search() {
+                clearTimeout(timer)
+                var timer = setTimeout(function () {
+                    var text = $('.search .search-box input').val(),
+                        mysteriouCode = localStorage.getItem('mysteriouCode') === 'true',
+                        count = 0;
+                    if(text == '') {
+                        $('.search .search-content').hide()
+                        return;
+                    }
+                    $('.search .search-content').html('<li class="search-tip">共搜索到 <span class="search-tip-count"></span> 个功能</li>')
+                    $.each(res, function (i, v) {
+                        if(i == 'mysteriouCode') {
+                            if(mysteriouCode) {
+                                count = searchEach(v, text, count)
+                            }
+                        } else {
+                            count = searchEach(v, text, count)
+                        }
+                    })
+                    if(count) {
+                        $('.search .search-content .search-tip .search-tip-count').html(count)
+                        count > 8 ? $('.search .search-content').css('height', '234px') : $('.search .search-content').css('height', 'auto');
+                        count = 0;
+                    } else {
+                        $('.search .search-content .search-tip').html('未搜索到功能')
+                    }
+                    $('.search .search-content').show()
+                }, 500)
+            }
+            $('.search .search-box input').on({
+                'input' : search,
+                'focus' : search
+            })
+            $('.search .search-box img').on('click', function () {
+                $('.search .search-box input').val('')
+                $('.search .search-content').html('')
+                $('.search .search-content').hide()
+            })
+            $('.search .search-content').on('click', function (e) {
+                addHistoryBrowsing(e)
+            })
+            // 点击功能里功能新增到历史浏览
+            $('#homepage .jumbotron .row').on('click', function (e) {
+                addHistoryBrowsing(e)
+            })
             function removeHistoryBrowsing(e) {
                 timer = setTimeout(function () {
                     $(e).parent().remove()
@@ -157,64 +225,6 @@ $(function () {
                     }
                 }
             }
-            // 首页搜索功能
-            $('.search .search-content').css('width', $('.search .search-box').width())
-            function searchEach(v, text, count) {
-                $.each(v, function (i, v) {
-                    if(v.name.indexOf(text) >= 0) {
-                        $('.search .search-content').append('<li><a target="_black"></a></li>').find('a:last').html(v.name).attr('href', v.url)
-                        count ++;
-                    }
-                })
-                return count
-            }
-            function search() {
-                clearTimeout(timer)
-                var timer = setTimeout(function () {
-                    var text = $('.search .search-box input').val(),
-                        mysteriouCode = localStorage.getItem('mysteriouCode') === 'true',
-                        count = 0;
-                    if(text == '') {
-                        $('.search .search-content').hide()
-                        return;
-                    }
-                    $('.search .search-content').html('<li class="search-tip">共搜索到 <span class="search-tip-count"></span> 个功能</li>')
-                    $.each(res, function (i, v) {
-                        if(i == 'mysteriouCode') {
-                            if(mysteriouCode) {
-                                count = searchEach(v, text, count)
-                            }
-                        } else {
-                            count = searchEach(v, text, count)
-                        }
-                    })
-                    if(count) {
-                        $('.search .search-content .search-tip .search-tip-count').html(count)
-                        count > 8 ? $('.search .search-content').css('height', '234px') : $('.search .search-content').css('height', 'auto');
-                        count = 0;
-                    } else {
-                        $('.search .search-content .search-tip').html('未搜索到功能')
-                    }
-                    $('.search .search-content').show()
-                    console.log(this)
-                }, 500)
-            }
-            $('.search .search-box input').on({
-                'input' : search,
-                'focus' : search
-            })
-            $('.search .search-box img').on('click', function () {
-                $('.search .search-box input').val('')
-                $('.search .search-content').html('')
-                $('.search .search-content').hide()
-            })
-            $('.search .search-content').on('click', function (e) {
-                addHistoryBrowsing(e)
-            })
-            // 点击功能里功能新增到历史浏览
-            $('#homepage .jumbotron .row').on('click', function (e) {
-                addHistoryBrowsing(e)
-            })
         },
         error : function (err) {
             clearInterval(loadding)
@@ -239,7 +249,7 @@ $(function () {
             name,
             certno;
         $('#feedback').on('click', function () {
-            $('.feedbackBox').stop().fadeIn()
+            $('.feedbackBox').stop().fadeIn(500)
             $('body > .cover').show()
             $('body').css('overflow', 'hidden')
             $('.feedbackBox input:eq(0)').focus()
@@ -248,7 +258,7 @@ $(function () {
             if(e.keyCode == 13) send()
         })
         $('.feedbackBox button:eq(0)').on('click', function () {
-            $('.feedbackBox').stop().fadeOut()
+            $('.feedbackBox').stop().fadeOut(500)
             $('body > .cover').hide()
             $('body').css('overflow', 'visible')
         })

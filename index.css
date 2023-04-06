@@ -236,7 +236,6 @@ input::-webkit-search-cancel-button {
     margin-top: 10px;
     padding: 0 10px;
     background-color: #eef;
-    display: none;
 }
 
 .sidebar .setting li {
@@ -606,4 +605,17 @@ footer button .text span {
     display: none;
     opacity: .5;
     z-index: 9999;
+}
+
+/* 下雪 */
+
+.xiaxue {
+    display: block;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    position: fixed;
+    z-index: 1;
+    pointer-events: none;
 }

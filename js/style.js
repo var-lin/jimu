@@ -256,8 +256,4 @@ $(function () {
             $('#lanzouyunDownload').html('复制成功')
         })
     }());
-    // 下雪特效执行
-    $(document).ready( function() {
-        $("canvas.xiaxue").let_it_snow();
-    });
 })

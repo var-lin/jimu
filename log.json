@@ -27,8 +27,9 @@
             "<span class=\"c-f40\">New </span>新增“<a href=\"./function/other/chatGPT3.5.html\">chatGPT3.5(免费)</a>”功能",
             "<span class=\"c-f40\">New </span>首页新增搜索功能",
             "<span class=\"c-f40\">New </span>首页新增“实用工具”",
-            "<span class=\"c-f40\">New </span>侧边栏新增“显示/隐藏历史浏览”",
             "<span class=\"c-f40\">New </span>侧边栏新增“功能输入框保存上次输入的数据”",
+            "<span class=\"c-f40\">New </span>侧边栏新增“显示/隐藏历史浏览”",
+            "<span class=\"c-f40\">New </span>侧边栏新增“显示/隐藏下雪动画”",
             "<span class=\"c-f40\">New </span>优化代码逻辑结构",
             "<span class=\"c-f40\">New </span>修复已知bug",
             "<span style=\"color: #055\">注释&nbsp</span>软件的接口都是别人的，所以不知道什么时候功能就会失效"
