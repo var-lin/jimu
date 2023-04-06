@@ -239,7 +239,7 @@ $(function () {
             name,
             certno;
         $('#feedback').on('click', function () {
-            $('.feedbackBox').stop().fadeIn(500)
+            $('.feedbackBox').stop().fadeIn()
             $('body > .cover').show()
             $('body').css('overflow', 'hidden')
             $('.feedbackBox input:eq(0)').focus()
@@ -248,7 +248,7 @@ $(function () {
             if(e.keyCode == 13) send()
         })
         $('.feedbackBox button:eq(0)').on('click', function () {
-            $('.feedbackBox').stop().hide(500)
+            $('.feedbackBox').stop().fadeOut()
             $('body > .cover').hide()
             $('body').css('overflow', 'visible')
         })
