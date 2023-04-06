@@ -289,7 +289,7 @@ input::-webkit-search-cancel-button {
     width: 80%;
     height: 2rem;
     border-radius: 5px;
-    background-color: #eff;
+    background-color: #fff;
     text-align: center;
     outline: none;
 }
@@ -298,8 +298,7 @@ input::-webkit-search-cancel-button {
     position: absolute;
     padding: 10px 30px;
     border-radius: 10px;
-    height: 234px;
-    background-color: #eff;
+    background-color: #fff;
     box-shadow: 0 2px #999;
     overflow-y: scroll;
     z-index: 99;

@@ -190,11 +190,13 @@ $(function () {
                     })
                     if(count) {
                         $('.search .search-content .search-tip .search-tip-count').html(count)
+                        count > 8 ? $('.search .search-content').css('height', '234px') : $('.search .search-content').css('height', 'auto');
                         count = 0;
                     } else {
                         $('.search .search-content .search-tip').html('未搜索到功能')
                     }
                     $('.search .search-content').show()
+                    console.log(this)
                 }, 500)
             }
             $('.search .search-box input').on({
@@ -237,7 +239,7 @@ $(function () {
             name,
             certno;
         $('#feedback').on('click', function () {
-            $('.feedbackBox').fadeIn(500)
+            $('.feedbackBox').stop().fadeIn(500)
             $('body > .cover').show()
             $('body').css('overflow', 'hidden')
             $('.feedbackBox input:eq(0)').focus()
@@ -246,7 +248,7 @@ $(function () {
             if(e.keyCode == 13) send()
         })
         $('.feedbackBox button:eq(0)').on('click', function () {
-            $('.feedbackBox').hide(500)
+            $('.feedbackBox').stop().hide(500)
             $('body > .cover').hide()
             $('body').css('overflow', 'visible')
         })
