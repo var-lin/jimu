@@ -3,11 +3,11 @@
     <head> 
         <meta charset="UTF-8"> 
         <meta name="viewport" id="viewport" content="width=device-width, initial-scale=1, user-scalable=no"> 
-        <title>积木·毒鸡汤</title>
+        <title>积木·温柔文案</title> 
         <link rel="icon" type="image/x-icin" href="../../images/logo.ico">
         <script src="../../tools/jQuery3.6.3_min.js"></script>
         <script src="../../tools/clipboard.min.js"></script>
-        <link rel="stylesheet" href="../../tools/bootstrap.min.css">
+      	<link rel="stylesheet" href="../../tools/bootstrap.min.css">
         <link rel="stylesheet" href="../css/function.css">
     </head> 
     <body>
@@ -23,14 +23,14 @@
            	</div> 
         </div>
         <a class="refresh" href="javascript: void(0);" onclick="location.reload()">刷新</a>
-        <span class="from text-center">接口来自:<a href="https://api.oick.cn/" target="_blank">零七生活API</a></span>  
+        <span class="from text-center">接口来自:<a href="https://api.lewz.cn/" target="_blank">酷酷API</a></span>  
         <script>
         	$(function () {
                	$('.container').fadeIn(300);
                 $('.result').html('请稍等').fadeIn(1000);
                 // ajax获得数据
                 $.ajax({
-                    url : 'https://api.oick.cn/dutang/api.php',
+                    url : 'https://api.lewz.cn/api/wrwa',
                     type : 'get',
                     dataType : 'text',
                     success : function (res) {
