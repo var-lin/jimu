@@ -15,21 +15,22 @@
     	<div class="container">
             <input type="url" class="form-control" placeholder="请输入需要生成的图片链接" required>
        		<input type="number" class="form-control" placeholder="请输入生成背景的颜色" required style="margin-top: 20px;">
-            <div class="text-center" style="margin: 20px 0;">
+            <div class="text-center allBtn">
             	<button class="btn btn-secondary">转换</button>
             </div>
             <div class="notes text-center">
                 <div>#无反应请检测网络#</div>
-                <div>#背景颜色 0为白色 1为蓝色 2为红色#</div>
+                <div>#背景颜色 0为白色 1为蓝色 2为红色(默认红色)#</div>
                 <div>#图片链接点击跳转自动复制图片链接#</div>
             </div>
             <div class="data">
             	查询结果
                	<ul>
                     <li>原图片链接<br><a target="_blank" id="result1" data-clipboard-target="#result1"></a></li>
+                    <li>原图片<br><a target="_blank"><img alt="原图片"></a></li>
                     <li>生成背景颜色为：<span></span></li>
                		<li>生成图片链接<br><a target="_blank" id="result2" data-clipboard-target="#result2"></a></li>
-                    <li>画图结果<br><a target="_blank"><img alt="AI画图" style="width: 90%;border-radius: 10px;"></a></li>
+                    <li>画图结果<br><a target="_blank"><img alt="AI画图"></a></li>
                	</ul>
             </div>                              	                    
        	</div>
@@ -46,7 +47,7 @@
                 $('input:eq(0)').focus();
 				function getdata() {
        				var url = $('input:eq(0)').val(),
-                        color = $('input:eq(1)').val();
+                        color = $('input:eq(1)').val() || '2';
                     if(url === '') return $('.result').html('请输入需要生成的图片链接').fadeOut(3000);
                    	if(color === '') return $('.result').html('请输入生成背景的颜色').fadeOut(3000);
                     // ajax获得数据
@@ -55,19 +56,21 @@
                         localStorage.setItem('generationOfOneInchBareheadedPhotos1', url)
                         localStorage.setItem('generationOfOneInchBareheadedPhotos2', color)
                         $('.data ul li:eq(0) a').html(url).attr('href', url)
+                        $('.data ul li:eq(1) a').attr('href', url).children('img').attr('src', url)
                         switch(color) {
                             case '0' :
-                                $('.data ul li:eq(1) span').html('白色');
+                                color = '白色';
                                 break;
                             case '1' :
-                                $('.data ul li:eq(1) span').html('蓝色');
+                                color = '蓝色';
                                 break;
                             case '2' :
-                                $('.data ul li:eq(1) span').html('红色');
+                                color = '白色';
                                 break;
                         }
-           				$('.data ul li:eq(2) a').html(res.url).attr('href', res.url)
-                     	$('.data ul li:eq(3) a').attr('href', res.url).children('img').attr('src', res.url)
+                        $('.data ul li:eq(2) span').html(color);
+           				$('.data ul li:eq(3) a').html(res.url).attr('href', res.url)
+                     	$('.data ul li:eq(4) a').attr('href', res.url).children('img').attr('src', res.url)
                      	$('.data').fadeIn(500)
                         $('.result').html('操作成功').fadeOut(3000)
                         $('input').val('')                                                    
