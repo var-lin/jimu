@@ -31,7 +31,8 @@
     "informationquery" : [
         {"name" : "访客相关信息查询", "url" : "./function/informationQueryZone/visitorInformation.html"},
         {"name" : "WIFI基站BSSID定位(测试中)", "url" : "./function/informationQueryZone/BSSIDLocationOfWifiBaseStation.html"},
-    	{"name" : "原神体力查询", "url" : "./function/informationQueryZone/ysPhysicalStrengthQuery.html"},
+        {"name" : "原神体力查询", "url" : "./function/informationQueryZone/ysPhysicalStrengthQuery.html"},
+    	{"name" : "抖音用户权重查询(测试中)", "url" : "./function/informationQueryZone/tiktokUserWeightQuery.html"},
         {"name" : "chatGPT密钥额度查询", "url" : "./function/informationQueryZone/charGPTKeyQuotaQuery.html"},
         {"name" : "获得IP信息归属地", "url" : "./function/informationQueryZone/GetiPInformationplaceOfOwnership.html"},
         {"name" : "手机号归属地查询", "url" : "./function/informationQueryZone/queryTelAttribution.html"},
@@ -72,6 +73,7 @@
     "analysis" : [
         {"name" : "短视频去水印解析", "url" : "./function/analysisZone/shortVideoDe_watermarkingAnalysis.html"},
         {"name" : "快手视频解析(测试中)", "url" : "./function/analysisZone/ksVideoAnalysis.html"},
+        {"name" : "聚合图集解析(测试中)", "url" : "./function/analysisZone/aggregateGraphAnalysis.html"},
         {"name" : "蓝奏云直链解析", "url" : "./function/analysisZone/lanzouyLinearChainAnalysis.html"},
         {"name" : "网易云音乐直链解析", "url" : "./function/analysisZone/wyyLinearChainAnalysis.html"},
         {"name" : "QQ音乐直链解析", "url" : "./function/analysisZone/QQMusicLinearChainAnalysis.html"},
