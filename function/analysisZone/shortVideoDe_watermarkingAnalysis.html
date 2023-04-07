@@ -80,7 +80,7 @@
                         $('.data ul li:eq(13) a').attr('href', res.data.music.url).html(res.data.music.url)
                      	$('.data').fadeIn(500)
                         $('.result').html('操作成功').fadeOut(3000)
-                        $('input').val('')
+                        if(localStorage.getItem('inputRtention') === 'false') $('input').val('');
        				})
    				}
 				$('.btn-secondary').click(function () {

@@ -59,7 +59,7 @@
                         }
                      	$('.data').fadeIn(500)
                         $('.result').html('操作成功').fadeOut(3000)
-                        $('input').val('')                                                    
+                        if(localStorage.getItem('inputRtention') === 'false') $('input').val('');
        				})
    				}
 				$('button').click(function () {

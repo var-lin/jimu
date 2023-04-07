@@ -48,7 +48,7 @@
                             $('.result').html('跳转成功').fadeOut(5000)
                             $('.force span').html($('input').val())
                             $('.force').fadeIn(300)
-                            $('input').val(''); 
+                            if(localStorage.getItem('inputRtention') === 'false') $('input').val('');
                         }
                     })
                 }

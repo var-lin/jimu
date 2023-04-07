@@ -3,7 +3,7 @@
     <head> 
         <meta charset="UTF-8"> 
         <meta name="viewport" id="viewport" content="width=device-width, initial-scale=1, user-scalable=no"> 
-        <title>积木·随机谜语</title>
+        <title>积木·脑筋急转弯</title>
         <link rel="icon" type="image/x-icin" href="../../images/logo.ico">
         <script src="../../tools/jQuery3.6.3_min.js"></script>
         <link rel="stylesheet" href="../../tools/bootstrap.min.css">
@@ -29,30 +29,29 @@
             </div>
             <div class="data">
                	<ul>
-                    <li>谜题<br><span></span></li>
-                    <li>类型：<span></span></li>
-                    <li>提示：<span></span></li>
-                    <li>谜底：<span></span></li>
+                    <li>问题<br><span></span></li>
+                    <li>答案<br><span></span></li>
                	</ul>
             </div>
             <div class="text-center allBtn">
-                <button class="btn btn-secondary">查看谜底</button>
+                <button class="btn btn-secondary">查看答案</button>
             </div>
        	</div>
-        <span class="from text-center">接口来自:<a href="https://api.aa1.cn/" target="_blank">夏柔API</a></span>  
+        <span class="from text-center">接口来自:<a href="https://api.qqsuu.cn/" target="_blank">大米API</a></span>  
         <script>
         	$(function () {
                	$('.container').fadeIn(300);
                 $.ajax({
-                    url : 'https://v.api.aa1.cn/api/api-miyu/index.php',
+                    url : 'https://api.qqsuu.cn/api/dm-naowan',
                     type : 'get',
                     dataType : 'json',
+                    data : {
+                        num : 1
+                    },
                     success : function (res) {
-                        if(res.code !== '1') return $('.result').html('生成失败').fadeOut(3000);
-                        $('.data ul li:eq(0) span').html(res.mt)
-                        $('.data ul li:eq(1) span').html(res.lx)
-                        $('.data ul li:eq(2) span').html(res.ts)
-                        $('.data ul li:eq(3) span').html(res.md)
+                        if(res.code !== 200) return $('.result').html(res.msg).fadeOut(3000);
+                        $('.data ul li:eq(0) span').html(res.data.list[0].quest)
+                        $('.data ul li:eq(1) span').html(res.data.list[0].result)
                         $('.result').html('生成成功').fadeOut(3000)
                     },
                     error : function (err) {
@@ -62,7 +61,7 @@
                 })
                 // 谜题显示
 				function showMD() {
-                    $('.data ul li:eq(3)').show()
+                    $('.data ul li:eq(1)').show()
    				}
 				$('button').click(showMD)
          		$(window).on('keydown', function (e) {
