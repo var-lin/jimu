@@ -24,11 +24,13 @@ $(function () {
         if(callback) callback(key)
     }
     // 功能输入框保存上次输入的数据
-    setting('.sidebar .setting li:eq(0)', 'dataRtention', true)
+    setting('.sidebar .setting .set_dataRtention', 'dataRtention', true)
+    // 功能输入框查询后保留数据
+    setting('.sidebar .setting .set_inputRtention', 'inputRtention', true)
     // 显示/隐藏历史浏览
-    setting('.sidebar .setting li:eq(1)', 'historyBrowsing', true, '#homepage .historyBrowsing')
+    setting('.sidebar .setting .set_historyBrowsing', 'historyBrowsing', true, '#homepage > .historyBrowsing')
     // 显示/隐藏下雪动画
-    setting('.sidebar .setting li:eq(2)', 'xiaxue', true, null, function (key) {
+    setting('.sidebar .setting .set_xiaxue', 'xiaxue', true, null, function (key) {
         if(key) {
             $('body').append('<canvas class="xiaxue"></canvas>')
             $("canvas.xiaxue").let_it_snow()
@@ -104,7 +106,7 @@ $(function () {
                     })
                     if(count == 1) {
                         count = 0;
-                        $('#homepage .historyBrowsing').append(ele).find('a:last').attr('href', historyBrowsingList[key]).html(key)
+                        $('#homepage > .historyBrowsing').append(ele).find('a:last').attr('href', historyBrowsingList[key]).html(key)
                     } else {
                         count = 0;
                         delete historyBrowsingList[key];
@@ -116,8 +118,12 @@ $(function () {
             $('.search .search-box input').removeAttr('readonly')
             $('.search .search-content').css('width', $('.search .search-box').width())
             function searchEach(v, text, count) {
+                var value,
+                    textToLower = text.toLowerCase(),
+                    textToUpper = text.toUpperCase();
                 $.each(v, function (i, v) {
-                    if(v.name.indexOf(text) >= 0) {
+                    value = v.name;
+                    if(value.indexOf(textToLower) >= 0 || value.indexOf(textToUpper) >= 0) {
                         $('.search .search-content').append('<li><a target="_black"></a></li>').find('a:last').html(v.name).attr('href', v.url)
                         count ++;
                     }
@@ -163,12 +169,32 @@ $(function () {
                 $('.search .search-content').html('')
                 $('.search .search-content').hide()
             })
+            // 点击添加历史浏览函数
+            function addHistoryBrowsing(e) {
+                var fnName = $(e).html(),
+                    fnHref = $(e).attr('href'),
+                    count = 0;
+                $.each($('#homepage > .historyBrowsing li a'), function (i, e) {
+                    if($(e).html() == fnName) {
+                        count ++;
+                    }
+                })
+                if(count == 0) {
+                    historyBrowsingList[fnName] = fnHref;
+                    $('#homepage > .historyBrowsing').append(ele).find('a:last').attr('href', fnHref).html(fnName)
+                    localStorage.setItem('historyBrowsingList', JSON.stringify(historyBrowsingList))
+                }
+            }
             $('.search .search-content').on('click', function (e) {
-                addHistoryBrowsing(e)
+                if(e.target !== this) {
+                    addHistoryBrowsing(e.target)
+                }
             })
             // 点击功能里功能新增到历史浏览
             $('#homepage .jumbotron .row').on('click', function (e) {
-                addHistoryBrowsing(e)
+                if(e.target !== this) {
+                    addHistoryBrowsing(e.target)
+                }
             })
             function removeHistoryBrowsing(e) {
                 timer = setTimeout(function () {
@@ -179,12 +205,12 @@ $(function () {
             }
             function removeHistoryBrowsingAll() {
                 timer = setTimeout(function () {
-                    $('#homepage .historyBrowsing').html('')
+                    $('#homepage > .historyBrowsing').html('')
                     historyBrowsingList = {};
                     localStorage.setItem('historyBrowsingList', "{}")
                 }, 2000)
             }
-            $('#homepage .historyBrowsing').on({
+            $('#homepage > .historyBrowsing').on({
                 'mousedown' : function (e) {
                     if(e.target == this) {
                         removeHistoryBrowsingAll()
@@ -206,25 +232,6 @@ $(function () {
                     clearTimeout(timer)
                 }
             })
-            // 点击添加历史浏览函数
-            function addHistoryBrowsing(e) {
-                var target = e.target;
-                if(target != this) {
-                    var fnName = $(target).html(),
-                        fnHref = $(target).attr('href'),
-                        count = 0;
-                    $.each($('#homepage .historyBrowsing li a'), function (i, e) {
-                        if($(e).html() == fnName) {
-                            count ++
-                        }
-                    })
-                    if(count == 0) {
-                        historyBrowsingList[fnName] = fnHref;
-                        $('#homepage .historyBrowsing').append(ele).find('a:last').attr('href', fnHref).html(fnName)
-                        localStorage.setItem('historyBrowsingList', JSON.stringify(historyBrowsingList))
-                    }
-                }
-            }
         },
         error : function (err) {
             clearInterval(loadding)
@@ -249,18 +256,14 @@ $(function () {
             name,
             certno;
         $('#feedback').on('click', function () {
-            $('.feedbackBox').stop().fadeIn(500)
-            $('body > .cover').show()
-            $('body').css('overflow', 'hidden')
+            togglePrompt(true, '.feedbackBox')
             $('.feedbackBox input:eq(0)').focus()
         })
         $('.feedbackBox input').on('keydown', function (e) {
             if(e.keyCode == 13) send()
         })
         $('.feedbackBox button:eq(0)').on('click', function () {
-            $('.feedbackBox').stop().fadeOut(500)
-            $('body > .cover').hide()
-            $('body').css('overflow', 'visible')
+            togglePrompt(false, '.feedbackBox')
         })
         $('.feedbackBox button:eq(1)').on('click', send)
         function send() {
@@ -330,9 +333,7 @@ $(function () {
                     if(count == 3) {
                         count = 0;
                         clearInterval(timer)
-                        $('.mysteriouCode').fadeIn(500)
-                        $('body > .cover').show()
-                        $('body').css('overflow', 'hidden')
+                        togglePrompt(true, '.mysteriouCode')
                         $('.mysteriouCode input').focus()
                         $('.mysteriouCode input').on('keydown', function (e) {
                             if(e.keyCode === 13) {
@@ -345,30 +346,40 @@ $(function () {
                 return timer
             }
             function clear() {
-                $('.mysteriouCode').hide(500)
-                $('body > .cover').hide()
-                $('body').css('overflow', 'visible')
+                togglePrompt(false, '.mysteriouCode')
                 $('.mysteriouCode input').on('keydown', null)
             }
             $('.mysteriouCode .mysteriouCodeLeft').on('click', function () {
                 clear()
             })
             $('.mysteriouCode .mysteriouCodeRight').on('click', function () {
-                if($('.mysteriouCode input').val() === '') {
+                var key = $('.mysteriouCode input').val();
+                if(key === '') {
                     return $('.mysteriouCode .mysteriouCodeTip .meg').html('密码不能为空')
                 }
-                $.get('https://v.api.aa1.cn/api/api-md5/go.php', {act : '加密', md5 : $('.mysteriouCode input').val()}, function (res) {
-                    res = res.slice(6, 38)
-                    if(res == '871925f4b0a5cd9e35cd0340edea0e82') {
-                        $('.mysteriouCode .mysteriouCodeTip .meg').html('密码正确')
-                        mysteriouCodeUrl()
-                        localStorage.setItem('mysteriouCode', 'true')
-                        clear()
-                        $('html').animate({
-                            'scrollTop' : $('html').prop('scrollHeight')
-                        })
-                    } else {
-                        $('.mysteriouCode .mysteriouCodeTip .meg').html('密码错误')
+                $.ajax({
+                    url : 'https://api.qqsuu.cn/api/dm-md5',
+                    type : 'get',
+                    dataType : 'json',
+                    data : {
+                        text : key
+                    },
+                    success : function (res) {
+                        if(res.code !== 200) return $('.mysteriouCode .mysteriouCodeTip .meg').html('判断的接口出错,请联系作者修复')
+                        if(res.md5 === '871925f4b0a5cd9e35cd0340edea0e82') {
+                            $('.mysteriouCode .mysteriouCodeTip .meg').html('密码正确')
+                            mysteriouCodeUrl()
+                            localStorage.setItem('mysteriouCode', 'true')
+                            clear()
+                            $('html').animate({
+                                'scrollTop' : $('html').prop('scrollHeight')
+                            })
+                        } else {
+                            $('.mysteriouCode .mysteriouCodeTip .meg').html('密码错误')
+                        }
+                    },
+                    error : function (err) {
+                        $('.mysteriouCode .mysteriouCodeTip .meg').html('判断的接口出错,请联系作者修复')
                     }
                 })
             })

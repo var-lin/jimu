@@ -1,4 +1,18 @@
 $(function () {
+    window.togglePrompt = function (key, element) {
+        if(key) {
+            $(element).stop().fadeIn(500)
+            $('body > .cover').show()
+            $('body').css('overflow', 'hidden')
+        } else {
+            $(element).stop().fadeOut(500)
+            $('body > .cover').hide()
+            if($('#homepage .cover').css('display') == 'none') $('body').css('overflow', 'visible');
+        }
+    }
+    $('body .cover').on('click', function () {
+        togglePrompt(false, '.prompt')
+    })
     // 当前版本信息写入
     var version = '2023.03.20.0',
         sourceCodeUrl = 'https://lhshilin.github.io/jimu/download/积木' + version + '版本源码.zip',
@@ -21,9 +35,7 @@ $(function () {
     $.get('https://lhshilin.github.io/jimu/update.json', function (res) {
         function showUpdate() {
             $('.sidebar .about .checkUpdateBtn').html('有新版本').css('color', '#f40')
-            $('.update').stop().fadeIn(1500)
-            $('body > .cover').show()
-            $('body').css('overflow', 'hidden')
+            togglePrompt(true, '.update')
         }
         if(version === res.updateV) {
             $('.sidebar .about .checkUpdateBtn').html('已最新版本')
@@ -35,9 +47,7 @@ $(function () {
         var updateAndroidUrl = 'https://lhshilin.github.io/jimu/download/积木_' + res.updateV + '.apk';
         $('.update .androidUrl a').prop('href', updateAndroidUrl).children('span').html(updateAndroidUrl)
         $('.update .updatebtnleft').on('click', function () {
-            $('.update').stop().fadeOut(300)
-            $('body > .cover').hide()
-            $('body').css('overflow', 'visible')
+            togglePrompt(false, '.update')
             localStorage.setItem('updateTip', 'false')
             localStorage.setItem('updateV', res.updateV)
         })

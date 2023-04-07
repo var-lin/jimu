@@ -9,8 +9,8 @@
         <link rel="stylesheet" href="./tools/bootstrap.min.css">
         <script src="./tools/bootstrap.min.js"></script>
         <link rel="stylesheet" href="./index.css">
-        <script src="./index.js"></script>
         <script src="./js/style.js"></script>
+        <script src="./index.js"></script>
         <script src="./js/update.js"></script>
         <!-- 复制功能工具导入-->
         <script src="./tools/clipboard.min.js"></script>
@@ -81,14 +81,14 @@
 
                 <!-- 首页 -->
             <div id="showregion">                           
-                <div id="homepage" class="container">
+                <div id="homepage" class="container" onselectstart="return false">
 
                     <!-- 导航栏 -->
 
                     <div class="sidebarBn">
                         <img src="./images/justify.svg" alt="功能导航栏" title="功能导航栏">
                     </div>
-                    <div class="sidebar hide-scrollbar" onselectstart="return false">
+                    <div class="sidebar hide-scrollbar">
                         <div class="ipSignatureFile">
                             <img src="https://api.lewz.cn/api/ipqm" alt="ip签名档" title="ip签名档">
                         </div>
@@ -106,22 +106,26 @@
                             <li style="color: #17a2b8;">其他</li>
                         </ul>
                         <ul class="setting">
-                            <li>
+                            <li class="set_dataRtention">
                                 <div>功能输入框保存上次输入的数据</div>
                                 <input type="checkbox">
                             </li>
-                            <li>
+                            <li class="set_inputRtention">
+                                <div>功能输入框查询后保留数据</div>
+                                <input type="checkbox">
+                            </li>
+                            <li class="set_historyBrowsing">
                                 <div>显示/隐藏历史浏览</div>
                                 <input type="checkbox">
                             </li>
-                            <li>
+                            <li class="set_xiaxue">
                                 <div>显示/隐藏下雪动画</div>
                                 <input type="checkbox">
                             </li>
                         </ul>
                         <div class="about">
-                            <button class="checkUpdateBtn">检测更新</button>
-                            <button class="authorBtn" data-toggle="modal" data-target="#exampleModal">联系作者</button>
+                            <button class="checkUpdateBtn fl">检测更新</button>
+                            <button class="authorBtn fr" data-toggle="modal" data-target="#exampleModal">联系作者</button>
                         </div>
                     </div>
 
@@ -136,7 +140,7 @@
 
                     <!-- 代刷网分享 -->
 
-                    <div class="replaceBrush" onselectstart="return false">
+                    <div class="replaceBrush">
                         <h6 class="text-center" style="cursor: pointer;margin: 0;font-weight: bold;">
                             <span>代刷网分享</span>
                             <span><img src="" alt="代刷网内容下拉" style="vertical-align: -3px;width: 1rem;"></span>
@@ -160,38 +164,38 @@
 
                     <!-- 历史浏览 -->
 
-                    <ul class="historyBrowsing clearFlost" onselectstart="return false"></ul>
+                    <ul class="historyBrowsing clearFlost"></ul>
 
                     <!-- 功能区 -->
 
-                    <div class="row fn-qq" onselectstart="return false">
+                    <div class="row fn-qq">
                         <div class="jumbotron col-12" style="background-image: linear-gradient(#fdd, #dff);">
                             <h4><span class="fnHeadBorder" style="color: #dc3545;border-color: #dc3545;">QQ专区</span></h4>                         
                             <hr class="my-4">
                             <p class="row">
                                 <img src="./images/arrow-clockwise.svg" alt="Loadding" title="Loadding">
-                            </p>                         
+                            </p>
                         </div>
                     </div>
-                    <div class="row fn-usingTools" onselectstart="return false">
+                    <div class="row fn-usingTools">
                         <div class="jumbotron col-12" style="background-image: linear-gradient(#cdd, #dff);">
                             <h4><span class="fnHeadBorder" style="color: #3545ab;border-color: #3545ab;">实用工具</span></h4>                         
                             <hr class="my-4">
                             <p class="row">
                                 <img src="./images/arrow-clockwise.svg" alt="Loadding" title="Loadding">
-                            </p>                         
+                            </p>
                         </div>
                     </div>
-                    <div class="row fn-informationquery" onselectstart="return false">
+                    <div class="row fn-informationquery">
                         <div class="jumbotron col-12" style="background-image: linear-gradient(#ddd, #dff);">
                             <h4><span class="fnHeadBorder" style="color: #6c757d;border-color: #6c757d;">信息查询专区</span></h4>
                             <hr class="my-4">
                             <p class="row">
                                 <img src="./images/arrow-clockwise.svg" alt="Loadding" title="Loadding">
-                            </p>                         
+                            </p>
                         </div>
                     </div>
-                    <div class="row fn-website" onselectstart="return false">
+                    <div class="row fn-website">
                         <div class="jumbotron col-12" style="background-image: linear-gradient(#fdb, #dff);">
                             <h4><span class="fnHeadBorder" style="color: #ffc107;border-color: #ffc107;">网站专区</span></h4>                         
                             <hr class="my-4">
@@ -200,7 +204,7 @@
                             </p>
                         </div>
                     </div>
-                    <div class="row fn-analysis" onselectstart="return false">
+                    <div class="row fn-analysis">
                         <div class="jumbotron col-12" style="background-image: linear-gradient(#fe7, #dff);">
                             <h4><span class="fnHeadBorder" style="color: #dde329;border-color: #dde329;">解析专区</span></h4>                         
                             <hr class="my-4">
@@ -209,7 +213,7 @@
                             </p>
                         </div>
                     </div>
-                    <div class="row fn-hotSearchList" onselectstart="return false">
+                    <div class="row fn-hotSearchList">
                         <div class="jumbotron col-12" style="background-image: linear-gradient(#dc5, #dff);">
                             <h4><span class="fnHeadBorder" style="color: #bbc107;border-color: #bbc107;">热搜专区</span></h4>                         
                             <hr class="my-4">
@@ -218,34 +222,34 @@
                             </p>
                         </div>
                     </div>
-                    <div class="row fn-copywriting" onselectstart="return false">
+                    <div class="row fn-copywriting">
                         <div class="jumbotron col-12" style="background-image: linear-gradient(#dfd, #dff);">
                             <h4><span class="fnHeadBorder" style="color: #28a745;border-color: #28a745;">文案专区</span></h4>                         
                             <hr class="my-4">
                             <p class="row">
                                 <img src="./images/arrow-clockwise.svg" alt="Loadding" title="Loadding">
-                            </p>                         
+                            </p>
                         </div>
                     </div>
-                    <div class="row fn-other" onselectstart="return false">
+                    <div class="row fn-other">
                         <div class="jumbotron col-12" style="background-image: linear-gradient(#aff, #dff);">
                             <h4><span class="fnHeadBorder" style="color: #17a2b8;border-color: #17a2b8;">其他</span></h4>                         
                             <hr class="my-4">
                             <p class="row">
                                 <img src="./images/arrow-clockwise.svg" alt="Loadding" title="Loadding">
-                            </p>                         
+                            </p>
                         </div>
                     </div>
-                    <div class="row fn-mysteriouCode" style="display: none;" onselectstart="return false">
+                    <div class="row fn-mysteriouCode" style="display: none;">
                         <div class="jumbotron col-12" style="background-image: linear-gradient(#dad, #dff);">
                             <h4><span class="fnHeadBorder" style="color: #a0a;border-color: #a0a;">秘密区</span></h4>                         
                             <hr class="my-4">
                             <p class="row">
                                 <img src="./images/arrow-clockwise.svg" alt="Loadding" title="Loadding">
-                            </p>                         
+                            </p>
                         </div>
                     </div>
-                    <div class="fn-num" onselectstart="return false">
+                    <div class="fn-num">
                         一共<span></span>个功能
                     </div>
                     <div class="cover" style="z-index: 998;"></div>
@@ -258,13 +262,13 @@
                 </div>
             </div>
             <!-- 底部元素 -->
-            <footer class="row">                              
+            <footer class="row" onselectstart="return false">                              
                 <button id="homepagebtn" class="col-6">
                      <p class="icon">
                         <img src="./images/layers-fill.svg" alt="首页" title="首页">
                     </p>
                      <p class="text cornflowerblue">
-                        <span class="texttype" style="font-size: .6rem;color: #fedcba;background-color: cornflowerblue;">首页</span>
+                        <span class="texttype">首页</span>
                     </p>
                 </button>
                 <button id="toupdatelogobtn" class="col-6">
@@ -277,7 +281,7 @@
                 </button>                
             </footer>
         </div>
-        <div class="mysteriouCode">
+        <div class="mysteriouCode prompt" onselectstart="return false">
             <div>
                 <input type="text" placeholder="请输入密码">
             </div>
@@ -290,15 +294,15 @@
                 <button class="mysteriouCodeRight btn btn-secondary" style="float: right;">确定</button>
             </div>
         </div>
-        <div class="update">
+        <div class="update prompt" onselectstart="return false">
             <h3>检测到新版本</h3>
             <p>网页版链接：<a href="https://lhshilin.github.io/jimu" target="_blank">https://lhshilin.github.io/jimu</a></p>
             <p class="androidUrl">安卓版下载链接：<a href="#" target="_blank"><span></span></a></p>
             <p class="updateTips">不更新将可能导致新增加的功能无法打开使用</p>
             <button class="updatebtnleft">下次一定</button>
-            <button class="updatebtnright">更新</button>
+            <button class="updatebtnright fr">更新</button>
         </div>
-        <div class="feedbackBox">
+        <div class="feedbackBox prompt" onselectstart="return false">
             <div>
                 <input type="text" name="name" placeholder="请输入标题">
                 <input type="text" name="certno" placeholder="请输入内容">
@@ -310,6 +314,6 @@
             </div>
             <div class="message">作者会在第一时间回复你</div>
         </div>
-        <div class="cover"></div>
+        <div class="cover" onselectstart="return false"></div>
     </body>
 </html>

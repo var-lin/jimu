@@ -16,6 +16,12 @@ ul {
     list-style: none;
 }
 
+button,
+input {
+    outline: none;
+    outline-style: none;
+}
+
 input[type=search] {
     -webkit-appearance: textfield;
     -webkit-box-sizing: content-box;
@@ -35,6 +41,14 @@ input::-webkit-search-cancel-button {
     content: "";
     display: block;
     clear: both;
+}
+
+.fl {
+    float: left;
+}
+
+.fr {
+    float: right;
 }
 
 /* 时间段提示样式 */
@@ -164,6 +178,10 @@ input::-webkit-search-cancel-button {
     z-index: 99;
 }
 
+.sidebarBn:hover {
+    background-color: #999;
+}
+
 .sidebarBn img {
     width: 25px;
     transition: all .3s;
@@ -230,6 +248,10 @@ input::-webkit-search-cancel-button {
     cursor: pointer;
 }
 
+.sidebar .navigaBar li:hover {
+    background-color: #fff;
+}
+
     /* 侧边栏设置样式 */
 
 .sidebar .setting {
@@ -244,7 +266,7 @@ input::-webkit-search-cancel-button {
     cursor: pointer;
 }
 
-.sidebar .setting div {
+.sidebar .setting li div {
     color: #424242;
     float: left;
 }
@@ -273,14 +295,6 @@ input::-webkit-search-cancel-button {
     font-size: 14px;
 }
 
-.sidebar .about .checkUpdateBtn {
-    float: left;
-}
-
-.sidebar .about .authorBtn {
-    float: right;
-}
-
     /* 搜索 */
 
 .search .search-box input {
@@ -290,7 +304,6 @@ input::-webkit-search-cancel-button {
     border-radius: 5px;
     background-color: #fff;
     text-align: center;
-    outline: none;
 }
 
 .search .search-content {
@@ -335,18 +348,18 @@ input::-webkit-search-cancel-button {
 
     /* 历史浏览 */
 
-#homepage .historyBrowsing {
+#homepage > .historyBrowsing {
     margin: 10px 0;
     padding: 0;
     display: none;
 }
 
-#homepage .historyBrowsing li {
+#homepage > .historyBrowsing li {
     margin: 0 10px 10px 0;
     float: left;
 }
 
-#homepage .historyBrowsing a {
+#homepage > .historyBrowsing a {
     padding: 5px 10px;
     border-radius: 30px;
     background-color: #eee;
@@ -452,7 +465,6 @@ footer button {
     border-top: 2px solid black;
     font-size: .5rem;
     color: #fffeee;
-    outline: none;
     text-shadow: 1px 1px 1px black;
 }
 
@@ -467,6 +479,12 @@ footer button .icon .cornflowerblue {
 footer button .text span {
     padding: 5px 10px;
     border-radius: 15px;
+}
+
+footer button .text .texttype {
+    font-size: .6rem;
+    color: #fedcba;
+    background-color: cornflowerblue;
 }
 
 /* mysteriouCode */
@@ -490,7 +508,6 @@ footer button .text span {
     margin: auto;
     border: none;
     border-bottom: 3px solid #daa;
-    outline-style: none;
     background: none;
     padding: 5px;
     text-align: center;
@@ -553,7 +570,6 @@ footer button .text span {
 
 .update .updatebtnright {
     background-color: #afa;
-    float: right;
 }
 
 /* 反馈框 */

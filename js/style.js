@@ -107,10 +107,6 @@ $(function () {
         $('.sidebar .navigaBar').on('click', function (e) {
             var target = e.target;
             if(target !== this) {
-                $(target).css('background-color', '#fff')
-                setTimeout(function () {
-                    $(target).css('background-color', '')
-                }, 500)
                 clear()
                 $('html').animate({
                     scrollTop : $('.jumbotron').eq($(target).index()).offset().top
@@ -124,21 +120,7 @@ $(function () {
             $('.sidebar').stop().animate({
                 left : 0
             }, 300)
-            $('#homepage .cover').on('click', function () {
-                clear()
-            })
-        })
-        function down() {
-            $(this).css('background-color', '#ccc')
-        }
-        function up() {
-            $(this).css('background-color', '#fff')
-        }
-        $('.sidebarBn').on({
-            'mousedown' : down,
-            'mouseup' : up,
-            'touchstart' : down,
-            'touchend' : up
+            $('#homepage .cover').on('click', clear)
         })
     })();
     // 获得软件已运行时间 pastTime
@@ -182,16 +164,8 @@ $(function () {
                    // 页面隐藏显示切换
                 $('#showregion > div').eq(i).stop().fadeIn(300).siblings().hide()
                 // 文字效果切换
-                $(e).find('.text span').css({
-                    fontSize : '.6rem',
-                    color : '#fedcba',
-                    backgroundColor : 'cornflowerblue'
-                })
-                $(e).siblings().find('.text span').css({
-                    fontSize : '.5rem',
-                    color : '#fff',
-                    backgroundColor : 'transparent'
-                })
+                $(e).find('.text span').addClass('texttype')
+                $(e).siblings().find('.text span').removeClass('texttype')
             })
         })
     }());
