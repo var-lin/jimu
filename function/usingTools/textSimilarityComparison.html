@@ -53,7 +53,7 @@
            				$('.data ul li:eq(0)').html(res)
                      	$('.data').fadeIn(500)
                         $('.result').html('操作成功').fadeOut(3000)
-                        $('textarea').val('')                                                    
+                        if(localStorage.getItem('inputRtention') === 'false') $('textarea').val('');
        				})
    				}
 				$('button').click(function () {

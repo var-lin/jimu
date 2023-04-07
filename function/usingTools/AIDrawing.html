@@ -19,12 +19,13 @@
             </div>
             <div class="notes text-center">
                 <div>#无反应请检测网络#</div>
+                <div>#最好用英文描述#</div>
                 <div>#图片链接点击跳转自动复制图片链接#</div>
             </div>
             <div class="data">
             	查询结果
                	<ul>
-                    <li>描述内容：<span></span></li>
+                    <li>描述内容<br><span></span></li>
                		<li>画图图片链接<br><a target="_blank" id="result" data-clipboard-target="#result"></a></li>
                     <li>画图结果<br><a target="_blank"><img alt="AI画图"></a></li>
                	</ul>
@@ -51,7 +52,7 @@
                      	$('.data ul li:eq(2) a').attr('href', res.url).children('img').attr('src', res.url)
                      	$('.data').fadeIn(500)
                         $('.result').html('操作成功').fadeOut(3000)
-                        $('input').val('')                                                    
+                        if(localStorage.getItem('inputRtention') === 'false') $('input').val('');
        				})
    				}
 				$('button').click(function () {

@@ -98,8 +98,10 @@
                             localStorage.setItem('stringEncryption&Decryption2', key)
                             $('.result').html('操作成功').fadeOut(3000)
                          	$('#result').html(res.enmissString)
-                            $('#encryption textarea').val('')
-                            $('#encryption input').val('')
+                            if(localStorage.getItem('inputRtention') === 'false') {
+                                $('#encryption textarea').val('')
+                                $('#encryption input').val('')
+                            }
                             results()
        					})
                    	}
@@ -113,8 +115,10 @@
                             localStorage.setItem('stringEncryption&Decryption4', key)
                             $('.result').html('操作成功').fadeOut(3000)
                          	$('#result').html(res.demissString)
-                            $('#decryption textarea').val('')
-                            $('#decryption input').val('')
+                            if(localStorage.getItem('inputRtention') === 'false') {
+                                $('#decryption textarea').val('')
+                                $('#decryption input').val('')
+                            }
                             results()
        					})
                     }
