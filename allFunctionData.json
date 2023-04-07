@@ -14,6 +14,7 @@
     "usingTools" : [
         {"name" : "万能翻译", "url" : "./function/usingTools/universalTranslata.html"},
         {"name" : "QQ翻译", "url" : "./function/usingTools/QQTranslata.html"},
+        {"name" : "有道翻译(测试中)", "url" : "./function/usingTools/youdaoTranslata.html"},
         {"name" : "AI画图(测试中)", "url" : "./function/usingTools/AIDrawing.html"},
         {"name" : "图片压缩(测试中)", "url" : "./function/usingTools/imageCompression.html"},
         {"name" : "微信刷运动步数", "url" : "./function/usingTools/wechatMovementBrushStep.html"},
@@ -24,9 +25,9 @@
         {"name" : "图片转换线稿(测试中)", "url" : "./function/usingTools/imageConversionLineDraft.html"},
         {"name" : "生成国庆头像(测试中)", "url" : "./function/usingTools/nationalDayPortrait.html"},
         {"name" : "一寸免冠照片生成(测试中)", "url" : "./function/usingTools/generationOfOneInchBareheadedPhotos.html"},
-        {"name" : "对联生成(测试中)", "url" : "./function/usingTools/antitheticalGeneration.html"},
-        {"name" : "字符串加密/解密", "url" : "./function/usingTools/stringEncryption&Decryption.html"},
-        {"name" : "md5加密/解密", "url" : "./function/usingTools/md5Encryption&Decryption.html"}
+        {"name" : "32位小写md5加密(测试中)", "url" : "./function/usingTools/32-bitLowercaseMD5Encryption.html"},
+        {"name" : "MD5Hash解密(测试中)", "url" : "./function/usingTools/MD5HashDecryption.html"},
+        {"name" : "字符串加密/解密", "url" : "./function/usingTools/stringEncryption&Decryption.html"}
     ],
     "informationquery" : [
         {"name" : "访客相关信息查询", "url" : "./function/informationQueryZone/visitorInformation.html"},
@@ -102,6 +103,7 @@
     "copywriting" : [
         {"name" : "原神、崩坏语录(测试中)", "url" : "./function/copyZone/ys&bhRecordedUtterance.html"},
         {"name" : "温柔文案(测试中)", "url" : "./function/copyZone/gentleCopy.html"},
+        {"name" : "生活小窍门(测试中)", "url" : "./function/copyZone/lifeTips.html"},
         {"name" : "我在人间凑数的日子", "url" : "./function/copyZone/makeUpTheNumberOnEarth.html"},
     	{"name" : "毒鸡汤", "url" : "./function/copyZone/poisonousChickenSoup.html"},
         {"name" : "舔狗日记", "url" : "./function/copyZone/lickDogDiary.html"},
@@ -116,7 +118,10 @@
     ],
     "other" : [
         {"name" : "随机谜题", "url" : "./function/other/randomRiddle.html"},
+        {"name" : "脑筋急转弯(测试中)", "url" : "./function/other/brainTwists.html"},
         {"name" : "周公解梦", "url" : "./function/other/dukeZhouInterpretsDreams.html"},
+        {"name" : "对联生成(测试中)", "url" : "./function/other/antitheticalGeneration.html"},
+        {"name" : "空气质量指数(测试中)", "url" : "./function/other/airQualityIndex.html"},
         {"name" : "垃圾分类", "url" : "./function/other/refuseClassification.html"},
         {"name" : "小爱同学聊天", "url" : "./function/other/xiaoAiClassmatesChat.html"},
         {"name" : "chatGPT3.0", "url" : "./function/other/chatGPT3.0.html"},
