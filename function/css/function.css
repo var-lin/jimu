@@ -91,8 +91,8 @@ textarea {
     border-radius: 10px;
 }
 
-.data ul .marTop {
-    margin-top: 20px !important;
+.marTop {
+    margin-top: 20px!important;
 }
 
 .data .dataTips {

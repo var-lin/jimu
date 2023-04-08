@@ -22,15 +22,16 @@
             <div class="data">
             	查询结果
                	<ul>
+                    <li>用户名：<span></span></li>
                		<li>总额度：<span></span></li>
                     <li>已用额度：<span></span></li>
                     <li>剩余额度：<span></span></li>
-                    <li>生效时间：<span></span></li>
+                    <li>查询时间：<span></span></li>
                     <li>到期时间：<span></span></li>
                	</ul>
             </div>                              	                    
        	</div>
-        <span class="from text-center">接口来自:<a href="https://api.aa1.cn/" target="_blank">夏柔API</a></span>  
+        <span class="from text-center">接口来自:<a href="https://api.qqsuu.cn/" target="_blank">大米API</a></span>  
         <script>
         	$(function () {
                	$('.container').fadeIn(300);
@@ -39,35 +40,19 @@
                     $('input').val(dataRtention)
                 }
                 $('input:eq(0)').focus();
-               	function zeroFill(num) {
-               		if(num < 10) {
-               			return '0' + num
-               		}
-               		return num
-               	}
-               	function time(time) {
-               		time = new Date(parseInt(time + '000'));
-               		var year = zeroFill(time.getFullYear()),
-               			month = zeroFill(time.getMonth() + 1),
-               			day = zeroFill(time.getDate()),
-               			houres = zeroFill(time.getHours()),
-               			minutes = zeroFill(time.getMinutes()),
-               			seconds = zeroFill(time.getSeconds());
-               		time = year + '-' + month + '-' + day + ' ' + houres + ':' + minutes + ':' + seconds;
-               		return time
-               	}
 				function getdata() {
        				var apikey = $('input').val();
                    	if(apikey === '') return $('.result').html('apikey不能为空').fadeOut(3000);
                     // ajax获得数据
-       				$.get('https://v1.apigpt.cn/key/', {key : apikey}, function (res){
-       					if(res.code !== 200) return $('.result').html(res.msg).fadeOut(3000);
+       				$.get('https://api.pearktrue.cn/api/gpt/money.php', {key : apikey}, function (res){
+       					if(res.code !== '200') return $('.result').html(res.msg).fadeOut(3000);
                         localStorage.setItem('charGPTKeyQuotaQuery', apikey)
-           				$('.data ul li:eq(0) span').html(res.total_granted)
-                        $('.data ul li:eq(1) span').html(res.total_used)
-                        $('.data ul li:eq(2) span').html(res.total_available)
-                     	$('.data ul li:eq(3) span').html(time(res.effective_at))
-                     	$('.data ul li:eq(4) span').html(time(res.expires_at))
+           				$('.data ul li:eq(0) span').html(res.data.account_name)
+                        $('.data ul li:eq(1) span').html(res.data.total_granted)
+                        $('.data ul li:eq(2) span').html(res.data.total_used)
+                     	$('.data ul li:eq(3) span').html(res.data.total_available)
+                        $('.data ul li:eq(4) span').html(res.data.current_time)
+                     	$('.data ul li:eq(5) span').html(res.data.expires_at)
                      	$('.data').fadeIn(500)
                         $('.result').html('操作成功').fadeOut(3000)
                         if(localStorage.getItem('inputRtention') === 'false') $('input').val('');
