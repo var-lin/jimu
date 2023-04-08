@@ -25,9 +25,9 @@
             <!-- logo -->
             <img id="logo" src="./images/logo.png" alt="logo" title="logo">
             <!-- 反馈按钮 -->
-            <button id="feedback">反馈</button>
+            <button id="feedback" onselectstart="return false">反馈</button>
             <!-- 联系作者 -->
-            <div class="modal fade" id="exampleModal">
+            <div class="modal fade" id="exampleModal" onselectstart="return false">
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
@@ -77,11 +77,14 @@
                     </div>
                 </div>
             </div>
+
             <!-- 显示区 -->
 
+            <div id="showregion" onselectstart="return false">
+
                 <!-- 首页 -->
-            <div id="showregion">                           
-                <div id="homepage" class="container" onselectstart="return false">
+
+                <div id="homepage" class="container">
 
                     <!-- 导航栏 -->
 
@@ -262,7 +265,7 @@
                 </div>
             </div>
             <!-- 底部元素 -->
-            <footer class="row" onselectstart="return false">                              
+            <footer class="row">                              
                 <button id="homepagebtn" class="col-6">
                      <p class="icon">
                         <img src="./images/layers-fill.svg" alt="首页" title="首页">

@@ -2,6 +2,14 @@ $(function () {
 	$('#homepage .jumbotron').animate({
         opacity : 1
     });
+    $('input').on({
+        'focus' : function () {
+            $(this).css('border-color', 'skyblue')
+        },
+        'blur' : function () {
+            $(this).css('border-color', 'black')
+        }
+    });
     // 代刷网下拉
     (function () {
         if(!localStorage.getItem('replaceBrushStyle')) {

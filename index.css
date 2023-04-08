@@ -107,6 +107,10 @@ input::-webkit-search-cancel-button {
     z-index: 999;
 }
 
+#feedback:hover {
+    background-color: #ccc;
+}
+
 /* 联系作者内容样式 */
 
 #exampleModal #exampleModalLabel {
