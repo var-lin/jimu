@@ -17,6 +17,7 @@
         {"name" : "有道翻译(测试中)", "url" : "./function/usingTools/youdaoTranslata.html"},
         {"name" : "AI画图(测试中)", "url" : "./function/usingTools/AIDrawing.html"},
         {"name" : "图片压缩(测试中)", "url" : "./function/usingTools/imageCompression.html"},
+        {"name" : "摸头GIF(测试中)", "url" : "./function/usingTools/knowTheRealSituationGIF.html"},
         {"name" : "微信刷运动步数", "url" : "./function/usingTools/wechatMovementBrushStep.html"},
         {"name" : "字数检测", "url" : "./function/usingTools/wordCountDetection.html"},
         {"name" : "文本相似度对比", "url" : "./function/usingTools/textSimilarityComparison.html"},
