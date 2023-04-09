@@ -45,7 +45,7 @@
                    	if(text === '') return $('.result').html('请输入描述画图内容').fadeOut(3000);
                     // ajax获得数据
        				$.get('https://api.wer.plus/api/aiw', {pra : text}, function (res){
-       					if(res.code !== 200) return $('.result').html(res.data.status).fadeOut(3000);
+       					if(res.code !== 200) return $('.result').html(res.msg).fadeOut(3000);
                         localStorage.setItem('AIDrawing', text)
                         $('.data ul li:eq(0) span').html(text)
            				$('.data ul li:eq(1) a').html(res.url).attr('href', res.url)

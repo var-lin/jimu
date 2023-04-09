@@ -46,7 +46,7 @@
                    	if(url === '') return $('.result').html('请输入需要转换的图片链接').fadeOut(3000);
                     // ajax获得数据
        				$.get('https://api.wer.plus/api/xian', {url : url}, function (res){
-       					if(res.code !== 200) return $('.result').html(res.data.status).fadeOut(3000);
+       					if(res.code !== 200) return $('.result').html(res.msg).fadeOut(3000);
                         localStorage.setItem('imageConversionLineDraft', url)
            				$('.data ul li:eq(0) a').html(url).attr('href', url)
                      	$('.data ul li:eq(1) a').attr('href', url).children('img').attr('src', url)

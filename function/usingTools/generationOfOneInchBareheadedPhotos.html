@@ -52,7 +52,7 @@
                    	if(color === '') return $('.result').html('请输入生成背景的颜色').fadeOut(3000);
                     // ajax获得数据
        				$.get('https://api.wer.plus/api/taof', {url : url, col : color}, function (res){
-       					if(res.code !== 200) return $('.result').html(res.data.status).fadeOut(3000);
+       					if(res.code !== 200) return $('.result').html(res.msg).fadeOut(3000);
                         localStorage.setItem('generationOfOneInchBareheadedPhotos1', url)
                         localStorage.setItem('generationOfOneInchBareheadedPhotos2', color)
                         $('.data ul li:eq(0) a').html(url).attr('href', url)
