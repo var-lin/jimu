@@ -73,7 +73,7 @@
                             return false;
                         }
                         localStorage.setItem('ysPhysicalStrengthQuery', qq)
-                        $('.data ul li:eq(0) img').attr('src', res.imageurl)
+                        $('.data ul li:eq(0) img').attr('src', res.imageurl + '?t=' + new Date())
                         $('.data ul li:eq(1) span').html(res.uid)
                         $('.data ul li:eq(3) span').html(res.data['原粹树脂']['现有'])
                         $('.data ul li:eq(4) span').html(res.data['原粹树脂']['上限'])
@@ -97,9 +97,9 @@
                         } else {
                             $('.data ul li:eq(19) span').html('不能使用')
                             if(res.data['参数质变仪']['天'] == 0) {
-                                $('.data ul li:eq(20) span').show().html('不到一天了')
+                                $('.data ul li:eq(20) span').show().html('不到1天')
                             } else {
-                                $('.data ul li:eq(20) span').show().html(res.data['参数质变仪']['天'])
+                                $('.data ul li:eq(20) span').show().html(res.data['参数质变仪']['天'] + '天多')
                             }
                         }
                         $('.data').fadeIn(500)
