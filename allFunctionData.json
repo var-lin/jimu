@@ -9,7 +9,8 @@
         {"name" : "QQ跳转资料卡", "url" : "./function/qqZone/qqForceCard.html"},
         {"name" : "跳转QQ群", "url" : "./function/qqZone/qqForceCrowd.html"},
         {"name" : "QQ估价(娱乐)", "url" : "./function/qqZone/QQEvaluation.html"},
-        {"name" : "QQ号测凶吉(娱乐)", "url" : "./function/qqZone/qqMeasuringGoodAndBadLuck.html"}
+        {"name" : "QQ号测凶吉(娱乐)", "url" : "./function/qqZone/qqMeasuringGoodAndBadLuck.html"},
+        {"name" : "QQ头像表情包生成(测试中)", "url" : "./function/qqZone/QQAvatarEmoticonPackageGeneration.html"}
     ],
     "usingTools" : [
         {"name" : "万能翻译", "url" : "./function/usingTools/universalTranslata.html"},
@@ -21,9 +22,10 @@
         {"name" : "生成国庆头像(测试中)", "url" : "./function/usingTools/nationalDayPortrait.html"},
         {"name" : "摸头GIF(测试中)", "url" : "./function/usingTools/knowTheRealSituationGIF.html"},
         {"name" : "一寸免冠照片生成(测试中)", "url" : "./function/usingTools/generationOfOneInchBareheadedPhotos.html"},
-        {"name" : "微信刷运动步数", "url" : "./function/usingTools/wechatMovementBrushStep.html"},
+        {"name" : "二维码生成(测试中)", "url" : "./function/usingTools/QRCodeGeneration.html"},
         {"name" : "字数检测", "url" : "./function/usingTools/wordCountDetection.html"},
         {"name" : "文本相似度对比", "url" : "./function/usingTools/textSimilarityComparison.html"},
+        {"name" : "微信刷运动步数", "url" : "./function/usingTools/wechatMovementBrushStep.html"},
         {"name" : "经纬度解析", "url" : "./function/usingTools/longitudeAndLatitudeAnalysis.html"},
         {"name" : "地址转换经纬度", "url" : "./function/usingTools/addressToLongitudeAndLatitude.html"},
         {"name" : "32位小写md5加密(测试中)", "url" : "./function/usingTools/32-bitLowercaseMD5Encryption.html"},
