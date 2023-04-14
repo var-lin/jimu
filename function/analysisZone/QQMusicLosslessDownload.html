@@ -16,7 +16,7 @@
     	<div class="container">
        		<input type="text" class="form-control" placeholder="请输入需要查找的QQ音乐歌名" required>            
             <div class="text-center allBtn">
-            	<button class="btn btn-secondary">解析</button>
+            	<button class="btn btn-secondary">查询</button>
             </div>
             <div class="notes text-center">
                 <div>#无反应请检测网络#</div>
@@ -64,9 +64,9 @@
                         $('.data ul li:eq(3) span').html(res.quality)
                         $('.data ul li:eq(4) a').html(res.url).attr('href', res.url)
                         $('.data').fadeIn(500)
-                        $('.result').html('解析成功').fadeOut(3000)
+                        $('.result').html('查询成功').fadeOut(3000)
                         if(localStorage.getItem('inputRtention') === 'false') $('input').val('');
-                    }).catch((err) => {console.log(err)
+                    }).catch((err) => {
                         $('.result').html('网络或接口出错,接口问题请联系作者').fadeOut(3000)
                     })
    				}
