@@ -41,17 +41,11 @@ $(function () {
     // 时间段提示内容获取
     (function () {
         function writeText() {
-            $.ajax({
-                url : 'https://v1.hitokoto.cn/',
-                type : 'get',
-                dataType : 'json',
-                success : function (res) {
-                    $('.brief-remark').html(res.hitokoto)
-                },
-                error : function (err){
-                    $('.brief-remark').html('接口可能失效啦~请联系作者修复哈')
-                }
-            });
+            axios.get('https://v1.hitokoto.cn/').then((res) => {
+                $('.brief-remark').html(res.data.hitokoto)
+            }).catch((err) => {
+                $('.brief-remark').html('接口可能失效啦~请联系作者修复哈')
+            })
         }
         var date = new Date(),
             dateYear = date.getFullYear(),
@@ -65,7 +59,16 @@ $(function () {
         if(localStorage.getItem('date') == date && !birthday) {
             writeText()
         } else {
-            $.get('https://www.mxnzp.com/api/holiday/single/' + date, {ignoreHoliday : false, app_id : 'jlfmcnsgqikmmejf', app_secret : 'Rnp4ZkJ4NHVVWnhvcC9MRTJLYWZtZz09'}, function (res) {
+            axios({
+                url : 'https://www.mxnzp.com/api/holiday/single/' + date,
+                method : 'get',
+                params : {
+                    ignoreHoliday : false,
+                    app_id : 'jlfmcnsgqikmmejf',
+                    app_secret : 'Rnp4ZkJ4NHVVWnhvcC9MRTJLYWZtZz09'
+                }
+            }).then((res) => {
+                res = res.data;
                 if(res.code == 1 && res.data.lunarCalendar == '三月初十') {
                     localStorage.setItem('birthday', 'true')
                     var text = '今天是作者的生日哦,那就祝自己生日快乐吧!🎉🎉🎉',
@@ -83,7 +86,7 @@ $(function () {
                     localStorage.setItem('birthday', 'false')
                     localStorage.setItem('date', date)
                 }
-            })
+            }).catch(writeText)
         }
     }());
     // 返回置顶显示隐藏功能 toupDateReturnTop

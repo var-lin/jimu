@@ -312,12 +312,20 @@ input::-webkit-search-cancel-button {
 
 .search .search-content {
     position: absolute;
-    padding: 10px 30px;
+    padding: 10px 20px;
     border-radius: 10px;
     background-color: #fff;
     box-shadow: 0 2px #999;
-    overflow-y: scroll;
     z-index: 99;
+    display: none;
+}
+
+.search .search-content li {
+    white-space: nowrap;
+    overflow-x: scroll;
+}
+
+.search .search-content li::-webkit-scrollbar {
     display: none;
 }
 
@@ -568,11 +576,16 @@ footer button .text .texttype {
     border-radius: 5px;
     padding: 5px 10px;
 }
-.update .updatebtnleft {
+
+.update button:nth-of-type(1) {
     background-color: #faa;
 }
 
-.update .updatebtnright {
+.update button:nth-of-type(2) {
+    background-color: #aff;
+}
+
+.update button:nth-of-type(3) {
     background-color: #afa;
 }
 
