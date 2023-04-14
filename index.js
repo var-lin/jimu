@@ -123,34 +123,34 @@ $(function () {
                 if(value.indexOf(textToLower) >= 0 || value.indexOf(textToUpper) >= 0) {
                     switch(zoneName) {
                         case 'QQ' :
-                            value = '(' + 'QQ专区' + ')';
+                            value = 'Q Q-';
                             break;
                         case 'usingTools' :
-                            value = '(' + '实用工具' + ')';
+                            value = '实用-';
                             break;
                         case 'informationquery' :
-                            value = '(' + '信息查询专区' + ')';
+                            value = '信息-';
                             break;
                         case 'website' :
-                            value = '(' + '网站专区' + ')';
+                            value = '网站-';
                             break;
                         case 'analysis' :
-                            value = '(' + '解析专区' + ')';
+                            value = '解析-';
                             break;
                         case 'hotSearchList' :
-                            value = '(' + '热搜专区' + ')';
+                            value = '热搜-';
                             break;
                         case 'copywriting' :
-                            value = '(' + '文案专区' + ')';
+                            value = '文案-';
                             break;
                         case 'other' :
-                            value = '(' + '其他' + ')';
+                            value = '其他-';
                             break;
                         case 'mysteriouCode' :
-                            value = '(' + '秘密区' + ')';
+                            value = '秘密-';
                             break;
                     }
-                    $('.search .search-content').append('<li><a target="_black"></a></li>').find('a:last').html(v.name + value).attr('href', v.url)
+                    $('.search .search-content').append('<li><span></span><a target="_black"></a></li>').find('span:last').html(value).siblings('a').html(v.name).attr('href', v.url)
                     count ++;
                 }
             })
@@ -201,6 +201,8 @@ $(function () {
             var fnName = $(e).html(),
                 fnHref = $(e).attr('href'),
                 count = 0;
+                console.log(fnHref)
+            if(!fnHref) return;
             $.each($('#homepage > .historyBrowsing li a'), function (i, e) {
                 if($(e).html() == fnName) {
                     count ++;

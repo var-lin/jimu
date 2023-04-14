@@ -316,6 +316,7 @@ input::-webkit-search-cancel-button {
     border-radius: 10px;
     background-color: #fff;
     box-shadow: 0 2px #999;
+    overflow-y: scroll;
     z-index: 99;
     display: none;
 }
@@ -327,10 +328,6 @@ input::-webkit-search-cancel-button {
 
 .search .search-content li::-webkit-scrollbar {
     display: none;
-}
-
-.search .search-content li a {
-    display: block;
 }
 
 .search .search-tip {
