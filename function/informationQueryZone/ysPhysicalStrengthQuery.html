@@ -5,7 +5,8 @@
         <meta name="viewport" id="viewport" content="width=device-width, initial-scale=1, user-scalable=no"> 
         <title>积木·原神体力查询</title>
         <link rel="icon" type="image/x-icin" href="../../images/logo.ico">
-        <script src="../../tools/jQuery3.6.3_min.js"></script>
+        <script src="../../tools/jQuery3.6.4.min.js"></script>
+        <script src="../../tools/axios.js"></script>
         <link rel="stylesheet" href="../../tools/bootstrap.min.css">
         <link rel="stylesheet" href="../css/function.css">
     </head> 
@@ -21,7 +22,7 @@
             <div class="notes text-center">
                 <div>#无反应请检测网络#</div>
                 <div>#数据刷新可能存在一定延迟，请以当前游戏实际数据为准#</div>
-            	<div>#QQ号主要用于绑定,之后再次查询不需要输入原神UID和米游社Cookie#</div>
+            	<div>#<span>QQ号主要用于绑定</span>,之后再次查询不需要输入原神UID和米游社Cookie#</div>
             </div>
             <div class="data">
             	查询结果
@@ -65,12 +66,33 @@
                         uid = $('input:eq(1)').val(),
                         cookie = $('input:eq(2)').val();
                    	if(qq === '') return $('.result').html('还是写上QQ号吧,会很方便的').fadeOut(3000);
-                    $.get('http://www.Dreamling.xyz/API/mihoyou/ys/get_real_time_raft/api.php', {qq : qq, uid : uid, cookie : cookie, format : 'mixed'}, function (res){
+                    axios({
+                        url : 'http://www.Dreamling.xyz/API/mihoyou/ys/get_real_time_raft/api.php',
+                        method : 'get',
+                        params : {
+                            qq : qq,
+                            uid : uid,
+                            cookie : cookie,
+                            format : 'mixed'
+                        }
+                    }).then((res) => {
+                        res = res.data;
                         if(res.code !== 200) {
-                            $.get('http://www.Dreamling.xyz/API/mihoyou/ys/get_real_time_raft/api.php', {qq : qq, uid : uid, cookie : cookie, format : 'json'}, function (res) {
-                                $('.result').html(res.data.state).fadeOut(3000);
+                            axios({
+                                url : 'http://www.Dreamling.xyz/API/mihoyou/ys/get_real_time_raft/api.php',
+                                method : 'get',
+                                params : {
+                                    qq : qq,
+                                    uid : uid,
+                                    cookie : cookie,
+                                    format : 'json'
+                                }
+                            }).then((res) => {
+                                $('.result').html(res.data.data.state).fadeOut(3000);
+                                return false;
+                            }).catch((err) => {
+                                $('.result').html('网络或接口出错,接口问题请联系作者').fadeOut(3000)
                             })
-                            return false;
                         }
                         localStorage.setItem('ysPhysicalStrengthQuery', qq)
                         $('.data ul li:eq(0) img').attr('src', res.imageurl + '?t=' + new Date())
@@ -105,6 +127,8 @@
                         $('.data').fadeIn(500)
                         $('.result').html('操作成功').fadeOut(3000)
                         if(localStorage.getItem('inputRtention') === 'false') $('input').val('');
+                    }).catch((err) => {
+                        $('.result').html('网络或接口出错,接口问题请联系作者').fadeOut(3000)
                     })
    				}
 				$('button').click(function () {

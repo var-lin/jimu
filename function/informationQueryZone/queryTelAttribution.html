@@ -5,7 +5,8 @@
         <meta name="viewport" id="viewport" content="width=device-width, initial-scale=1, user-scalable=no"> 
         <title>积木·手机号归属地查询</title>
         <link rel="icon" type="image/x-icin" href="../../images/logo.ico">
-        <script src="../../tools/jQuery3.6.3_min.js"></script>
+        <script src="../../tools/jQuery3.6.4.min.js"></script>
+        <script src="../../tools/axios.js"></script>
         <link rel="stylesheet" href="../../tools/bootstrap.min.css">
         <link rel="stylesheet" href="../css/function.css">
     </head> 
@@ -43,19 +44,29 @@
        				var tel = $('input').val();
                    	if(tel === '') return $('.result').html('手机号不能为空').fadeOut(3000);
                     // ajax获得数据
-       				$.get('https://api.vvhan.com/api/phone', {tel:tel}, function (res){
+                    axios({
+                        url : 'https://api.vvhan.com/api/phone',
+                        method : 'get',
+                        params : {
+                            tel : tel
+                        }
+                    }).then((res) => {
+                        res = res.data;
                         if(!res.success) return $('.result').html(res.message).fadeOut(3000);
-       					if(res.local) return $('.result').html('查询失败').fadeOut(3000);
+                        if(res.local) return $('.result').html('查询失败').fadeOut(3000);
                         localStorage.setItem('queryTelAttribution', tel)
-           				$('.data ul li:eq(0) span').html(res.tel)
-                     	$('.data ul li:eq(1) span').html(res.info.local)
-                        $('.data ul li:eq(2) span').html(res.info.type)
-                        $('.data ul li:eq(3) span').html(res.info.yys)
-                        $('.data ul li:eq(4) span').html(res.info.bz)                                                          
-                     	$('.data').fadeIn(500)
+                        $('.data ul li:eq(0) span').html(res.tel)
+                        res = res.info;
+                        $('.data ul li:eq(1) span').html(res.local)
+                        $('.data ul li:eq(2) span').html(res.type)
+                        $('.data ul li:eq(3) span').html(res.yys)
+                        $('.data ul li:eq(4) span').html(res.bz)                                                          
+                        $('.data').fadeIn(500)
                         $('.result').html('操作成功').fadeOut(3000)
                         if(localStorage.getItem('inputRtention') === 'false') $('input').val('');
-       				})
+                    }).catch((err) => {
+                        $('.result').html('网络或接口出错,接口问题请联系作者').fadeOut(3000)
+                    })
    				}
 				$('button').click(function () {
             		$('.result').html('请稍等').fadeIn(1000)

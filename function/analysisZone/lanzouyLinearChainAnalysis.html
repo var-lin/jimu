@@ -5,7 +5,8 @@
         <meta name="viewport" id="viewport" content="width=device-width, initial-scale=1, user-scalable=no"> 
         <title>积木·蓝奏云直链解析</title>
         <link rel="icon" type="image/x-icin" href="../../images/logo.ico">
-        <script src="../../tools/jQuery3.6.3_min.js"></script>
+        <script src="../../tools/jQuery3.6.4.min.js"></script>
+        <script src="../../tools/axios.js"></script>
         <script src="../../tools/clipboard.min.js"></script>
         <link rel="stylesheet" href="../../tools/bootstrap.min.css">
         <link rel="stylesheet" href="../css/function.css">
@@ -21,7 +22,7 @@
             <div class="notes text-center">
                 <div>#无反应请检测网络#</div>
                 <div>#解析链接点击复制#</div>
-            	<div>#只能单文件解析噢~#</div>
+            	<div>#只能<span>单文件解析</span>噢~#</div>
             </div>
             <div class="data">
             	查询结果
@@ -52,36 +53,34 @@
        				var pwd = $('input:eq(1)').val();
                    	if(url === '') return $('.result').html('蓝奏云链接不能为空').fadeOut(3000);
                     // ajax获得数据
-                    $.ajax({
+                    axios({
                         url : 'https://apis.jxcxin.cn/api/lanzou',
-                        type : 'get',
-                        dataType : 'json',
-                        data : {
+                        method : 'get',
+                        params : {
                             url : url,
                             pwd : pwd
-                        },
-                        success : function (res) {
-                            if(res.code !== 200) return $('.result').html(res.msg).fadeOut(3000);
-                            localStorage.setItem('lanzouyLinearChainAnalysis1', url)
-                            localStorage.setItem('lanzouyLinearChainAnalysis2', pwd)
-                            $('.data ul li:eq(0) span').html(url)
-                            $('.data ul li:eq(1) span').html(res.data.name)
-                            $('.data ul li:eq(2) span').html(res.data.author)
-                            $('.data ul li:eq(3) span').html(res.data.time)
-                            $('.data ul li:eq(4) span').html(res.data.size)
-                            if(res.data.describe) {
-                                $('.data ul li:eq(5) span').html(res.data.describe)
-                            } else {
-                                $('.data ul li:eq(5) span').html('无')
-                            }
-                            $('.data ul li:eq(6) a').html(res.data.url).attr('href', res.data.url)
-                            $('.data').fadeIn(500)
-                            $('.result').html('操作成功').fadeOut(3000)
-                            if(localStorage.getItem('inputRtention') === 'false') $('input').val('');
-                        },
-                        error : function (err) {
-                            $('.data').html(err)
                         }
+                    }).then((res) => {
+                        res = res.data;
+                        if(res.code !== 200) return $('.result').html(res.msg).fadeOut(3000);
+                        localStorage.setItem('lanzouyLinearChainAnalysis1', url)
+                        localStorage.setItem('lanzouyLinearChainAnalysis2', pwd)
+                        $('.data ul li:eq(0) span').html(url)
+                        $('.data ul li:eq(1) span').html(res.data.name)
+                        $('.data ul li:eq(2) span').html(res.data.author)
+                        $('.data ul li:eq(3) span').html(res.data.time)
+                        $('.data ul li:eq(4) span').html(res.data.size)
+                        if(res.data.describe) {
+                            $('.data ul li:eq(5) span').html(res.data.describe)
+                        } else {
+                            $('.data ul li:eq(5) span').html('无')
+                        }
+                        $('.data ul li:eq(6) a').html(res.data.url).attr('href', res.data.url)
+                        $('.data').fadeIn(500)
+                        $('.result').html('解析成功').fadeOut(3000)
+                        if(localStorage.getItem('inputRtention') === 'false') $('input').val('');
+                    }).catch((err) => {
+                        $('.result').html('网络或接口出错,接口问题请联系作者').fadeOut(3000)
                     })
    				}
 				$('button').click(function () {

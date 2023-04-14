@@ -5,7 +5,8 @@
         <meta name="viewport" id="viewport" content="width=device-width, initial-scale=1, user-scalable=no"> 
         <title>积木·36氪热搜榜</title>
         <link rel="icon" type="image/x-icin" href="../../images/logo.ico">
-        <script src="../../tools/jQuery3.6.3_min.js"></script>
+        <script src="../../tools/jQuery3.6.4.min.js"></script>
+        <script src="../../tools/axios.js"></script>
         <link rel="stylesheet" href="../css/hotSearchList.css">
     </head> 
     <body>
@@ -33,28 +34,23 @@
                     })
                 }());
                 // 获取显示数据
-                $.ajax({
-                    url : 'https://api.vvhan.com/api/hotlist?type=36Ke',
-                    type : 'get',
-                    dataType : 'json',
-                    success : function (res) {
-                        if(!res.success) return $('.result').html('查询失败').fadeOut(3000);
-                        $('.update').show()
-                        $('.result').html('查询成功').fadeOut(3000)
-                        $('.update_time').html(res.update_time)
-                        $.each(res.data, function (i, v) {
-                            $('body').append('<div class="data"><h4 class="topIndex">top<span></span></h4><h3 class="header"><a target="_blank";></a></h3><div class="desc"><img src=""><span></span></div><div class="hot"><span></span></div></div>')
-                            $('.data').eq(i).find('.topIndex span').html(v.index)
-                            $('.data').eq(i).find('.header a').html(v.title).attr('href', v.url)
-                            $('.data').eq(i).find('.desc img').attr('src', v.pic)
-                            $('.data').eq(i).find('.desc span').html(v.desc)
-                            $('.data').eq(i).find('.hot span').html(v.hot)
-                        })
-                    },
-                    error : function (err) {
-                        $('.result').html('查询失败')
-                    }
-                }) 
+                axios.get('https://api.vvhan.com/api/hotlist?type=36Ke').then((res) => {
+                    res = res.data;
+                    if(!res.success) return $('.result').html('查询失败').fadeOut(3000);
+                    $('.update').show()
+                    $('.result').html('查询成功').fadeOut(3000)
+                    $('.update_time').html(res.update_time)
+                    $.each(res.data, function (i, v) {
+                        $('body').append('<div class="data"><h4 class="topIndex">top<span></span></h4><h3 class="header"><a target="_blank";></a></h3><div class="desc"><img src=""><span></span></div><div class="hot"><span></span></div></div>')
+                        $('.data').eq(i).find('.topIndex span').html(v.index)
+                        $('.data').eq(i).find('.header a').html(v.title).attr('href', v.url)
+                        $('.data').eq(i).find('.desc img').attr('src', v.pic)
+                        $('.data').eq(i).find('.desc span').html(v.desc)
+                        $('.data').eq(i).find('.hot span').html(v.hot)
+                    })
+                }).catch((err) => {
+                    $('.result').html('网络或接口出错,接口问题请联系作者').fadeOut(3000)
+                })
             })
         </script>
     </body>

@@ -5,7 +5,8 @@
         <meta name="viewport" id="viewport" content="width=device-width, initial-scale=1, user-scalable=no"> 
         <title>积木·哔哩哔哩粉丝关注查询</title>
         <link rel="icon" type="image/x-icin" href="../../images/logo.ico">
-        <script src="../../tools/jQuery3.6.3_min.js"></script>
+        <script src="../../tools/jQuery3.6.4.min.js"></script>
+        <script src="../../tools/axios.js"></script>
         <link rel="stylesheet" href="../../tools/bootstrap.min.css">
         <link rel="stylesheet" href="../css/function.css">
     </head> 
@@ -41,16 +42,26 @@
 				function getdata() {
        				var id = $('input').val();
                    	if(id === '') return $('.result').html('哔哩哔哩用户ID不能为空').fadeOut(3000);
-       				$.get('https://apis.jxcxin.cn/api/blfs', {id : id, type : 'json'}, function (res){
-       					if(res.code !== 0) return $('.result').html(res.message).fadeOut(3000);
+                    axios({
+                        url : 'https://apis.jxcxin.cn/api/blfs',
+                        method : 'get',
+                        params : {
+                            id : id,
+                            type : 'json'
+                        }
+                    }).then((res) => {
+                        if(res.data.code !== 0) return $('.result').html(res.message).fadeOut(3000);
+                        res = res.data.data;
                         localStorage.setItem('bilibiliFanFollowQuery', id)
-           				$('.data ul li:eq(0) span').html(res.data.mid)
-                     	$('.data ul li:eq(1) span').html(res.data.following)
-                        $('.data ul li:eq(2) span').html(res.data.follower)                                                       
-                     	$('.data').fadeIn(500)
+                        $('.data ul li:eq(0) span').html(res.mid)
+                        $('.data ul li:eq(1) span').html(res.following)
+                        $('.data ul li:eq(2) span').html(res.follower)                                                       
+                        $('.data').fadeIn(500)
                         $('.result').html('操作成功').fadeOut(3000)
                         if(localStorage.getItem('inputRtention') === 'false') $('input').val('');
-       				})
+                    }).catch((err) => {
+                        $('.result').html('网络或接口出错,接口问题请联系作者').fadeOut(3000)
+                    })
    				}
 				$('button').click(function () {
             		$('.result').html('请稍等').fadeIn(1000)

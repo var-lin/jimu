@@ -5,7 +5,8 @@
         <meta name="viewport" id="viewport" content="width=device-width, initial-scale=1, user-scalable=no"> 
         <title>积木·酷我音乐直链解析</title>
         <link rel="icon" type="image/x-icin" href="../../images/logo.ico">
-        <script src="../../tools/jQuery3.6.3_min.js"></script>
+        <script src="../../tools/jQuery3.6.4.min.js"></script>
+        <script src="../../tools/axios.js"></script>
         <script src="../../tools/clipboard.min.js"></script>
         <link rel="stylesheet" href="../../tools/bootstrap.min.css">
         <link rel="stylesheet" href="../css/function.css">
@@ -50,8 +51,16 @@
        				var id = $('input').val();
                    	if(id === '') return $('.result').html('酷我音乐ID不能为空').fadeOut(3000);
                     // ajax获得数据
-       				$.get('https://apis.jxcxin.cn/api/kuwo', {id : id, type : 'json'}, function (res){
-       					if(res.code !== 200) return $('.result').html(res.msg).fadeOut(3000);
+                    axios({
+                        url : 'https://apis.jxcxin.cn/api/kuwo',
+                        method : 'get',
+                        params : {
+                            id : id,
+                            type : 'json'
+                        }
+                    }).then((res) => {
+                        res = res.daya;
+                        if(res.code !== 200) return $('.result').html(res.msg).fadeOut(3000);
                         localStorage.setItem('kuwoLinearChainAnalysis', id)
                         if(res.pic) {
                             $('.data ul li:eq(0)').show().children('a').attr('href', res.pic).children('img').attr('src', res.pic)
@@ -68,10 +77,12 @@
                             $('.data ul li:eq(5) a').html(res.mvurl)
                         }
                         $('.data ul li:eq(6) a').html(res.lrc).attr('href', res.lrc)
-                     	$('.data').fadeIn(500)
-                        $('.result').html('操作成功').fadeOut(3000)
+                        $('.data').fadeIn(500)
+                        $('.result').html('解析成功').fadeOut(3000)
                         if(localStorage.getItem('inputRtention') === 'false') $('input').val('');
-       				})
+                    }).catch((err) => {
+                        $('.result').html('网络或接口出错,接口问题请联系作者').fadeOut(3000)
+                    })
    				}
 				$('.btn-secondary').click(function () {
             		$('.result').html('请稍等').fadeIn(1000)

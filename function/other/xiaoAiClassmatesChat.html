@@ -5,7 +5,8 @@
         <meta name="viewport" id="viewport" content="width=device-width, initial-scale=1, user-scalable=no"> 
         <title>积木·小爱同学聊天</title>
         <link rel="icon" type="image/x-icin" href="../../images/logo.ico">
-        <script src="../../tools/jQuery3.6.3_min.js"></script>
+        <script src="../../tools/jQuery3.6.4.min.js"></script>
+        <script src="../../tools/axios.js"></script>
         <link rel="stylesheet" href="../../tools/bootstrap.min.css">
         <link rel="stylesheet" href="../css/chatGPT.css">
     </head> 
@@ -97,19 +98,16 @@
                     $('.text').val('')
                     $('.dialogBox .rightText:last').css('height', $('.dialogBox .rightText:last').prop('scrollHeight'))
                     $('.dialogBox').scrollTop($('.dialogBox').prop('scrollHeight'))
-                    $.ajax({
+                    axios({
                         url : 'https://api.lewz.cn/api/xiaoai',
-                        type : 'get',
-                        data : {
+                        method : 'get',
+                        params : {
                             msg : text
-                        },
-                        success : function (res) {
-                            returnData(res)
-                        },
-                        error : function (err) {
-                            returnData('小爱不能接收到的你消息~')
-
                         }
+                    }).then((res) => {
+                        returnData(res.data)
+                    }).catch((err) => {
+                        returnData('小爱不能接收到的你消息~')
                     })
                 }
                 $('.header span').on('dblclick', function () {

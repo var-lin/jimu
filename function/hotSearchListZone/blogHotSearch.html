@@ -5,7 +5,8 @@
         <meta name="viewport" id="viewport" content="width=device-width, initial-scale=1, user-scalable=no"> 
         <title>积木·微博热搜榜</title>
         <link rel="icon" type="image/x-icin" href="../../images/logo.ico">
-        <script src="../../tools/jQuery3.6.3_min.js"></script> 
+        <script src="../../tools/jQuery3.6.4.min.js"></script>
+        <script src="../../tools/axios.js"></script>
         <link rel="stylesheet" href="../../tools/bootstrap.min.css">
         <style>
         	.result {
@@ -111,19 +112,22 @@
                 }());
                 // ajax获得数据
 				(function getdata() {
-       				$.get('https://api.vvhan.com/api/wbhot', function (res){                       
-       					if(!res.success) return $('.result').html('查询失败').fadeOut(5000);
-           				$('.network span').html(res.NetWork);
-                       	$('.time span').html(res.time)
+                    axios.get('https://api.vvhan.com/api/wbhot').then((res) => {
+                        res = res.data;
+                        if(!res.success) return $('.result').html('查询失败').fadeOut(5000);
+                        $('.network span').html(res.NetWork);
+                        $('.time span').html(res.time)
                         $(res.data).each(function (i, e) {
                             $('.data').append('<div class="row"><div class="row col-12 tips text-center"><div class="col-2 top">top<span></span></div><div class="col-7">标题</div><div class="col-3">热度</div></div><div class="row col-12"><div class="url col-9"><a></a></div><div class="hot col-3"></div></div></div>')
-                           	$('.data > .row').eq(i).find('.row:eq(0) .top span').html(i + 1)
-                           	$('.data > .row').eq(i).find('.row:eq(1) .url a').html(e.title).prop('href', e.url)
-                           	$('.data > .row').eq(i).find('.row:eq(1) .hot').html(e.hot)
+                            $('.data > .row').eq(i).find('.row:eq(0) .top span').html(i + 1)
+                            $('.data > .row').eq(i).find('.row:eq(1) .url a').html(e.title).prop('href', e.url)
+                            $('.data > .row').eq(i).find('.row:eq(1) .hot').html(e.hot)
                         })
                         $('.container').fadeIn(300)
                         $('.result').html('查询成功').fadeOut(3000)
-       				})
+                    }).catch((err) => {
+                        $('.result').html('网络或接口出错,接口问题请联系作者').fadeOut(3000)
+                    })
    				}());
                	// 更新日志返回置顶显示隐藏功能
     			function returnTop() {

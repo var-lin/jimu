@@ -5,7 +5,8 @@
         <meta name="viewport" id="viewport" content="width=device-width, initial-scale=1, user-scalable=no"> 
         <title>积木·短视频去水印解析</title>
         <link rel="icon" type="image/x-icin" href="../../images/logo.ico">
-        <script src="../../tools/jQuery3.6.3_min.js"></script>
+        <script src="../../tools/jQuery3.6.4.min.js"></script>
+        <script src="../../tools/axios.js"></script>
         <script src="../../tools/clipboard.min.js"></script>
         <link rel="stylesheet" href="../../tools/bootstrap.min.css">
         <link rel="stylesheet" href="../css/function.css">
@@ -20,7 +21,7 @@
             <div class="notes text-center">
                 <div>#无反应请检测网络#</div>
                 <div>#解析链接点击复制#</div>
-            	<div>#支持抖音,皮皮虾,火山,微视,微博,绿洲,最右,轻视频,快手,全民小视频,巴塞电影,陌陌,Before避风,开眼,Vue Vlog 小咖秀,皮皮搞笑,西瓜短视频去水印解析#</div>
+            	<div>#支持<span>抖音,皮皮虾,火山,微视,微博,绿洲,最右,轻视频,快手,全民小视频,巴塞电影,陌陌,Before避风,开眼,Vue Vlog 小咖秀,皮皮搞笑,西瓜短视频</span>去水印解析#</div>
             </div>
             <div class="data">
             	查询结果
@@ -58,9 +59,16 @@
        				var url = $('input').val();
                    	if(url === '') return $('.result').html('链接不能为空').fadeOut(3000);
                     // ajax获得数据
-       				$.get('https://apis.jxcxin.cn/api/video', {url : url}, function (res){
+                    axios({
+                        url : 'https://apis.jxcxin.cn/api/video',
+                        method : 'get',
+                        params : {
+                            url : url
+                        }
+                    }).then((res) => {
+                        res = res.data;
                         if(res.code !== 200) return $('.result').html(res.msg).fadeOut(3000);
-       					if(res.data.url == null) return $('.result').html('解析失败').fadeOut(3000);
+                        if(res.data.url == null) return $('.result').html('解析失败').fadeOut(3000);
                         localStorage.setItem('shortVideoDe_watermarkingAnalysis', url)
                         $('.data ul li:eq(0) a').attr('href', res.data.avatar).children('img').attr('src', res.data.avatar)
                         $('.data ul li:eq(1) a').attr('href', res.data.cover).children('img').attr('src', res.data.cover)
@@ -78,10 +86,12 @@
                         ifData(res.data.music.author, '.data ul li:eq(11) span')
                         $('.data ul li:eq(12) a').attr('href', res.data.music.avatar).children('img').attr('src', res.data.music.avatar)
                         $('.data ul li:eq(13) a').attr('href', res.data.music.url).html(res.data.music.url)
-                     	$('.data').fadeIn(500)
-                        $('.result').html('操作成功').fadeOut(3000)
+                        $('.data').fadeIn(500)
+                        $('.result').html('解析成功').fadeOut(3000)
                         if(localStorage.getItem('inputRtention') === 'false') $('input').val('');
-       				})
+                    }).catch((err) => {
+                        $('.result').html('网络或接口出错,接口问题请联系作者').fadeOut(3000)
+                    })
    				}
 				$('.btn-secondary').click(function () {
             		$('.result').html('请稍等').fadeIn(1000)

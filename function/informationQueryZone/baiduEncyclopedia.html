@@ -5,7 +5,8 @@
         <meta name="viewport" id="viewport" content="width=device-width, initial-scale=1, user-scalable=no"> 
         <title>积木·百度百科</title>
         <link rel="icon" type="image/x-icin" href="../../images/logo.ico">
-        <script src="../../tools/jQuery3.6.3_min.js"></script>
+        <script src="../../tools/jQuery3.6.4.min.js"></script>
+        <script src="../../tools/axios.js"></script>
         <link rel="stylesheet" href="../../tools/bootstrap.min.css">
         <link rel="stylesheet" href="../css/function.css">
     </head> 
@@ -18,7 +19,7 @@
             </div>
             <div class="notes text-center">
                 <div>#无反应请检测网络#</div>
-            	<div>#用户名不是昵称哦~#</div>
+            	<div>#<span>用户名不是昵称</span>哦~#</div>
             </div>
             <div class="data">
             	查询结果
@@ -41,15 +42,24 @@
        				var text = $('input').val();
                    	if(text === '') return $('.result').html('内容不能为空').fadeOut(3000);
                     // ajax获得数据
-       				$.get('https://api.wer.plus/api/dub', {t : text}, function (res){
-       					if(res.data.text === null) return $('.result').html('未查到').fadeOut(3000);
+                    axios({
+                        url : 'https://api.wer.plus/api/dub',
+                        method : 'get',
+                        params : {
+                            t : text
+                        }
+                    }).then((res) => {
+                        res = res.data.data;
+                        if(res.text === null) return $('.result').html('未查到').fadeOut(3000);
                         localStorage.setItem('baiduEncyclopedia', text)
-           				$('.data ul li:eq(0) a').attr('href', res.data.img_url).children('img').attr('src', res.data.img_url)
-                        $('.data ul li:eq(1) span').html(res.data.text)
-                     	$('.data').fadeIn(500)
+                        $('.data ul li:eq(0) a').attr('href', res.img_url).children('img').attr('src', res.img_url)
+                        $('.data ul li:eq(1) span').html(res.text)
+                        $('.data').fadeIn(500)
                         $('.result').html('操作成功').fadeOut(3000)
                         if(localStorage.getItem('inputRtention') === 'false') $('input').val('');
-       				})
+                    }).catch((err) => {
+                        $('.result').html('网络或接口出错,接口问题请联系作者').fadeOut(3000)
+                    })
    				}
 				$('button').click(function () {
             		$('.result').html('请稍等').fadeIn(1000)

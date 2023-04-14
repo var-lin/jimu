@@ -5,7 +5,8 @@
         <meta name="viewport" id="viewport" content="width=device-width, initial-scale=1, user-scalable=no"> 
         <title>积木·WIFI基站BSSID定位</title>
         <link rel="icon" type="image/x-icin" href="../../images/logo.ico">
-        <script src="../../tools/jQuery3.6.3_min.js"></script>
+        <script src="../../tools/jQuery3.6.4.min.js"></script>
+        <script src="../../tools/axios.js"></script>
         <link rel="stylesheet" href="../../tools/bootstrap.min.css">
         <link rel="stylesheet" href="../css/function.css">
     </head> 
@@ -43,18 +44,27 @@
 				function getdata() {
        				var id = $('input').val();
                    	if(id === '') return $('.result').html('BSSID不能为空').fadeOut(3000);
-       				$.get('https://api.pearktrue.cn/api/map/wifi.php', {bssid : id}, function (res){
-       					if(res.code !== '200') return $('.result').html(res.msg).fadeOut(3000);
+                    axios({
+                        url : 'https://api.pearktrue.cn/api/map/wifi.php',
+                        method : 'get',
+                        params : {
+                            bssid : id
+                        }
+                    }).then((res) => {
+                        if(res.data.code !== '200') return $('.result').html(res.data.msg).fadeOut(3000);
+                        res = res.data.data;
                         localStorage.setItem('BSSIDLocationOfWifiBaseStation', id)
-           				$('.data ul li:eq(0) span').html(res.data.bssid)
-                     	$('.data ul li:eq(1) span').html(res.data.lng)
-                        $('.data ul li:eq(2) span').html(res.data.lat)                                                       
-                        $('.data ul li:eq(3) span').html(res.data.address)                                                       
-                        $('.data ul li:eq(4) span').html(res.data.recommend)                                                       
-                     	$('.data').fadeIn(500)
+                        $('.data ul li:eq(0) span').html(res.bssid)
+                        $('.data ul li:eq(1) span').html(res.lng)
+                        $('.data ul li:eq(2) span').html(res.lat)                                                       
+                        $('.data ul li:eq(3) span').html(res.address)                                                       
+                        $('.data ul li:eq(4) span').html(res.recommend)                                                       
+                        $('.data').fadeIn(500)
                         $('.result').html('操作成功').fadeOut(3000)
                         if(localStorage.getItem('inputRtention') === 'false') $('input').val('');
-       				})
+                    }).catch((err) => {
+                        $('.result').html('网络或接口出错,接口问题请联系作者').fadeOut(3000)
+                    })
    				}
 				$('button').click(function () {
             		$('.result').html('请稍等').fadeIn(1000)

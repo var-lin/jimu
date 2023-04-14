@@ -5,7 +5,8 @@
         <meta name="viewport" id="viewport" content="width=device-width, initial-scale=1, user-scalable=no"> 
         <title>积木·chatGPT3.0</title>
         <link rel="icon" type="image/x-icin" href="../../images/logo.ico">
-        <script src="../../tools/jQuery3.6.3_min.js"></script>
+        <script src="../../tools/jQuery3.6.4.min.js"></script>
+        <script src="../../tools/axios.js"></script>
         <link rel="stylesheet" href="../../tools/bootstrap.min.css">
         <link rel="stylesheet" href="../css/chatGPT.css">
     </head> 
@@ -144,25 +145,21 @@
                             presence_penalty : 0,
                             prompt : text
                         });
-                    $.ajax({
+                    axios({
                         url : 'https://api.openai.com/v1/completions',
-                        type : 'post',
-                        dataType : 'json',
+                        method : 'post',
+                        data : data,
                         headers : {
                             Authorization : Authorization,
                             'Content-Type' : 'application/json'
-                        },
-                        data : data,
-                        success : function (res) {
-                            returnData(res.choices[0].text)
-                        },
-                        error : function (err) {
-                            if(err.responseText) {
-                                err = JSON.parse(err.responseText)
-                                returnData(err.error.message)
-                            } else {
-                                returnData('对不起，chatGPT不能收到你的消息')
-                            }
+                        }
+                    }).then((res) => {
+                        returnData(res.data.choices[0].text)
+                    }).catch((err) => {
+                        if(err.response.data.error.message) {
+                            returnData(err.response.data.error.message)
+                        } else {
+                            returnData('对不起，chatGPT不能收到你的消息')
                         }
                     })
                 }

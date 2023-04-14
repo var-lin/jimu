@@ -5,7 +5,8 @@
         <meta name="viewport" id="viewport" content="width=device-width, initial-scale=1, user-scalable=no"> 
         <title>积木·哔哩当日番剧更新列表</title>
         <link rel="icon" type="image/x-icin" href="../../images/logo.ico">
-        <script src="../../tools/jQuery3.6.3_min.js"></script>
+        <script src="../../tools/jQuery3.6.4.min.js"></script>
+        <script src="../../tools/axios.js"></script>
         <link rel="stylesheet" href="../css/hotSearchList.css">
     </head> 
     <body>
@@ -32,27 +33,22 @@
                     })
                 }());
                 // 获取显示数据
-                $.ajax({
-                    url : 'https://xiaoapi.cn/API/zs_tf.php',
-                    type : 'get',
-                    dataType : 'json',
-                    success : function (res) {
-                        if(res.code !== 200) return $('.result').html(res.msg).fadeOut(3000);
-                        $('.update').show()
-                        $('.result').html('查询成功').fadeOut(3000)
-                        $.each(res.data.bili, function (i, v) {
-                            $('body').append('<div class="data"><h3 class="header"></h3><div class="desc"><img src="">id：<span></span><br>更新时间：<span></span><br>更新内容：<span></span></div></div>')
-                            $('.data').eq(i).find('.header').html(v.title)
-                            $('.data').eq(i).find('.desc img').attr('src', v.cover)
-                            $('.data').eq(i).find('.desc span:eq(0)').html(v.id)
-                            $('.data').eq(i).find('.desc span:eq(1)').html(v.time)
-                            $('.data').eq(i).find('.desc span:eq(2)').html(v.updata)
-                        })
-                    },
-                    error : function (err) {
-                        $('.result').html('查询失败')
-                    }
-                }) 
+                axios.get('https://xiaoapi.cn/API/zs_tf.php').then((res) => {
+                    res = res.data;
+                    if(res.code !== 200) return $('.result').html(res.msg).fadeOut(3000);
+                    $('.update').show()
+                    $('.result').html('查询成功').fadeOut(3000)
+                    $.each(res.data.bili, function (i, v) {
+                        $('body').append('<div class="data"><h3 class="header"></h3><div class="desc"><img src="">id：<span></span><br>更新时间：<span></span><br>更新内容：<span></span></div></div>')
+                        $('.data').eq(i).find('.header').html(v.title)
+                        $('.data').eq(i).find('.desc img').attr('src', v.cover)
+                        $('.data').eq(i).find('.desc span:eq(0)').html(v.id)
+                        $('.data').eq(i).find('.desc span:eq(1)').html(v.time)
+                        $('.data').eq(i).find('.desc span:eq(2)').html(v.updata)
+                    })
+                }).catch((err) => {
+                    $('.result').html('网络或接口出错,接口问题请联系作者').fadeOut(3000)
+                })
             })
         </script>
     </body>

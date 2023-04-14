@@ -55,6 +55,10 @@ textarea {
     color: #aaa;
 }
 
+.notes div span {
+    color: #f40;
+}
+
 .data {
 	display: none;
    	width: 90%;

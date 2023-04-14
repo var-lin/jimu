@@ -5,7 +5,8 @@
         <meta name="viewport" id="viewport" content="width=device-width, initial-scale=1, user-scalable=no"> 
         <title>积木·脑筋急转弯</title>
         <link rel="icon" type="image/x-icin" href="../../images/logo.ico">
-        <script src="../../tools/jQuery3.6.3_min.js"></script>
+        <script src="../../tools/jQuery3.6.4.min.js"></script>
+        <script src="../../tools/axios.js"></script>
         <link rel="stylesheet" href="../../tools/bootstrap.min.css">
         <link rel="stylesheet" href="../css/function.css">
         <style>
@@ -25,7 +26,7 @@
     	<div class="container">
             <div class="notes text-center">
                 <div>#无反应请检测网络#</div>
-            	<div>#请不要刷新太快不然题出不来#</div>
+            	<div>#请<span>不要刷新太快</span>不然题出不来#</div>
             </div>
             <div class="data">
                	<ul>
@@ -41,23 +42,20 @@
         <script>
         	$(function () {
                	$('.container').fadeIn(300);
-                $.ajax({
+                axios({
                     url : 'https://api.qqsuu.cn/api/dm-naowan',
-                    type : 'get',
-                    dataType : 'json',
-                    data : {
+                    method : 'get',
+                    params : {
                         num : 1
-                    },
-                    success : function (res) {
-                        if(res.code !== 200) return $('.result').html(res.msg).fadeOut(3000);
-                        $('.data ul li:eq(0) span').html(res.data.list[0].quest)
-                        $('.data ul li:eq(1) span').html(res.data.list[0].result)
-                        $('.result').html('生成成功').fadeOut(3000)
-                    },
-                    error : function (err) {
-                        $('.data').html('用安卓app试试,如果还不行请联系作者修复')
-                        $('.result').html('生成失败').fadeOut(3000);
                     }
+                }).then((res) => {
+                    if(res.data.code !== 200) return $('.result').html(res.data.msg).fadeOut(3000);
+                    res = res.data.data.list[0];
+                    $('.data ul li:eq(0) span').html(res.quest)
+                    $('.data ul li:eq(1) span').html(res.result)
+                    $('.result').html('生成成功').fadeOut(3000)
+                }).catch((err) => {
+                    $('.result').html('网络或接口出错,接口问题请联系作者').fadeOut(3000)
                 })
                 // 谜题显示
 				function showMD() {

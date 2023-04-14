@@ -5,7 +5,8 @@
         <meta name="viewport" id="viewport" content="width=device-width, initial-scale=1, user-scalable=no"> 
         <title>积木·聚合图集解析</title>
         <link rel="icon" type="image/x-icin" href="../../images/logo.ico">
-        <script src="../../tools/jQuery3.6.3_min.js"></script>
+        <script src="../../tools/jQuery3.6.4.min.js"></script>
+        <script src="../../tools/axios.js"></script>
         <script src="../../tools/clipboard.min.js"></script>
         <link rel="stylesheet" href="../../tools/bootstrap.min.css">
         <link rel="stylesheet" href="../css/function.css">
@@ -55,38 +56,36 @@
        				var url = $('input').val();
                    	if(url === '') return $('.result').html('分享链接不能为空').fadeOut(3000);
                     // ajax获得数据
-                    $.ajax({
+                    axios({
                         url : 'https://api.pearktrue.cn/api/tuji/api.php',
-                        type : 'get',
-                        dataType : 'json',
-                        data : {
+                        method : 'get',
+                        params : {
                             url : url
-                        },
-                        success : function (res) {
-                            if(res.code !== 200) return $('.result').html(res.msg).fadeOut(3000)
-                            localStorage.setItem('aggregateGraphAnalysis', url)
-                            var count;
-                            $('.data ul').html('<li>链接<br><a target="_blank" id="result" data-clipboard-target="#result"></a>')
-                            $('.data ul li:first a').html(url).attr('href', url)
-                            $.each(res.images, function (i, v) {
-                                count = '#result' + i;
-                                $('.data ul').append('<li class="topNum marTop">top<span>' + (i + 1) +'</span></li><li class="imgUrl">图片链接<br><a target="_blank" id="result' + i +'" data-clipboard-target="' + count +'"></a></li><li class="img"><a target="_blank"><img alt="图片"></a></li>')
-                                $('.data .imgUrl:last a').html(v).attr('href', v)
-                                $('.data .img:last a').attr('href', v).children('img').attr('src', v)
-                                // 解析链接点击复制
-                                new Clipboard(count, {
-                                    count : function(trigger) {
-                                        return trigger.nextElementSibling
-                                    }
-                                })
-                            })
-                            $('.data').fadeIn(500)
-                            $('.result').html('操作成功').fadeOut(3000)
-                            if(localStorage.getItem('inputRtention') === 'false') $('input').val('');
-                        },
-                        error : function (err) {
-                            $('.result').html('解析失败').fadeOut(3000)
                         }
+                    }).then((res) => {
+                        res = res.data;
+                        if(res.code !== 200) return $('.result').html(res.msg).fadeOut(3000)
+                        localStorage.setItem('aggregateGraphAnalysis', url)
+                        var count;
+                        $('.data ul').html('<li>链接<br><a target="_blank" id="result" data-clipboard-target="#result"></a>')
+                        $('.data ul li:first a').html(url).attr('href', url)
+                        $.each(res.images, function (i, v) {
+                            count = '#result' + i;
+                            $('.data ul').append('<li class="topNum marTop">top<span>' + (i + 1) +'</span></li><li class="imgUrl">图片链接<br><a target="_blank" id="result' + i +'" data-clipboard-target="' + count +'"></a></li><li class="img"><a target="_blank"><img alt="图片"></a></li>')
+                            $('.data .imgUrl:last a').html(v).attr('href', v)
+                            $('.data .img:last a').attr('href', v).children('img').attr('src', v)
+                            // 解析链接点击复制
+                            new Clipboard(count, {
+                                count : function(trigger) {
+                                    return trigger.nextElementSibling
+                                }
+                            })
+                        })
+                        $('.data').fadeIn(500)
+                        $('.result').html('解析成功').fadeOut(3000)
+                        if(localStorage.getItem('inputRtention') === 'false') $('input').val('');
+                    }).catch((err) => {
+                        $('.result').html('网络或接口出错,接口问题请联系作者').fadeOut(3000)
                     })
    				}
 				$('.btn-secondary').click(function () {

@@ -5,7 +5,8 @@
         <meta name="viewport" id="viewport" content="width=device-width, initial-scale=1, user-scalable=no"> 
         <title>积木·车牌凶吉查询</title>
         <link rel="icon" type="image/x-icin" href="../../images/logo.ico">
-        <script src="../../tools/jQuery3.6.3_min.js"></script>
+        <script src="../../tools/jQuery3.6.4.min.js"></script>
+        <script src="../../tools/axios.js"></script>
         <link rel="stylesheet" href="../../tools/bootstrap.min.css">
         <link rel="stylesheet" href="../css/function.css">
     </head> 
@@ -43,24 +44,35 @@
 				function getdata() {
        				var id = $('input').val();
                    	if(id === '') return $('.result').html('车牌号不能为空').fadeOut(3000);
-       				$.get('https://api.pearktrue.cn/api/xj/cp.php', {cp : id}, function (res){
-       					if(res.code !== '200' || res.data.xjfx == null) return $('.result').html('查询失败').fadeOut(3000);
+                    // ajax数据请求
+                    axios({
+                        url : 'https://api.pearktrue.cn/api/xj/cp.php',
+                        method : 'get',
+                        params : {
+                            cp : id
+                        }
+                    }).then((res) => {
+                        res = res.data;
+                        if(res.code !== '200' || res.data.xjfx == null) return $('.result').html('查询失败').fadeOut(3000);
                         localStorage.setItem('vehicleLicensePlateUnluckyInquiry', id)
-           				$('.data ul li:eq(0) span').html(res.data.cp)
-                        $('.data ul li:eq(1) span:eq(0)').html(res.data.wxsl)
-                        $('.data ul li:eq(1) span:eq(1)').html(res.data.wxsx)
-                     	$('.data ul li:eq(1) span:eq(2)').html(res.data.wxyy)
-                        $('.data ul li:eq(2) span').html(res.data.xjfx)
-                        $('.data ul li:eq(3) span').html(res.data.zrgx)
-                        if(res.data.place) {
-                            $('.data ul li:eq(4)').show().children('span').html(res.data.place)
+                        res = res.data;
+                        $('.data ul li:eq(0) span').html(res.cp)
+                        $('.data ul li:eq(1) span:eq(0)').html(res.wxsl)
+                        $('.data ul li:eq(1) span:eq(1)').html(res.wxsx)
+                        $('.data ul li:eq(1) span:eq(2)').html(res.wxyy)
+                        $('.data ul li:eq(2) span').html(res.xjfx)
+                        $('.data ul li:eq(3) span').html(res.zrgx)
+                        if(res.place) {
+                            $('.data ul li:eq(4)').show().children('span').html(res.place)
                         } else {
                             $('.data ul li:eq(4)').hide()
                         }
-                     	$('.data').fadeIn(500)
+                        $('.data').fadeIn(500)
                         $('.result').html('操作成功').fadeOut(3000)
                         if(localStorage.getItem('inputRtention') === 'false') $('input').val('');
-       				})
+                    }).catch((err) => {
+                        $('.result').html('网络或接口出错,接口问题请联系作者').fadeOut(3000)
+                    })
    				}
 				$('button').click(function () {
             		$('.result').html('请稍等').fadeIn(1000)

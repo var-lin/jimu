@@ -5,7 +5,8 @@
         <meta name="viewport" id="viewport" content="width=device-width, initial-scale=1, user-scalable=no"> 
         <title>积木·chatGPT3.5</title>
         <link rel="icon" type="image/x-icin" href="../../images/logo.ico">
-        <script src="../../tools/jQuery3.6.3_min.js"></script>
+        <script src="../../tools/jQuery3.6.4.min.js"></script>
+        <script src="../../tools/axios.js"></script>
         <link rel="stylesheet" href="../../tools/bootstrap.min.css">
         <link rel="stylesheet" href="../css/chatGPT.css">
     </head> 
@@ -95,19 +96,16 @@
                     $('.text').val('')
                     $('.dialogBox .rightText:last').css('height', $('.dialogBox .rightText:last').prop('scrollHeight'))
                     $('.dialogBox').scrollTop($('.dialogBox').prop('scrollHeight'))
-                    $.ajax({
+                    axios({
                         url : 'https://api.pearktrue.cn/api/gpt/',
-                        type : 'get',
-                        dataType : 'json',
-                        data : {
+                        method : 'get',
+                        params : {
                             message : text
-                        },
-                        success : function (res) {
-                            returnData(res.answer)
-                        },
-                        error : function (err) {
-                            returnData('对不起，chatGPT不能收到你的消息')
                         }
+                    }).then((res) => {
+                        returnData(res.data.answer)
+                    }).catch((err) => {
+                        returnData('对不起，chatGPT不能收到你的消息')
                     })
                 }
                 $('.header span').on('dblclick', function () {

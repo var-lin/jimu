@@ -5,7 +5,8 @@
         <meta name="viewport" id="viewport" content="width=device-width, initial-scale=1, user-scalable=no"> 
         <title>积木·抖音用户权重查询</title>
         <link rel="icon" type="image/x-icin" href="../../images/logo.ico">
-        <script src="../../tools/jQuery3.6.3_min.js"></script>
+        <script src="../../tools/jQuery3.6.4.min.js"></script>
+        <script src="../../tools/axios.js"></script>
         <link rel="stylesheet" href="../../tools/bootstrap.min.css">
         <link rel="stylesheet" href="../css/function.css">
     </head> 
@@ -59,34 +60,45 @@
 				function getdata() {
        				var url = $('input').val();
                    	if(url === '') return $('.result').html('请输入需要查询的抖音主页面链接').fadeOut(3000);
-       				$.get('https://api.pearktrue.cn/api/dy/check.php', {url : url}, function (res){
-       					if(res.code !== '200') return $('.result').html(res.msg).fadeOut(3000);
+                    // ajax数据请求
+                    axios({
+                        url : 'https://api.pearktrue.cn/api/dy/check.php',
+                        method : 'get',
+                        params : {
+                            url : url
+                        }
+                    }).then((res) => {
+                        res = res.data;
+                        if(res.code !== '200') return $('.result').html(res.msg).fadeOut(3000);
                         localStorage.setItem('tiktokUserWeightQuery', url)
-           				$('.data ul li:eq(0) a').attr('href', res.imgurl).children('img').attr('src', res.imgurl)
-                     	$('.data ul li:eq(1) span').html(res.user)
+                        $('.data ul li:eq(0) a').attr('href', res.imgurl).children('img').attr('src', res.imgurl)
+                        $('.data ul li:eq(1) span').html(res.user)
                         $('.data ul li:eq(2) span').html(res.name)
-                        $('.data ul li:eq(3) span').html(res.data.weight)
-                        $('.data ul li:eq(4) span').html(res.data.index)
-                        $('.data ul li:eq(5) span').html(res.data.fans)
-                        $('.data ul li:eq(6) span').html(res.data.clicklike)
-                        $('.data ul li:eq(7) span').html(res.data.works)
-                        $('.data ul li:eq(8) span').html(res.data.introduction)
-                        $('.data ul li:eq(9) span').html(res.data.follow)
-                        $('.data ul li:eq(10) span').html(res.data.status)
-                        $('.data ul li:eq(11) span').html(res.data.age)
-                        $('.data ul li:eq(12) span').html(res.data.sex)
-                        $('.data ul li:eq(13) span').html(res.data.school)
-                        $('.data ul li:eq(14) span').html(res.data.location)
-                        $('.data ul li:eq(15) span').html(res.data.score)
-                        $('.data ul li:eq(16) span').html(res.data.flow)
-                        $('.data ul li:eq(17) span').html(res.data.label)
-                        $('.data ul li:eq(18) span').html(res.data.time)
-                        $('.data ul li:eq(19) span').html(res.data.valuation)
-                        $('.data ul li:eq(20) span').html(res.data.synthesize)
-                     	$('.data').fadeIn(500)
+                        res = res.data;
+                        $('.data ul li:eq(3) span').html(res.weight)
+                        $('.data ul li:eq(4) span').html(res.index)
+                        $('.data ul li:eq(5) span').html(res.fans)
+                        $('.data ul li:eq(6) span').html(res.clicklike)
+                        $('.data ul li:eq(7) span').html(res.works)
+                        $('.data ul li:eq(8) span').html(res.introduction)
+                        $('.data ul li:eq(9) span').html(res.follow)
+                        $('.data ul li:eq(10) span').html(res.status)
+                        $('.data ul li:eq(11) span').html(res.age)
+                        $('.data ul li:eq(12) span').html(res.sex)
+                        $('.data ul li:eq(13) span').html(res.school)
+                        $('.data ul li:eq(14) span').html(res.location)
+                        $('.data ul li:eq(15) span').html(res.score)
+                        $('.data ul li:eq(16) span').html(res.flow)
+                        $('.data ul li:eq(17) span').html(res.label)
+                        $('.data ul li:eq(18) span').html(res.time)
+                        $('.data ul li:eq(19) span').html(res.valuation)
+                        $('.data ul li:eq(20) span').html(res.synthesize)
+                        $('.data').fadeIn(500)
                         $('.result').html('操作成功').fadeOut(3000)
                         if(localStorage.getItem('inputRtention') === 'false') $('input').val('');
-       				})
+                    }).catch((err) => {
+                        $('.result').html('网络或接口出错,接口问题请联系作者').fadeOut(3000)
+                    })
    				}
 				$('button').click(function () {
             		$('.result').html('请稍等').fadeIn(1000)

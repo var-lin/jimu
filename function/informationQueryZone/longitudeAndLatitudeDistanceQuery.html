@@ -5,7 +5,8 @@
         <meta name="viewport" id="viewport" content="width=device-width, initial-scale=1, user-scalable=no"> 
         <title>积木·经纬度距离查询</title>
         <link rel="icon" type="image/x-icin" href="../../images/logo.ico">
-        <script src="../../tools/jQuery3.6.3_min.js"></script>
+        <script src="../../tools/jQuery3.6.4.min.js"></script>
+        <script src="../../tools/axios.js"></script>
         <link rel="stylesheet" href="../../tools/bootstrap.min.css">
         <link rel="stylesheet" href="../css/function.css">
     </head> 
@@ -56,18 +57,30 @@
                     if(lon2 === '') return $('.result').html('结束位置经度不能为空').fadeOut(3000);
                    	if(lat2 === '') return $('.result').html('结束位置纬度不能为空').fadeOut(3000);
                     // ajax获得数据
-                    $.get('https://api.pearktrue.cn/api/map/distance.php', {start_lon : lon1, start_lat : lat1, end_lon : lon2, end_lat : lat2}, function (res) {
-                        if(res.code !== '200') return $('.result').html(res.msg).fadeOut(3000);
+                    axios({
+                        url : 'https://api.pearktrue.cn/api/map/distance.php',
+                        method : 'get',
+                        params : {
+                            start_lon : lon1,
+                            start_lat : lat1,
+                            end_lon : lon2,
+                            end_lat : lat2
+                        }
+                    }).then((res) => {
+                        if(res.data.code !== '200') return $('.result').html(res.data.msg).fadeOut(3000);
                         localStorage.setItem('wechatMovementBrushStep1', lon1)
                         localStorage.setItem('wechatMovementBrushStep2', lat1)
                         localStorage.setItem('wechatMovementBrushStep3', lon2)
                         localStorage.setItem('wechatMovementBrushStep4', lat2)
-                        $('.data ul li:eq(0) span').html(res.data.start_lon + ' ' + res.data.start_lat)
-                        $('.data ul li:eq(1) span').html(res.data.end_lon + ' ' + res.data.end_lat)
-                        $('.data ul li:eq(2) span').html(res.data.distance)
+                        res = res.data.data;
+                        $('.data ul li:eq(0) span').html(res.start_lon + ' ' + res.start_lat)
+                        $('.data ul li:eq(1) span').html(res.end_lon + ' ' + res.end_lat)
+                        $('.data ul li:eq(2) span').html(res.distance)
                         $('.data').fadeIn(500)
                         $('.result').html('操作成功').fadeOut(3000)
                         if(localStorage.getItem('inputRtention') === 'false') $('input').val('');
+                    }).catch((err) => {
+                        $('.result').html('网络或接口出错,接口问题请联系作者').fadeOut(3000)
                     })
    				}
 				$('button').click(function () {

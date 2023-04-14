@@ -5,7 +5,8 @@
         <meta name="viewport" id="viewport" content="width=device-width, initial-scale=1, user-scalable=no"> 
         <title>积木·QQ音乐无损下载</title>
         <link rel="icon" type="image/x-icin" href="../../images/logo.ico">
-        <script src="../../tools/jQuery3.6.3_min.js"></script>
+        <script src="../../tools/jQuery3.6.4.min.js"></script>
+        <script src="../../tools/axios.js"></script>
         <script src="../../tools/clipboard.min.js"></script>
         <link rel="stylesheet" href="../../tools/bootstrap.min.css">
         <link rel="stylesheet" href="../css/function.css">
@@ -19,7 +20,7 @@
             </div>
             <div class="notes text-center">
                 <div>#无反应请检测网络#</div>
-            	<div>#无视会员#</div>
+            	<div>#<span>无视会员</span>#</div>
             </div>
             <div class="data">
             	查询结果
@@ -45,7 +46,16 @@
 				function getdata() {
        				var text = $('input').val();
                    	if(text === '') return $('.result').html('请输入需要查询的QQ音乐歌名').fadeOut(3000);
-                    $.get('https://xiaoapi.cn/API/yy_sq.php', {msg : text, type : 'json', n : 1}, function (res){
+                    axios({
+                        url : 'https://xiaoapi.cn/API/yy_sq.php',
+                        method : 'get',
+                        params : {
+                            msg : text,
+                            type : 'json',
+                            n : 1
+                        }
+                    }).then((res) => {
+                        res = res.data;
                         if(res.code !== 200) return $('.result').html('查询失败').fadeOut(3000);
                         localStorage.setItem('QQMusicLosslessDownload', text)
                         $('.data ul li:eq(0) a').attr('href', res.cover).children('img').attr('src', res.cover)
@@ -54,8 +64,10 @@
                         $('.data ul li:eq(3) span').html(res.quality)
                         $('.data ul li:eq(4) a').html(res.url).attr('href', res.url)
                         $('.data').fadeIn(500)
-                        $('.result').html('操作成功').fadeOut(3000)
+                        $('.result').html('解析成功').fadeOut(3000)
                         if(localStorage.getItem('inputRtention') === 'false') $('input').val('');
+                    }).catch((err) => {console.log(err)
+                        $('.result').html('网络或接口出错,接口问题请联系作者').fadeOut(3000)
                     })
    				}
 				$('button').click(function () {

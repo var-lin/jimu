@@ -5,7 +5,8 @@
         <meta name="viewport" id="viewport" content="width=device-width, initial-scale=1, user-scalable=no"> 
         <title>积木·空气气质指数</title>
         <link rel="icon" type="image/x-icin" href="../../images/logo.ico">
-        <script src="../../tools/jQuery3.6.3_min.js"></script>
+        <script src="../../tools/jQuery3.6.4.min.js"></script>
+        <script src="../../tools/axios.js"></script>
         <link rel="stylesheet" href="../../tools/bootstrap.min.css">
         <link rel="stylesheet" href="../css/function.css">
     </head> 
@@ -52,28 +53,36 @@
        				var area = $('input').val();
                    	if(area === '') return $('.result').html('城市不能为空').fadeOut(3000);
                     // ajax获得数据
-       				$.get('https://api.qqsuu.cn/api/dm-aqi', {area : area}, function (res){
-                        res = JSON.parse(res);
-       					if(res.code !== 200) return $('.result').html(res.msg).fadeOut(3000);
+                    axios({
+                        url : 'https://api.qqsuu.cn/api/dm-aqi',
+                        method : 'get',
+                        params : {
+                            area : area
+                        }
+                    }).then((res) => {
+                        if(res.data.code !== 200) return $('.result').html(res.data.msg).fadeOut(3000);
                         localStorage.setItem('airQualityIndex', area)
-           				$('.data ul li:eq(0) span').html(res.data.area)
-                        $('.data ul li:eq(1) span').html(res.data.area_code)
-                        $('.data ul li:eq(2) span span').html(res.data.so2)
-                        $('.data ul li:eq(3) span span').html(res.data.o3)
-                        $('.data ul li:eq(4) span span').html(res.data.pm2_5)
-                        $('.data ul li:eq(5) span').html(res.data.primary_pollutant)
-                        $('.data ul li:eq(6) span span').html(res.data.co)
-                        $('.data ul li:eq(7) span').html(res.data.num)
-                        $('.data ul li:eq(8) span span').html(res.data.no2)
-                        $('.data ul li:eq(9) span').html(res.data.quality)
-                        $('.data ul li:eq(10) span').html(res.data.aqi)
-                        $('.data ul li:eq(11) span span').html(res.data.pm10)
-                        $('.data ul li:eq(12) span span').html(res.data.o3_8h)
-                        $('.data ul li:eq(13) span').html(res.data.time)
-                     	$('.data').fadeIn(500)
+                        res = res.data.data;
+                        $('.data ul li:eq(0) span').html(res.area)
+                        $('.data ul li:eq(1) span').html(res.area_code)
+                        $('.data ul li:eq(2) span span').html(res.so2)
+                        $('.data ul li:eq(3) span span').html(res.o3)
+                        $('.data ul li:eq(4) span span').html(res.pm2_5)
+                        $('.data ul li:eq(5) span').html(res.primary_pollutant)
+                        $('.data ul li:eq(6) span span').html(res.co)
+                        $('.data ul li:eq(7) span').html(res.num)
+                        $('.data ul li:eq(8) span span').html(res.no2)
+                        $('.data ul li:eq(9) span').html(res.quality)
+                        $('.data ul li:eq(10) span').html(res.aqi)
+                        $('.data ul li:eq(11) span span').html(res.pm10)
+                        $('.data ul li:eq(12) span span').html(res.o3_8h)
+                        $('.data ul li:eq(13) span').html(res.time)
+                        $('.data').fadeIn(500)
                         $('.result').html('查询成功').fadeOut(3000)
                         if(localStorage.getItem('inputRtention') === 'false') $('input').val('');
-       				})
+                    }).catch((err) => {
+                        $('.result').html('网络或接口出错,接口问题请联系作者').fadeOut(3000)
+                    })
    				}
 				$('button').click(function () {
             		$('.result').html('请稍等').fadeIn(1000)

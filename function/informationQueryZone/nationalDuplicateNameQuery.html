@@ -5,7 +5,8 @@
         <meta name="viewport" id="viewport" content="width=device-width, initial-scale=1, user-scalable=no"> 
         <title>积木·全国重名查询</title>
         <link rel="icon" type="image/x-icin" href="../../images/logo.ico">
-        <script src="../../tools/jQuery3.6.3_min.js"></script>
+        <script src="../../tools/jQuery3.6.4.min.js"></script>
+        <script src="../../tools/axios.js"></script>
         <link rel="stylesheet" href="../../tools/bootstrap.min.css">
         <link rel="stylesheet" href="../css/function.css">
     </head> 
@@ -42,22 +43,31 @@
        				var text = $('input').val();
                    	if(text === '') return $('.result').html('名字不能为空').fadeOut(3000);
                     // ajax获得数据
-       				$.get('https://api.pearktrue.cn/api/name/check.php', {name : text}, function (res){
-       					if(res.code !== '200') return $('.result').html(res.msg).fadeOut(3000);
+                    axios({
+                        url : 'https://api.pearktrue.cn/api/name/check.php',
+                        method : 'get',
+                        params : {
+                            name : text
+                        }
+                    }).then((res) => {
+                        if(res.data.code !== '200') return $('.result').html(res.data.msg).fadeOut(3000);
                         localStorage.setItem('nationalDuplicateNameQuery', text)
-           				$('.data ul li:eq(0) span').html(res.data.name)
-                        $('.data ul li:eq(1) span').html(res.data.count)
-                        if(res.data.count == 0) {
+                        res = res.data.data;
+                        $('.data ul li:eq(0) span').html(res.name)
+                        $('.data ul li:eq(1) span').html(res.count)
+                        if(res.count == 0) {
                             $('.data ul li:eq(2)').hide()
                             $('.data ul li:eq(3)').hide()
                         } else {
-                            $('.data ul li:eq(2)').show().children('span').html(res.data.male)
-                            $('.data ul li:eq(3)').show().children('span').html(res.data.female)
+                            $('.data ul li:eq(2)').show().children('span').html(res.male)
+                            $('.data ul li:eq(3)').show().children('span').html(res.female)
                         }
-                     	$('.data').fadeIn(500)
+                        $('.data').fadeIn(500)
                         $('.result').html('操作成功').fadeOut(3000)
                         if(localStorage.getItem('inputRtention') === 'false') $('input').val('');
-       				})
+                    }).catch((err) => {
+                        $('.result').html('网络或接口出错,接口问题请联系作者').fadeOut(3000)
+                    })
    				}
 				$('button').click(function () {
             		$('.result').html('请稍等').fadeIn(1000)

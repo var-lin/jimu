@@ -5,7 +5,8 @@
         <meta name="viewport" id="viewport" content="width=device-width, initial-scale=1, user-scalable=no"> 
         <title>积木·成语查询</title>
         <link rel="icon" type="image/x-icin" href="../../images/logo.ico">
-        <script src="../../tools/jQuery3.6.3_min.js"></script>
+        <script src="../../tools/jQuery3.6.4.min.js"></script>
+        <script src="../../tools/axios.js"></script>
         <link rel="stylesheet" href="../../tools/bootstrap.min.css">
         <link rel="stylesheet" href="../css/function.css">
     </head> 
@@ -47,9 +48,16 @@
 				function getdata() {
        				var idiom = $('input').val();
                    	if(idiom === '') return $('.result').html('成语不能为空').fadeOut(3000);
-       				$.get('https://v.api.aa1.cn/api/api-chengyu/index.php', {msg : idiom}, function (res){
-                        res = JSON.parse(res)
-       					if(res.code !== '1') return $('.result').html(res.error).fadeOut(3000);
+                    // ajax数据请求
+                    axios({
+                        url : 'https://v.api.aa1.cn/api/api-chengyu/index.php',
+                        method : 'get',
+                        params : {
+                            msg : idiom
+                        }
+                    }).then((res) => {
+                        res = res.data;
+                        if(res.code !== '1') return $('.result').html(res.error).fadeOut(3000);
                         localStorage.setItem('idiomQuery', idiom)
                         ifData(res.cycx, '.data ul li:eq(0) span')
                         ifData(res.cycc, '.data ul li:eq(1) span')
@@ -57,10 +65,12 @@
                         ifData(res.cybx, '.data ul li:eq(3) span')
                         ifData(res.cyzj, '.data ul li:eq(4) span')
                         ifData(res.cysy, '.data ul li:eq(5) span')
-                     	$('.data').fadeIn(500)
+                        $('.data').fadeIn(500)
                         $('.result').html('操作成功').fadeOut(3000)
                         if(localStorage.getItem('inputRtention') === 'false') $('input').val('');
-       				})
+                    }).catch((err) => {
+                        $('.result').html('网络或接口出错,接口问题请联系作者').fadeOut(3000)
+                    })
    				}
 				$('button').click(function () {
             		$('.result').html('请稍等').fadeIn(1000)

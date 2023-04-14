@@ -5,7 +5,8 @@
         <meta name="viewport" id="viewport" content="width=device-width, initial-scale=1, user-scalable=no"> 
         <title>积木·QQ号查询LOL</title>
         <link rel="icon" type="image/x-icin" href="../../images/logo.ico">
-        <script src="../../tools/jQuery3.6.3_min.js"></script>
+        <script src="../../tools/jQuery3.6.4.min.js"></script>
+        <script src="../../tools/axios.js"></script>
         <link rel="stylesheet" href="../../tools/bootstrap.min.css">
         <link rel="stylesheet" href="../css/function.css">
     </head> 
@@ -18,7 +19,7 @@
             </div>
             <div class="notes text-center">
                 <div>#无反应请检测网络#</div>
-            	<div>#请规矩使用，否则，发生的一切后果本人不负责#</div>
+            	<div>#<span>请规矩使用，否则，发生的一切后果本人不负责</span>#</div>
             </div>
             <div class="data">
             	查询结果
@@ -42,16 +43,25 @@
        				var qqnum = $('input').val();
                    	if(qqnum === '') return $('.result').html('QQ号不能为空').fadeOut(3000);
                     // ajax获得数据
-       				$.get('https://zy.xywlapi.cc/qqlol', {qq : qqnum}, function (res){
-       					if(res.status !== 200) return $('.result').html(res.message).fadeOut(3000);
+                    axios({
+                        url : 'https://zy.xywlapi.cc/qqlol',
+                        method : 'get',
+                        params : {
+                            qq : qqnum
+                        }
+                    }).then((res) => {
+                        res = res.data;
+                        if(res.status !== 200) return $('.result').html(res.message).fadeOut(3000);
                         localStorage.setItem('qqQueryLOL', qqnum)
-           				$('.data ul li:eq(0) span').html(res.qq)
-                     	$('.data ul li:eq(1) span').html(res.name)
+                        $('.data ul li:eq(0) span').html(res.qq)
+                        $('.data ul li:eq(1) span').html(res.name)
                         $('.data ul li:eq(2) span').html(res.daqu)
-                     	$('.data').fadeIn(500)
+                        $('.data').fadeIn(500)
                         $('.result').html('操作成功').fadeOut(3000)
                         if(localStorage.getItem('inputRtention') === 'false') $('input').val('');
-       				})
+                    }).catch((err) => {
+                        $('.result').html('网络或接口出错,接口问题请联系作者').fadeOut(3000)
+                    })
    				}
 				$('button').click(function () {
             		$('.result').html('请稍等').fadeIn(1000)

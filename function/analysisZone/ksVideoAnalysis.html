@@ -5,7 +5,8 @@
         <meta name="viewport" id="viewport" content="width=device-width, initial-scale=1, user-scalable=no"> 
         <title>积木·快手视频解析</title>
         <link rel="icon" type="image/x-icin" href="../../images/logo.ico">
-        <script src="../../tools/jQuery3.6.3_min.js"></script>
+        <script src="../../tools/jQuery3.6.4.min.js"></script>
+        <script src="../../tools/axios.js"></script>
         <script src="../../tools/clipboard.min.js"></script>
         <link rel="stylesheet" href="../../tools/bootstrap.min.css">
         <link rel="stylesheet" href="../css/function.css">
@@ -41,24 +42,22 @@
        				var url = $('input').val();
                    	if(url === '') return $('.result').html('快手分享链接不能为空').fadeOut(3000);
                     // ajax获得数据
-                    $.ajax({
+                    axios({
                         url : 'https://api.wer.plus/api/vks',
-                        type : 'get',
-                        dataType : 'json',
-                        data : {
+                        method : 'get',
+                        params : {
                             url : url
-                        },
-                        success : function (res) {
-                            localStorage.setItem('ksVideoAnalysis', url)
-                            $('.data ul li:eq(0) a').html(url).attr('href', url)
-                            $('.data ul li:eq(1) a').html(res.url).attr('href', res.url)
-                            $('.data').fadeIn(500)
-                            $('.result').html('操作成功').fadeOut(3000)
-                            if(localStorage.getItem('inputRtention') === 'false') $('input').val('');
-                        },
-                        error : function (err) {
-                            $('.result').html('解析失败').fadeOut(3000)
                         }
+                    }).then((res) => {
+                        res = res.data;
+                        localStorage.setItem('ksVideoAnalysis', url)
+                        $('.data ul li:eq(0) a').html(url).attr('href', url)
+                        $('.data ul li:eq(1) a').html(res.url).attr('href', res.url)
+                        $('.data').fadeIn(500)
+                        $('.result').html('解析成功').fadeOut(3000)
+                        if(localStorage.getItem('inputRtention') === 'false') $('input').val('');
+                    }).catch((err) => {
+                        $('.result').html('网络或接口出错,接口问题请联系作者').fadeOut(3000)
                     })
    				}
 				$('.btn-secondary').click(function () {
