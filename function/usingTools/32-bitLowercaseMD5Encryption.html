@@ -5,7 +5,8 @@
         <meta name="viewport" id="viewport" content="width=device-width, initial-scale=1, user-scalable=no"> 
         <title>积木·32位小写md5加密</title>
         <link rel="icon" type="image/x-icin" href="../../images/logo.ico">
-        <script src="../../tools/jQuery3.6.3_min.js"></script>
+        <script src="../../tools/jQuery3.6.4.min.js"></script>
+        <script src="../../tools/axios.js"></script>
         <script src="../../tools/clipboard.min.js"></script>
         <link rel="stylesheet" href="../../tools/bootstrap.min.css">
         <link rel="stylesheet" href="../css/function.css">
@@ -42,15 +43,24 @@
        				var text = $('input').val();
                    	if(text === '') return $('.result').html('加密内容不能为空').fadeOut(3000);
                     // ajax获得数据
-       				$.get('https://api.qqsuu.cn/api/dm-md5', {text : text}, function (res){
-       					if(res.code !== 200) return $('.result').html(res.msg).fadeOut(3000);
+                    axios({
+                        url : 'https://api.qqsuu.cn/api/dm-md5',
+                        method : 'get',
+                        params : {
+                            text : text
+                        }
+                    }).then((res) => {
+                        res = res.data;
+                        if(res.code !== 200) return $('.result').html(res.msg).fadeOut(3000);
                         localStorage.setItem('32-bitLowercaseMD5Encryption', text)
-           				$('.data ul li:eq(0) span').html(res.Front)
-                     	$('.data ul li:eq(1) span').html(res.md5)
-                     	$('.data').fadeIn(500)
+                        $('.data ul li:eq(0) span').html(res.Front)
+                        $('.data ul li:eq(1) span').html(res.md5)
+                        $('.data').fadeIn(500)
                         $('.result').html('加密成功').fadeOut(3000)
                         if(localStorage.getItem('inputRtention') === 'false') $('input').val('');
-       				})
+                    }).catch((err) => {
+                        $('.result').html('网络或接口出错,接口问题请联系作者').fadeOut(3000)
+                    })
    				}
 				$('button').click(function () {
             		$('.result').html('请稍等').fadeIn(1000)

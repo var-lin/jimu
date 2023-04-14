@@ -5,7 +5,8 @@
         <meta name="viewport" id="viewport" content="width=device-width, initial-scale=1, user-scalable=no"> 
         <title>积木·网址缩短</title>
         <link rel="icon" type="image/x-icin" href="../../images/logo.ico">
-        <script src="../../tools/jQuery3.6.3_min.js"></script>
+        <script src="../../tools/jQuery3.6.4.min.js"></script>
+        <script src="../../tools/axios.js"></script>
         <script src="../../tools/clipboard.min.js"></script>
         <link rel="stylesheet" href="../../tools/bootstrap.min.css">
         <link rel="stylesheet" href="../css/function.css">
@@ -19,7 +20,7 @@
 	        </div>
            	<div class="notes text-center">
                 <div>#无反应请检测网络#</div>
-              	<div>#必须是完整的网址加上https://#</div>
+              	<div>#<span>必须是完整的网址</span>加上https://#</div>
                 <div>#网址点击可复制哦~#</div>
             </div>
 	        <div class="data text-center">
@@ -40,15 +41,24 @@
 				function getdata() {
        				var url = $('input').val();
                    	if(url === '') return $('.result').html('请输入网址').fadeOut(3000);
-       				$.get('https://api.uomg.com/api/long2dwz', {url : url, dwzapi : 'tcn'}, function (res){
-                        res = JSON.parse(res)
+                    axios({
+                        url : 'https://api.uomg.com/api/long2dwz',
+                        method : 'get',
+                        params : {
+                            url : url,
+                            dwzapi : 'tcn'
+                        }
+                    }).then((res) => {
+                        res = res.data;
                         if(res.code !== 1 || res.ae_url == '请输入有效的URL。') return $('.result').html(res.msg ? res.msg : res.ae_url).fadeOut(3000);
                         localStorage.setItem('shortenUrl', url)
-            			$('.data div:eq(1)').html(res.ae_url)
-                     	$('.data').fadeIn(500)
+                        $('.data div:eq(1)').html(res.ae_url)
+                        $('.data').fadeIn(500)
                         $('.result').html('操作成功').fadeOut(3000)
                         if(localStorage.getItem('inputRtention') === 'false') $('input').val('');
-       				})
+                    }).catch((err) => {
+                        $('.result').html('网络或接口出错,接口问题请联系作者').fadeOut(3000)
+                    })
    				}
 				$('button').click(function () {
             		$('.result').fadeIn(1000).html('请稍等')      	

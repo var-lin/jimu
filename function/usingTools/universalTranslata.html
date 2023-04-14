@@ -5,7 +5,8 @@
         <meta name="viewport" id="viewport" content="width=device-width, initial-scale=1, user-scalable=no"> 
         <title>积木·万能翻译</title>
         <link rel="icon" type="image/x-icin" href="../../images/logo.ico">
-        <script src="../../tools/jQuery3.6.3_min.js"></script>
+        <script src="../../tools/jQuery3.6.4.min.js"></script>
+        <script src="../../tools/axios.js"></script>
         <script src="../../tools/clipboard.min.js"></script>
         <link rel="stylesheet" href="../../tools/bootstrap.min.css">
         <link rel="stylesheet" href="../css/function.css">
@@ -36,15 +37,25 @@
 				function getdata() {
        				var text = $('textarea').val();
                    	if(text === '') return $('.result').html('请输入内容').fadeOut(3000);
-       				$.get('https://api.vvhan.com/api/fy', {text:text}, function (res){
-       					if(!res.success) return $('.result').html('获取失败').fadeOut(3000);
-            			$('.data div:eq(0) span').html(res.data.text)
-                     	$('.data div:eq(1) span').html(res.type)
-            			$('.data div:eq(2) span').html(res.data.fanyi)
-                     	$('.data').fadeIn(500)
+                    axios({
+                        url : 'https://api.vvhan.com/api/fy',
+                        method : 'get',
+                        params : {
+                            text : text
+                        }
+                    }).then((res) => {
+                        res = res.data;
+                        if(!res.success) return $('.result').html('获取失败').fadeOut(3000);
+                        $('.data div:eq(1) span').html(res.type)
+                        res = res.data;
+                        $('.data div:eq(0) span').html(res.text)
+                        $('.data div:eq(2) span').html(res.fanyi)
+                        $('.data').fadeIn(500)
                         $('.result').html('操作成功').fadeOut(3000)
                         if(localStorage.getItem('inputRtention') === 'false') $('textarea').val('');
-       				})
+                    }).catch((err) => {
+                        $('.result').html('网络或接口出错,接口问题请联系作者').fadeOut(3000)
+                    })
    				}
 				$('button').click(function () {
             		$('.result').html('请稍等').fadeIn(1000)

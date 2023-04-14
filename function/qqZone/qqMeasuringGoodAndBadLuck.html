@@ -5,7 +5,7 @@
         <meta name="viewport" id="viewport" content="width=device-width, initial-scale=1, user-scalable=no"> 
         <title>积木·QQ号测凶吉</title>
         <link rel="icon" type="image/x-icin" href="../../images/logo.ico">
-        <script src="../../tools/jQuery3.6.3_min.js"></script>
+        <script src="../../tools/jQuery3.6.4.min.js"></script>
         <link rel="stylesheet" href="../../tools/bootstrap.min.css">
         <link rel="stylesheet" href="../css/function.css">
     </head> 
@@ -18,7 +18,7 @@
             </div>
             <div class="notes text-center">
             	<div>#无反应请检测网络#</div>
-               	<div>#资金问题,这个接口每天一共只能查询100次#</div>
+               	<div>#资金问题,这个接口<span>每天一共只能查询100次</span>#</div>
             </div>
             <div class="data">
             	查询结果
@@ -57,15 +57,19 @@
        					success : function (res){
        						if(res.status !== 0) return $('.result').html(res.msg).fadeOut(3000);
                             localStorage.setItem('qqMeasuringGoodAndBadLuck', qqnum)
-                      		$('.data ul li:eq(0) span').html(res.result.qq)        			
-           					$('.data ul li:eq(1) span').html(res.result.score)
-                     		$('.data ul li:eq(2) span').html(res.result.luck)
-                        	$('.data ul li:eq(4)').html(res.result.content)
-                        	$('.data ul li:eq(5) span').html(res.result.character)
-                        	$('.data ul li:eq(7)').html(res.result.characterdetail)                                                          
+                            res = res.result;
+                      		$('.data ul li:eq(0) span').html(res.qq)        			
+           					$('.data ul li:eq(1) span').html(res.score)
+                     		$('.data ul li:eq(2) span').html(res.luck)
+                        	$('.data ul li:eq(4)').html(res.content)
+                        	$('.data ul li:eq(5) span').html(res.character)
+                        	$('.data ul li:eq(7)').html(res.characterdetail)                                                          
                      		$('.data').fadeIn(500)
                         	$('.result').html('操作成功').fadeOut(3000)
                         	if(localStorage.getItem('inputRtention') === 'false') $('input').val('');
+                         },
+                         error : function (err) {
+                            $('.result').html('网络或接口出错,接口问题请联系作者').fadeOut(3000)
                          }
        				})
    				}

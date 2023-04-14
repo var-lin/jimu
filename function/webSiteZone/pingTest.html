@@ -5,7 +5,8 @@
         <meta name="viewport" id="viewport" content="width=device-width, initial-scale=1, user-scalable=no"> 
         <title>积木·ping测试</title>
         <link rel="icon" type="image/x-icin" href="../../images/logo.ico">
-        <script src="../../tools/jQuery3.6.3_min.js"></script>
+        <script src="../../tools/jQuery3.6.4.min.js"></script>
+        <script src="../../tools/axios.js"></script>
         <link rel="stylesheet" href="../../tools/bootstrap.min.css">
         <link rel="stylesheet" href="../css/function.css">
     </head> 
@@ -44,28 +45,26 @@
        				var url = $('input').val();
                    	if(url === '') return $('.result').html('请输入要查询的网址或ip').fadeOut(3000);
                     // ajax获得数据
-                    $.ajax({
+                    axios({
                         url : 'https://v.api.aa1.cn/api/api-ping/ping.php',
-                        type : 'get',
-                        dataType : 'json',
-                        data : {
+                        method : 'get',
+                        params : {
                             url : url
-                        },
-                        success : function (res) {
-                            localStorage.setItem('pingTest', url)
-                            $('.data ul li:eq(0) span').html(res.host)
-                            $('.data ul li:eq(1) span').html(res.ip)
-                            $('.data ul li:eq(2) span').html(res.ping_time_min)
-                            $('.data ul li:eq(3) span').html(res.ping_time_max)
-                            $('.data ul li:eq(4) span').html(res.location)
-                            $('.data ul li:eq(5) span').html(res.node)
-                            $('.data').fadeIn(500)
-                            $('.result').html('操作成功').fadeOut(3000)
-                            if(localStorage.getItem('inputRtention') === 'false') $('input').val('');
-                        },
-                        error : function (err) {
-                            $('.result').html(err.responseText).fadeOut(3000);
                         }
+                    }).then((res) => {
+                        res = res.data;
+                        localStorage.setItem('pingTest', url)
+                        $('.data ul li:eq(0) span').html(res.host)
+                        $('.data ul li:eq(1) span').html(res.ip)
+                        $('.data ul li:eq(2) span').html(res.ping_time_min)
+                        $('.data ul li:eq(3) span').html(res.ping_time_max)
+                        $('.data ul li:eq(4) span').html(res.location)
+                        $('.data ul li:eq(5) span').html(res.node)
+                        $('.data').fadeIn(500)
+                        $('.result').html('操作成功').fadeOut(3000)
+                        if(localStorage.getItem('inputRtention') === 'false') $('input').val('');
+                    }).catch((err) => {
+                        $('.result').html('网络或接口出错,接口问题请联系作者').fadeOut(3000)
                     })
    				}
 				$('button').click(function () {

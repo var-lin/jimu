@@ -5,7 +5,7 @@
         <meta name="viewport" id="viewport" content="width=device-width, initial-scale=1, user-scalable=no"> 
         <title>积木·QQ头像表情包生成</title>
         <link rel="icon" type="image/x-icin" href="../../images/logo.ico">
-        <script src="../../tools/jQuery3.6.3_min.js"></script>
+        <script src="../../tools/jQuery3.6.4.min.js"></script>
         <script src="../../tools/clipboard.min.js"></script>
         <link rel="stylesheet" href="../../tools/bootstrap.min.css">
         <link rel="stylesheet" href="../css/function.css">
@@ -105,7 +105,8 @@
             <div class="data">
             	查询结果
                	<ul>
-               		<li>QQ号：<span></span></li>
+                    <li>QQ号：<span></span></li>
+               		<li>QQ号2：<span></span></li>
                     <li>表情包图片链接<br><a target="_blank" id="result" data-clipboard-target="#result"></a></li>
                     <li><a target="_blank"><img alt="表情包"></a></li>
                	</ul>
@@ -307,15 +308,17 @@
                     if($('input:eq(2)').val() > 75) {
                         if(qqnum2 === '') return $('.result').html('第二QQ不能为空').fadeOut(3000);
                         localStorage.setItem('QQAvatarEmoticonPackageGeneration2', qqnum2)
+                        $('.data ul li:eq(1)').show().children('span').html(qqnum2)
                         url = type + qqnum + '&qq2=' + qqnum2;
                     } else {
+                        $('.data ul li:eq(1)').hide()
                         url = type + qqnum;
                     }
                     localStorage.setItem('QQAvatarEmoticonPackageGeneration1', qqnum)
                     localStorage.setItem('QQAvatarEmoticonPackageGeneration3', $('input:eq(2)').val())
        				$('.data ul li:eq(0) span').html(qqnum)
-                    $('.data ul li:eq(1) a').html(url).attr('href', url)
-                    $('.data ul li:eq(2) a').attr('href', url).children('img').attr('src', url)
+                    $('.data ul li:eq(2) a').html(url).attr('href', url)
+                    $('.data ul li:eq(3) a').attr('href', url).children('img').attr('src', url)
                  	$('.data').fadeIn(500)
                     $('.result').html('操作成功').fadeOut(3000)
                     if(localStorage.getItem('inputRtention') === 'false') $('input').val('');

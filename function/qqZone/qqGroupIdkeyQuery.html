@@ -5,7 +5,8 @@
         <meta name="viewport" id="viewport" content="width=device-width, initial-scale=1, user-scalable=no"> 
         <title>积木·QQ群idkey查询</title>
         <link rel="icon" type="image/x-icin" href="../../images/logo.ico">
-        <script src="../../tools/jQuery3.6.3_min.js"></script>
+        <script src="../../tools/jQuery3.6.4.min.js"></script>
+        <script src="../../tools/axios.js"></script>
         <script src="../../tools/clipboard.min.js"></script>
         <link rel="stylesheet" href="../../tools/bootstrap.min.css">
         <link rel="stylesheet" href="../css/function.css">
@@ -43,16 +44,25 @@
        				var qqgroupnum = $('input').val();
                    	if(qqgroupnum === '') return $('.result').html('QQ群号不能为空').fadeOut(3000);
                     // ajax获得数据
-       				$.get('http://res.abeim.cn/api-qq.qun.key', {qun : qqgroupnum}, function (res){
-       					if(res.code !== 200) return $('.result').html(res.msg).fadeOut(3000);
+                    axios({
+                        url : 'http://res.abeim.cn/api-qq.qun.key',
+                        method : 'get',
+                        params : {
+                            qun : qqgroupnum
+                        }
+                    }).then((res) => {
+                        res = res.data;
+                        if(res.code !== 200) return $('.result').html(res.msg).fadeOut(3000);
                         localStorage.setItem('qqGroupIdkeyQuery', qqgroupnum)
-           				$('.data ul li:eq(0) span').html(res.qun)
+                        $('.data ul li:eq(0) span').html(res.qun)
                         $('.data ul li:eq(1) span').html(res.key)
-                     	$('.data ul li:eq(2) a').attr('href', res.url).html(res.url)
-                     	$('.data').fadeIn(500)
+                        $('.data ul li:eq(2) a').attr('href', res.url).html(res.url)
+                        $('.data').fadeIn(500)
                         $('.result').html('操作成功').fadeOut(3000)
                         if(localStorage.getItem('inputRtention') === 'false') $('input').val('');
-       				})
+                    }).catch((err) => {
+                        $('.result').html('网络或接口出错,接口问题请联系作者').fadeOut(3000)
+                    })
    				}
 				$('button').click(function () {
             		$('.result').html('请稍等').fadeIn(1000)

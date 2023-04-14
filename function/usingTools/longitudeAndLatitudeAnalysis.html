@@ -5,7 +5,8 @@
         <meta name="viewport" id="viewport" content="width=device-width, initial-scale=1, user-scalable=no"> 
         <title>积木·经纬度解析</title>
         <link rel="icon" type="image/x-icin" href="../../images/logo.ico">
-        <script src="../../tools/jQuery3.6.3_min.js"></script>
+        <script src="../../tools/jQuery3.6.4.min.js"></script>
+        <script src="../../tools/axios.js"></script>
         <link rel="stylesheet" href="../../tools/bootstrap.min.css">
         <link rel="stylesheet" href="../css/function.css">
     </head> 
@@ -29,7 +30,7 @@
                     <li>区：<span></span></li>
                     <li>街道：<span></span></li>
                     <li>地址：<span></span></li>
-                    <li>推荐地址：<span></span></li>
+                    <li>推荐地址<br><span></span></li>
                	</ul>
             </div>                              	                    
        	</div>
@@ -52,21 +53,31 @@
                     }
                    	if(longitud === '' && latitude === '') return $('.result').html('请输入要解析的经纬度').fadeOut(3000);
                     // ajax获得数据
-       				$.get('http://res.abeim.cn/api-location_geocoder_address', {lng : longitud, lat : latitude}, function (res){
-       					if(res.code !== 200) return $('.result').html(res.msg).fadeOut(3000);
+                    axios({
+                        url : 'http://res.abeim.cn/api-location_geocoder_address',
+                        method : 'get',
+                        params : {
+                            lng : longitud,
+                            lat : latitude
+                        }
+                    }).then((res) => {
+                        if(res.data.code !== 200) return $('.result').html(res.data.msg).fadeOut(3000);
                         localStorage.setItem('longitudeAndLatitudeAnalysis1', longitud)
                         localStorage.setItem('longitudeAndLatitudeAnalysis2', latitude)
-           				$('.data ul li:eq(0) span').html(res.data.location)
-                        ifData(res.data.province, '.data ul li:eq(1) span')
-                        ifData(res.data.city, '.data ul li:eq(2) span')
-                        ifData(res.data.district, '.data ul li:eq(3) span')
-                        ifData(res.data.street, '.data ul li:eq(4) span')
-                        ifData(res.data.title, '.data ul li:eq(5) span')
-                        $('.data ul li:eq(6) span').html(res.data.recommend)
-                     	$('.data').fadeIn(500)
+                        res = res.data.data;
+                        $('.data ul li:eq(0) span').html(res.location)
+                        ifData(res.province, '.data ul li:eq(1) span')
+                        ifData(res.city, '.data ul li:eq(2) span')
+                        ifData(res.district, '.data ul li:eq(3) span')
+                        ifData(res.street, '.data ul li:eq(4) span')
+                        ifData(res.title, '.data ul li:eq(5) span')
+                        $('.data ul li:eq(6) span').html(res.recommend)
+                        $('.data').fadeIn(500)
                         $('.result').html('操作成功').fadeOut(3000)
                         if(localStorage.getItem('inputRtention') === 'false') $('input').val('');
-       				})
+                    }).catch((err) => {
+                        $('.result').html('网络或接口出错,接口问题请联系作者').fadeOut(3000)
+                    })
    				}
 				$('button').click(function () {
             		$('.result').html('请稍等').fadeIn(1000)

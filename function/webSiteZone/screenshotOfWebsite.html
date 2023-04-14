@@ -5,7 +5,8 @@
         <meta name="viewport" id="viewport" content="width=device-width, initial-scale=1, user-scalable=no"> 
         <title>积木·网站截图</title>
         <link rel="icon" type="image/x-icin" href="../../images/logo.ico">
-        <script src="../../tools/jQuery3.6.3_min.js"></script>
+        <script src="../../tools/jQuery3.6.4.min.js"></script>
+        <script src="../../tools/axios.js"></script>
         <script src="../../tools/clipboard.min.js"></script>
         <link rel="stylesheet" href="../../tools/bootstrap.min.css">
         <link rel="stylesheet" href="../css/function.css">
@@ -19,7 +20,7 @@
             </div>
             <div class="notes text-center">
                 <div>#无反应请检测网络#</div>
-                <div>#有的网站禁止截图#</div>
+                <div>#没有图片请检测网址或就是网站禁止截图#</div>
             </div>
             <div class="data">
             	查询结果
@@ -43,7 +44,14 @@
        				var url = $('input').val();
                    	if(url === '') return $('.result').html('截图网址不能为空').fadeOut(3000);
                     // ajax获得数据
-                    $.get('https://xiaoapi.cn/API/wzjp.php', {url : url}, function (res) {
+                    axios({
+                        url : 'https://xiaoapi.cn/API/wzjp.php',
+                        method : 'get',
+                        params : {
+                            url : url
+                        }
+                    }).then((res) => {
+                        res = res.data;
                         if(res.code !== 200) return $('.result').html('截图失败').fadeOut(3000);
                         localStorage.setItem('screenshotOfWebsite', url)
                         $('.data ul li:eq(0) span').html(res.data.url)
@@ -52,6 +60,8 @@
                         $('.data').fadeIn(500)
                         $('.result').html('截图成功').fadeOut(3000)
                         if(localStorage.getItem('inputRtention') === 'false') $('input').val('');
+                    }).catch((err) => {
+                        $('.result').html('网络或接口出错,接口问题请联系作者').fadeOut(3000)
                     })
    				}
 				$('button').click(function () {

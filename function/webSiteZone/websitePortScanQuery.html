@@ -5,7 +5,8 @@
         <meta name="viewport" id="viewport" content="width=device-width, initial-scale=1, user-scalable=no"> 
         <title>积木·网站端口扫描查询</title>
         <link rel="icon" type="image/x-icin" href="../../images/logo.ico">
-        <script src="../../tools/jQuery3.6.3_min.js"></script>
+        <script src="../../tools/jQuery3.6.4.min.js"></script>
+        <script src="../../tools/axios.js"></script>
         <link rel="stylesheet" href="../../tools/bootstrap.min.css">
         <link rel="stylesheet" href="../css/function.css">
         <style>
@@ -35,7 +36,7 @@
             </div>
             <div class="notes text-center">
                 <div>#无反应请检测网络#</div>
-            	<div>#不需要加https://#</div>
+            	<div>#<span>不要加https://</span>#</div>
                 <div>#如果查询失败可能是被锁ip禁用了#</div>
                 <div>#可以联系作者ip添加到白名单#</div>
             </div>
@@ -80,35 +81,46 @@
 				function getdata() {
        				var ip = $('input').val();
                    	if(ip === '') return $('.result').html('请输入要查询网站的域名或ip').fadeOut(3000);
-       				$.get('https://api.qqsuu.cn/api/dm-port', {ip : ip, apiKey : 'a4be7c080fb67a0dc76f9b75fc7f161b'}, function (res){
-       					if(res.code !== 200) return $('.result').html(res.msg + '请联系作者').fadeOut(3000);
+                    axios({
+                        url : 'https://api.qqsuu.cn/api/dm-port',
+                        method : 'get',
+                        params : {
+                            ip : ip,
+                            apiKey : 'a4be7c080fb67a0dc76f9b75fc7f161b'
+                        }
+                    }).then((res) => {
+                        res = res.data;
+                        if(res.code !== 200) return $('.result').html(res.msg + '请联系作者').fadeOut(3000);
                         localStorage.setItem('websitePortScanQuery', ip)
-           				$('.data .ip span').html(res.host)
-                        $('.data ul li:eq(0) span').html(res.port['21'])
-                        $('.data ul li:eq(1) span').html(res.port['22'])
-                        $('.data ul li:eq(2) span').html(res.port['23'])
-                        $('.data ul li:eq(3) span').html(res.port['25'])
-                     	$('.data ul li:eq(4) span').html(res.port['79'])
-                        $('.data ul li:eq(5) span').html(res.port['80'])
-                        $('.data ul li:eq(6) span').html(res.port['110'])
-                        $('.data ul li:eq(7) span').html(res.port['135'])
-                        $('.data ul li:eq(8) span').html(res.port['137'])
-                        $('.data ul li:eq(9) span').html(res.port['138'])
-                        $('.data ul li:eq(10) span').html(res.port['139'])
-                        $('.data ul li:eq(11) span').html(res.port['143'])
-                        $('.data ul li:eq(12) span').html(res.port['443'])
-                        $('.data ul li:eq(13) span').html(res.port['445'])
-                        $('.data ul li:eq(14) span').html(res.port['888'])
-                        $('.data ul li:eq(15) span').html(res.port['1433'])
-                        $('.data ul li:eq(16) span').html(res.port['3306'])
-                        $('.data ul li:eq(17) span').html(res.port['3311'])
-                        $('.data ul li:eq(18) span').html(res.port['3312'])
-                        $('.data ul li:eq(19) span').html(res.port['3389'])
-                        $('.data ul li:eq(20) span').html(res.port['8888'])
-                     	$('.data').fadeIn(500)
+                        $('.data .ip span').html(res.host)
+                        res = res.prot;
+                        $('.data ul li:eq(0) span').html(res['21'])
+                        $('.data ul li:eq(1) span').html(res['22'])
+                        $('.data ul li:eq(2) span').html(res['23'])
+                        $('.data ul li:eq(3) span').html(res['25'])
+                        $('.data ul li:eq(4) span').html(res['79'])
+                        $('.data ul li:eq(5) span').html(res['80'])
+                        $('.data ul li:eq(6) span').html(res['110'])
+                        $('.data ul li:eq(7) span').html(res['135'])
+                        $('.data ul li:eq(8) span').html(res['137'])
+                        $('.data ul li:eq(9) span').html(res['138'])
+                        $('.data ul li:eq(10) span').html(res['139'])
+                        $('.data ul li:eq(11) span').html(res['143'])
+                        $('.data ul li:eq(12) span').html(res['443'])
+                        $('.data ul li:eq(13) span').html(res['445'])
+                        $('.data ul li:eq(14) span').html(res['888'])
+                        $('.data ul li:eq(15) span').html(res['1433'])
+                        $('.data ul li:eq(16) span').html(res['3306'])
+                        $('.data ul li:eq(17) span').html(res['3311'])
+                        $('.data ul li:eq(18) span').html(res['3312'])
+                        $('.data ul li:eq(19) span').html(res['3389'])
+                        $('.data ul li:eq(20) span').html(res['8888'])
+                        $('.data').fadeIn(500)
                         $('.result').html('操作成功').fadeOut(3000)
                         if(localStorage.getItem('inputRtention') === 'false') $('input').val('');
-       				})
+                    }).catch((err) => {
+                        $('.result').html('网络或接口出错,接口问题请联系作者').fadeOut(3000)
+                    })
    				}
 				$('button').click(function () {
             		$('.result').html('请稍等(有点慢)').fadeIn(1000)

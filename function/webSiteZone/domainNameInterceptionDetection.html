@@ -5,7 +5,8 @@
         <meta name="viewport" id="viewport" content="width=device-width, initial-scale=1, user-scalable=no"> 
         <title>积木·域名拦截检测</title>
         <link rel="icon" type="image/x-icin" href="../../images/logo.ico">
-        <script src="../../tools/jQuery3.6.3_min.js"></script>
+        <script src="../../tools/jQuery3.6.4.min.js"></script>
+        <script src="../../tools/axios.js"></script>
         <link rel="stylesheet" href="../../tools/bootstrap.min.css">
         <link rel="stylesheet" href="../css/function.css">
     </head> 
@@ -18,7 +19,7 @@
             </div>
             <div class="notes text-center">
                 <div>#无反应请检测网络#</div>
-                <div>#不要加https://#</div>
+                <div>#<span>不要加https://</span>#</div>
             </div>
             <div class="data">
                 查询结果
@@ -41,7 +42,14 @@
                 function getdata() {
                     var url = $('input').val();
                     if(url === '') return $('.result').html('请输入网址').fadeOut(3000);
-                    $.get('https://api.oick.cn/t/api.php', {url:url}, function (res){
+                    axios({
+                        url : 'https://api.oick.cn/t/api.php',
+                        method : 'get',
+                        params : {
+                            url : url
+                        }
+                    }).then((res) => {
+                        res = res.data;
                         if(res.code !== 1) return $('.result').html(res.msg).fadeOut(3000);
                         localStorage.setItem('domainNameInterceptionDetection', url)
                         $('.data ul li:eq(0) span').html(res.url)
@@ -49,6 +57,8 @@
                         $('.data').fadeIn(500)
                         $('.result').html('操作成功').fadeOut(3000)
                         if(localStorage.getItem('inputRtention') === 'false') $('input').val('');
+                    }).catch((err) => {
+                        $('.result').html('网络或接口出错,接口问题请联系作者').fadeOut(3000)
                     })
                 }
                 $('button').click(function () {

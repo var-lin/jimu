@@ -5,7 +5,8 @@
         <meta name="viewport" id="viewport" content="width=device-width, initial-scale=1, user-scalable=no"> 
         <title>积木·B站短链生成</title>
         <link rel="icon" type="image/x-icin" href="../../images/logo.ico">
-        <script src="../../tools/jQuery3.6.3_min.js"></script>
+        <script src="../../tools/jQuery3.6.4.min.js"></script>
+        <script src="../../tools/axios.js"></script>
         <script src="../../tools/clipboard.min.js"></script>
         <link rel="stylesheet" href="../../tools/bootstrap.min.css">
         <link rel="stylesheet" href="../css/function.css">
@@ -39,24 +40,22 @@
 				function getdata() {
        				var url = $('input').val();
                    	if(url === '') return $('.result').html('请输入网址').fadeOut(3000);
-                    $.ajax({
+                    axios({
                         url : 'https://xiaobapi.top/api/xb/api/bilibili_short_url.php',
-                        type : 'get',
-                        dataType : 'text',
-                        data : {
+                        method : 'get',
+                        params : {
                             url : url
-                        },
-                        success : function (res) {
-                            if(res.indexOf('http')) return $('.result').html(res).fadeOut(3000);
-                            localStorage.setItem('biliShortenUrl', url)
-                            $('.data div:eq(1)').html(res)
-                            $('.data').fadeIn(500)
-                            $('.result').html('操作成功').fadeOut(3000)
-                            if(localStorage.getItem('inputRtention') === 'false') $('input').val('');
-                        },
-                        error : function (err) {
-                            $('.result').html(err.responseText).fadeOut(3000)
                         }
+                    }).then((res) => {
+                        res = res.data;
+                        if(res.indexOf('http')) return $('.result').html(res).fadeOut(3000);
+                        localStorage.setItem('biliShortenUrl', url)
+                        $('.data div:eq(1)').html(res)
+                        $('.data').fadeIn(500)
+                        $('.result').html('操作成功').fadeOut(3000)
+                        if(localStorage.getItem('inputRtention') === 'false') $('input').val('');
+                    }).catch((err) => {
+                        $('.result').html('网络或接口出错,接口问题请联系作者').fadeOut(3000)
                     })
    				}
 				$('button').click(function () {

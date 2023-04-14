@@ -5,7 +5,8 @@
         <meta name="viewport" id="viewport" content="width=device-width, initial-scale=1, user-scalable=no"> 
         <title>积木·小米域名检测</title>
         <link rel="icon" type="image/x-icin" href="../../images/logo.ico">
-        <script src="../../tools/jQuery3.6.3_min.js"></script>
+        <script src="../../tools/jQuery3.6.4.min.js"></script>
+        <script src="../../tools/axios.js"></script>
         <link rel="stylesheet" href="../../tools/bootstrap.min.css">
         <link rel="stylesheet" href="../css/function.css">
     </head> 
@@ -14,16 +15,15 @@
 	   	<div class="container">
 	       	<input type="url" class="form-control" placeholder="请输入需要检测的域名" required>            
 	        <div class="text-center allBtn">
-	           	<button class="btn btn-secondary">缩短</button>
+	           	<button class="btn btn-secondary">检测</button>
 	        </div>
            	<div class="notes text-center">
                 <div>#无反应请检测网络#</div>
             </div>
 	        <div class="data text-center">
                 <div>域名</div>
-                <div id="result"></div>
-	         	<div>结果</div>
-               	<div id="result"></div>
+                <div style="color: #f40;"></div>
+	         	<div>结果：<span style="color: #f40;"></span></div>
            	</div> 
         </div>
         <span class="from text-center">接口来自:<a href="http://res.abeim.cn/api/" target="_blank">Abeim API</a></span>  
@@ -39,15 +39,24 @@
 				function getdata() {
        				var url = $('input').val();
                    	if(url === '') return $('.result').html('请输入域名').fadeOut(3000);
-       				$.get('http://res.abeim.cn/api-check_mi_url', {url : url}, function (res){
+                    axios({
+                        url : 'http://res.abeim.cn/api-check_mi_url',
+                        method : 'get',
+                        params : {
+                            url : url
+                        }
+                    }).then((res) => {
+                        res = res.data;
                         if(res.code !== 200) return $('.result').html(res.msg).fadeOut(3000);
                         localStorage.setItem('miDomainNameDetection', url)
                         $('.data div:eq(1)').html(res.url)
-            			$('.data div:eq(3)').html(res.status)
-                     	$('.data').fadeIn(500)
-                        $('.result').html('操作成功').fadeOut(3000)
+                        $('.data div:eq(2) span').html(res.status)
+                        $('.data').fadeIn(500)
+                        $('.result').html('检测成功').fadeOut(3000)
                         if(localStorage.getItem('inputRtention') === 'false') $('input').val('');
-       				})
+                    }).catch((err) => {
+                        $('.result').html('网络或接口出错,接口问题请联系作者').fadeOut(3000)
+                    })
    				}
 				$('button').click(function () {
             		$('.result').fadeIn(1000).html('请稍等')      	
