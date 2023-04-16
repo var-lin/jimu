@@ -10,6 +10,44 @@ $(function () {
             $(this).css('border-color', 'black')
         }
     });
+    // 侧边栏
+    (function () {
+        function clear() {
+            $('#homepage .cover').hide()
+            $('body').css('overflow', 'visible')
+            $('.sidebar').stop().animate({
+                left : -280
+            }, 300)
+            $('.sidebarBn img').css('transform', 'rotate(0deg)')
+        }
+        $('.sidebar .navigaBar').on('click', function (e) {
+            var target = e.target;
+            if(target !== this) {
+                clear()
+                $('html').animate({
+                    scrollTop : $('.jumbotron').eq($(target).index()).offset().top
+                })
+            }
+        })
+        $('.sidebarBn').on('click', function () {
+            $('.sidebarBn img').css('transform', 'rotate(90deg)')
+            $('#homepage .cover').show()
+            $('body').css('overflow', 'hidden')
+            $('.sidebar').stop().animate({
+                left : 0
+            }, 300)
+            $('#homepage .cover').on('click', clear)
+        })
+    })();
+    // 打赏二维码切换效果
+    $('#reward > button').eq(0).click(function () {
+        $(this).addClass('btn-success').siblings('button').removeClass('btn-primary')
+        $('#reward a:eq(0)').stop().fadeIn(500).siblings('a').hide()
+    });
+    $('#reward > button').eq(1).click(function () {
+        $(this).addClass('btn-primary').siblings('button').removeClass('btn-success')
+        $('#reward a:eq(1)').stop().fadeIn(500).siblings('a').hide()
+    });
     // 代刷网下拉
     (function () {
         if(!localStorage.getItem('replaceBrushStyle')) {
@@ -91,9 +129,9 @@ $(function () {
     }());
     // 返回置顶显示隐藏功能 toupDateReturnTop
     (function () {
+        var htmlheight = $(window).height() / 2;
         $(window).on('scroll', function () {
-            var htmlheight = $(window).height() / 2;
-            if($('html').scrollTop() > htmlheight) {
+            if($('html').scrollTop() >= htmlheight) {
                 $('#returntop').show()
             }else {
                 $('#returntop').hide()
@@ -105,35 +143,6 @@ $(function () {
             })
         })
     }());
-    // 侧边栏
-    (function () {
-        function clear() {
-            $('#homepage .cover').hide()
-            $('body').css('overflow', 'visible')
-            $('.sidebar').stop().animate({
-                left : -280
-            }, 300)
-            $('.sidebarBn img').css('transform', 'rotate(0deg)')
-        }
-        $('.sidebar .navigaBar').on('click', function (e) {
-            var target = e.target;
-            if(target !== this) {
-                clear()
-                $('html').animate({
-                    scrollTop : $('.jumbotron').eq($(target).index()).offset().top
-                })
-            }
-        })
-        $('.sidebarBn').on('click', function () {
-            $('.sidebarBn img').css('transform', 'rotate(90deg)')
-            $('#homepage .cover').show()
-            $('body').css('overflow', 'hidden')
-            $('.sidebar').stop().animate({
-                left : 0
-            }, 300)
-            $('#homepage .cover').on('click', clear)
-        })
-    })();
     // 获得软件已运行时间 pastTime
     (function () {       
         var pasttimeevents = $('.sidebar .pasttime span'),
@@ -180,15 +189,6 @@ $(function () {
             })
         })
     }());
-    // 打赏二维码切换效果
-    $('#reward button').eq(0).click(function () {
-        $(this).addClass('btn-success').siblings('button').removeClass('btn-primary')
-        $('#reward img').eq(0).stop().fadeIn(500).siblings('img').hide()
-    });
-    $('#reward button').eq(1).click(function () {
-        $(this).addClass('btn-primary').siblings('button').removeClass('btn-success')
-        $('#reward img').eq(1).stop().fadeIn(500).siblings('img').hide()
-    });
     // 点击复制功能 copy
     (function () {       
         // QQ复制按钮

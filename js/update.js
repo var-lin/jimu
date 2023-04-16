@@ -52,12 +52,7 @@ $(function () {
             localStorage.setItem('updateTip', 'false')
             localStorage.setItem('updateV', res.updateV)
         })
-        $('.update button:eq(1)').on('click', function () {
-            window.location.href = 'https://lhshilin.lanzoui.com/b0176d1pe';
-        })
-        $('.update button:eq(2)').on('click', function () {
-            window.location.href = updateAndroidUrl;
-        })
+        $('.update button:eq(2) a').attr('href', updateAndroidUrl)
     }).catch((err) => {
         console.log(err.response.data)
     })

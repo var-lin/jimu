@@ -16,6 +16,7 @@
             "<span class=\"c-f40\">New </span>新增“<a href=\"./function/usingTools/MD5HashDecryption.html\">MD5Hash解密</a>”功能",
             "<span class=\"c-f40\">New </span>新增“<a href=\"./function/informationQueryZone/BSSIDLocationOfWifiBaseStation.html\">WIFI基站BSSID定位</a>”功能",
             "<span class=\"c-f40\">New </span>新增“<a href=\"./function/informationQueryZone/tiktokUserWeightQuery.html\">抖音用户权重查询</a>”功能",
+            "<span class=\"c-f40\">New </span>新增“<a href=\"./function/informationQueryZone/GetiPv6InformationplaceOfOwnership.html\">获得IPv6归属地</a>”功能",
             "<span class=\"c-f40\">New </span>新增“<a href=\"./function/informationQueryZone/vehicleLicensePlateUnluckyInquiry.html\">车牌凶吉查询</a>”功能",
             "<span class=\"c-f40\">New </span>新增“<a href=\"./function/informationQueryZone/WeChatArticleVideoAcquisition.html\">微信文字视频获取</a>”功能",
             "<span class=\"c-f40\">New </span>新增“<a href=\"./function/informationQueryZone/longitudeAndLatitudeDistanceQuery.html\">经纬度距离查询</a>”功能",
@@ -291,8 +292,8 @@
     {
        	"date" : "2022.01.29更新日志",
         "data" : [
-        	"新增“<a href=\"./function/informationQueryZone/GetiPInformationplaceOfOwnership.html\">获得IP信息归属地</a>”功能",
-           	"“<a href=\"./function/informationQueryZone/todayInHistory.html\">历史上的今天</a>”功能添加接口不稳定提示"
+        	"新增“<a href=\"./function/informationQueryZone/GetiPv4InformationplaceOfOwnership.html\">获得IPv4信息归属地</a>”功能",
+           	"“<a href=\"./function/hotSearchListZone/todayInHistory.html\">历史上的今天</a>”功能添加接口不稳定提示"
         ]
     },
     {
@@ -332,7 +333,7 @@
             "新增“<a href=\"./function/copyZone/lickDogDiary.html\">舔狗日记</a>”功能",
             "新增“<a href=\"./function/copyZone/aBriefRemark.html\">一言</a>”功能",
             "新增“<a href=\"./function/copyZone/todayInHistory.html\">历史上的今天</a>”功能",
-        	"修复“<a href=\"./function/other/blogHotSearch.html\">微博热搜榜</a>”功能排名不全问题",
+        	"修复“<a href=\"./function/hotSearchListZone/blogHotSearch.html\">微博热搜榜</a>”功能排名不全问题",
             "主页“其他”功能多显示一排"
         ]
     },
@@ -361,7 +362,7 @@
            	"删除本地框架，利用网络框架(减少软件大小，所以没网络加载不出来页面，其实软件功能也无论如何都需要网络支持都能使用)",
             "删除本地图片，利用网络图片(减少软件大小，所以页面底栏图片没做动画，换了另一种效果样式)",
             "压缩剩余图片，减小软件大小",
-            "“<a href=\"./function/other/blogHotSearch.html\">微博热搜榜</a>”功能添加一键返回置顶",
+            "“<a href=\"./function/hotSearchListZone/blogHotSearch.html\">微博热搜榜</a>”功能添加一键返回置顶",
             "更新日志添加一键返回置顶",
             "更新日志顶部添加提示语",
             "改变全部功能的一共功能文字颜色",
@@ -373,9 +374,9 @@
        	"date" : "2022.01.21更新日志",
         "data" : [
         	"新增“<a href=\"./function/informationQueryZone/visitorInformation.html\">访客相关信息查询</a>”功能",
-           	"新增“<a href=\"./function/other/blogHotSearch.html\">微博热搜榜</a>”功能",
+           	"新增“<a href=\"./function/hotSearchListZone/blogHotSearch.html\">微博热搜榜</a>”功能",
             "修正“<a href=\"./function/informationQueryZone/visitorInformation.html\">访客相关信息查询</a>”功能页面滑动问题",
-            "修正“<a href=\"./function/other/blogHotSearch.html\">微博热搜榜</a>”功能排名问题",
+            "修正“<a href=\"./function/hotSearchListZone/blogHotSearch.html\">微博热搜榜</a>”功能排名问题",
            	"主页样式修改",
            	"删除多余代码"
         ]

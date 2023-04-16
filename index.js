@@ -1,10 +1,18 @@
 $(function () {
     // loadding效果
-    var loadding = (function () {
+    var fn_loadding = (function () {
         var rotateDeg = 0,
             timer = setInterval(function () {
                 rotateDeg ++;
                 $('#homepage .jumbotron p img').css('transform', 'rotate(' + rotateDeg + 'deg)')
+            }, 0);
+        return timer
+    })();
+    var update_loadding = (function () {
+        var rotateDeg = 0,
+            timer = setInterval(function () {
+                rotateDeg ++;
+                $('#toupdate > img').css('transform', 'rotate(' + rotateDeg + 'deg)')
             }, 0);
         return timer
     })();
@@ -261,15 +269,32 @@ $(function () {
                 clearTimeout(timer)
             }
         })
+        // 滚动条到某功能位置侧边栏功能变色
+        var fnScrollTop = [],
+            fnHeight = [];
+        $(window).on('scroll', function () {
+            $.each($('#homepage .jumbotron'), function (i, v) {
+                fnScrollTop[i] = Math.floor($(v).offset().top) - 1;
+                fnHeight[i] = Math.floor(fnScrollTop[i] + $(v).height());
+            })
+            $.each(fnScrollTop, function (i, v) {
+                if($('html').scrollTop() >= v && $('html').scrollTop() <= fnHeight[i]) {
+                    $('#homepage .sidebar .navigaBar li').eq(i).css('background-color', '#fff').siblings().css('background', 'none')
+                }
+            })
+        })
     }).catch((err) => {
-        clearInterval(loadding)
-        $('#homepage .row p img').css('transform', 'rotate(0deg)').attr('src', './images/bug.svg')
+        clearInterval(fn_loadding)
+        $('#homepage .row p img').css('transform', 'rotate(0deg)').attr('src', './images/bug.svg').on('click', function () {
+            window.location.reload()
+        })
         $('#logo').on('click', function () {
-            location.reload()
+            window.location.reload()
         })
     })
     // 更新日志数据输入
     axios.get('https://lhshilin.github.io/jimu/log.json').then((res) => {
+        $('#toupdate > img').remove()
         res = res.data;
         $(res).each(function (i, v) {
             $('#toupdate').append('<ul class="row"><li><span class="update-date">' + v.date + '</span><ul class="update-content"></ul></li></ul>')         
@@ -278,7 +303,10 @@ $(function () {
             })          
         })
     }).catch((err) => {
-        $('#toupdate').html('请检测网络')
+        clearInterval(update_loadding)
+        $('#toupdate > img').css('transform', 'rotate(0deg)').attr('src', './images/bug.svg').on('click', function () {
+            window.location.reload()
+        })
     });
     // 反馈功能 feedback
     (function () {

@@ -155,14 +155,14 @@ input::-webkit-search-cancel-button {
 
     /* 打赏二维码 */
 
-#reward img {    
+#reward a {
+    display: none;
+}
+
+#reward a img {    
     width: 60%;
     margin-top: 10px;
     border-radius: 10px;
-}
-
-#reward img:last-child {
-    display: none;
 }
 
 /* 首页样式 */
@@ -246,7 +246,7 @@ input::-webkit-search-cancel-button {
 
 .sidebar .navigaBar li {
     margin: 10px 0;
-    padding: 5px;
+    padding: 5px 15px;
     border-radius: 15px;
     font-weight: bolder;
     cursor: pointer;
@@ -433,6 +433,14 @@ input::-webkit-search-cancel-button {
     color: #999;
 }
 
+#toupdate > img {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 50px;
+}
+
 #toupdate > div:first-child {
     margin-top: .5rem;
 }
@@ -559,7 +567,7 @@ footer button .text .texttype {
     text-align: center;
 }
 
-.update a {
+.update p a {
     color: #fff;
 }
 
@@ -570,8 +578,9 @@ footer button .text .texttype {
 }
 
 .update button {
-    border-radius: 5px;
     padding: 5px 10px;
+    border-radius: 5px;
+    color: #424242;
 }
 
 .update button:nth-of-type(1) {
@@ -584,6 +593,10 @@ footer button .text .texttype {
 
 .update button:nth-of-type(3) {
     background-color: #afa;
+}
+
+.update button a:hover {
+    text-decoration: none;
 }
 
 /* 反馈框 */
