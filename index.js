@@ -31,13 +31,12 @@ $(function () {
         })
         if(callback) callback(key)
     }
-    // 功能输入框保存上次输入的数据
-    setting('.sidebar .setting .set_dataRtention', 'dataRtention', true)
-    // 功能输入框查询后保留数据
-    setting('.sidebar .setting .set_inputRtention', 'inputRtention', true)
-    // 显示/隐藏历史浏览
+    // 首页设置
+        // 显示/隐藏历史浏览
     setting('.sidebar .setting .set_historyBrowsing', 'historyBrowsing', true, '#homepage > .historyBrowsing')
-    // 显示/隐藏下雪动画
+        // 开启/关闭历史浏览删除音
+    setting('.sidebar .setting .set_historyBrowsing_deleteSound', 'historyBrowsing_deleteSound', true)
+        // 显示/隐藏下雪动画
     setting('.sidebar .setting .set_xiaxue', 'xiaxue', true, null, function (key) {
         if(key) {
             $('body').append('<canvas class="xiaxue"></canvas>')
@@ -46,6 +45,11 @@ $(function () {
             $('canvas.xiaxue').remove()
         }
     })
+    // 功能页设置
+        // 输入框保存上次输入的数据
+    setting('.sidebar .setting .set_dataRtention', 'dataRtention', true)
+        // 输入框查询后保留数据
+    setting('.sidebar .setting .set_inputRtention', 'inputRtention', true)
     // 功能链接数据加载
     axios.get('https://lhshilin.github.io/jimu/allFunctionData.json').then((res) => {
         res = res.data;
@@ -209,7 +213,6 @@ $(function () {
             var fnName = $(e).html(),
                 fnHref = $(e).attr('href'),
                 count = 0;
-                console.log(fnHref)
             if(!fnHref) return;
             $.each($('#homepage > .historyBrowsing li a'), function (i, e) {
                 if($(e).html() == fnName) {
@@ -239,7 +242,9 @@ $(function () {
                 $(e).parent().remove()
                 delete historyBrowsingList[$(e).html()]
                 localStorage.setItem('historyBrowsingList', JSON.stringify(historyBrowsingList))
-                $('.delHistoryBrowsingFn')[0].play()
+                if(localStorage.getItem('historyBrowsing_deleteSound') === 'true') {
+                    $('.historyBrowsing_deleteSound')[0].play()
+                }
             }, 1000);
         }
         function removeHistoryBrowsingAll() {
@@ -247,7 +252,9 @@ $(function () {
                 $('#homepage > .historyBrowsing').html('')
                 historyBrowsingList = {};
                 localStorage.setItem('historyBrowsingList', "{}")
-                $('.delHistoryBrowsingFn')[0].play()
+                if(localStorage.getItem('historyBrowsing_deleteSound') === 'true') {
+                    $('.historyBrowsing_deleteSound')[0].play()
+                }
             }, 2000)
         }
         $('#homepage > .historyBrowsing').on({
@@ -416,9 +423,7 @@ $(function () {
                 togglePrompt(false, '.mysteriouCode')
                 $('.mysteriouCode input').on('keydown', null)
             }
-            $('.mysteriouCode .mysteriouCodeLeft').on('click', function () {
-                clear()
-            })
+            $('.mysteriouCode .mysteriouCodeLeft').on('click', clear)
             $('.mysteriouCode .mysteriouCodeRight').on('click', function () {
                 var key = $('.mysteriouCode input').val();
                 if(key === '') {
@@ -466,10 +471,10 @@ $(function () {
                     })
                 }
             })
-            $(window).on('storage', (e) => {
-                localStorage.setItem(e.originalEvent.key, e.originalEvent.oldValue)
-                this.close()
-            })
         }
     };
+    $(window).on('storage', (e) => {
+        localStorage.setItem(e.originalEvent.key, e.originalEvent.oldValue)
+        this.close()
+    })
 })

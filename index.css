@@ -277,6 +277,14 @@ input::-webkit-search-cancel-button {
     cursor: pointer;
 }
 
+.sidebar .setting > .setting_headerTip {
+    color: #96f;
+    text-align: left;
+    font-size: 1.1rem;
+    text-decoration: underline;
+    cursor: auto;
+}
+
 .sidebar .setting li div {
     color: #424242;
     float: left;

@@ -53,7 +53,5 @@ $(function () {
             localStorage.setItem('updateV', res.updateV)
         })
         $('.update button:eq(2) a').attr('href', updateAndroidUrl)
-    }).catch((err) => {
-        console.log(err.response.data)
     })
 })
