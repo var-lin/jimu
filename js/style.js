@@ -25,7 +25,7 @@ $(function () {
             if(target !== this) {
                 clear()
                 $('html').animate({
-                    scrollTop : $('.jumbotron').eq($(target).index()).offset().top
+                    scrollTop : $('.jumbotron').eq($(target).index()).offset().top - 40
                 })
             }
         })
@@ -131,7 +131,7 @@ $(function () {
     (function () {
         var htmlheight = $(window).height() / 2;
         $(window).on('scroll', function () {
-            if($('html').scrollTop() >= htmlheight) {
+            if($(this).scrollTop() >= htmlheight) {
                 $('#returntop').show()
             }else {
                 $('#returntop').hide()
@@ -177,9 +177,17 @@ $(function () {
     }());
     // 底部按钮切换功能 footerBtnType
     (function () {
+        var bodyOverflow;
         $('footer button').each(function (i, e) {
             $(this).click(function () {
-                   // 点击底部按钮返回滚动条置顶
+                if(i != 0 && $('body').css('overflow') == 'hidden') {
+                    $('body').css('overflow', 'visible')
+                    bodyOverflow = true;
+                } else if(bodyOverflow) {
+                    $('body').css('overflow', 'hidden')
+                    bodyOverflow = false;
+                }
+                    // 点击底部按钮返回滚动条置顶
                 $('html').scrollTop(0)
                    // 页面隐藏显示切换
                 $('#showregion > div').eq(i).stop().fadeIn(300).siblings().hide()

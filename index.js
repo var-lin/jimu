@@ -12,7 +12,7 @@ $(function () {
         var rotateDeg = 0,
             timer = setInterval(function () {
                 rotateDeg ++;
-                $('#toupdate > img').css('transform', 'rotate(' + rotateDeg + 'deg)')
+                $('#toupdate > img').css('transform', 'translate(-50%, -50%) rotate(' + rotateDeg + 'deg)')
             }, 0);
         return timer
     })();
@@ -96,7 +96,7 @@ $(function () {
         // 输出一共的功能数量
         $('.fn-num span').html(fnnum).parent().show()
         mysteriouCode(res)
-        // 历史浏览
+        // 加载历史浏览
         if(!localStorage.getItem('historyBrowsingList')) {
             localStorage.setItem('historyBrowsingList', "{}")
         }
@@ -233,11 +233,13 @@ $(function () {
                 addHistoryBrowsing(e.target)
             }
         })
+        // 历史浏览长按删除
         function removeHistoryBrowsing(e) {
             timer = setTimeout(function () {
                 $(e).parent().remove()
                 delete historyBrowsingList[$(e).html()]
                 localStorage.setItem('historyBrowsingList', JSON.stringify(historyBrowsingList))
+                $('.delHistoryBrowsingFn')[0].play()
             }, 1000);
         }
         function removeHistoryBrowsingAll() {
@@ -245,6 +247,7 @@ $(function () {
                 $('#homepage > .historyBrowsing').html('')
                 historyBrowsingList = {};
                 localStorage.setItem('historyBrowsingList', "{}")
+                $('.delHistoryBrowsingFn')[0].play()
             }, 2000)
         }
         $('#homepage > .historyBrowsing').on({
@@ -271,17 +274,23 @@ $(function () {
         })
         // 滚动条到某功能位置侧边栏功能变色
         var fnScrollTop = [],
-            fnHeight = [];
+            fnHeight = [],
+            htmlScrollTop;
         $(window).on('scroll', function () {
+            htmlScrollTop = $(this).scrollTop();
             $.each($('#homepage .jumbotron'), function (i, v) {
-                fnScrollTop[i] = Math.floor($(v).offset().top) - 1;
+                fnScrollTop[i] = Math.floor($(v).offset().top) - 41;
                 fnHeight[i] = Math.floor(fnScrollTop[i] + $(v).height());
             })
-            $.each(fnScrollTop, function (i, v) {
-                if($('html').scrollTop() >= v && $('html').scrollTop() <= fnHeight[i]) {
-                    $('#homepage .sidebar .navigaBar li').eq(i).css('background-color', '#fff').siblings().css('background', 'none')
-                }
-            })
+            if(htmlScrollTop >= fnScrollTop[0] && htmlScrollTop <= fnHeight[$('#homepage .sidebar .navigaBar li').length - 1]) {
+                $.each(fnScrollTop, function (i, v) {
+                    if(htmlScrollTop >= v && htmlScrollTop <= fnHeight[i]) {
+                        $('#homepage .sidebar .navigaBar li').eq(i).addClass('select').siblings().removeClass('select')
+                    }
+                })
+            } else {
+                $('#homepage .sidebar .navigaBar li').removeClass('select')
+            }
         })
     }).catch((err) => {
         clearInterval(fn_loadding)
@@ -440,21 +449,21 @@ $(function () {
                 })
             })
             $('#logo').on({
-                mousedown : function () {
+                mousedown : function (e) {
+                    e.preventDefault()
                     down()
                     $('#logo').on('mouseup', function () {
                         count = 0;
                         clearInterval(timer)
-                        return false;
                     }) 
                 },
-                touchstart : function () {
+                touchstart : function (e) {
+                    e.preventDefault()
                     down()
                     $('#logo').on('touchend', function () {
                         count = 0;
                         clearInterval(timer)
-                        return false;
-                    }) 
+                    })
                 }
             })
         }

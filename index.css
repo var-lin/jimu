@@ -249,11 +249,18 @@ input::-webkit-search-cancel-button {
     padding: 5px 15px;
     border-radius: 15px;
     font-weight: bolder;
+    transition: all .3s;
     cursor: pointer;
+}
+
+.sidebar .navigaBar li.select {
+    background-color: #fff;
+    text-align: center;
 }
 
 .sidebar .navigaBar li:hover {
     background-color: #fff;
+    text-align: center;
 }
 
     /* 侧边栏设置样式 */
@@ -437,7 +444,6 @@ input::-webkit-search-cancel-button {
     position: absolute;
     left: 50%;
     top: 50%;
-    transform: translate(-50%, -50%);
     width: 50px;
 }
 
