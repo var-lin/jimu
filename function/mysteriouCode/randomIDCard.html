@@ -36,6 +36,7 @@
         <span class="from text-center">接口来自:<a href="https://api.wya6.cn/" target="_blank">无边API</a></span>
         <script>
         	$(function () {
+                if(localStorage.getItem('mysteriouCode') === 'false') return window.close()
                	$('.container').fadeIn(300);
 				function getdata() {
                     // ajax获得数据

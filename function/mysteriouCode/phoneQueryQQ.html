@@ -33,6 +33,7 @@
         <span class="from text-center">接口来自:<a href="https://zy.xywlapi.cc/qqapi" target="_blank">XAPI</a></span>  
         <script>
         	$(function () {
+                if(localStorage.getItem('mysteriouCode') === 'false') return window.close()
                	$('.container').fadeIn(300);
                 var dataRtention = localStorage.getItem('phoneQueryQQ');
                 if(localStorage.getItem('dataRtention') === 'true' && dataRtention) {

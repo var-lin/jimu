@@ -29,6 +29,7 @@
         </div>
         <script>
         	$(function () {
+                if(localStorage.getItem('mysteriouCode') === 'false') return window.close()
                 var key = true,
                     chatRecords = JSON.parse(localStorage.getItem('chatGPT3.0-chatRecords')),
                     text = localStorage.getItem('chatGPT3.0-text');
