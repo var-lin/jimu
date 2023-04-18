@@ -271,12 +271,6 @@ input::-webkit-search-cancel-button {
     background-color: #eef;
 }
 
-.sidebar .setting li {
-    padding: 10px 0;
-    text-align: right;
-    cursor: pointer;
-}
-
 .sidebar .setting > .setting_headerTip {
     margin: 10px 0 5px;
     color: deepskyblue;
@@ -285,12 +279,24 @@ input::-webkit-search-cancel-button {
     cursor: auto;
 }
 
+.sidebar .setting li {
+    padding: 10px 0;
+    text-align: right;
+    cursor: pointer;
+}
+
+.sidebar .setting li:after {
+    content: "";
+    display: block;
+    clear: both;
+}
+
 .sidebar .setting li div {
     color: #424242;
     float: left;
 }
 
-.sidebar .setting input {
+.sidebar .setting li input {
     width: 1rem;
     height: 1rem;
     vertical-align: -3px;

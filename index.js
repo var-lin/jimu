@@ -384,14 +384,13 @@ $(function () {
     // mysteriouCode
     function mysteriouCode(res) {
         function mysteriouCodeUrl() {
-            $('.sidebar .navigaBar').append('<li style="color: #a0a;">秘密区</li>')
             $(res.mysteriouCode).each(function (i, e) {
                 $('#homepage .fn-mysteriouCode .row').append('<a class="col-4" target="_blank"></a>').children('a').eq(i).html(e.name).attr('href', e.url)
             })
             // 输出一共的功能数量
-            var funcNum = parseInt($('.fn-num span').html())
-            $('.fn-num span').html(funcNum + res.mysteriouCode.length)
+            $('.fn-num span').html(parseInt($('.fn-num span').html()) + res.mysteriouCode.length)
             $('.fn-mysteriouCode').show()
+            $('.sidebar .navigaBar').append('<li style="color: #a0a;">秘密区</li>')
         }
         if(!localStorage.getItem('mysteriouCode')) {
             localStorage.setItem('mysteriouCode', 'false')
