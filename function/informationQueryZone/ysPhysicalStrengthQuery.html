@@ -77,23 +77,6 @@
                         }
                     }).then((res) => {
                         res = res.data;
-                        if(res.code !== 200) {
-                            axios({
-                                url : 'http://www.Dreamling.xyz/API/mihoyou/ys/get_real_time_raft/api.php',
-                                method : 'get',
-                                params : {
-                                    qq : qq,
-                                    uid : uid,
-                                    cookie : cookie,
-                                    format : 'json'
-                                }
-                            }).then((res) => {
-                                $('.result').html(res.data.data.state).fadeOut(3000);
-                                return false;
-                            }).catch((err) => {
-                                $('.result').html('网络或接口出错,接口问题请联系作者').fadeOut(3000)
-                            })
-                        }
                         localStorage.setItem('ysPhysicalStrengthQuery', qq)
                         $('.data ul li:eq(0) img').attr('src', res.imageurl + '?t=' + new Date())
                         $('.data ul li:eq(1) span').html(res.uid)
@@ -128,7 +111,21 @@
                         $('.result').html('操作成功').fadeOut(3000)
                         if(localStorage.getItem('inputRtention') === 'false') $('input').val('');
                     }).catch((err) => {
-                        $('.result').html('网络或接口出错,接口问题请联系作者').fadeOut(3000)
+                        axios({
+                            url : 'http://www.Dreamling.xyz/API/mihoyou/ys/get_real_time_raft/api.php',
+                            method : 'get',
+                            params : {
+                                qq : qq,
+                                uid : uid,
+                                cookie : cookie,
+                                format : 'json'
+                            }
+                        }).then((res) => {
+                            $('.result').html(res.data.data.state).fadeOut(3000);
+                            return false;
+                        }).catch((err) => {
+                            $('.result').html('网络或接口出错,接口问题请联系作者').fadeOut(3000)
+                        })
                     })
    				}
 				$('button').click(function () {
