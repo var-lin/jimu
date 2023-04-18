@@ -126,7 +126,7 @@
                     }).then((res) => {
                         returnData(res.data.choices[0].text)
                     }).catch((err) => {
-                        if(err.response.data.error.message) {
+                        if(err.response) {
                             returnData(err.response.data.error.message)
                         } else {
                             returnData('对不起，chatGPT不能收到你的消息')
