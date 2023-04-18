@@ -278,10 +278,10 @@ input::-webkit-search-cancel-button {
 }
 
 .sidebar .setting > .setting_headerTip {
-    color: #96f;
+    margin: 10px 0 5px;
+    color: deepskyblue;
     text-align: left;
-    font-size: 1.1rem;
-    text-decoration: underline;
+    font-size: 1.3rem;
     cursor: auto;
 }
 
