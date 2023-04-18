@@ -51,7 +51,7 @@
                         }
                     }).then((res) => {
                         res = res.data;
-                        if(res.code !== 200 || res.msg) return $('.result').html(res.msg).fadeOut(3000);
+                        if(res.msg) return $('.result').html(res.msg).fadeOut(3000);
                         localStorage.setItem('licensePlateAscriptionPlaceQuery', num)
                         $('.data ul li:eq(0) span').html(num)
                         $('.data ul li:eq(1) span:eq(0)').html(res.province_name).siblings('span').html(res.city)

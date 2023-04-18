@@ -53,7 +53,7 @@
                         }
                     }).then((res) => {
                         res = res.data;
-                        if(res.code !== '200' || res.data.xjfx == null) return $('.result').html('查询失败').fadeOut(3000);
+                        if(res.code !== '200' || !res.data.xjfx) return $('.result').html('查询失败').fadeOut(3000);
                         localStorage.setItem('vehicleLicensePlateUnluckyInquiry', id)
                         res = res.data;
                         $('.data ul li:eq(0) span').html(res.cp)

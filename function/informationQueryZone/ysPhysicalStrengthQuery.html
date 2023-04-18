@@ -73,12 +73,13 @@
                             qq : qq,
                             uid : uid,
                             cookie : cookie,
-                            format : 'mixed'
+                            format : 'json'
                         }
                     }).then((res) => {
                         res = res.data;
+                        if(res.code !== 200) return $('.result').html(res.data.state).fadeOut(3000);
                         localStorage.setItem('ysPhysicalStrengthQuery', qq)
-                        $('.data ul li:eq(0) img').attr('src', res.imageurl + '?t=' + new Date())
+                        $('.data ul li:eq(0) img').attr('src', 'http://www.dreamling.xyz/API/mihoyou/ys/get_real_time_raft/' + res.uid + '.png?t=' + new Date())
                         $('.data ul li:eq(1) span').html(res.uid)
                         $('.data ul li:eq(3) span').html(res.data['原粹树脂']['现有'])
                         $('.data ul li:eq(4) span').html(res.data['原粹树脂']['上限'])
@@ -111,21 +112,7 @@
                         $('.result').html('操作成功').fadeOut(3000)
                         if(localStorage.getItem('inputRtention') === 'false') $('input').val('');
                     }).catch((err) => {
-                        axios({
-                            url : 'http://www.Dreamling.xyz/API/mihoyou/ys/get_real_time_raft/api.php',
-                            method : 'get',
-                            params : {
-                                qq : qq,
-                                uid : uid,
-                                cookie : cookie,
-                                format : 'json'
-                            }
-                        }).then((res) => {
-                            $('.result').html(res.data.data.state).fadeOut(3000);
-                            return false;
-                        }).catch((err) => {
-                            $('.result').html('网络或接口出错,接口问题请联系作者').fadeOut(3000)
-                        })
+                        $('.result').html('网络或接口出错,接口问题请联系作者').fadeOut(3000)
                     })
    				}
 				$('button').click(function () {

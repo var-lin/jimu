@@ -50,7 +50,7 @@
                             type : 'json'
                         }
                     }).then((res) => {
-                        if(res.data.code !== 0) return $('.result').html(res.message).fadeOut(3000);
+                        if(res.data.code !== 0) return $('.result').html(res.data.message).fadeOut(3000);
                         res = res.data.data;
                         localStorage.setItem('bilibiliFanFollowQuery', id)
                         $('.data ul li:eq(0) span').html(res.mid)
