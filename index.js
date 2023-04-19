@@ -473,7 +473,8 @@ $(function () {
         }
     };
     $(window).on('storage', (e) => {
-        localStorage.setItem(e.originalEvent.key, e.originalEvent.oldValue)
-        this.close()
+        if(e.originalEvent.key == 'mysteriouCode') {
+            localStorage.setItem('mysteriouCode', e.originalEvent.oldValue)
+        }
     })
 })
