@@ -1,0 +1,89 @@
+<!doctype html>
+<html> 
+    <head> 
+        <meta charset="UTF-8"> 
+        <meta name="viewport" id="viewport" content="width=device-width, initial-scale=1, user-scalable=no"> 
+        <title>积木·QQ号测凶吉</title>
+        <link rel="icon" type="image/x-icin" href="../../images/logo.ico">
+        <script src="../../tools/jQuery3.6.4.min.js"></script>
+        <link rel="stylesheet" href="../../tools/bootstrap.min.css">
+        <link rel="stylesheet" href="../css/function.css">
+    </head> 
+    <body>
+		<div class="result text-center"></div>
+    	<div class="container">
+       		<input type="number" class="form-control" placeholder="请输入需要查询的QQ号" required>            
+            <div class="text-center allBtn">
+            	<button class="btn btn-secondary">查询</button>
+            </div>
+            <div class="notes text-center">
+            	<div>#无反应请检测网络#</div>
+               	<div>#资金问题,这个接口<span>每天一共只能查询100次</span>#</div>
+            </div>
+            <div class="data">
+            	查询结果
+               	<ul>
+                  	<li>QQ号：<span></span></li>
+               		<li>数理分数：<span></span></li>                                
+                    <li>吉凶：<span></span></li>  
+                    <li>吉凶分析</li>
+                    <li style="color: #f40;"></li>
+                    <li>主人个性：<span></span></li>  
+                    <li>具体表现</li>
+                    <li style="color: #f40;"></li>                                  
+               	</ul>
+            </div>                              	                    
+       	</div>
+        <span class="from text-center">接口来自:<a href="https://www.jisuapi.com/" target="_blank">极速数据API</a></span>  
+        <script>
+        	$(function () {
+               	$('.container').fadeIn(300);
+                var dataRtention = localStorage.getItem('qqMeasuringGoodAndBadLuck');
+                if(localStorage.getItem('dataRtention') === 'true' && dataRtention) {
+                    $('input').val(dataRtention)
+                }
+                $('input:eq(0)').focus();
+                // ajax获得数据
+				function getdata() {
+       				var qqnum = $('input').val();
+                   	if(qqnum === '') return $('.result').html('QQ号不能为空').fadeOut(3000);
+                    $.ajax({
+                        url : 'https://api.jisuapi.com/qqluck/query',
+                        dataType : 'jsonp',
+                        data : {
+                            appkey : '2ffe53aad1021979',
+                            qq : qqnum
+                        },
+       					success : function (res){
+       						if(res.status !== 0) return $('.result').html(res.msg).fadeOut(3000);
+                            localStorage.setItem('qqMeasuringGoodAndBadLuck', qqnum)
+                            res = res.result;
+                      		$('.data ul li:eq(0) span').html(res.qq)        			
+           					$('.data ul li:eq(1) span').html(res.score)
+                     		$('.data ul li:eq(2) span').html(res.luck)
+                        	$('.data ul li:eq(4)').html(res.content)
+                        	$('.data ul li:eq(5) span').html(res.character)
+                        	$('.data ul li:eq(7)').html(res.characterdetail)                                                          
+                     		$('.data').fadeIn(500)
+                        	$('.result').html('操作成功').fadeOut(3000)
+                        	if(localStorage.getItem('inputRtention') === 'false') $('input').val('');
+                         },
+                         error : function (err) {
+                            $('.result').html('网络或接口出错,接口问题请联系作者').fadeOut(3000)
+                         }
+       				})
+   				}
+				$('button').click(function () {
+            		$('.result').html('请稍等').fadeIn(1000)
+   					getdata()        			
+   				})
+         		$(window).on('keydown', function (e) {
+               		if(e.keyCode === 13) {
+                        $('.result').html('请稍等').fadeIn(1000)
+                        getdata()
+                    }
+               	})
+			})
+        </script> 	
+    </body>
+</html>
