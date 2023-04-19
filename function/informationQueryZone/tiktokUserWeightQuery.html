@@ -1,0 +1,116 @@
+<!doctype html>
+<html> 
+    <head> 
+        <meta charset="UTF-8"> 
+        <meta name="viewport" id="viewport" content="width=device-width, initial-scale=1, user-scalable=no"> 
+        <title>积木·抖音用户权重查询</title>
+        <link rel="icon" type="image/x-icin" href="../../images/logo.ico">
+        <script src="../../tools/jQuery3.6.4.min.js"></script>
+        <script src="../../tools/axios.js"></script>
+        <link rel="stylesheet" href="../../tools/bootstrap.min.css">
+        <link rel="stylesheet" href="../css/function.css">
+    </head> 
+    <body>
+		<div class="result text-center"></div>
+    	<div class="container">
+       		<input type="url" class="form-control" placeholder="请输入需要查询的抖音主页面链接" required>            
+            <div class="text-center allBtn">
+            	<button class="btn btn-secondary">查询</button>
+            </div>
+            <div class="notes text-center">
+            	<div>#无反应请检测网络#</div>
+            </div>
+            <div class="data">
+            	查询结果
+               	<ul>
+                    <li><a target="_blank"><img alt="抖音用户头像"></a></li>
+               		<li>抖音号：<span></span></li>
+                    <li>抖音名：<span></span></li>
+                    <li class="marTop">等级：<span></span></li>
+                    <li>指数：<span></span></li>
+                    <li>粉丝：<span></span></li>
+                    <li>点赞：<span></span></li>
+                    <li>作品：<span></span></li>
+                    <li>介绍<br><span></span></li>
+                    <li class="marTop">等级：<span></span></li>
+                    <li>身份：<span></span></li>
+                    <li>年龄：<span></span></li>
+                    <li>性别：<span></span></li>
+                    <li>学校：<span></span></li>
+                    <li>地址：<span></span></li>
+                    <li>得分：<span></span></li>
+                    <li>人流：<span></span></li>
+                    <li>标签：<span></span></li>
+                    <li>时间：<span></span></li>
+                    <li>账号估价：<span></span></li>
+                    <li>综合：<span></span></li>
+               	</ul>
+            </div>                              	                    
+       	</div>
+        <span class="from text-center">接口来自:<a href="https://api.pearktrue.cn/" target="_blank">Pear API</a></span>  
+        <script>
+        	$(function () {
+               	$('.container').fadeIn(300);
+                var dataRtention = localStorage.getItem('tiktokUserWeightQuery');
+                if(localStorage.getItem('dataRtention') === 'true' && dataRtention) {
+                    $('input').val(dataRtention)
+                }
+                $('input:eq(0)').focus();
+                // ajax获得数据
+				function getdata() {
+       				var url = $('input').val();
+                   	if(url === '') return $('.result').html('请输入需要查询的抖音主页面链接').fadeOut(3000);
+                    // ajax数据请求
+                    axios({
+                        url : 'https://api.pearktrue.cn/api/dy/check.php',
+                        method : 'get',
+                        params : {
+                            url : url
+                        }
+                    }).then((res) => {
+                        res = res.data;
+                        if(res.code !== '200') return $('.result').html(res.msg).fadeOut(3000);
+                        localStorage.setItem('tiktokUserWeightQuery', url)
+                        $('.data ul li:eq(0) a').attr('href', res.imgurl).children('img').attr('src', res.imgurl)
+                        $('.data ul li:eq(1) span').html(res.user)
+                        $('.data ul li:eq(2) span').html(res.name)
+                        res = res.data;
+                        $('.data ul li:eq(3) span').html(res.weight)
+                        $('.data ul li:eq(4) span').html(res.index)
+                        $('.data ul li:eq(5) span').html(res.fans)
+                        $('.data ul li:eq(6) span').html(res.clicklike)
+                        $('.data ul li:eq(7) span').html(res.works)
+                        $('.data ul li:eq(8) span').html(res.introduction)
+                        $('.data ul li:eq(9) span').html(res.follow)
+                        $('.data ul li:eq(10) span').html(res.status)
+                        $('.data ul li:eq(11) span').html(res.age)
+                        $('.data ul li:eq(12) span').html(res.sex)
+                        $('.data ul li:eq(13) span').html(res.school)
+                        $('.data ul li:eq(14) span').html(res.location)
+                        $('.data ul li:eq(15) span').html(res.score)
+                        $('.data ul li:eq(16) span').html(res.flow)
+                        $('.data ul li:eq(17) span').html(res.label)
+                        $('.data ul li:eq(18) span').html(res.time)
+                        $('.data ul li:eq(19) span').html(res.valuation)
+                        $('.data ul li:eq(20) span').html(res.synthesize)
+                        $('.data').fadeIn(500)
+                        $('.result').html('操作成功').fadeOut(3000)
+                        if(localStorage.getItem('inputRtention') === 'false') $('input').val('');
+                    }).catch((err) => {
+                        $('.result').html('网络或接口出错,接口问题请联系作者').fadeOut(3000)
+                    })
+   				}
+				$('button').click(function () {
+            		$('.result').html('请稍等').fadeIn(1000)
+   					getdata()        			
+   				})
+         		$(window).on('keydown', function (e) {
+               		if(e.keyCode === 13) {
+                        $('.result').html('请稍等').fadeIn(1000)
+                        getdata()
+                    }
+               	})
+			})
+        </script> 	
+    </body>
+</html>

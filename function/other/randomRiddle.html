@@ -1,0 +1,73 @@
+<!doctype html>
+<html> 
+    <head> 
+        <meta charset="UTF-8"> 
+        <meta name="viewport" id="viewport" content="width=device-width, initial-scale=1, user-scalable=no"> 
+        <title>积木·随机谜语</title>
+        <link rel="icon" type="image/x-icin" href="../../images/logo.ico">
+        <script src="../../tools/jQuery3.6.4.min.js"></script>
+        <script src="../../tools/axios.js"></script>
+        <link rel="stylesheet" href="../../tools/bootstrap.min.css">
+        <link rel="stylesheet" href="../css/function.css">
+        <style>
+            .data {
+                margin-top: 88px;
+                display: block;
+            }
+
+            .data li:last-child {
+                display: none;
+            }
+        </style>
+    </head> 
+    <body>
+		<div class="result text-center" style="display: block;">请稍等...</div>
+        <a class="refresh" href="javascript: void(0);" onclick="location.reload()">刷新</a>
+    	<div class="container">
+            <div class="notes text-center">
+                <div>#无反应请检测网络#</div>
+            	<div>#请<span>不要刷新太快</span>不然题出不来#</div>
+            </div>
+            <div class="data">
+               	<ul>
+                    <li>谜题<br><span></span></li>
+                    <li>类型：<span></span></li>
+                    <li>提示：<span></span></li>
+                    <li>谜底：<span></span></li>
+               	</ul>
+            </div>
+            <div class="text-center allBtn">
+                <button class="btn btn-secondary">查看谜底</button>
+            </div>
+       	</div>
+        <span class="from text-center">接口来自:<a href="https://api.aa1.cn/" target="_blank">夏柔API</a></span>  
+        <script>
+        	$(function () {
+               	$('.container').fadeIn(300);
+                axios.get('https://v.api.aa1.cn/api/api-miyu/index.php').then((res) => {
+                    res = res.data;
+                    if(res.code !== '1') {
+                        $('.result').html('生成失败,刷新试试吧').fadeOut(3000)
+                        $('.data').hide()
+                        return;
+                    }
+                    $('.data ul li:eq(0) span').html(res.mt)
+                    $('.data ul li:eq(1) span').html(res.lx)
+                    $('.data ul li:eq(2) span').html(res.ts)
+                    $('.data ul li:eq(3) span').html(res.md)
+                    $('.result').html('生成成功').fadeOut(3000)
+                }).catch((err) => {
+                    $('.result').html('网络或接口出错,接口问题请联系作者').fadeOut(3000)
+                })
+                // 谜题显示
+				function showMD() {
+                    $('.data ul li:eq(3)').show()
+   				}
+				$('button').click(showMD)
+         		$(window).on('keydown', function (e) {
+               		if(e.keyCode === 13) showMD()
+               	})
+			})
+        </script> 	
+    </body>
+</html>

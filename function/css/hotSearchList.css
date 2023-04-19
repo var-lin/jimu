@@ -1,0 +1,116 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    margin-bottom: 1rem;
+}
+
+/* 提示样式 */
+
+.result {
+    position: absolute;
+    top: 2%;
+    left: 50%;
+    transform: translateX(-50%);
+    font-weight: bolder;
+    text-align: center;
+    color: red;
+}
+
+/* 更新时间样式 */
+
+.update {
+    display: none;
+    text-align: center;
+}
+
+.update_time {
+    color: #999;
+}
+
+/* 数据样式 */
+
+.data {
+    margin: 5px auto 1rem;
+    border: 5px solid #bdc;
+    border-radius: 25px;
+    padding: 10px;
+    width: 90%;
+    word-break: break-all;
+}
+
+.topIndex {
+    text-align: center;
+    color: #999;
+}
+
+.header {
+    text-align: center;
+}
+
+.header a {
+    color: #f40;
+}
+
+.desc {
+    margin: 5px 0;
+}
+
+.desc::after {
+    content: "";
+    display: block;
+    clear: both;
+}
+
+.desc img {
+    float: left;
+    margin-right: 10px;
+    border-radius: 10px;
+    width: 200px;
+}
+
+.desc span {
+    color: #666;
+}
+
+.hot {
+    text-align: center;
+    color: #f00;
+}
+
+/* 刷新 */
+
+.refresh {
+    position: fixed;
+    bottom: 50%;
+    right: .5rem;  
+    width: 1rem;              
+    font-size: 1.1rem;
+    color: #04f;               
+    text-shadow: 0 -1px 1px green;
+    z-index: 999;             
+}
+
+/* 返回置顶 */
+
+#returntop {
+    display: none;
+    position: fixed;
+    top: 60%;
+    right: 10px;
+    width: 2rem;
+    cursor: pointer;
+    z-index: 999;
+}
+
+.from {
+    position: fixed;
+    left: 50%;
+    bottom: .5rem;
+    transform: translateX(-50%);
+    font-size: 10px;
+    text-align: center;
+    color: #666;
+}

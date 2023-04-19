@@ -1,0 +1,90 @@
+<!doctype html>
+<html> 
+    <head> 
+        <meta charset="UTF-8"> 
+        <meta name="viewport" id="viewport" content="width=device-width, initial-scale=1, user-scalable=no"> 
+        <title>积木·车牌凶吉查询</title>
+        <link rel="icon" type="image/x-icin" href="../../images/logo.ico">
+        <script src="../../tools/jQuery3.6.4.min.js"></script>
+        <script src="../../tools/axios.js"></script>
+        <link rel="stylesheet" href="../../tools/bootstrap.min.css">
+        <link rel="stylesheet" href="../css/function.css">
+    </head> 
+    <body>
+		<div class="result text-center"></div>
+    	<div class="container">
+       		<input type="text" class="form-control" placeholder="请输入需要查询的车牌号" required>            
+            <div class="text-center allBtn">
+            	<button class="btn btn-secondary">查询</button>
+            </div>
+            <div class="notes text-center">
+            	<div>#无反应请检测网络#</div>
+            </div>
+            <div class="data">
+            	查询结果
+               	<ul>
+               		<li>车牌号：<span></span></li>                                
+                    <li><span></span> <span></span> <span></span></li>  
+                    <li>凶吉分析<br><span></span></li>
+                    <li>主人个性<br><span></span></li>
+                    <li>归属地：<span></span></li>
+               	</ul>
+            </div>                              	                    
+       	</div>
+        <span class="from text-center">接口来自:<a href="https://api.pearktrue.cn/" target="_blank">Pear API</a></span>  
+        <script>
+        	$(function () {
+               	$('.container').fadeIn(300);
+                var dataRtention = localStorage.getItem('vehicleLicensePlateUnluckyInquiry');
+                if(localStorage.getItem('dataRtention') === 'true' && dataRtention) {
+                    $('input').val(dataRtention)
+                }
+                $('input:eq(0)').focus();
+                // ajax获得数据
+				function getdata() {
+       				var id = $('input').val();
+                   	if(id === '') return $('.result').html('车牌号不能为空').fadeOut(3000);
+                    // ajax数据请求
+                    axios({
+                        url : 'https://api.pearktrue.cn/api/xj/cp.php',
+                        method : 'get',
+                        params : {
+                            cp : id
+                        }
+                    }).then((res) => {
+                        res = res.data;
+                        if(res.code !== '200' || !res.data.xjfx) return $('.result').html('查询失败').fadeOut(3000);
+                        localStorage.setItem('vehicleLicensePlateUnluckyInquiry', id)
+                        res = res.data;
+                        $('.data ul li:eq(0) span').html(res.cp)
+                        $('.data ul li:eq(1) span:eq(0)').html(res.wxsl)
+                        $('.data ul li:eq(1) span:eq(1)').html(res.wxsx)
+                        $('.data ul li:eq(1) span:eq(2)').html(res.wxyy)
+                        $('.data ul li:eq(2) span').html(res.xjfx)
+                        $('.data ul li:eq(3) span').html(res.zrgx)
+                        if(res.place) {
+                            $('.data ul li:eq(4)').show().children('span').html(res.place)
+                        } else {
+                            $('.data ul li:eq(4)').hide()
+                        }
+                        $('.data').fadeIn(500)
+                        $('.result').html('操作成功').fadeOut(3000)
+                        if(localStorage.getItem('inputRtention') === 'false') $('input').val('');
+                    }).catch((err) => {
+                        $('.result').html('网络或接口出错,接口问题请联系作者').fadeOut(3000)
+                    })
+   				}
+				$('button').click(function () {
+            		$('.result').html('请稍等').fadeIn(1000)
+   					getdata()        			
+   				})
+         		$(window).on('keydown', function (e) {
+               		if(e.keyCode === 13) {
+                        $('.result').html('请稍等').fadeIn(1000)
+                        getdata()
+                    }
+               	})
+			})
+        </script> 	
+    </body>
+</html>

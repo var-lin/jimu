@@ -1,0 +1,106 @@
+<!doctype html>
+<html> 
+    <head> 
+        <meta charset="UTF-8"> 
+        <meta name="viewport" id="viewport" content="width=device-width, initial-scale=1, user-scalable=no"> 
+        <title>积木·随机美国人身份证</title>
+        <link rel="icon" type="image/x-icin" href="../../images/logo.ico">
+        <script src="../../tools/jQuery3.6.4.min.js"></script>
+        <script src="../../tools/axios.js"></script>
+        <link rel="stylesheet" href="../../tools/bootstrap.min.css">
+        <link rel="stylesheet" href="../css/function.css">
+    </head> 
+    <body>
+		<div class="result text-center"></div>
+    	<div class="container">
+            <div class="text-center" style="margin-top: 150px;">
+            	<button class="btn btn-secondary">生成</button>
+            </div>
+            <div class="notes text-center">
+            	<div>#无反应请检测网络#</div>
+                <div>#<span>请规矩使用，否则，发生的一切后果本人不负责</span>#</div>
+            </div>
+            <div class="data">
+            	查询结果
+               	<ul>
+                    <li>名字：<span></span></li>
+                    <li>性别：<span></span></li>
+               		<li>名：<span></span></li>
+                    <li>姓：<span></span></li>
+                    <li>中间名：<span></span></li>
+                    <li>称呼：<span></span></li>
+                    <li>生日：<span></span></li>
+                    <li>州：<span></span></li>
+                    <li>住址：<span></span></li>
+                    <li>城市：<span></span></li>
+                    <li>电话：<span></span></li>
+                    <li>邮箱：<span></span></li>
+                    <li>地址：<span></span></li>
+                    <li>ssn：<span></span></li>
+                    <li>网络用户：<span></span></li>
+                    <li>密码：<span></span></li>
+                    <li>身份证类型：<span></span></li>
+                    <li>身份证：<span></span></li>
+                    <li>cvv：<span></span></li>
+                    <li>身份证有效期：<span></span></li>
+                    <li>位置：<span></span></li>
+                    <li>公司：<span></span></li>
+                    <li>身高：<span></span></li>
+                    <li>体重<br><span></span></li>
+               	</ul>
+            </div>                              	                    
+       	</div>
+        <span class="from text-center">接口来自:<a href="https://api.pearktrue.cn/" target="_blank">Pear API</a></span>
+        <script>
+        	$(function () {
+                if(localStorage.getItem('mysteriouCode') === 'false') return window.close()
+               	$('.container').fadeIn(300);
+				function getdata() {
+                    // ajax获得数据
+                    axios.get('https://api.pearktrue.cn/api/sfz/usa.php').then((res) => {
+                        if(res.data.code !== '200') return $('.result').html('生成失败').fadeOut(3000);
+                        res = res.data.data;
+                        $('.data ul li:eq(0) span').html(res.allname)
+                        $('.data ul li:eq(1) span').html(res.sex)
+                        $('.data ul li:eq(2) span').html(res.firstname)
+                        $('.data ul li:eq(3) span').html(res.lastname)
+                        $('.data ul li:eq(4) span').html(res.middlename)
+                        $('.data ul li:eq(5) span').html(res.callname)
+                        $('.data ul li:eq(6) span').html(res.birthday)
+                        $('.data ul li:eq(7) span').html(res.state)
+                        $('.data ul li:eq(8) span').html(res.address)
+                        $('.data ul li:eq(9) span').html(res.city)
+                        $('.data ul li:eq(10) span').html(res.mobile)
+                        $('.data ul li:eq(11) span').html(res.zipcode)
+                        $('.data ul li:eq(12) span').html(res.stateallname)
+                        $('.data ul li:eq(13) span').html(res.ssn)
+                        $('.data ul li:eq(14) span').html(res.netuser)
+                        $('.data ul li:eq(15) span').html(res.password)
+                        $('.data ul li:eq(16) span').html(res.cardtype)
+                        $('.data ul li:eq(17) span').html(res.cardnumber)
+                        $('.data ul li:eq(18) span').html(res.cvv)
+                        $('.data ul li:eq(19) span').html(res.validityperiod)
+                        $('.data ul li:eq(20) span').html(res.position)
+                        $('.data ul li:eq(21) span').html(res.company)
+                        $('.data ul li:eq(22) span').html(res.height)
+                        $('.data ul li:eq(23) span').html(res.weight)
+                        $('.data').fadeIn(500)
+                        $('.result').html('生成成功').fadeOut(3000)
+                    }).catch((err) => {
+                        $('.result').html('网络或接口出错,接口问题请联系作者').fadeOut(3000)
+                    })
+   				}
+				$('button').click(function () {
+            		$('.result').html('请稍等').fadeIn(1000)
+   					getdata()        			
+   				})
+         		$(window).on('keydown', function (e) {
+               		if(e.keyCode === 13) {
+                        $('.result').html('请稍等').fadeIn(1000)
+                        getdata()
+                    }
+               	})
+			})
+        </script> 	
+    </body>
+</html>
