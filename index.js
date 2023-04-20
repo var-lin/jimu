@@ -1,21 +1,4 @@
 $(function () {
-    // loadding效果
-    var fn_loadding = (function () {
-        var rotateDeg = 0,
-            timer = setInterval(function () {
-                rotateDeg ++;
-                $('#homepage .jumbotron p img').css('transform', 'rotate(' + rotateDeg + 'deg)')
-            }, 0);
-        return timer
-    })();
-    var update_loadding = (function () {
-        var rotateDeg = 0,
-            timer = setInterval(function () {
-                rotateDeg ++;
-                $('#toupdate > img').css('transform', 'translate(-50%, -50%) rotate(' + rotateDeg + 'deg)')
-            }, 0);
-        return timer
-    })();
     // 侧边栏设置
     function setting(e, dataName, tacitConsent, target, callback) {
         if(!localStorage.getItem(dataName)) localStorage.setItem(dataName, tacitConsent);
@@ -300,8 +283,10 @@ $(function () {
             }
         })
     }).catch((err) => {
-        clearInterval(fn_loadding)
-        $('#homepage .row p img').css('transform', 'rotate(0deg)').attr('src', './images/bug.svg').on('click', function () {
+        $('#homepage .row p .loaddingImg').css({
+            'animationPlayState' : 'paused',
+            'animation' : 'fn_loaddingImgrotate'
+        }).attr('src', './images/bug.svg').on('click', function () {
             window.location.reload()
         })
         $('#logo').on('click', function () {
@@ -319,8 +304,10 @@ $(function () {
             })          
         })
     }).catch((err) => {
-        clearInterval(update_loadding)
-        $('#toupdate > img').css('transform', 'rotate(0deg)').attr('src', './images/bug.svg').on('click', function () {
+        $('#toupdate > img').css({
+            'animationPlayState' : 'paused',
+            'animation' : 'update_loaddingImgrotate'
+        }).attr('src', './images/bug.svg').on('click', function () {
             window.location.reload()
         })
     });

@@ -108,7 +108,7 @@ input::-webkit-search-cancel-button {
 }
 
 #feedback:hover {
-    background-color: #ccc;
+    background-color: blanchedalmond;
 }
 
 /* 联系作者内容样式 */
@@ -389,11 +389,16 @@ input::-webkit-search-cancel-button {
     float: left;
 }
 
-#homepage > .historyBrowsing a {
+#homepage > .historyBrowsing li:hover a {
+    color: palevioletred;
+}
+
+#homepage > .historyBrowsing li a {
     padding: 5px 10px;
     border-radius: 30px;
     background-color: #eee;
     font-size: 12px;
+    transition: all .3s;
 }
 
     /* 功能区样式 */
@@ -418,10 +423,20 @@ input::-webkit-search-cancel-button {
     height: 300px;
 }
 
-#homepage .jumbotron p img {
+@keyframes fn_loaddingImgrotate {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+#homepage .jumbotron p .loaddingImg {
     margin: 0 auto;
     width: 50px;
     line-height: 300px;
+    animation: fn_loaddingImgrotate 3s linear infinite;
 }
 
     /* 首页分区a链接样式 */
@@ -454,11 +469,22 @@ input::-webkit-search-cancel-button {
     color: #999;
 }
 
-#toupdate > img {
+@keyframes update_loaddingImgrotate {
+    0% {
+        transform: translate(-50%, -50%) rotate(0deg);
+    }
+    100% {
+        transform: translate(-50%, -50%) rotate(360deg);
+    }
+}
+
+#toupdate > .loaddingImg {
     position: absolute;
     left: 50%;
     top: 50%;
     width: 50px;
+    transform: translate(-50%, -50%);
+    animation: update_loaddingImgrotate 3s linear infinite;
 }
 
 #toupdate > div:first-child {
