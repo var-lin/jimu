@@ -41,6 +41,7 @@ textarea {
 }
 
 .btn {
+    margin: 0 10px;
    	height: 50px;
     box-shadow: 0 2px 2px black;
     outline: none;
