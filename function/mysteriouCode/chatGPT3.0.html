@@ -31,6 +31,7 @@
         	$(function () {
                 if(localStorage.getItem('mysteriouCode') === 'false') return window.close()
                 var key = false,
+                    Authorization = 'Bearer ' + localStorage.getItem('chatGPT3.0apikey'),
                     chatRecords = JSON.parse(localStorage.getItem('chatGPT3.0-chatRecords')),
                     text = localStorage.getItem('chatGPT3.0-text');
                 $('.dialogBox').css('height', ($(window).height()) * 0.8);
@@ -50,8 +51,10 @@
                             type : 'de'
                         }
                     }).then((res) => {
+                        res = res.data.demissString;
                         key = true;
-                        localStorage.setItem('chatGPT3.0apikey', res.data.demissString)
+                        Authorization = 'Bearer ' + res;
+                        localStorage.setItem('chatGPT3.0apikey', res)
                     }).catch((err) => {
                         $('.dialogBox .leftContent:eq(0) textarea:eq(0)').val('获取内置apikey失败，请联系作者查明原因')
                     })
@@ -115,20 +118,18 @@
                     $('.text').val('')
                     $('.dialogBox .rightText:last').css('height', $('.dialogBox .rightText:last').prop('scrollHeight'))
                     $('.dialogBox').scrollTop($('.dialogBox').prop('scrollHeight'))
-                    var Authorization = 'Bearer ' + localStorage.getItem('chatGPT3.0apikey'),
-                        data = JSON.stringify({
-                            model : 'text-davinci-003',
-                            user : '1',
-                            max_tokens : 2000,
-                            temperature : 0.5,
-                            frequency_penalty : 0,
-                            presence_penalty : 0,
-                            prompt : text
-                        });
                     axios({
                         url : 'https://api.openai.com/v1/completions',
                         method : 'post',
-                        data : data,
+                        data : {
+                            "model" : 'text-davinci-003',
+                            "user" : '1',
+                            "max_tokens" : 2000,
+                            "temperature" : 0.5,
+                            "frequency_penalty" : 0,
+                            "presence_penalty" : 0,
+                            "prompt" : text
+                        },
                         headers : {
                             Authorization : Authorization,
                             'Content-Type' : 'application/json'

@@ -42,7 +42,7 @@
         <script>
             $(function () {
                 var key = true,
-                    apikey = localStorage.getItem('apikey3.0'),
+                    Authorization = 'Bearer ' + localStorage.getItem('apikey3.0'),
                     chatRecords = JSON.parse(localStorage.getItem('chatGPT3.0ChatRecords')),
                     text = localStorage.getItem('chatGPT3.0Text');
                 $('.dialogBox').css('height', ($(window).height()) * 0.8);
@@ -78,7 +78,7 @@
                 }
                 function getApiKey() {
                     var apikeyInput = $('.apikeyInput').val();
-                    apikey = apikeyInput;
+                    Authorization = 'Bearer ' + apikeyInput;
                     localStorage.setItem('apikey3.0', apikeyInput)
                     $('.apikey').fadeOut()
                     $('.cover').hide()
@@ -136,20 +136,18 @@
                     $('.text').val('')
                     $('.dialogBox .rightText:last').css('height', $('.dialogBox .rightText:last').prop('scrollHeight'))
                     $('.dialogBox').scrollTop($('.dialogBox').prop('scrollHeight'))
-                    var Authorization = 'Bearer ' + apikey,
-                        data = JSON.stringify({
-                            model : 'text-davinci-003',
-                            user : '1',
-                            max_tokens : 2000,
-                            temperature : 0.5,
-                            frequency_penalty : 0,
-                            presence_penalty : 0,
-                            prompt : text
-                        });
                     axios({
                         url : 'https://api.openai.com/v1/completions',
                         method : 'post',
-                        data : data,
+                        data : {
+                            "model" : 'text-davinci-003',
+                            "user" : '1',
+                            "max_tokens" : 2000,
+                            "temperature" : 0.5,
+                            "frequency_penalty" : 0,
+                            "presence_penalty" : 0,
+                            "prompt" : text
+                        },
                         headers : {
                             Authorization : Authorization,
                             'Content-Type' : 'application/json'
