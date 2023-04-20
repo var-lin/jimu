@@ -15,8 +15,9 @@
 	   	<div class="container">
 	       	<input type="number" class="form-control" placeholder="请输入需要跳转资料卡的QQ号" required>            
 	        <div class="text-center allBtn">
-	           	<button class="btn btn-secondary">点击跳转</button>
-	        </div>
+                <button class="btn btn-secondary">清空内容</button>
+                <button class="btn btn-info">立即跳转</button>
+            </div>
            	<div class="notes text-center">
               	<div>#没跳转请检测网络#</div>
                 <div>#网络没问题的话或许功能已经不能用了#</div>
@@ -47,9 +48,12 @@
                         if(localStorage.getItem('inputRtention') === 'false') $('input').val('');
                     })
                 }
-                $('button').on('click', function () {
+                $('.allBtn .btn:eq(0)').click(() => {
+                    $('input').val('').focus()
+                })
+                $('.allBtn .btn:eq(1)').click(function () {
                     $('.result').html('请稍等').fadeIn(1000)
-                    getData()
+                    getdata()                   
                 })
          		$(window).on('keydown', function (e) {
                		if(e.keyCode === 13) {

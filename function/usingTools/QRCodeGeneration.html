@@ -16,7 +16,8 @@
             <input type="text" class="form-control" placeholder="请输入文本内容" required>
             <input type="number" class="form-control marTop" placeholder="请输入二维码大小50-900(默认100)" required>
             <div class="text-center allBtn">
-            	<button class="btn btn-secondary">生成</button>
+                <button class="btn btn-secondary">清空内容</button>
+                <button class="btn btn-info">立即生成</button>
             </div>
             <div class="notes text-center">
             	<div>#无反应请检测网络#</div>
@@ -59,10 +60,13 @@
                     $('.result').html('生成成功').fadeOut(3000)
                     if(localStorage.getItem('inputRtention') === 'false') $('input').val('');
    				}
-				$('button').click(function () {
-            		$('.result').html('请稍等').fadeIn(1000)
-   					getdata()        			
-   				})
+				$('.allBtn .btn:eq(0)').click(() => {
+                    $('input').val('').focus()
+                })
+                $('.allBtn .btn:eq(1)').click(function () {
+                    $('.result').html('请稍等').fadeIn(1000)
+                    getdata()                   
+                })
          		$(window).on('keydown', function (e) {
                		if(e.keyCode === 13) {
                         $('.result').html('请稍等').fadeIn(1000)

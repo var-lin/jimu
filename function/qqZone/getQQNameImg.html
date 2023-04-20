@@ -25,9 +25,10 @@
 		<div class="result text-center"></div>
 	   	<div class="container">
 	       	<input type="number" class="form-control" placeholder="请输入需要查询的QQ号" required>            
-	        <div class="text-center" style="margin: 20px 0;">
-	           	<button class="btn btn-secondary">获得该QQ昵称和头像</button>
-	        </div>
+	        <div class="text-center allBtn">
+                <button class="btn btn-secondary">清空内容</button>
+                <button class="btn btn-info">立即查询</button>
+            </div>
            	<div class="notes text-center">
               	<div>#无反应请检测网络#</div>
               	<div>#点击头像跳转到头像地址#</div>
@@ -74,7 +75,10 @@
                    		$('.result').html('网络或接口出错,接口问题请联系作者').fadeOut(3000)
                    	})
    				}
-				$('button').click(function () {
+				$('.allBtn .btn:eq(0)').click(() => {
+                    $('input').val('').focus()
+                })
+				$('.allBtn .btn:eq(1)').click(function () {
             		$('.result').html('请稍等').fadeIn(1000)
    					getdata()        			
    				})

@@ -28,7 +28,8 @@
     	<div class="container">
        		<textarea type="text" placeholder="请输入需要检测的文本" required></textarea>
             <div class="text-center allBtn">
-            	<button class="btn btn-secondary">查询</button>
+                <button class="btn btn-secondary">清空内容</button>
+                <button class="btn btn-info">立即检测</button>
             </div>
             <div class="notes text-center">
             	<div>#无反应请检测网络#</div>
@@ -65,10 +66,13 @@
                         $('.result').html('网络或接口出错,接口问题请联系作者').fadeOut(3000)
                     })
    				}
-				$('button').click(function () {
-            		$('.result').html('请稍等').fadeIn(1000)
-   					getdata()        			
-   				})
+				$('.allBtn .btn:eq(0)').click(() => {
+                    $('textarea').val('').focus()
+                })
+                $('.allBtn .btn:eq(1)').click(function () {
+                    $('.result').html('请稍等').fadeIn(1000)
+                    getdata()                   
+                })
          		$(window).on('keydown', function (e) {
                		if(e.keyCode === 13) {
                         $('.result').html('请稍等').fadeIn(1000)

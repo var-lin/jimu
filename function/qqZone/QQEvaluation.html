@@ -15,7 +15,8 @@
     	<div class="container">
        		<input type="number" class="form-control" placeholder="请输入需要查询的QQ号" required>            
             <div class="text-center allBtn">
-            	<button class="btn btn-secondary">查询</button>
+                <button class="btn btn-secondary">清空内容</button>
+                <button class="btn btn-info">立即估价</button>
             </div>
             <div class="notes text-center">
             	<div>#无反应请检测网络#</div>
@@ -68,10 +69,13 @@
                         $('.result').html('网络或接口出错,接口问题请联系作者').fadeOut(3000)
                     })
    				}
-				$('button').click(function () {
-            		$('.result').html('请稍等').fadeIn(1000)
-   					getdata()        			
-   				})
+				$('.allBtn .btn:eq(0)').click(() => {
+                    $('input').val('').focus()
+                })
+                $('.allBtn .btn:eq(1)').click(function () {
+                    $('.result').html('请稍等').fadeIn(1000)
+                    getdata()                   
+                })
          		$(window).on('keydown', function (e) {
                		if(e.keyCode === 13) {
                         $('.result').html('请稍等').fadeIn(1000)
