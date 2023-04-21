@@ -63,7 +63,8 @@
         <script>
         	$(function () {
                	$('.container').fadeIn(300);
-                var dataRtention1 = localStorage.getItem('stringEncryption&Decryption1'),
+                var type = 0,
+                    dataRtention1 = localStorage.getItem('stringEncryption&Decryption1'),
                     dataRtention2 = localStorage.getItem('stringEncryption&Decryption2'),
                     dataRtention3 = localStorage.getItem('stringEncryption&Decryption3'),
                     dataRtention4 = localStorage.getItem('stringEncryption&Decryption4');
@@ -83,82 +84,65 @@
                             }).siblings().animate({
                             	width : '7rem'
                             })
-                       		$('#function > div').eq(i).fadeIn(500).siblings().hide()
+                       		$('#function > div').eq(i).fadeIn(500).siblings().hide();
+                            type = i;
+                            if(type) {
+                                $('#decryption textarea:eq(0)').focus()
+                            } else {
+                                $('#encryption textarea:eq(0)').focus()
+                            }
                        	})
                     })
                 }());
                 // ajax获得数据
 				function getdata() {
-                	if($('.btn-success').css('width') < $('.btn-info').css('width')) {
-                       	return decryption()
-                   	}else {
-                      	return encryption()
-                    }
-                	// 加密方法
-                	function encryption() {
-                       	var string = $('#encryption textarea').val(),
-                   		   key = $('#encryption input').val();
-                        axios({
-                            url : 'https://api.vvhan.com/api/jm',
-                            method : 'get',
-                            params : {
-                                key : key,
-                                string : string,
-                                type : 'en'
-                            }
-                        }).then((res) => {
-                            res = res.data;
-                            if(!res.success) return $('.result').html(res.message).fadeOut(3000);
-                            localStorage.setItem('stringEncryption&Decryption1', string)
-                            localStorage.setItem('stringEncryption&Decryption2', key)
-                            $('.result').html('操作成功').fadeOut(3000)
-                            $('#result').html(res.enmissString)
-                            if(localStorage.getItem('inputRtention') === 'false') {
-                                $('#encryption textarea').val('')
-                                $('#encryption input').val('')
-                            }
-                            results()
-                        }).catch((err) => {
-                            $('.result').html('网络或接口出错,接口问题请联系作者').fadeOut(3000)
-                        })
-                   	}
-                    // 解密方法
-       				function decryption() {
-                       	var string = $('#decryption textarea').val(),
-                   		   key = $('#decryption input').val();
-                        axios({
-                            url : 'https://api.vvhan.com/api/jm',
-                            method : 'get',
-                            params : {
-                                key : key,
-                                string : string,
-                                type : 'de'
-                            }
-                        }).then((res) => {
-                            res = res.data;
-                            if(!res.success) return $('.result').html(res.message).fadeOut(3000);
+                    var string = type ? $('#decryption textarea').val() : $('#encryption textarea').val(),
+                        key = type ? $('#decryption input').val() : $('#encryption input').val(),
+                        typeNum = type ? 'de' : 'en';
+                    axios({
+                        url : 'https://api.vvhan.com/api/jm',
+                        method : 'get',
+                        params : {
+                            key : key,
+                            string : string,
+                            type : typeNum
+                        }
+                    }).then((res) => {
+                        res = res.data;
+                        if(!res.success) return $('.result').html(res.message).fadeOut(3000);
+                        if(type) {
                             localStorage.setItem('stringEncryption&Decryption3', string)
                             localStorage.setItem('stringEncryption&Decryption4', key)
-                            $('.result').html('操作成功').fadeOut(3000)
                             $('#result').html(res.demissString)
                             if(localStorage.getItem('inputRtention') === 'false') {
                                 $('#decryption textarea').val('')
                                 $('#decryption input').val('')
                             }
-                            results()
-                        }).catch((err) => {
-                            $('.result').html('网络或接口出错,接口问题请联系作者').fadeOut(3000)
-                        })
-                    }
-                    // 结果显示方法
-                    function results() {
+                        } else {
+                            localStorage.setItem('stringEncryption&Decryption1', string)
+                            localStorage.setItem('stringEncryption&Decryption2', key)
+                            $('#result').html(res.enmissString)
+                            if(localStorage.getItem('inputRtention') === 'false') {
+                                $('#encryption textarea').val('')
+                                $('#encryption input').val('')
+                            }
+                        }
                         $('.data').fadeIn(500)
                         $('.result').html('操作成功').fadeOut(3000)
-                    }
+                    }).catch((err) => {
+                        $('.result').html('网络或接口出错,接口问题请联系作者').fadeOut(3000)
+                    })
    				}
 				$('.allBtn .btn:eq(0)').click(() => {
-                    $('textarea').val('').focus()
-                    $('input').val('')
+                    if(type) {
+                        $('#decryption textarea').val('')
+                        $('#decryption input').val('')
+                        $('#decryption textarea:eq(0)').focus()
+                    } else {
+                        $('#encryption textarea').val('')
+                        $('#encryption input').val('')
+                        $('#encryption textarea:eq(0)').focus()
+                    }
                 })
                 $('.allBtn .btn:eq(1)').click(function () {
                     $('.result').html('请稍等').fadeIn(1000)

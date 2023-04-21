@@ -29,8 +29,9 @@
             <textarea type="text" placeholder="请输入需要检测的文本" required></textarea>
        		<textarea type="text" placeholder="请输入需要检测的文本" required></textarea>
             <div class="text-center allBtn">
-                <button class="btn btn-secondary">清空内容</button>
-                <button class="btn btn-info">立即查询</button>
+                <button class="btn btn-secondary">清空内容1</button>
+                <button class="btn btn-secondary">清空内容2</button><br>
+                <button class="btn btn-info marTop">立即查询</button>
             </div>
             <div class="notes text-center">
             	<div>#无反应请检测网络#</div>
@@ -70,9 +71,12 @@
                     })
    				}
 				$('.allBtn .btn:eq(0)').click(() => {
-                    $('textarea').val('').focus()
+                    $('textarea:eq(0)').val('').focus()
                 })
-                $('.allBtn .btn:eq(1)').click(function () {
+                $('.allBtn .btn:eq(1)').click(() => {
+                    $('textarea:eq(1)').val('').focus()
+                })
+                $('.allBtn .btn:eq(2)').click(function () {
                     $('.result').html('请稍等').fadeIn(1000)
                     getdata()                   
                 })
