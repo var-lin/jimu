@@ -42,7 +42,8 @@
         <script>
             $(function () {
                 var key = true,
-                    Authorization = 'Bearer ' + localStorage.getItem('apikey3.0'),
+                    apikey = localStorage.getItem('apikey3.0'),
+                    Authorization,
                     chatRecords = JSON.parse(localStorage.getItem('chatGPT3.0ChatRecords')),
                     text = localStorage.getItem('chatGPT3.0Text');
                 $('.dialogBox').css('height', ($(window).height()) * 0.8);
@@ -67,17 +68,19 @@
                     localStorage.setItem('chatGPT3.0ChatRecords', "[]");
                     chatRecords = [];
                 }
-                if(!apikey) {
+                if(apikey) {
+                    Authorization = 'Bearer ' + apikey;
+                    $('.apikeyInput').val(apikey)
+                    $('.text').focus()
+                } else {
                     $('.apikey').fadeIn()
                     $('.cover').show()
                     $('body').css('overflow', 'hidden')
                     $('.apikeyInput').focus()
-                } else {
-                    $('.apikeyInput').val(apikey)
-                    $('.text').focus()
                 }
                 function getApiKey() {
                     var apikeyInput = $('.apikeyInput').val();
+                    apikey = apikeyInput;
                     Authorization = 'Bearer ' + apikeyInput;
                     localStorage.setItem('apikey3.0', apikeyInput)
                     $('.apikey').fadeOut()
@@ -122,6 +125,7 @@
                 function getData() {
                     key = false;
                     $('.send').off('click')
+                    if(!Authorization) return returnData('apikey出错，请检测apikey');
                     var text = $.trim($('.text').val());
                     if(text === '') return;
                     var time = nowTime();

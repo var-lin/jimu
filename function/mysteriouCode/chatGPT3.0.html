@@ -31,7 +31,8 @@
         	$(function () {
                 if(localStorage.getItem('mysteriouCode') === 'false') return window.close()
                 var key = false,
-                    Authorization = 'Bearer ' + localStorage.getItem('chatGPT3.0apikey'),
+                    apikey = localStorage.getItem('chatGPT3.0apikey'),
+                    Authorization,
                     chatRecords = JSON.parse(localStorage.getItem('chatGPT3.0-chatRecords')),
                     text = localStorage.getItem('chatGPT3.0-text');
                 $('.dialogBox').css('height', ($(window).height()) * 0.8);
@@ -41,7 +42,7 @@
                 $('input:eq(0)').focus().on('input', function () {
                     localStorage.setItem('chatGPT3.0-text', $(this).val())
                 });
-                if(!localStorage.getItem('chatGPT3.0apikey')) {
+                if(!apikey) {
                     axios({
                         url : 'https://api.vvhan.com/api/jm',
                         method : 'get',
@@ -60,6 +61,7 @@
                     })
                 } else {
                     key = true;
+                    Authorization = 'Bearer ' + apikey;
                 }
                 if(chatRecords && chatRecords !== []) {
                     $.each(chatRecords, function (i, e) {
@@ -104,6 +106,7 @@
                 function getData() {
                     key = false;
                     $('.send').off('click')
+                    if(!Authorization) return returnData('apikey出错，请联系作者修复');
                     var text = $.trim($('.text').val());
                     if(text === '') return;
                     var time = nowTime();
