@@ -107,9 +107,10 @@ $(function () {
                 }
             }).then((res) => {
                 res = res.data;
+                localStorage.setItem('date', date)
                 if(res.code == 1 && res.data.lunarCalendar == '三月初十') {
                     localStorage.setItem('birthday', 'true')
-                    var text = '今天是作者的生日哦,那就祝自己生日快乐吧!🎉🎉🎉',
+                    var text = '今天是作者的生日哦,在这就祝自己生日快乐吧!🎉🎉🎉',
                         text_len = text.length;
                     $('.brief-remark').html('')
                     for (var i = 0; i < text_len; i ++) {
@@ -122,7 +123,6 @@ $(function () {
                 } else {
                     writeText()
                     localStorage.setItem('birthday', 'false')
-                    localStorage.setItem('date', date)
                 }
             }).catch(writeText)
         }
