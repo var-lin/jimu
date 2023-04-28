@@ -54,6 +54,7 @@
                         }
                     }).then((res) => {
                         res = res.data;
+                        if(!res.ping_time_min) return $('.result').html(res).fadeOut(3000);
                         localStorage.setItem('pingTest', url)
                         $('.data ul li:eq(0) span').html(res.host)
                         $('.data ul li:eq(1) span').html(res.ip)
