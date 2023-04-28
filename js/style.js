@@ -85,17 +85,33 @@ $(function () {
                 $('.brief-remark').html('接口可能失效啦~请联系作者修复哈')
             })
         }
+        function birthdayText() {
+            var text = '今天是作者的生日哦,在这就祝自己生日快乐吧!🎉🎉🎉',
+                text_len = text.length;
+            $('.brief-remark').html('')
+            for (var i = 0; i < text_len; i ++) {
+                (function (i) {
+                    setTimeout(function () {
+                        $('.brief-remark').html($('.brief-remark').html() + text[i])
+                    }, 100 * i)
+                }(i));
+            }
+        }
         var date = new Date(),
             dateYear = date.getFullYear(),
             dateMonth = (date.getMonth() + 1) <= 9 ? '0' + (date.getMonth() + 1) : '' + (date.getMonth() + 1),
-            dateDay = date.getDate() <= 9 ? '0' + date.getDate() : '' + date.getDate(),
-            birthday = localStorage.getItem('birthday') == 'true';
+            dateDay = date.getDate() <= 9 ? '0' + date.getDate() : '' + date.getDate();
         date = dateYear + dateMonth + dateDay;
-        if(!localStorage.getItem('date')) {
+        localDate = localStorage.getItem('date');
+        birthday = localStorage.getItem('birthday') == 'true';
+        if(!localDate) {
+            localDate = date;
             localStorage.setItem('date', date)
         }
-        if(localStorage.getItem('date') == date && !birthday) {
+        if(localDate == date && !birthday) {
             writeText()
+        } else if(birthday && localStorage.getItem('birthdayDate') == date) {
+            birthdayText()
         } else {
             axios({
                 url : 'https://www.mxnzp.com/api/holiday/single/' + date,
@@ -110,19 +126,11 @@ $(function () {
                 localStorage.setItem('date', date)
                 if(res.code == 1 && res.data.lunarCalendar == '三月初十') {
                     localStorage.setItem('birthday', 'true')
-                    var text = '今天是作者的生日哦,在这就祝自己生日快乐吧!🎉🎉🎉',
-                        text_len = text.length;
-                    $('.brief-remark').html('')
-                    for (var i = 0; i < text_len; i ++) {
-                        (function (i) {
-                            setTimeout(function () {
-                                $('.brief-remark').html($('.brief-remark').html() + text[i])
-                            }, 100 * i)
-                        }(i));
-                    }
+                    localStorage.setItem('birthdayDate', date)
+                    birthdayText()
                 } else {
-                    writeText()
                     localStorage.setItem('birthday', 'false')
+                    writeText()
                 }
             }).catch(writeText)
         }

@@ -627,6 +627,9 @@ footer button .text .texttype {
 .update button {
     padding: 5px 10px;
     border-radius: 5px;
+}
+
+.update button a {
     color: #424242;
 }
 
