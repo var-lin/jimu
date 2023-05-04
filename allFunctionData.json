@@ -40,6 +40,7 @@
         {"name" : "chatGPT密钥额度查询", "url" : "./function/informationQueryZone/charGPTKeyQuotaQuery.html"},
         {"name" : "获得IPv4归属地", "url" : "./function/informationQueryZone/GetiPv4InformationplaceOfOwnership.html"},
         {"name" : "获得IPv6归属地", "url" : "./function/informationQueryZone/GetiPv6InformationplaceOfOwnership.html"},
+        {"name" : "汽车OBD查询(测试中)", "url" : "./function/informationQueryZone/vehicleOBDInquiry.html"},
         {"name" : "车牌号归属地查询", "url" : "./function/informationQueryZone/licensePlateAscriptionPlaceQuery.html"},
         {"name" : "车牌凶吉查询(娱乐)", "url" : "./function/informationQueryZone/vehicleLicensePlateUnluckyInquiry.html"},
         {"name" : "手机号归属地查询", "url" : "./function/informationQueryZone/queryTelAttribution.html"},
@@ -113,6 +114,7 @@
         {"name" : "晚安心语", "url" : "./function/copyZone/goodNightHeartfeltWords.html"},
     	{"name" : "毒鸡汤", "url" : "./function/copyZone/poisonousChickenSoup.html"},
         {"name" : "彩虹屁", "url" : "./function/copyZone/rainbowFart.html"},
+        {"name" : "失恋分手句子(测试中)", "url" : "./function/copyZone/breakupSentences.html"},
         {"name" : "舔狗日记", "url" : "./function/copyZone/lickDogDiary.html"},
         {"name" : "顺口溜", "url" : "./function/copyZone/doggerel.html"},
         {"name" : "我在人间凑数的日子", "url" : "./function/copyZone/makeUpTheNumberOnEarth.html"},
@@ -127,8 +129,10 @@
         {"name" : "随机情话", "url" : "./function/copyZone/loveTalk.html"}
     ],
     "other" : [
+        {"name" : "网络随机取名(测试中)", "url" : "./function/other/networkRandomNaming.html"},
         {"name" : "随机谜题", "url" : "./function/other/randomRiddle.html"},
         {"name" : "脑筋急转弯", "url" : "./function/other/brainTwists.html"},
+        {"name" : "恋爱术语(测试中)", "url" : "./function/other/loveTerminology.html"},
         {"name" : "周公解梦", "url" : "./function/other/dukeZhouInterpretsDreams.html"},
         {"name" : "对联生成", "url" : "./function/other/antitheticalGeneration.html"},
         {"name" : "空气质量指数", "url" : "./function/other/airQualityIndex.html"},

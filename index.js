@@ -460,8 +460,8 @@ $(function () {
         }
     };
     $(window).on('storage', (e) => {
-        if(e.originalEvent.key == 'mysteriouCode') {
-            localStorage.setItem('mysteriouCode', e.originalEvent.oldValue)
+        if(e.originalEvent.key == 'mysteriouCode' || e.originalEvent.key == 'chatGPT3.0apikey') {
+            localStorage.setItem(e.key, e.originalEvent.oldValue)
         }
     })
 })

@@ -222,11 +222,10 @@ input::-webkit-search-cancel-button {
 }
 
 .sidebar .pasttime {
-    margin-bottom: 10px;
+    margin: 10px 0;
     text-align: center;
     font-size: .8rem;
     color: #f40;
-    display: inline-block;
 }
 
 .sidebar .pasttime span {
