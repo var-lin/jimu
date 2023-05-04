@@ -69,10 +69,10 @@
                         }
                     }).then((res) => {
                         if(res.data.code !== '200') return $('.result').html(res.data.msg).fadeOut(3000);
-                        localStorage.setItem('wechatMovementBrushStep1', lon1)
-                        localStorage.setItem('wechatMovementBrushStep2', lat1)
-                        localStorage.setItem('wechatMovementBrushStep3', lon2)
-                        localStorage.setItem('wechatMovementBrushStep4', lat2)
+                        localStorage.setItem('longitudeAndLatitudeDistanceQuery1', lon1)
+                        localStorage.setItem('longitudeAndLatitudeDistanceQuery2', lat1)
+                        localStorage.setItem('longitudeAndLatitudeDistanceQuery3', lon2)
+                        localStorage.setItem('longitudeAndLatitudeDistanceQuery4', lat2)
                         res = res.data.data;
                         $('.data ul li:eq(0) span').html(res.start_lon + ' ' + res.start_lat)
                         $('.data ul li:eq(1) span').html(res.end_lon + ' ' + res.end_lat)

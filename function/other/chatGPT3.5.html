@@ -11,7 +11,7 @@
         <link rel="stylesheet" href="../css/chatGPT.css">
     </head> 
     <body>
-		<div class="header">
+		<div class="header" onselectstart="return false">
             <img src="../../images/chatGPT.png" alt="log"><span>chatGPT3.5</span>
         </div>
         <div class="dialogBox">
@@ -20,7 +20,14 @@
                 <span class="time"></span>
             </p>
             <p class="leftContent">
-                <textarea class="leftText" disabled>您需要什么帮助呢&#10接口来自：Pear Api&#10https://api.pearktrue.cn/</textarea>
+                <textarea class="leftText" disabled>您需要什么帮助呢？</textarea>
+            </p>
+            <p class="left">
+                <img src="../../images/chatGPT.png" alt="chatGPT-log">
+                <span class="time"></span>
+            </p>
+            <p class="leftContent">
+                <textarea class="leftText" disabled>菜单列表&#10 发送 #0 表示 打开菜单列表&#10 发送 #1 表示 删除聊天记录&#10 发送 #2 表示 开启/关闭记忆对话&#10 发送 #3 表示 更换记忆对话ID值&#10 发送 #4 表示 开启/关闭进入聊天提示菜单列表&#10&#10双击上面chatGPT3.0文字清空所以聊天记录&#10输入 代号或者#+名 都可以实现同样的操作，记得点击发送按钮</textarea>
             </p>
         </div>
         <div class="inputBox">
@@ -29,16 +36,33 @@
         </div>
         <script>
         	$(function () {
-                var key = true;
+                function initialization(localName, data) {
+                    if(!localStorage.getItem(localName)) {
+                        localStorage.setItem(localName, data)
+                    }
+                }
+                initialization('chatGPT3.5-menu_list_tip', false)
+                initialization('chatGPT3.5-memoryDialogue', false)
+                var key = true,
+                    menu_list_tip = localStorage.getItem('chatGPT3.5-menu_list_tip') == 'true',
+                    memoryDialogue = localStorage.getItem('chatGPT3.5-memoryDialogue') == 'true',
                     chatRecords = JSON.parse(localStorage.getItem('chatGPT3.5-chatRecords')),
-                    text = localStorage.getItem('chatGPT3.5-text');
-                $('.dialogBox').css('height', ($(window).height()) * 0.8);
-                $('.dialogBox .left:first-child .time').html(nowTime());
-                $('.dialogBox .leftText:first-child').css('height', $('.dialogBox .leftText:first-child').prop('scrollHeight'))
+                    text = localStorage.getItem('chatGPT3.5-text'),
+                    winHeight = $(window).height(),
+                    chatID = localStorage.getItem('chatGPT3-chatID'),
+                    menu_list = '菜单列表\n 发送 #0 表示 打开菜单列表\n 发送 #1 表示 删除聊天记录\n 发送 #2 表示 开启/关闭记忆对话\n 发送 #3 表示 更换记忆对话ID值\n 发送 #4 表示 开启/关闭进入聊天提示菜单列表\n\n双击上面chatGPT3.0文字清空所以聊天记录\n输入 代号或者#+名 都可以实现同样的操作，记得点击发送按钮';
+                $('.dialogBox').css('height', winHeight * 0.8);
+                $('.dialogBox .left .time').html(nowTime())
+                $('.dialogBox .leftText').each((i, e) => {
+                    $('.dialogBox .leftText').eq(i).css('height', $('.dialogBox .leftText').eq(i).prop('scrollHeight'))
+                })
                 text ? $('input:eq(0)').val(text) : null;
                 $('input:eq(0)').focus().on('input', function () {
                     localStorage.setItem('chatGPT3.5-text', $(this).val())
                 });
+                if(menu_list_tip) {
+                    returnData(menu_list);
+                }
                 if(chatRecords && chatRecords !== []) {
                     $.each(chatRecords, function (i, e) {
                         if(e.spokesman == 'left') {
@@ -54,6 +78,26 @@
                     localStorage.setItem('chatGPT3.5-chatRecords', "[]");
                     chatRecords = [];
                 }
+                function getChatID() {
+                    axios({
+                        url : 'https://api.pearktrue.cn/api/gpt/continuous.php',
+                        method : 'get',
+                        params : {
+                            type : 'get'
+                        }
+                    }).then((res) => {
+                        var id = res.data.id;
+                        if(id) {
+                            chatID = id;
+                            localStorage.setItem('chatGPT3-chatID', id)
+                            returnData('已获取更换新的记忆对话ID')
+                        } else {
+                            returnData('获取记忆对话ID失败，请检测网络或接口可能失效了，请联系作者反馈')
+                        }
+                    }).catch((err) => {
+                        returnData('获取记忆对话ID失败，请检测网络或接口可能失效了，请联系作者反馈')
+                    })
+                }
                 function nowTime() {
                     var time = new Date();
                     function zeroPadding(num) {
@@ -64,6 +108,14 @@
                     }
                     time = time.getFullYear() + '年' + (time.getMonth() + 1) + '月' + time.getDate() + '日 ' + zeroPadding(time.getHours()) + ':' + zeroPadding(time.getMinutes()) + ':' + zeroPadding(time.getSeconds());
                     return time
+                }
+                function clearChatRecords() {
+                    chatRecords = [];
+                    localStorage.setItem('chatGPT3.5-chatRecords', "[]");
+                    $('.dialogBox').html('')
+                    $('input:eq(0)').val('')
+                    localStorage.setItem('chatGPT3.5-text', '')
+                    window.location.reload()
                 }
                 function returnData(data) {
                     var time = nowTime();
@@ -96,28 +148,84 @@
                     $('.text').val('')
                     $('.dialogBox .rightText:last').css('height', $('.dialogBox .rightText:last').prop('scrollHeight'))
                     $('.dialogBox').scrollTop($('.dialogBox').prop('scrollHeight'))
-                    axios({
-                        url : 'https://api.pearktrue.cn/api/gpt/',
-                        method : 'get',
-                        params : {
-                            message : text
-                        }
-                    }).then((res) => {
-                        returnData(res.data.answer)
-                    }).catch((err) => {
-                        returnData('对不起，chatGPT不能收到你的消息')
-                    })
+                    switch(text) {
+                        case '#0' :
+                        case '#打开菜单列表' :
+                            return returnData(menu_list);
+                        case '#1' :
+                        case '#删除聊天记录' :
+                            key = true;
+                            $('.send').on('click', getData)
+                            return clearChatRecords();
+                        case '#2' :
+                        case '#开启/关闭记忆对话' :
+                            if(memoryDialogue) {
+                                memoryDialogue = false;
+                                localStorage.setItem('chatGPT3.5-memoryDialogue', 'false')
+                                return returnData('已关闭记忆对话');
+                            } else {
+                                if(!chatID) getChatID();
+                                memoryDialogue = true;
+                                localStorage.setItem('chatGPT3.5-memoryDialogue', 'true')
+                                return returnData('已开启记忆对话');
+                            }
+                        case '#3' :
+                        case '#更换记忆对话ID值' :
+                            key = true;
+                            $('.send').on('click', getData)
+                            return getChatID();
+                        case '#4' :
+                        case '#开启/关闭进入聊天提示菜单列表' :
+                            if(menu_list_tip) {
+                                menu_list_tip = false;
+                                localStorage.setItem('chatGPT3.5-menu_list_tip', 'false')
+                                return returnData('已关闭进入聊天提示菜单列表');
+                            } else {
+                                menu_list_tip = true;
+                                localStorage.setItem('chatGPT3.5-menu_list_tip', 'true')
+                                return returnData('已开启进入聊天提示菜单列表');
+                            }
+                    }
+                    if(memoryDialogue) {
+                        axios({
+                            url : 'https://api.pearktrue.cn/api/gpt/continuous.php',
+                            method : 'get',
+                            params : {
+                                id : chatID,
+                                message : text
+                            }
+                        }).then((res) => {
+                            returnData(res.data.answer)
+                        }).catch((err) => {
+                            returnData('对不起，chatGPT不能收到你的消息')
+                        })
+                    } else {
+                        axios({
+                            url : 'https://api.pearktrue.cn/api/gpt/',
+                            method : 'get',
+                            params : {
+                                message : text
+                            }
+                        }).then((res) => {
+                            returnData(res.data.answer)
+                        }).catch((err) => {
+                            returnData('对不起，chatGPT不能收到你的消息')
+                        })
+                    }
                 }
-                $('.header span').on('dblclick', function () {
-                    chatRecords = [];
-                    localStorage.setItem('chatGPT3.5-chatRecords', "[]");
-                    $('.dialogBox').html('')
-                    $('input:eq(0)').val('')
-                    localStorage.setItem('chatGPT3.5-text', '')
-                })
+                $('.header span').on('dblclick', clearChatRecords)
                 $('.send').on('click', getData)
                 $(window).on('keydown', function (e) {
                     if(e.keyCode == 13 && key) getData();
+                })
+                $(window).resize(() => {
+                    var height = $(this).height();
+                    if(height != winHeight){
+                        $('.dialogBox').css('height', height * 0.4)
+                    } else {
+                        $('.dialogBox').css('height', winHeight * 0.8)
+                    }
+                    $('.dialogBox').scrollTop($('.dialogBox').prop('scrollHeight'))
                 })
 			})
         </script> 	

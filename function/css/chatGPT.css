@@ -20,12 +20,13 @@
     font-weight: bolder;
     vertical-align: bottom;
     margin-left: 5px;
+    cursor: pointer;
 }
 
 /* 对话框 */
 
 .dialogBox {
-    width: 80%;
+    width: 90%;
     background-color: #efefef;
     margin: 10px auto;
     padding: 10px;
@@ -33,8 +34,30 @@
     overflow: auto;
 }
 
-.dialogBox::-webkit-scrollbar {
-    width: 0;
+.dialogBox::-webkit-scrollbar{
+    width: 5px;
+    height: 5px;
+    background-color: #F5F5F5;
+}
+
+/*定义滚动条轨道内阴影+圆角*/
+
+.dialogBox::-webkit-scrollbar-track{
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+    border-radius: 10px;
+    background-color: #F5F5F5;
+}
+
+/*定义滑块内阴影+圆角*/
+
+.dialogBox::-webkit-scrollbar-thumb{
+    border-radius: 10px;
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+    background-color: #555;
+}
+
+.dialogBox p {
+    margin-bottom: 5px;
 }
 
 .dialogBox .left {
@@ -57,13 +80,6 @@
     font-size: 14px;
 }
 
-.dialogBox .leftContent,
-.dialogBox .rightContent {
-    margin: 0 10px;
-    padding: 10px;
-    border-radius: 5px;
-}
-
 .dialogBox textarea {
     width: 100%;
     height: 1.5rem;
@@ -72,12 +88,25 @@
     resize: none;
 }
 
+.dialogBox textarea::-webkit-scrollbar {
+    display: none;
+}
+
+.dialogBox .leftContent,
+.dialogBox .rightContent {
+    margin: 0 35px;
+    padding: 10px;
+    border-radius: 5px;
+}
+
 .dialogBox .leftContent {
+    border-top-left-radius: 0;
     background-color: #fff;
     color: #424242;
 }
 
 .dialogBox .rightContent {
+    border-top-right-radius: 0;
     background-color: skyblue;
     color: #fff;
 }

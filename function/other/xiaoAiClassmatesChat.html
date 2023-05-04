@@ -22,6 +22,13 @@
             <p class="leftContent">
                 <textarea class="leftText" disabled>聊点什么呢？</textarea>
             </p>
+            <p class="left">
+                <img src="../../images/chatGPT.png" alt="chatGPT-log">
+                <span class="time"></span>
+            </p>
+            <p class="leftContent">
+                <textarea class="leftText" disabled>菜单列表&#10 发送 #0 表示 打开菜单列表&#10 发送 #1 表示 删除聊天记录&#10 发送 #2 表示 开启/关闭进入聊天提示菜单列表&#10&#10输入 代号或者#+名 都可以实现同样的操作，记得点击发送按钮</textarea>
+            </p>
         </div>
         <div class="inputBox">
             <input class="text" type="text" placeholder="请输入内容">
@@ -30,12 +37,20 @@
         <div class="cover"></div>
         <script>
             $(function () {
+                if(!localStorage.getItem('xiaoAi-menu_list_tip')) {
+                    localStorage.setItem('xiaoAi-menu_list_tip', false)
+                }
                 var key = true,
-                chatRecords = JSON.parse(localStorage.getItem('xiaoAi-chatRecords')),
-                text = localStorage.getItem('xiaoAi-text');
-                $('.dialogBox').css('height', ($(window).height()) * 0.8);
-                $('.dialogBox .left:first-child .time').html(nowTime());
-                $('.dialogBox .leftText:first-child').css('height', $('.dialogBox .leftText:first-child').prop('scrollHeight'))
+                    menu_list_tip = localStorage.getItem('xiaoAi-menu_list_tip') == 'true',
+                    chatRecords = JSON.parse(localStorage.getItem('xiaoAi-chatRecords')),
+                    text = localStorage.getItem('xiaoAi-text'),
+                    winHeight = $(window).height(),
+                    menu_list = '菜单列表\n 发送 #0 表示 打开菜单列表\n 发送 #1 表示 删除聊天记录\n 发送 #2 表示 开启/关闭进入聊天提示菜单列表\n\n输入 代号或者#+名 都可以实现同样的操作，记得点击发送按钮';
+                $('.dialogBox').css('height', winHeight * 0.8);
+                $('.dialogBox .left .time').html(nowTime())
+                $('.dialogBox .leftText').each((i, e) => {
+                    $('.dialogBox .leftText').eq(i).css('height', $('.dialogBox .leftText').eq(i).prop('scrollHeight'))
+                })
                 text ? $('input:eq(0)').val(text) : null;
                 $('input:eq(0)').focus().on('input', function () {
                     localStorage.setItem('xiaoAi-text', $(this).val())
@@ -54,6 +69,14 @@
                 } else {
                     localStorage.setItem('xiaoAi-chatRecords', "[]");
                     chatRecords = [];
+                }
+                function clearChatRecords() {
+                    chatRecords = [];
+                    localStorage.setItem('xiaoAi-chatRecords', "[]");
+                    $('.dialogBox').html('')
+                    $('input:eq(0)').val('')
+                    localStorage.setItem('xiaoAi-text', '')
+                    window.location.reload()
                 }
                 function nowTime() {
                     var time = new Date();
@@ -98,6 +121,27 @@
                     $('.text').val('')
                     $('.dialogBox .rightText:last').css('height', $('.dialogBox .rightText:last').prop('scrollHeight'))
                     $('.dialogBox').scrollTop($('.dialogBox').prop('scrollHeight'))
+                    switch(text) {
+                        case '#0' :
+                        case '#打开菜单列表' :
+                            return returnData(menu_list);
+                        case '#1' :
+                        case '#删除聊天记录' :
+                            key = true;
+                            window.location.reload()
+                            return clearChatRecords();
+                        case '#2' :
+                        case '#开启/关闭进入聊天提示菜单列表' :
+                            if(menu_list_tip) {
+                                menu_list_tip = false;
+                                localStorage.setItem('xiaoAi-menu_list_tip', 'false')
+                                return returnData('已关闭进入聊天提示菜单列表');
+                            } else {
+                                menu_list_tip = true;
+                                localStorage.setItem('xiaoAi-menu_list_tip', 'true')
+                                return returnData('已开启进入聊天提示菜单列表');
+                            }
+                    }
                     axios({
                         url : 'https://api.lewz.cn/api/xiaoai',
                         method : 'get',
@@ -110,16 +154,19 @@
                         returnData('小爱不能接收到的你消息~')
                     })
                 }
-                $('.header span').on('dblclick', function () {
-                    chatRecords = [];
-                    localStorage.setItem('xiaoAi-chatRecords', "[]");
-                    $('.dialogBox').html('')
-                    $('input:eq(0)').val('')
-                    localStorage.setItem('xiaoAi-text', '')
-                })
+                $('.header span').on('dblclick', clearChatRecords)
                 $('.send').on('click', getData)
                 $('.text').on('keydown', function (e) {
                     if(e.keyCode == 13 && key) getData();
+                })
+                $(window).resize(() => {
+                    var height = $(this).height();
+                    if(height != winHeight){
+                        $('.dialogBox').css('height', height * 0.4)
+                    } else {
+                        $('.dialogBox').css('height', winHeight * 0.8)
+                    }
+                    $('.dialogBox').scrollTop($('.dialogBox').prop('scrollHeight'))
                 })
             })
         </script> 	
