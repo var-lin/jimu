@@ -97,10 +97,7 @@
                     chatRecords = [];
                 }
                 function clearChatRecords() {
-                    chatRecords = [];
-                    localStorage.setItem('chatGPT3.0-chatRecords', "[]");
-                    $('.dialogBox').html('')
-                    $('input:eq(0)').val('')
+                    localStorage.setItem('chatGPT3.0-chatRecords', "[]")
                     localStorage.setItem('chatGPT3.0-text', '')
                     window.location.reload()
                 }
@@ -203,10 +200,10 @@
                     var height = $(this).height();
                     if(height != winHeight){
                         $('.dialogBox').css('height', height * 0.4)
+                        $('.dialogBox').scrollTop($('.dialogBox').prop('scrollHeight'))
                     } else {
                         $('.dialogBox').css('height', winHeight * 0.8)
                     }
-                    $('.dialogBox').scrollTop($('.dialogBox').prop('scrollHeight'))
                 })
 			})
         </script> 	

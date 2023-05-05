@@ -27,7 +27,7 @@
                 <span class="time"></span>
             </p>
             <p class="leftContent">
-                <textarea class="leftText" disabled>菜单列表&#10 发送 #0 表示 打开菜单列表&#10 发送 #1 表示 删除聊天记录&#10 发送 #2 表示 开启/关闭记忆对话&#10 发送 #3 表示 更换记忆对话ID值&#10 发送 #4 表示 开启/关闭进入聊天提示菜单列表&#10&#10双击上面chatGPT3.0文字清空所以聊天记录&#10输入 代号或者#+名 都可以实现同样的操作，记得点击发送按钮</textarea>
+                <textarea class="leftText" disabled>菜单列表&#10 发送 #0 表示 打开菜单列表&#10 发送 #1 表示 删除聊天记录&#10 发送 #2 表示 开启/关闭进入聊天提示菜单列表&#10 发送 #3 表示 开启/关闭记忆对话&#10 发送 #4 表示 更换记忆对话ID值&#10&#10双击上面chatGPT3.0文字清空所以聊天记录&#10输入 代号或者#+名 都可以实现同样的操作，记得点击发送按钮</textarea>
             </p>
         </div>
         <div class="inputBox">
@@ -50,7 +50,7 @@
                     text = localStorage.getItem('chatGPT3.5-text'),
                     winHeight = $(window).height(),
                     chatID = localStorage.getItem('chatGPT3-chatID'),
-                    menu_list = '菜单列表\n 发送 #0 表示 打开菜单列表\n 发送 #1 表示 删除聊天记录\n 发送 #2 表示 开启/关闭记忆对话\n 发送 #3 表示 更换记忆对话ID值\n 发送 #4 表示 开启/关闭进入聊天提示菜单列表\n\n双击上面chatGPT3.0文字清空所以聊天记录\n输入 代号或者#+名 都可以实现同样的操作，记得点击发送按钮';
+                    menu_list = '菜单列表\n 发送 #0 表示 打开菜单列表\n 发送 #1 表示 删除聊天记录\n 发送 #2 表示 开启/关闭进入聊天提示菜单列表\n 发送 #3 表示 开启/关闭记忆对话\n 发送 #4 表示 更换记忆对话ID值\n\n双击上面chatGPT3.0文字清空所以聊天记录\n输入 代号或者#+名 都可以实现同样的操作，记得点击发送按钮';
                 $('.dialogBox').css('height', winHeight * 0.8);
                 $('.dialogBox .left .time').html(nowTime())
                 $('.dialogBox .leftText').each((i, e) => {
@@ -110,10 +110,7 @@
                     return time
                 }
                 function clearChatRecords() {
-                    chatRecords = [];
-                    localStorage.setItem('chatGPT3.5-chatRecords', "[]");
-                    $('.dialogBox').html('')
-                    $('input:eq(0)').val('')
+                    localStorage.setItem('chatGPT3.5-chatRecords', "[]")
                     localStorage.setItem('chatGPT3.5-text', '')
                     window.location.reload()
                 }
@@ -158,6 +155,17 @@
                             $('.send').on('click', getData)
                             return clearChatRecords();
                         case '#2' :
+                        case '#开启/关闭进入聊天提示菜单列表' :
+                            if(menu_list_tip) {
+                                menu_list_tip = false;
+                                localStorage.setItem('chatGPT3.5-menu_list_tip', 'false')
+                                return returnData('已关闭进入聊天提示菜单列表');
+                            } else {
+                                menu_list_tip = true;
+                                localStorage.setItem('chatGPT3.5-menu_list_tip', 'true')
+                                return returnData('已开启进入聊天提示菜单列表');
+                            }
+                        case '#3' :
                         case '#开启/关闭记忆对话' :
                             if(memoryDialogue) {
                                 memoryDialogue = false;
@@ -169,22 +177,11 @@
                                 localStorage.setItem('chatGPT3.5-memoryDialogue', 'true')
                                 return returnData('已开启记忆对话');
                             }
-                        case '#3' :
+                        case '#4' :
                         case '#更换记忆对话ID值' :
                             key = true;
                             $('.send').on('click', getData)
                             return getChatID();
-                        case '#4' :
-                        case '#开启/关闭进入聊天提示菜单列表' :
-                            if(menu_list_tip) {
-                                menu_list_tip = false;
-                                localStorage.setItem('chatGPT3.5-menu_list_tip', 'false')
-                                return returnData('已关闭进入聊天提示菜单列表');
-                            } else {
-                                menu_list_tip = true;
-                                localStorage.setItem('chatGPT3.5-menu_list_tip', 'true')
-                                return returnData('已开启进入聊天提示菜单列表');
-                            }
                     }
                     if(memoryDialogue) {
                         axios({
@@ -222,10 +219,10 @@
                     var height = $(this).height();
                     if(height != winHeight){
                         $('.dialogBox').css('height', height * 0.4)
+                        $('.dialogBox').scrollTop($('.dialogBox').prop('scrollHeight'))
                     } else {
                         $('.dialogBox').css('height', winHeight * 0.8)
                     }
-                    $('.dialogBox').scrollTop($('.dialogBox').prop('scrollHeight'))
                 })
 			})
         </script> 	

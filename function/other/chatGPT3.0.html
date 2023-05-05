@@ -27,7 +27,7 @@
                 <span class="time"></span>
             </p>
             <p class="leftContent">
-                <textarea class="leftText" disabled>菜单列表&#10 发送 #0 表示 打开菜单列表&#10 发送 #1 表示 删除聊天记录&#10 发送 #2 表示 更换apikey&#10 发送 #3 表示 开启/关闭进入聊天提示菜单列表&#10&#10长按最上方chatGPT的logo2秒打开更换apikey输入框&#10双击上面chatGPT3.0文字清空所以聊天记录&#10输入 代号或者#+名 都可以实现同样的操作，记得点击发送按钮</textarea>
+                <textarea class="leftText" disabled>菜单列表&#10 发送 #0 表示 打开菜单列表&#10 发送 #1 表示 删除聊天记录&#10 发送 #2 表示 开启/关闭进入聊天提示菜单列表&#10 发送 #3 表示 更换apikey&#10&#10长按最上方chatGPT的logo2秒打开更换apikey输入框&#10双击上面chatGPT3.0文字清空所以聊天记录&#10输入 代号或者#+名 都可以实现同样的操作，记得点击发送按钮</textarea>
             </p>
         </div>
         <div class="inputBox">
@@ -58,7 +58,7 @@
                     chatRecords = JSON.parse(localStorage.getItem('chatGPT3.0ChatRecords')),
                     text = localStorage.getItem('chatGPT3.0Text'),
                     winHeight = $(window).height(),
-                    menu_list = '菜单列表\n 发送 #0 表示 打开菜单列表\n 发送 #1 表示 删除聊天记录\n 发送 #2 表示 更换apikey\n 发送 #3 表示 开启/关闭进入聊天提示菜单列表\n\n长按最上方chatGPT的logo2秒打开更换apikey输入框\n双击上面chatGPT3.0文字清空所以聊天记录\n输入 代号或者#+名 都可以实现同样的操作，记得点击发送按钮';
+                    menu_list = '菜单列表\n 发送 #0 表示 打开菜单列表\n 发送 #1 表示 删除聊天记录\n 发送 #2 表示 开启/关闭进入聊天提示菜单列表\n 发送 #3 表示 更换apikey\n\n长按最上方chatGPT的logo2秒打开更换apikey输入框\n双击上面chatGPT3.0文字清空所以聊天记录\n输入 代号或者#+名 都可以实现同样的操作，记得点击发送按钮';
                 $('.dialogBox').css('height', winHeight * 0.8);
                 $('.dialogBox .left .time').html(nowTime())
                 $('.dialogBox .leftText').each((i, e) => {
@@ -115,10 +115,7 @@
                     }
                 })
                 function clearChatRecords() {
-                    chatRecords = [];
-                    localStorage.setItem('chatGPT3.0ChatRecords', "[]");
-                    $('.dialogBox').html('')
-                    $('input:eq(0)').val('')
+                    localStorage.setItem('chatGPT3.0ChatRecords', "[]")
                     localStorage.setItem('chatGPT3.0Text', '')
                     window.location.reload()
                 }
@@ -176,12 +173,6 @@
                             $('.send').off('click')
                             return clearChatRecords();
                         case '#2' :
-                        case '#更换apikey' :
-                            key = true;
-                            $('.send').off('click')
-                            showApikeyInput()
-                            return returnData('已打开apikey输入框');
-                        case '#3' :
                         case '#开启/关闭进入聊天提示菜单列表' :
                             if(menu_list_tip) {
                                 menu_list_tip = false;
@@ -192,6 +183,12 @@
                                 localStorage.setItem('chatGPT3.0Menu_list_tip', 'true')
                                 return returnData('已开启进入聊天提示菜单列表');
                             }
+                        case '#3' :
+                        case '#更换apikey' :
+                            key = true;
+                            $('.send').off('click')
+                            showApikeyInput()
+                            return returnData('已打开apikey输入框');
                     }
                     axios({
                         url : 'https://api.openai.com/v1/completions',
@@ -265,10 +262,10 @@
                     var height = $(this).height();
                     if(height != winHeight){
                         $('.dialogBox').css('height', height * 0.4)
+                        $('.dialogBox').scrollTop($('.dialogBox').prop('scrollHeight'))
                     } else {
                         $('.dialogBox').css('height', winHeight * 0.8)
                     }
-                    $('.dialogBox').scrollTop($('.dialogBox').prop('scrollHeight'))
                 })
             })
         </script> 	

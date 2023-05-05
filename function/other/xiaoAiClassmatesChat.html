@@ -71,10 +71,7 @@
                     chatRecords = [];
                 }
                 function clearChatRecords() {
-                    chatRecords = [];
-                    localStorage.setItem('xiaoAi-chatRecords', "[]");
-                    $('.dialogBox').html('')
-                    $('input:eq(0)').val('')
+                    localStorage.setItem('xiaoAi-chatRecords', "[]")
                     localStorage.setItem('xiaoAi-text', '')
                     window.location.reload()
                 }
@@ -163,10 +160,10 @@
                     var height = $(this).height();
                     if(height != winHeight){
                         $('.dialogBox').css('height', height * 0.4)
+                        $('.dialogBox').scrollTop($('.dialogBox').prop('scrollHeight'))
                     } else {
                         $('.dialogBox').css('height', winHeight * 0.8)
                     }
-                    $('.dialogBox').scrollTop($('.dialogBox').prop('scrollHeight'))
                 })
             })
         </script> 	
