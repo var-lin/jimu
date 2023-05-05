@@ -1,4 +1,7 @@
 $(function () {
+    if(!localStorage.getItem('htmlHeight')) {
+        localStorage.setItem('htmlHeight', $(window).height())
+    }
     // 侧边栏设置
     function setting(e, dataName, tacitConsent, target, callback) {
         if(!localStorage.getItem(dataName)) localStorage.setItem(dataName, tacitConsent);
