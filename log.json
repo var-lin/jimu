@@ -6,7 +6,7 @@
             "<span class=\"c-f40\">New </span>新增“<a href=\"./function/copyZone/breakupSentences.html\">失恋分手句子</a>”功能",
             "<span class=\"c-f40\">New </span>新增“<a href=\"./function/other/networkRandomNaming.html\">网络随机取名</a>”功能",
             "<span class=\"c-f40\">New </span>新增“<a href=\"./function/other/loveTerminology.html\">恋爱术语</a>”功能",
-            "<span class=\"c-f40\">New </span>修复“<a href=\"./function/informationQueryZone/longitudeAndLatitudeDistanceQuery.html\">经纬度距离查询</a>”功能保留输入框的数据错误",
+            "<span class=\"c-f40\">New </span>修复“<a href=\"./function/informationQueryZone/longitudeAndLatitudeDistanceQuery.html\">经纬度距离查询</a>”功能保留输入框的数据错误bug",
             "<span class=\"c-f40\">New </span>“<a href=\"./function/other/chatGPT3.5.html\">chatGPT3.5(免费)</a>”功能新增记忆对话",
             "<span class=\"c-f40\">New </span>聊天类功能新增菜单列表",
             "<span style=\"color: #055\">注释&nbsp</span>软件的接口都是别人的，所以不知道什么时候功能就会失效"
