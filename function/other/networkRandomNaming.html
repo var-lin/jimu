@@ -23,7 +23,7 @@
             </div>
             <div class="notes text-center">
                 <div>#无反应请检测网络#</div>
-                <div>#<span>性别1：男 2：女 3：中性</span>#</div>
+                <div>#<span>性别男：1 女：2 中性：3</span>#</div>
                 <div>#名字字数最小<span>2</span>最大<span>3</span>#</div>
                 <div>#返回数量最小<span>1</span>最大<span>50</span>#</div>
             </div>
@@ -42,7 +42,7 @@
                     dataRtention2 = localStorage.getItem('networkRandomNaming2'),
                     dataRtention3 = localStorage.getItem('networkRandomNaming3'),
                     dataRtention4 = localStorage.getItem('networkRandomNaming4');
-                if(localStorage.getItem('dataRtention') === 'true' && dataRtention1) {
+                if(localStorage.getItem('dataRtention') === 'true') {
                     $('input:eq(0)').val(dataRtention1)
                     $('input:eq(1)').val(dataRtention2)
                     $('input:eq(2)').val(dataRtention3)
@@ -53,20 +53,17 @@
                     var sex = $('input:eq(0)').val(),
                         wordnum = $('input:eq(1)').val(),
                         num = $('input:eq(2)').val(),
-                        word = $('input:eq(3)').val();
-                    if(sex === '' || sex < 1 || sex > 3) sex = 1;
-                    if(wordnum === '' || wordnum < 2 || wordnum > 3) wordnum = 2;
-                    if(num === '' || num < 1 || num > 50) num = 1;
+                        word = $('input:eq(3)').val(),
+                        params = {};
+                    if(sex !== '') params.sex = sex;
+                    if(wordnum !== '') params.wordnum = wordnum;
+                    if(num !== '') params.num = num;
+                    if(word !== '') params.word = word;
                     // ajax获得数据
                     axios({
                         url : 'https://api.qqsuu.cn/api/dm-cname',
                         method : 'get',
-                        params : {
-                            sex : sex,
-                            wordnum : wordnum,
-                            num : num,
-                            word : word
-                        }
+                        params : params
                     }).then((res) => {
                         if(res.data.code !== 200) return $('.result').html(res.data.msg).fadeOut(3000);
                         localStorage.setItem('networkRandomNaming1', sex)
