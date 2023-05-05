@@ -44,9 +44,9 @@
                     menu_list_tip = localStorage.getItem('xiaoAi-menu_list_tip') == 'true',
                     chatRecords = JSON.parse(localStorage.getItem('xiaoAi-chatRecords')),
                     text = localStorage.getItem('xiaoAi-text'),
-                    winHeight = $(window).height(),
+                    htmlHeight = localStorage.getItem('htmlHeight'),
                     menu_list = '菜单列表\n 发送 #0 表示 打开菜单列表\n 发送 #1 表示 删除聊天记录\n 发送 #2 表示 开启/关闭进入聊天提示菜单列表\n\n输入 代号或者#+名 都可以实现同样的操作，记得点击发送按钮';
-                $('.dialogBox').css('height', winHeight * 0.8);
+                $('.dialogBox').css('height', htmlHeight * 0.8);
                 $('.dialogBox .left .time').html(nowTime())
                 $('.dialogBox .leftText').each((i, e) => {
                     $('.dialogBox .leftText').eq(i).css('height', $('.dialogBox .leftText').eq(i).prop('scrollHeight'))
@@ -158,11 +158,11 @@
                 })
                 $(window).resize(() => {
                     var height = $(this).height();
-                    if(height != winHeight){
+                    if(height != htmlHeight){
                         $('.dialogBox').css('height', height * 0.4)
                         $('.dialogBox').scrollTop($('.dialogBox').prop('scrollHeight'))
                     } else {
-                        $('.dialogBox').css('height', winHeight * 0.8)
+                        $('.dialogBox').css('height', htmlHeight * 0.8)
                     }
                 })
             })

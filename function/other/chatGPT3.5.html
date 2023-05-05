@@ -48,10 +48,10 @@
                     memoryDialogue = localStorage.getItem('chatGPT3.5-memoryDialogue') == 'true',
                     chatRecords = JSON.parse(localStorage.getItem('chatGPT3.5-chatRecords')),
                     text = localStorage.getItem('chatGPT3.5-text'),
-                    winHeight = $(window).height(),
+                    htmlHeight = localStorage.getItem('htmlHeight'),
                     chatID = localStorage.getItem('chatGPT3-chatID'),
                     menu_list = '菜单列表\n 发送 #0 表示 打开菜单列表\n 发送 #1 表示 删除聊天记录\n 发送 #2 表示 开启/关闭进入聊天提示菜单列表\n 发送 #3 表示 开启/关闭记忆对话\n 发送 #4 表示 更换记忆对话ID值\n\n双击上面chatGPT3.0文字清空所以聊天记录\n输入 代号或者#+名 都可以实现同样的操作，记得点击发送按钮';
-                $('.dialogBox').css('height', winHeight * 0.8);
+                $('.dialogBox').css('height', htmlHeight * 0.8);
                 $('.dialogBox .left .time').html(nowTime())
                 $('.dialogBox .leftText').each((i, e) => {
                     $('.dialogBox .leftText').eq(i).css('height', $('.dialogBox .leftText').eq(i).prop('scrollHeight'))
@@ -217,11 +217,11 @@
                 })
                 $(window).resize(() => {
                     var height = $(this).height();
-                    if(height != winHeight){
+                    if(height != htmlHeight){
                         $('.dialogBox').css('height', height * 0.4)
                         $('.dialogBox').scrollTop($('.dialogBox').prop('scrollHeight'))
                     } else {
-                        $('.dialogBox').css('height', winHeight * 0.8)
+                        $('.dialogBox').css('height', htmlHeight * 0.8)
                     }
                 })
 			})
