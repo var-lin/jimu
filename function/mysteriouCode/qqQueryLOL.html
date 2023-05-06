@@ -34,7 +34,7 @@
         <span class="from text-center">接口来自:<a href="https://api.xywlapi.cc/" target="_blank">XAPI</a></span>  
         <script>
         	$(function () {
-                if(localStorage.getItem('mysteriouCode') === 'false') return window.close()
+                if(localStorage.getItem('mysteriouCode') !== 'true') return window.close();
                	$('.container').fadeIn(300);
                 var dataRtention = localStorage.getItem('qqQueryLOL');
                 if(localStorage.getItem('dataRtention') === 'true' && dataRtention) {

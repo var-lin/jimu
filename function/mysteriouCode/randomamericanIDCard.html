@@ -53,7 +53,7 @@
         <span class="from text-center">接口来自:<a href="https://api.pearktrue.cn/" target="_blank">Pear API</a></span>
         <script>
         	$(function () {
-                if(localStorage.getItem('mysteriouCode') === 'false') return window.close()
+                if(localStorage.getItem('mysteriouCode') !== 'true') return window.close();
                	$('.container').fadeIn(300);
 				function getdata() {
                     // ajax获得数据

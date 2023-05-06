@@ -27,7 +27,7 @@
                 <span class="time"></span>
             </p>
             <p class="leftContent">
-                <textarea class="leftText" disabled>菜单列表&#10 发送 #0 表示 打开菜单列表&#10 发送 #1 表示 删除聊天记录&#10 发送 #2 表示 开启/关闭进入聊天提示菜单列表&#10 发送 #3 表示 更换apikey&#10&#10长按最上方chatGPT的logo2秒打开更换apikey输入框&#10双击上面chatGPT3.0文字清空所以聊天记录&#10输入 代号或者#+名 都可以实现同样的操作，记得点击发送按钮</textarea>
+                <textarea class="leftText" disabled></textarea>
             </p>
         </div>
         <div class="inputBox">
@@ -58,9 +58,10 @@
                     chatRecords = JSON.parse(localStorage.getItem('chatGPT3.0ChatRecords')),
                     text = localStorage.getItem('chatGPT3.0Text'),
                     htmlHeight = localStorage.getItem('htmlHeight'),
-                    menu_list = '菜单列表\n 发送 #0 表示 打开菜单列表\n 发送 #1 表示 删除聊天记录\n 发送 #2 表示 开启/关闭进入聊天提示菜单列表\n 发送 #3 表示 更换apikey\n\n长按最上方chatGPT的logo2秒打开更换apikey输入框\n双击上面chatGPT3.0文字清空所以聊天记录\n输入 代号或者#+名 都可以实现同样的操作，记得点击发送按钮';
+                    menu_list = '菜单列表\n 发送 #0 表示 打开菜单列表\n 发送 #1 表示 删除聊天记录\n 发送 #2 表示 开启/关闭进入聊天提示菜单列表\n 发送 #3 表示 更换apikey\n\n长按最上方chatGPT的logo2秒打开更换apikey输入框\n双击上面chatGPT3.0文字清空所有聊天记录\n输入 代号或者#+名 都可以实现同样的操作，记得点击发送按钮';
                 $('.dialogBox').css('height', htmlHeight * 0.8);
                 $('.dialogBox .left .time').html(nowTime())
+                $('.dialogBox .leftContent .leftText:eq(1)').html(menu_list)
                 $('.dialogBox .leftText').each((i, e) => {
                     $('.dialogBox .leftText').eq(i).css('height', $('.dialogBox .leftText').eq(i).prop('scrollHeight'))
                 })
