@@ -1,13 +1,25 @@
 $(function () {
 	$('#homepage .jumbotron').animate({
         opacity : 1
-    });
-    $('input').on({
-        'focus' : function () {
-            $(this).css('border-color', 'skyblue')
-        },
-        'blur' : function () {
-            $(this).css('border-color', 'black')
+    })
+    if(!localStorage.getItem('htmlWidth')) {
+        localStorage.setItem('htmlWidth', window.innerWidth)
+    }
+    if(!localStorage.getItem('htmlHeight')) {
+        localStorage.setItem('htmlHeight', window.innerHeight)
+    }
+    $(window).resize(() => {
+        if(window.innerWidth != localStorage.getItem('htmlWidth')) {
+            $('.search .search-content').css('width', $('.search .search-box').width())
+        }
+        if(window.innerHeight != localStorage.getItem('htmlHeight')) {
+            $('#logo').hide()
+            $('#feedback').hide()
+            $('footer').hide()
+        } else {
+            $('#logo').show()
+            $('#feedback').show()
+            $('footer').show()
         }
     });
     // 侧边栏
