@@ -1,0 +1,166 @@
+<!doctype html>
+<html> 
+    <head> 
+        <meta charset="UTF-8"> 
+        <meta name="viewport" id="viewport" content="width=device-width, initial-scale=1, user-scalable=no"> 
+        <title>积木·字符串加密/解密</title>
+        <link rel="icon" type="image/x-icin" href="../../images/logo.ico">
+        <script src="../../tools/jQuery3.6.4.min.js"></script>
+        <script src="../../tools/axios.js"></script>
+        <script src="../../tools/clipboard.min.js"></script>
+        <link rel="stylesheet" href="../../tools/bootstrap.min.css">
+        <link rel="stylesheet" href="../css/function.css">
+        <style>
+        	textarea,
+            input {
+    			margin-top: 2rem;
+			}
+
+			.btn-secondary {
+             	margin-top: 1rem;
+               	box-shadow: 0 2px 2px black;
+			}
+
+            .data #result {
+                color: #f40;
+            }
+        </style>
+    </head> 
+    <body>
+		<div class="result text-center"></div>
+	   	<div class="container">
+         	<div class="switch text-center" style="margin-top: 20%;">
+            	<button class="btn btn-success" style="margin-right: 2rem;width: 9rem;">字符串加密</button>
+               	<button class="btn btn-info" style="width: 7rem">字符串解密</button>
+            </div>
+            <div id="function">
+            	<!-- 字符串加密输入框 -->
+            	<div id="encryption">
+            		<textarea class="form-control text-center" placeholder="请输入需要加密的内容"></textarea>
+            		<input type="number" class="form-control" placeholder="请输入加密的密码" required>
+            	</div>
+               	<!-- 字符串解密输入框 -->
+            	<div id="decryption" style="display: none;">
+            		<textarea class="form-control text-center" placeholder="请输入需要解密的内容"></textarea>
+            		<input type="number" class="form-control" placeholder="请输入解密的密码" required>
+            	</div>
+            </div>
+	        <div class="text-center allBtn">
+                <button class="btn btn-secondary" style="margin-top: 0;">清空内容</button>
+                <button class="btn btn-info">立即加密/解密</button>
+            </div>
+           	<div class="notes text-center">
+              	<div>#无反应请检测网络#</div>
+                <div>#密码必须为<span>1-8位纯数字</span>#</div>
+            </div>
+	        <div class="data text-center marTop">
+           		<div>加密/解密结果</div>
+                <div id="result" data-clipboard-target="#result"></div>
+                <div class="dataTips">#加密/解密结果可以点击复制#</div>
+           	</div> 
+        </div>
+        <span class="from text-center">接口来自:<a href="https://api.vvhan.com/" target="_blank">韩小韩API</a></span>  
+        <script>
+        	$(function () {
+               	$('.container').fadeIn(300);
+                var type = 0,
+                    dataRtention1 = localStorage.getItem('stringEncryption&Decryption1'),
+                    dataRtention2 = localStorage.getItem('stringEncryption&Decryption2'),
+                    dataRtention3 = localStorage.getItem('stringEncryption&Decryption3'),
+                    dataRtention4 = localStorage.getItem('stringEncryption&Decryption4');
+                if(localStorage.getItem('dataRtention') === 'true' && dataRtention1 || dataRtention3) {
+                    $('textarea:eq(0)').val(dataRtention1)
+                    $('input:eq(0)').val(dataRtention2)
+                    $('textarea:eq(1)').val(dataRtention3)
+                    $('input:eq(1)').val(dataRtention4)
+                }
+                $('textarea:eq(0)').focus();
+                // 切换解密加密 switchbtn
+                (function () {
+                    $('.switch button').each(function (i, e) {
+                    	$(this).click(function () {
+                           	$(this).animate({
+                              	width : '9rem'
+                            }).siblings().animate({
+                            	width : '7rem'
+                            })
+                       		$('#function > div').eq(i).fadeIn(500).siblings().hide();
+                            type = i;
+                            if(type) {
+                                $('#decryption textarea:eq(0)').focus()
+                            } else {
+                                $('#encryption textarea:eq(0)').focus()
+                            }
+                       	})
+                    })
+                }());
+                // ajax获得数据
+				function getdata() {
+                    var string = type ? $('#decryption textarea').val() : $('#encryption textarea').val(),
+                        key = type ? $('#decryption input').val() : $('#encryption input').val(),
+                        typeNum = type ? 'de' : 'en';
+                    axios({
+                        url : 'https://api.vvhan.com/api/jm',
+                        method : 'get',
+                        params : {
+                            key : key,
+                            string : string,
+                            type : typeNum
+                        }
+                    }).then((res) => {
+                        res = res.data;
+                        if(!res.success) return $('.result').html(res.message).fadeOut(3000);
+                        if(type) {
+                            localStorage.setItem('stringEncryption&Decryption3', string)
+                            localStorage.setItem('stringEncryption&Decryption4', key)
+                            $('#result').html(res.demissString)
+                            if(localStorage.getItem('inputRtention') === 'false') {
+                                $('#decryption textarea').val('')
+                                $('#decryption input').val('')
+                            }
+                        } else {
+                            localStorage.setItem('stringEncryption&Decryption1', string)
+                            localStorage.setItem('stringEncryption&Decryption2', key)
+                            $('#result').html(res.enmissString)
+                            if(localStorage.getItem('inputRtention') === 'false') {
+                                $('#encryption textarea').val('')
+                                $('#encryption input').val('')
+                            }
+                        }
+                        $('.data').fadeIn(500)
+                        $('.result').html('操作成功').fadeOut(3000)
+                    }).catch((err) => {
+                        $('.result').html('网络或接口出错,接口问题请联系作者').fadeOut(3000)
+                    })
+   				}
+				$('.allBtn .btn:eq(0)').click(() => {
+                    if(type) {
+                        $('#decryption textarea').val('')
+                        $('#decryption input').val('')
+                        $('#decryption textarea:eq(0)').focus()
+                    } else {
+                        $('#encryption textarea').val('')
+                        $('#encryption input').val('')
+                        $('#encryption textarea:eq(0)').focus()
+                    }
+                })
+                $('.allBtn .btn:eq(1)').click(function () {
+                    $('.result').html('请稍等').fadeIn(1000)
+                    getdata()                   
+                })
+         		$(window).on('keydown', function (e) {
+               		if(e.keyCode === 13) {
+                        $('.result').html('请稍等').fadeIn(1000)
+                        getdata()
+                    }
+               	})
+                // 结果点击复制
+         		new Clipboard('#result', {
+    				'#result': function(trigger) {
+        				return trigger.nextElementSibling
+    				}
+				})
+			})
+        </script> 	
+    </body>
+</html>

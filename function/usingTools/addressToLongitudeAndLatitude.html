@@ -1,0 +1,82 @@
+<!doctype html>
+<html> 
+    <head> 
+        <meta charset="UTF-8"> 
+        <meta name="viewport" id="viewport" content="width=device-width, initial-scale=1, user-scalable=no"> 
+        <title>积木·地址转换经纬度</title>
+        <link rel="icon" type="image/x-icin" href="../../images/logo.ico">
+        <script src="../../tools/jQuery3.6.4.min.js"></script>
+        <script src="../../tools/axios.js"></script>
+        <link rel="stylesheet" href="../../tools/bootstrap.min.css">
+        <link rel="stylesheet" href="../css/function.css">
+    </head> 
+    <body>
+		<div class="result text-center"></div>
+    	<div class="container">
+       		<input type="text" class="form-control" placeholder="请输入需要转换的地址" required>            
+            <div class="text-center allBtn">
+                <button class="btn btn-secondary">清空内容</button>
+                <button class="btn btn-info">立即转换</button>
+            </div>
+            <div class="notes text-center">
+                <div>#无反应请检测网络#</div>
+            </div>
+            <div class="data">
+            	查询结果
+               	<ul>
+               		<li>经度：<span></span></li>
+                    <li>纬度：<span></span></li>
+                    <li>地址：<span></span></li>
+               	</ul>
+            </div>                              	                    
+       	</div>
+        <span class="from text-center">接口来自:<a href="http://res.abeim.cn/api/" target="_blank">Abeim API</a></span>  
+        <script>
+        	$(function () {
+               	$('.container').fadeIn(300);
+                var dataRtention = localStorage.getItem('addressToLongitudeAndLatitude');
+                if(localStorage.getItem('dataRtention') === 'true' && dataRtention) {
+                    $('input').val(dataRtention)
+                }
+                $('input:eq(0)').focus();
+				function getdata() {
+       				var text = $('input').val();
+                   	if(text === '') return $('.result').html('请输入要转换的地址').fadeOut(3000);
+                    // ajax获得数据
+                    axios({
+                        url : 'http://res.abeim.cn/api-location_address_geocoder',
+                        method : 'get',
+                        params : {
+                            address : text
+                        }
+                    }).then((res) => {
+                        if(res.data.code !== 200) return $('.result').html(res.data.msg).fadeOut(3000);
+                        localStorage.setItem('addressToLongitudeAndLatitude', text)
+                        res = res.data.data;
+                        $('.data ul li:eq(0) span').html(res.lng)
+                        $('.data ul li:eq(1) span').html(res.lat)
+                        $('.data ul li:eq(2) span').html(res.city + res.district + res.name)
+                        $('.data').fadeIn(500)
+                        $('.result').html('操作成功').fadeOut(3000)
+                        if(localStorage.getItem('inputRtention') === 'false') $('input').val('');
+                    }).catch((err) => {
+                        $('.result').html('网络或接口出错,接口问题请联系作者').fadeOut(3000)
+                    })
+   				}
+				$('.allBtn .btn:eq(0)').click(() => {
+                    $('input').val('').focus()
+                })
+                $('.allBtn .btn:eq(1)').click(function () {
+                    $('.result').html('请稍等').fadeIn(1000)
+                    getdata()                   
+                })
+         		$(window).on('keydown', function (e) {
+               		if(e.keyCode === 13) {
+                        $('.result').html('请稍等').fadeIn(1000)
+                        getdata()
+                    }
+               	})
+			})
+        </script> 	
+    </body>
+</html>
