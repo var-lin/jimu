@@ -1,8 +1,13 @@
 [
     {
-        "date" : "加Q群610411365体验测试版",
+        "date" : "2023.05.20.999更新日志",
         "data" : [
-            "<span class=\"c-f40\">New </span>“<a href=\"./function/other/chatGPT3.5.html\">chatGPT3.5(免费)</a>”功能新增联网对话",
+            "<span class=\"c-f40\">New </span>“<a href=\"./function/other/chatGPT3.5.html\">chatGPT3.5(免费)</a>”功能新增联网对话模式",
+            "<span class=\"c-f40\">New </span>“<a href=\"./function/other/chatGPT3.5.html\">chatGPT3.5(免费)</a>”功能AI绘画模式",
+            "<span class=\"c-f40\">New </span>新增“<a href=\"./function/analysisZone/kugouLinearChainAnalysis.html\">酷狗音乐直链解析</a>”功能",
+            "<span class=\"c-f40\">New </span>删除失效功能\"QQ头像表情包生成\"",
+            "<span class=\"c-f40\">New </span>删除失效功能\"原神体力查询\"",
+            "<span class=\"c-f40\">New </span>删除失效功能\"全国重名查询\"",
             "<span style=\"color: #055\">注释&nbsp</span>软件的接口都是别人的，所以不知道什么时候功能就会失效"
         ]
     },

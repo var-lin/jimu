@@ -16,10 +16,12 @@ $(function () {
             $('#logo').hide()
             $('#feedback').hide()
             $('footer').hide()
+            $('#homepage .sidebar .about').hide()
         } else {
             $('#logo').show()
             $('#feedback').show()
             $('footer').show()
+            $('#homepage .sidebar .about').show()
         }
     });
     // 侧边栏
