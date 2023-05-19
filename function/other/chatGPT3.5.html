@@ -1,0 +1,298 @@
+<!doctype html>
+<html> 
+    <head> 
+        <meta charset="UTF-8"> 
+        <meta name="viewport" id="viewport" content="width=device-width, initial-scale=1, user-scalable=no"> 
+        <title>积木·chatGPT3.5</title>
+        <link rel="icon" type="image/x-icin" href="../../images/logo.ico">
+        <script src="../../tools/jQuery3.6.4.min.js"></script>
+        <script src="../../tools/axios.js"></script>
+        <link rel="stylesheet" href="../../tools/bootstrap.min.css">
+        <link rel="stylesheet" href="../css/chatGPT.css">
+    </head> 
+    <body>
+		<div class="header" onselectstart="return false">
+            <img src="../../images/chatGPT.png" alt="log"><span>chatGPT3.5</span>
+        </div>
+        <div class="dialogBox">
+            <p class="left">
+                <img src="../../images/chatGPT.png" alt="chatGPT-logo">
+                <span class="time"></span>
+            </p>
+            <p class="leftContent">
+                <textarea class="leftText" disabled>您需要什么帮助呢？&#10&#10接口来自Pear API&#10https://api.pearktrue.cn/</textarea>
+            </p>
+            <p class="left">
+                <img src="../../images/chatGPT.png" alt="chatGPT-logo">
+                <span class="time"></span>
+            </p>
+            <p class="leftContent">
+                <textarea class="leftText" disabled></textarea>
+            </p>
+        </div>
+        <div class="inputBox">
+            <input class="text" type="text" placeholder="请输入内容">
+            <button class="send">发送</button>
+        </div>
+        <script>
+        	$(function () {
+                function initialization(localName, data) {
+                    if(!localStorage.getItem(localName)) {
+                        localStorage.setItem(localName, data)
+                    }
+                }
+                initialization('chatGPT3.5-menu_list_tip', false)
+                initialization('chatGPT3.5-chatType', '普通模式')
+                var key = true,
+                    menu_list_tip = localStorage.getItem('chatGPT3.5-menu_list_tip') == 'true',
+                    chatType = localStorage.getItem('chatGPT3.5-chatType'),
+                    chatRecords = JSON.parse(localStorage.getItem('chatGPT3.5-chatRecords')),
+                    text = localStorage.getItem('chatGPT3.5-text'),
+                    htmlHeight = localStorage.getItem('htmlHeight'),
+                    chatID = localStorage.getItem('chatGPT3-chatID'),
+                    menu_list = '菜单列表\n 发送 #0 表示 打开菜单列表\n 发送 #1 表示 删除聊天记录\n 发送 #2 表示 开启/关闭进入聊天提示菜单列表\n 发送 #3 表示 查看当前模式\n 发送 #4 表示 切换普通模式\n 发送 #5 表示 切换联网模式\n 发送 #6 表示 切换记忆对话模式\n 发送 #7 表示 更换记忆对话ID值\n 发送 #8 表示 切换AI绘画模式\n\n双击上面chatGPT3.5文字清空所有聊天记录\n输入 代号或者#+名 都可以实现同样的操作，记得点击发送按钮\n\n温馨提示：AI绘画加载有点慢';
+                $('.dialogBox .left .time').html(nowTime())
+                $('.dialogBox .leftContent .leftText:eq(1)').html(menu_list)
+                $('.dialogBox .leftText').each((i, e) => {
+                    $('.dialogBox .leftText').eq(i).css('height', $('.dialogBox .leftText').eq(i).prop('scrollHeight'))
+                })
+                text ? $('input:eq(0)').val(text) : null;
+                $('input:eq(0)').focus().on('input', function () {
+                    localStorage.setItem('chatGPT3.5-text', $(this).val())
+                });
+                if(menu_list_tip) {
+                    returnData(menu_list);
+                }
+                if(chatRecords && chatRecords !== []) {
+                    $.each(chatRecords, function (i, e) {
+                        if(e.spokesman == 'left') {
+                            $('.dialogBox').append('<p class="right"><span class="time">' + e.time + '</span><img src="../../images/logo.png" alt="logo"></p><p class="rightContent"><textarea class="rightText" disabled>' + e.text + '</textarea></p>')
+                            $('.dialogBox .rightText:last').css('height', $('.dialogBox .rightText:last').prop('scrollHeight'))
+                        } else if(e.spokesman == 'leftAIPainting') {
+                            $('.dialogBox').append('<p class="left"><img src="../../images/chatGPT.png" alt="chatGPT-logo"><span class="time">' + e.time + '</span></p><p class="leftContent"><span>' + e.imgURL + '</span><a href="' + e.imgURL +'" target="_blank"><img src="' + e.imgURL +'" alt="' + e.text +'" title="' + e.text +'"></a></p>')
+                            $('.dialogBox .leftText:last').css('height', $('.dialogBox .leftText:last').prop('scrollHeight'))
+                        } else {
+                            $('.dialogBox').append('<p class="left"><img src="../../images/chatGPT.png" alt="chatGPT-logo"><span class="time">' + e.time + '</span></p><p class="leftContent"><textarea class="leftText" disabled>' + e.text + '</textarea></p>')
+                            $('.dialogBox .leftText:last').css('height', $('.dialogBox .leftText:last').prop('scrollHeight'))
+                        }
+                    })
+                    $('.dialogBox img').on('load', () => {
+                        $('.dialogBox').scrollTop($('.dialogBox').prop('scrollHeight'))
+                    })
+                } else {
+                    localStorage.setItem('chatGPT3.5-chatRecords', "[]");
+                    chatRecords = [];
+                }
+                function getChatID() {
+                    axios({
+                        url : 'https://api.pearktrue.cn/api/gpt/continuous.php',
+                        method : 'get',
+                        params : {
+                            type : 'get'
+                        }
+                    }).then((res) => {
+                        var id = res.data.id;
+                        if(id) {
+                            chatID = id;
+                            localStorage.setItem('chatGPT3-chatID', id)
+                            returnData('已获取更换新的记忆对话ID')
+                        } else {
+                            returnData(res.data.msg)
+                        }
+                    }).catch((err) => {
+                        returnData('获取记忆对话ID失败，请检测网络或接口可能失效了，请联系作者反馈')
+                    })
+                }
+                function nowTime() {
+                    var time = new Date();
+                    function zeroPadding(num) {
+                        if(num < 10) {
+                            return '0' + num
+                        }
+                        return num
+                    }
+                    time = time.getFullYear() + '年' + (time.getMonth() + 1) + '月' + time.getDate() + '日 ' + zeroPadding(time.getHours()) + ':' + zeroPadding(time.getMinutes()) + ':' + zeroPadding(time.getSeconds());
+                    return time
+                }
+                function clearChatRecords() {
+                    localStorage.setItem('chatGPT3.5-chatRecords', "[]")
+                    localStorage.setItem('chatGPT3.5-text', '')
+                    window.location.reload()
+                }
+                function returnData(data) {
+                    var time = nowTime();
+                    chatRecords.push({
+                        spokesman : 'right',
+                        time : time,
+                        text : data
+                    });
+                    localStorage.setItem('chatGPT3.5-chatRecords', JSON.stringify(chatRecords));
+                    $('.dialogBox .leftText:last').html($.trim(data)).css('height', $('.dialogBox .leftContent:last-child .leftText').prop('scrollHeight'))
+                    $('.dialogBox .left:nth-last-child(2) .time').html(time)
+                    $('.dialogBox').scrollTop($('.dialogBox').prop('scrollHeight'))
+                    key = true;
+                    $('.send').on('click', getData)
+                }
+                function getData() {
+                    key = false;
+                    $('.send').off('click')
+                    var text = $.trim($('.text').val());
+                    if(text === '') return;
+                    var time = nowTime();
+                    chatRecords.push({
+                        spokesman : 'left',
+                        time : time,
+                        text : text
+                    });
+                    localStorage.setItem('chatGPT3.5-chatRecords', JSON.stringify(chatRecords));
+                    localStorage.setItem('chatGPT3.5-text', '')
+                    $('.dialogBox').append('<p class="right"><span class="time">' + time + '</span><img src="../../images/logo.png" alt="logo"></p><p class="rightContent"><textarea class="rightText" disabled>' + text +'</textarea></p><p class="left"><img src="../../images/chatGPT.png" alt="chatGPT-logo"><span class="time"></span></p><p class="leftContent"><textarea class="leftText" disabled>chatGPT正在思考中...</textarea></p>')
+                    $('.text').val('')
+                    $('.dialogBox .rightText:last').css('height', $('.dialogBox .rightText:last').prop('scrollHeight'))
+                    $('.dialogBox').scrollTop($('.dialogBox').prop('scrollHeight'))
+                    switch(text) {
+                        case '#0' :
+                        case '#打开菜单列表' :
+                            return returnData(menu_list);
+                        case '#1' :
+                        case '#删除聊天记录' :
+                            key = true;
+                            $('.send').on('click', getData)
+                            return clearChatRecords();
+                        case '#2' :
+                        case '#开启/关闭进入聊天提示菜单列表' :
+                            if(menu_list_tip) {
+                                menu_list_tip = false;
+                                localStorage.setItem('chatGPT3.5-menu_list_tip', 'false')
+                                return returnData('已关闭进入聊天提示菜单列表');
+                            } else {
+                                menu_list_tip = true;
+                                localStorage.setItem('chatGPT3.5-menu_list_tip', 'true')
+                                return returnData('已开启进入聊天提示菜单列表');
+                            }
+                        case '#3' :
+                        case '#查看当前模式' :
+                            return returnData('当前模式：' + chatType)
+                        case '#4' :
+                        case '#切换普通模式' :
+                            if(chatType != '普通模式') {
+                                chatType = '普通模式'
+                                localStorage.setItem('chatGPT3.5-chatType', '普通模式')
+                                return returnData('已切换普通模式')
+                            } else {
+                                return returnData('当前已是普通模式')
+                            }
+                        case '#5' :
+                        case '#切换联网模式' :
+                            if(chatType != '联网模式') {
+                                chatType = '联网模式'
+                                localStorage.setItem('chatGPT3.5-chatType', '联网模式')
+                                return returnData('已切换联网模式')
+                            } else {
+                                return returnData('当前已是联网模式')
+                            }
+                        case '#6' :
+                        case '#切换记忆对话模式' :
+                            if(chatType != '记忆对话模式') {
+                                if(!chatID) getChatID();
+                                chatType = '记忆对话模式'
+                                localStorage.setItem('chatGPT3.5-chatType', '记忆对话模式')
+                                return returnData('已切换记忆对话模式')
+                            } else {
+                                return returnData('当前已是记忆对话模式')
+                            }
+                        case '#7' :
+                        case '#更换记忆对话ID值' :
+                            key = true;
+                            $('.send').on('click', getData)
+                            return getChatID();
+                        case '#8' :
+                        case '#切换AI绘画模式' :
+                            if(chatType != 'AI绘画模式') {
+                                if(!chatID) getChatID();
+                                chatType = 'AI绘画模式'
+                                localStorage.setItem('chatGPT3.5-chatType', 'AI绘画模式')
+                                return returnData('已切换AI绘画模式')
+                            } else {
+                                return returnData('当前已是AI绘画模式')
+                            }
+                    }
+                    var chatData = {};
+                    switch(chatType) {
+                        case '普通模式' :
+                            chatData.url = 'https://api.pearktrue.cn/api/gpt/';
+                            chatData.params = {
+                                message : text
+                            }
+                            break;
+                        case '联网模式' :
+                            chatData.url = 'https://api.pearktrue.cn/api/gpt/online.php';
+                            chatData.params = {
+                                message : text
+                            }
+                            break;
+                        case '记忆对话模式' :
+                            chatData.url = 'https://api.pearktrue.cn/api/gpt/continuous.php';
+                            chatData.params = {
+                                id : chatID,
+                                message : text
+                            }
+                            break;
+                        case 'AI绘画模式' :
+                            axios.get('https://api.pearktrue.cn/api/gpt/aipaint.php', {
+                                params: {
+                                    prompt: text
+                                }
+                            }).then((res) => {
+                                var time = nowTime();
+                                res = res.data.imgurl;
+                                chatRecords.push({
+                                    spokesman: 'leftAIPainting',
+                                    time: time,
+                                    imgURL: res,
+                                    text: text
+                                });
+                                localStorage.setItem('chatGPT3.5-chatRecords', JSON.stringify(chatRecords));
+                                $('.leftContent:last').html('<span>' + res + '</span><a target="_blank"><img></a>')
+                                $('.leftContent:last a').attr('href', res).children('img').attr({
+                                    src: res,
+                                    alt: text,
+                                    title: text
+                                }).on('load', () => {
+                                    $('.dialogBox').scrollTop($('.dialogBox').prop('scrollHeight'))
+                                })
+                                $('.dialogBox .left:nth-last-child(2) .time').html(time)
+                                key = true;
+                                $('.send').on('click', getData)
+                            }).catch((err) => {
+                                returnData('对不起，chatGPT不能收到你的消息')
+                            })
+                            return;
+                    }
+                    axios({
+                        url : chatData.url,
+                        method : 'get',
+                        params : chatData.params
+                    }).then((res) => {
+                        returnData(res.data.answer)
+                    }).catch((err) => {
+                        returnData('对不起，chatGPT不能收到你的消息')
+                    })
+                }
+                $('.header span').on('dblclick', clearChatRecords)
+                $('.send').on('click', getData)
+                $(window).on('keydown', function (e) {
+                    if(e.keyCode == 13 && key) getData();
+                })
+                $(window).resize(() => {
+                    if($(window).height() != htmlHeight){
+                        $('.dialogBox').css('height', '70vh')
+                        $('.dialogBox').scrollTop($('.dialogBox').prop('scrollHeight'))
+                    } else {
+                        $('.dialogBox').css('height', '83vh')
+                    }
+                })
+			})
+        </script> 	
+    </body>
+</html>

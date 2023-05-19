@@ -1,0 +1,102 @@
+<!doctype html>
+<html> 
+    <head> 
+        <meta charset="UTF-8"> 
+        <meta name="viewport" id="viewport" content="width=device-width, initial-scale=1, user-scalable=no"> 
+        <title>积木·网络随机取名</title>
+        <link rel="icon" type="image/x-icin" href="../../images/logo.ico">
+        <script src="../../tools/jQuery3.6.4.min.js"></script>
+        <script src="../../tools/axios.js"></script>
+        <link rel="stylesheet" href="../../tools/bootstrap.min.css">
+        <link rel="stylesheet" href="../css/function.css">
+    </head> 
+    <body>
+		<div class="result text-center"></div>
+    	<div class="container">
+            <input type="number" class="form-control" placeholder="请输入性别(默认3)" required>
+            <input type="number" class="form-control marTop" placeholder="请输入数字字数(默认2)" required>
+            <input type="number" class="form-control marTop" placeholder="请输入返回数量(默认1)" required>
+       		<input type="text" class="form-control marTop" placeholder="请输入名字中包含的字(没有则不用写)" required>
+            <div class="text-center allBtn">
+                <button class="btn btn-secondary">清空内容</button>
+                <button class="btn btn-info">立即查询</button>
+            </div>
+            <div class="notes text-center">
+                <div>#无反应请检测网络#</div>
+                <div>#<span>性别男：1 女：2 中性：3</span>#</div>
+                <div>#名字字数最小<span>2</span>最大<span>3</span>#</div>
+                <div>#返回数量最小<span>1</span>最大<span>50</span>#</div>
+            </div>
+            <div class="data">
+            	查询结果
+               	<ul>
+                    <li><span></span></li>
+               	</ul>
+            </div>                              	                    
+       	</div>
+        <span class="from text-center">接口来自:<a href="https://api.qqsuu.cn/" target="_blank">大米API</a></span>  
+        <script>
+        	$(function () {
+               	$('.container').fadeIn(300);
+                var dataRtention1 = localStorage.getItem('networkRandomNaming1'),
+                    dataRtention2 = localStorage.getItem('networkRandomNaming2'),
+                    dataRtention3 = localStorage.getItem('networkRandomNaming3'),
+                    dataRtention4 = localStorage.getItem('networkRandomNaming4');
+                if(localStorage.getItem('dataRtention') === 'true') {
+                    $('input:eq(0)').val(dataRtention1)
+                    $('input:eq(1)').val(dataRtention2)
+                    $('input:eq(2)').val(dataRtention3)
+                    $('input:eq(3)').val(dataRtention4)
+                }
+                $('input:eq(0)').focus();
+				function getdata() {
+                    var sex = $('input:eq(0)').val(),
+                        wordnum = $('input:eq(1)').val(),
+                        num = $('input:eq(2)').val(),
+                        word = $('input:eq(3)').val(),
+                        params = {};
+                    if(sex !== '') params.sex = sex;
+                    if(wordnum !== '') params.wordnum = wordnum;
+                    if(num !== '') params.num = num;
+                    if(word !== '') params.word = word;
+                    // ajax获得数据
+                    axios({
+                        url : 'https://api.qqsuu.cn/api/dm-cname',
+                        method : 'get',
+                        params : params
+                    }).then((res) => {
+                        if(res.data.code !== 200) return $('.result').html(res.data.msg).fadeOut(3000);
+                        localStorage.setItem('networkRandomNaming1', sex)
+                        localStorage.setItem('networkRandomNaming2', wordnum)
+                        localStorage.setItem('networkRandomNaming3', num)
+                        localStorage.setItem('networkRandomNaming4', word)
+                        res = res.data.data.list;
+                        var name = '';
+                        $(res).each((i, e) => {
+                            name += res[i].naming + ' ';
+                        })
+                        $('.data ul li:eq(0) span').html(name)
+                        $('.data').fadeIn(500)
+                        $('.result').html('操作成功').fadeOut(3000)
+                        if(localStorage.getItem('inputRtention') === 'false') $('input').val('');
+                    }).catch((err) => {
+                        $('.result').html('网络或接口出错,接口问题请联系作者').fadeOut(3000)
+                    })
+   				}
+				$('.allBtn .btn:eq(0)').click(() => {
+                    $('input').val('').eq(0).focus()
+                })
+                $('.allBtn .btn:eq(1)').click(function () {
+                    $('.result').html('请稍等').fadeIn(1000)
+                    getdata()                   
+                })
+         		$(window).on('keydown', function (e) {
+               		if(e.keyCode === 13) {
+                        $('.result').html('请稍等').fadeIn(1000)
+                        getdata()
+                    }
+               	});
+			})
+        </script> 	
+    </body>
+</html>

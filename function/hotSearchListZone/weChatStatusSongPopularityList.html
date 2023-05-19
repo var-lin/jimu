@@ -1,0 +1,55 @@
+<!doctype html>
+<html> 
+    <head> 
+        <meta charset="UTF-8"> 
+        <meta name="viewport" id="viewport" content="width=device-width, initial-scale=1, user-scalable=no"> 
+        <title>积木·微信状态歌词热度榜</title>
+        <link rel="icon" type="image/x-icin" href="../../images/logo.ico">
+        <script src="../../tools/jQuery3.6.4.min.js"></script>
+        <script src="../../tools/axios.js"></script>
+        <link rel="stylesheet" href="../css/hotSearchList.css">
+    </head> 
+    <body>
+        <div class="result">请稍等...</div>
+        <img id="returntop" src="../../images/capslock-fill.svg">
+        <a class="refresh" href="javascript: void(0);" onclick="location.reload()">刷新</a>
+        <span class="from">接口来自:<a href="https://api.wer.plus/product/" target="_blank">一铭API</a></span>
+        <script>
+            $(function () {
+                // 返回置顶
+                (function () {
+                    $(window).on('scroll', function () {
+                        var htmlheight = $(window).height() / 2;
+                        if($('html').scrollTop() > htmlheight) {
+                            $('#returntop').show()
+                        }else {
+                            $('#returntop').hide()
+                        }
+                    })
+                    $('#returntop').on('click', function () {
+                        $('html').stop().animate({
+                            scrollTop : 0
+                        })
+                    })
+                }());
+                // 获取显示数据
+                axios.get('https://api.wer.plus/api/wxtop').then((res) => {
+                    res = res.data;
+                    if(res.code !== 200) return $('.result').html('查询失败').fadeOut(3000);
+                    $('.update').show()
+                    $('.result').html('查询成功').fadeOut(3000)
+                    $.each(res.data, function (i, v) {
+                        $('body').append('<div class="data"><h4 class="topIndex">top<span></span></h4><h3 class="header">歌名：<span></span></h3><div class="desc"><img src="">歌手：<span></span><br>专辑：<span></span></div><div class="hot"><span></span></div></div>')
+                        $('.data').eq(i).find('.topIndex span').html(i + 1)
+                        $('.data').eq(i).find('.header span:eq(0)').html(v.song)
+                        $('.data').eq(i).find('.desc img').attr('src', v.cover)
+                        $('.data').eq(i).find('.desc span:eq(0)').html(v.singer)
+                        $('.data').eq(i).find('.desc span:eq(1)').html(v.album)
+                    })
+                }).catch((err) => {
+                    $('.result').html('网络或接口出错,接口问题请联系作者').fadeOut(3000)
+                })
+            })
+        </script>
+    </body>
+</html>
