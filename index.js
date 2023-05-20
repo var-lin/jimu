@@ -342,7 +342,7 @@ $(function () {
                     key = true;
                     return $('.feedbackBox .message').html('请输入内容');
                 }
-                if(email == '' || email.indexOf('@') != 1) {
+                if(email == '' || email.indexOf('@') < 0) {
                     key = true;
                     return $('.feedbackBox .message').html('请输入正常的邮箱联系方式,方便回复你');
                 }
