@@ -69,7 +69,7 @@
                             $('.dialogBox').append('<p class="right"><span class="time">' + e.time + '</span><img src="../../images/logo.png" alt="logo"></p><p class="rightContent"><textarea class="rightText" disabled>' + e.text + '</textarea></p>')
                             $('.dialogBox .rightText:last').css('height', $('.dialogBox .rightText:last').prop('scrollHeight'))
                         } else if(e.spokesman == 'leftAIPainting') {
-                            $('.dialogBox').append('<p class="left"><img src="../../images/chatGPT.png" alt="chatGPT-logo"><span class="time">' + e.time + '</span></p><p class="leftContent"><span>' + e.imgURL + '</span><a href="' + e.imgURL +'" target="_blank"><img src="' + e.imgURL +'" alt="' + e.text +'" title="' + e.text +'"></a></p>')
+                            $('.dialogBox').append('<p class="left"><img src="../../images/chatGPT.png" alt="chatGPT-logo"><span class="time">' + e.time + '</span></p><p class="leftContent"><span>' + e.imgURL + '</span><br><a href="' + e.imgURL +'" target="_blank"><img src="' + e.imgURL +'" alt="' + e.text +'" title="' + e.text +'"></a></p>')
                             $('.dialogBox .leftText:last').css('height', $('.dialogBox .leftText:last').prop('scrollHeight'))
                         } else {
                             $('.dialogBox').append('<p class="left"><img src="../../images/chatGPT.png" alt="chatGPT-logo"><span class="time">' + e.time + '</span></p><p class="leftContent"><textarea class="leftText" disabled>' + e.text + '</textarea></p>')
@@ -253,7 +253,7 @@
                                     text: text
                                 });
                                 localStorage.setItem('chatGPT3.5-chatRecords', JSON.stringify(chatRecords));
-                                $('.leftContent:last').html('<span>' + res + '</span><a target="_blank"><img></a>')
+                                $('.leftContent:last').html('<span>' + res + '</span><br><a target="_blank"><img></a>')
                                 $('.leftContent:last a').attr('href', res).children('img').attr({
                                     src: res,
                                     alt: text,
