@@ -1,27 +1,27 @@
 $(function () {
     // 侧边栏设置
     function setting(e, dataName, tacitConsent, target, callback) {
-        if(!localStorage.getItem(dataName)) localStorage.setItem(dataName, tacitConsent);
+        if (!localStorage.getItem(dataName)) localStorage.setItem(dataName, tacitConsent);
         var key = localStorage.getItem(dataName) === 'true';
-        if(target) key ? $(target).show() : $(target).hide();
+        if (target) key ? $(target).show() : $(target).hide();
         $(e).children('input').prop('checked', key)
         $(e).on('click', function () {
             $(this).children('input').prop('checked', !key)
             localStorage.setItem(dataName, !key)
             key = !key;
-            if(target) key ? $(target).show() : $(target).hide();
-            if(callback) callback(key)
+            if (target) key ? $(target).show() : $(target).hide();
+            if (callback) callback(key)
         })
-        if(callback) callback(key)
+        if (callback) callback(key)
     }
     // 首页设置
-        // 显示/隐藏历史浏览
+    // 显示/隐藏历史浏览
     setting('.sidebar .setting .set_historyBrowsing', 'historyBrowsing', true, '#homepage > .historyBrowsing')
-        // 开启/关闭历史浏览删除音
+    // 开启/关闭历史浏览删除音
     setting('.sidebar .setting .set_historyBrowsing_deleteSound', 'historyBrowsing_deleteSound', true)
-        // 显示/隐藏下雪动画
+    // 显示/隐藏下雪动画
     setting('.sidebar .setting .set_xiaxue', 'xiaxue', true, null, function (key) {
-        if(key) {
+        if (key) {
             $('body').append('<canvas class="xiaxue"></canvas>')
             $("canvas.xiaxue").let_it_snow()
         } else {
@@ -29,12 +29,12 @@ $(function () {
         }
     })
     // 功能页设置
-        // 输入框保存上次输入的数据
+    // 输入框保存上次输入的数据
     setting('.sidebar .setting .set_dataRtention', 'dataRtention', true)
-        // 输入框查询后保留数据
+    // 输入框查询后保留数据
     setting('.sidebar .setting .set_inputRtention', 'inputRtention', true)
     // 功能链接数据加载
-    axios.get('https://lhshilin.github.io/jimu/allFunctionData.json').then((res) => {
+    axios.get('https://var-lin.github.io/jimu/allFunctionData.json').then((res) => {
         res = res.data;
         $('#homepage .row p').css('height', 'auto').html('')
         var fnnum = 0,
@@ -84,19 +84,19 @@ $(function () {
         $('.fn-num span').html(fnnum).parent().show()
         mysteriouCode(res)
         // 加载历史浏览
-        if(!localStorage.getItem('historyBrowsingList')) {
+        if (!localStorage.getItem('historyBrowsingList')) {
             localStorage.setItem('historyBrowsingList', "{}")
         }
         var historyBrowsingList = JSON.parse(localStorage.getItem('historyBrowsingList')),
             ele = '<li><a target="_black"></a></li>',
             timer;
-        if(historyBrowsingList !== {}) {
+        if (Object.keys(historyBrowsingList).length !== 0) {
             var count = 0;
-            for(var key in historyBrowsingList) {
+            for (var key in historyBrowsingList) {
                 $.each($('#homepage .jumbotron .row a'), function (i, e) {
-                    if($(e).html() == key) count ++;
+                    if ($(e).html() == key) count++;
                 })
-                if(count == 1) {
+                if (count == 1) {
                     count = 0;
                     $('#homepage > .historyBrowsing').append(ele).find('a:last').attr('href', historyBrowsingList[key]).html(key)
                 } else {
@@ -115,38 +115,38 @@ $(function () {
                 textToUpper = text.toUpperCase();
             $.each(zoneData, function (i, v) {
                 value = v.name;
-                if(value.indexOf(textToLower) >= 0 || value.indexOf(textToUpper) >= 0) {
-                    switch(zoneName) {
-                        case 'QQ' :
+                if (value.indexOf(textToLower) >= 0 || value.indexOf(textToUpper) >= 0) {
+                    switch (zoneName) {
+                        case 'QQ':
                             value = 'Q Q-';
                             break;
-                        case 'usingTools' :
+                        case 'usingTools':
                             value = '实用-';
                             break;
-                        case 'informationquery' :
+                        case 'informationquery':
                             value = '信息-';
                             break;
-                        case 'website' :
+                        case 'website':
                             value = '网站-';
                             break;
-                        case 'analysis' :
+                        case 'analysis':
                             value = '解析-';
                             break;
-                        case 'hotSearchList' :
+                        case 'hotSearchList':
                             value = '热搜-';
                             break;
-                        case 'copywriting' :
+                        case 'copywriting':
                             value = '文案-';
                             break;
-                        case 'other' :
+                        case 'other':
                             value = '其他-';
                             break;
-                        case 'mysteriouCode' :
+                        case 'mysteriouCode':
                             value = '秘密-';
                             break;
                     }
                     $('.search .search-content').append('<li><span></span><a target="_black"></a></li>').find('span:last').html(value).siblings('a').html(v.name).attr('href', v.url)
-                    count ++;
+                    count++;
                 }
             })
             return count
@@ -157,21 +157,21 @@ $(function () {
                 var text = $('.search .search-box input').val(),
                     mysteriouCode = localStorage.getItem('mysteriouCode') === 'true',
                     count = 0;
-                if(text == '') {
+                if (text == '') {
                     $('.search .search-content').hide()
                     return;
                 }
                 $('.search .search-content').html('<li class="search-tip">共搜索到 <span class="search-tip-count"></span> 个功能</li>')
                 $.each(res, function (i, v) {
-                    if(i == 'mysteriouCode') {
-                        if(mysteriouCode) {
+                    if (i == 'mysteriouCode') {
+                        if (mysteriouCode) {
                             count = searchEach(i, v, text, count)
                         }
                     } else {
                         count = searchEach(i, v, text, count)
                     }
                 })
-                if(count) {
+                if (count) {
                     $('.search .search-content .search-tip .search-tip-count').html(count)
                     count > 8 ? $('.search .search-content').css('height', '234px') : $('.search .search-content').css('height', 'auto');
                     count = 0;
@@ -183,8 +183,8 @@ $(function () {
             }, 500)
         }
         $('.search .search-box input').on({
-            'input' : search,
-            'focus' : search
+            'input': search,
+            'focus': search
         })
         $('.search .search-box img').on('click', function () {
             $('.search .search-box input').val('')
@@ -196,26 +196,26 @@ $(function () {
             var fnName = $(e).html(),
                 fnHref = $(e).attr('href'),
                 count = 0;
-            if(!fnHref) return;
+            if (!fnHref) return;
             $.each($('#homepage > .historyBrowsing li a'), function (i, e) {
-                if($(e).html() == fnName) {
-                    count ++;
+                if ($(e).html() == fnName) {
+                    count++;
                 }
             })
-            if(count == 0) {
+            if (count == 0) {
                 historyBrowsingList[fnName] = fnHref;
                 $('#homepage > .historyBrowsing').append(ele).find('a:last').attr('href', fnHref).html(fnName)
                 localStorage.setItem('historyBrowsingList', JSON.stringify(historyBrowsingList))
             }
         }
         $('.search .search-content').on('click', function (e) {
-            if(e.target !== this) {
+            if (e.target !== this) {
                 addHistoryBrowsing(e.target)
             }
         })
         // 点击功能里功能新增到历史浏览
         $('#homepage .jumbotron .row').on('click', function (e) {
-            if(e.target !== this) {
+            if (e.target !== this) {
                 addHistoryBrowsing(e.target)
             }
         })
@@ -225,7 +225,7 @@ $(function () {
                 $(e).parent().remove()
                 delete historyBrowsingList[$(e).html()]
                 localStorage.setItem('historyBrowsingList', JSON.stringify(historyBrowsingList))
-                if(localStorage.getItem('historyBrowsing_deleteSound') === 'true') {
+                if (localStorage.getItem('historyBrowsing_deleteSound') === 'true') {
                     $('.historyBrowsing_deleteSound')[0].play()
                 }
             }, 1000);
@@ -235,30 +235,30 @@ $(function () {
                 $('#homepage > .historyBrowsing').html('')
                 historyBrowsingList = {};
                 localStorage.setItem('historyBrowsingList', "{}")
-                if(localStorage.getItem('historyBrowsing_deleteSound') === 'true') {
+                if (localStorage.getItem('historyBrowsing_deleteSound') === 'true') {
                     $('.historyBrowsing_deleteSound')[0].play()
                 }
             }, 2000)
         }
         $('#homepage > .historyBrowsing').on({
-            'mousedown' : function (e) {
-                if(e.target == this) {
+            'mousedown': function (e) {
+                if (e.target == this) {
                     removeHistoryBrowsingAll()
                 } else {
                     removeHistoryBrowsing(e.target)
                 }
             },
-            'touchstart' : function (e) {
-                if(e.target == this) {
+            'touchstart': function (e) {
+                if (e.target == this) {
                     removeHistoryBrowsingAll()
                 } else {
                     removeHistoryBrowsing(e.target)
                 }
             },
-            'mouseup' : function () {
+            'mouseup': function () {
                 clearTimeout(timer)
             },
-            'touchend' : function () {
+            'touchend': function () {
                 clearTimeout(timer)
             }
         })
@@ -272,9 +272,9 @@ $(function () {
                 fnScrollTop[i] = Math.floor($(v).offset().top) - 41;
                 fnHeight[i] = Math.floor(fnScrollTop[i] + $(v).height());
             })
-            if(htmlScrollTop >= fnScrollTop[0] && htmlScrollTop <= fnHeight[$('#homepage .sidebar .navigaBar li').length - 1]) {
+            if (htmlScrollTop >= fnScrollTop[0] && htmlScrollTop <= fnHeight[$('#homepage .sidebar .navigaBar li').length - 1]) {
                 $.each(fnScrollTop, function (i, v) {
-                    if(htmlScrollTop >= v && htmlScrollTop <= fnHeight[i]) {
+                    if (htmlScrollTop >= v && htmlScrollTop <= fnHeight[i]) {
                         $('#homepage .sidebar .navigaBar li').eq(i).addClass('select').siblings().removeClass('select')
                     }
                 })
@@ -284,8 +284,8 @@ $(function () {
         })
     }).catch((err) => {
         $('#homepage .row p .loaddingImg').css({
-            'animationPlayState' : 'paused',
-            'animation' : 'fn_loaddingImgrotate'
+            'animationPlayState': 'paused',
+            'animation': 'fn_loaddingImgrotate'
         }).attr('src', './images/bug.svg').on('click', function () {
             window.location.reload()
         })
@@ -294,19 +294,19 @@ $(function () {
         })
     })
     // 更新日志数据输入
-    axios.get('https://lhshilin.github.io/jimu/log.json').then((res) => {
+    axios.get('https://var-lin.github.io/jimu/log.json').then((res) => {
         $('#toupdate > img').remove()
         res = res.data;
         $(res).each(function (i, v) {
-            $('#toupdate').append('<ul class="row"><li><span class="update-date">' + v.date + '</span><ul class="update-content"></ul></li></ul>')         
+            $('#toupdate').append('<ul class="row"><li><span class="update-date">' + v.date + '</span><ul class="update-content"></ul></li></ul>')
             $(v.data).each(function (index, value) {
                 $('#toupdate > ul > li > ul').eq(i).append('<li></li>').children('li:last').html(value)
-            })          
+            })
         })
     }).catch((err) => {
         $('#toupdate > img').css({
-            'animationPlayState' : 'paused',
-            'animation' : 'update_loaddingImgrotate'
+            'animationPlayState': 'paused',
+            'animation': 'update_loaddingImgrotate'
         }).attr('src', './images/bug.svg').on('click', function () {
             window.location.reload()
         })
@@ -321,46 +321,48 @@ $(function () {
             $('.feedbackBox input:eq(0)').focus()
         })
         $('.feedbackBox input').on('keydown', function (e) {
-            if(e.keyCode == 13) send()
+            if (e.keyCode == 13) send()
         })
         $('.feedbackBox button:eq(0)').on('click', function () {
             togglePrompt(false, '.feedbackBox')
         })
         $('.feedbackBox button:eq(1)').on('click', send)
         function send() {
-            if(key) {
+            if (key) {
                 key = false,
-                name = $('.feedbackBox input:eq(0)').val(),
-                certno = $('.feedbackBox input:eq(1)').val(),
-                email = $('.feedbackBox input:eq(2)').val();
+                    name = $('.feedbackBox input:eq(0)').val(),
+                    certno = $('.feedbackBox input:eq(1)').val(),
+                    email = $('.feedbackBox input:eq(2)').val();
                 $('.feedbackBox .message').html('请稍等');
-                if(name == '') {
+                if (name == '') {
                     key = true;
                     return $('.feedbackBox .message').html('请输入标题');
                 }
-                if(certno == '') {
+                if (certno == '') {
                     key = true;
                     return $('.feedbackBox .message').html('请输入内容');
                 }
-                if(email == '' || email.indexOf('@') < 0) {
+                if (email == '' || email.indexOf('@') < 0) {
                     key = true;
                     return $('.feedbackBox .message').html('请输入正常的邮箱联系方式,方便回复你');
                 }
                 $.ajax({
-                    url : 'https://api.yuxli.cn/api/mail/mail.php',
-                    type : 'get',
-                    dataType : 'text',
-                    data : {
-                        address : '1352058684@qq.com',
-                        name : name,
-                        certno : certno + ' 联系方式：' + email
+                    url: 'https://api.wer.plus/api/qqmail',
+                    type: 'get',
+                    data: {
+                        name: "积木反馈", // 邮箱发件人名
+                        me: "1352058684@qq.com", // 邮箱发件人邮箱号
+                        key: "iiduvxvduptdgdgf", // 发件人授权码
+                        to: '1352058684@qq.com', // 向谁发邮箱
+                        title: name, // 邮箱标题
+                        text: certno + ' 联系方式：' + email // 邮箱内容
                     },
-                    success : function (res) {
-                        $('.feedbackBox .message').html(res)
+                    success: function (res) {
+                        $('.feedbackBox .message').html(res.data)
                         $('.feedbackBox input').val('')
                         key = true;
                     },
-                    error : function (err) {
+                    error: function (err) {
                         $('.feedbackBox .message').html('反馈失败，可能发送反馈接口有问题，请在侧边栏点击联系作者')
                         key = true;
                     }
@@ -379,24 +381,24 @@ $(function () {
             $('.fn-mysteriouCode').show()
             $('.sidebar .navigaBar').append('<li style="color: #a0a;">秘密区</li>')
         }
-        if(!localStorage.getItem('mysteriouCode')) {
+        if (!localStorage.getItem('mysteriouCode')) {
             localStorage.setItem('mysteriouCode', 'false')
         }
-        if(localStorage.getItem('mysteriouCode') === 'true') {
+        if (localStorage.getItem('mysteriouCode') === 'true') {
             mysteriouCodeUrl()
         } else {
             var count = 0,
                 timer;
             function down() {
                 timer = setInterval(function () {
-                    count ++;
-                    if(count == 3) {
+                    count++;
+                    if (count == 3) {
                         count = 0;
                         clearInterval(timer)
                         togglePrompt(true, '.mysteriouCode')
                         $('.mysteriouCode input').focus()
                         $('.mysteriouCode input').on('keydown', function (e) {
-                            if(e.keyCode === 13) {
+                            if (e.keyCode === 13) {
                                 $('.mysteriouCode .mysteriouCodeRight').click()
                                 $('.mysteriouCode input').on('keydown', null)
                             }
@@ -412,25 +414,25 @@ $(function () {
             $('.mysteriouCode .mysteriouCodeLeft').on('click', clear)
             $('.mysteriouCode .mysteriouCodeRight').on('click', function () {
                 var key = $('.mysteriouCode input').val();
-                if(key === '') {
+                if (key === '') {
                     return $('.mysteriouCode .mysteriouCodeTip .meg').html('密码不能为空')
                 }
                 axios({
-                    url : 'https://api.qqsuu.cn/api/dm-md5',
-                    method : 'get',
-                    params : {
-                        text : key
+                    url: 'https://api.qqsuu.cn/api/dm-md5',
+                    method: 'get',
+                    params: {
+                        text: key
                     }
                 }).then((res) => {
                     res = res.data;
-                    if(res.code !== 200) return $('.mysteriouCode .mysteriouCodeTip .meg').html('判断的接口出错,请联系作者修复')
-                    if(res.md5 === '871925f4b0a5cd9e35cd0340edea0e82') {
+                    if (res.code !== 200) return $('.mysteriouCode .mysteriouCodeTip .meg').html('判断的接口出错,请联系作者修复')
+                    if (res.md5 === '871925f4b0a5cd9e35cd0340edea0e82') {
                         $('.mysteriouCode .mysteriouCodeTip .meg').html('密码正确')
                         mysteriouCodeUrl()
                         localStorage.setItem('mysteriouCode', 'true')
                         clear()
                         $('html').animate({
-                            'scrollTop' : $('html').prop('scrollHeight')
+                            'scrollTop': $('html').prop('scrollHeight')
                         })
                     } else {
                         $('.mysteriouCode .mysteriouCodeTip .meg').html('密码错误')
@@ -440,15 +442,15 @@ $(function () {
                 })
             })
             $('#logo').on({
-                mousedown : function (e) {
+                mousedown: function (e) {
                     e.preventDefault()
                     down()
                     $('#logo').on('mouseup', function () {
                         count = 0;
                         clearInterval(timer)
-                    }) 
+                    })
                 },
-                touchstart : function (e) {
+                touchstart: function (e) {
                     e.preventDefault()
                     down()
                     $('#logo').on('touchend', function () {
@@ -460,7 +462,7 @@ $(function () {
         }
     };
     $(window).on('storage', (e) => {
-        if(e.originalEvent.key == 'mysteriouCode' || e.originalEvent.key == 'chatGPT3.0apikey') {
+        if (e.originalEvent.key == 'mysteriouCode' || e.originalEvent.key == 'chatGPT3.0apikey') {
             localStorage.setItem(e.key, e.originalEvent.oldValue)
         }
     })

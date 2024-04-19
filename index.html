@@ -1,330 +1,346 @@
 <!doctype html>
-<html lang="en, zh"> 
-    <head> 
-        <meta charset="UTF-8"> 
-        <meta name="viewport" id="viewport" content="width=device-width, initial-scale=1, user-scalable=no"> 
-        <link rel="icon" type="image/x-icin" href="./images/logo.ico">
-        <title>积木</title>
-        <script src="./tools/jQuery3.6.4.min.js"></script>
-        <script src="./tools/axios.js"></script>
-        <link rel="stylesheet" href="./tools/bootstrap.min.css">
-        <script src="./tools/bootstrap.min.js"></script>
-        <link rel="stylesheet" href="./index.css">
-        <script src="./js/style.js"></script>
-        <script src="./index.js"></script>
-        <script src="./js/update.js"></script>
-        <!-- 复制功能工具导入-->
-        <script src="./tools/clipboard.min.js"></script>
-        <!-- 下雪特效导入 -->
-        <script src="./tools/xiaxue.js"></script>
-    </head> 
-    <body>
-        <div class="brief-remark hide-scrollbar">... ... ...</div>
-        <div class="container-fluid">
-            <!-- 返回置顶 -->
-            <img id="returntop" src="./images/capslock-fill.svg" alt="置顶" title="置顶">
-            <!-- logo -->
-            <img id="logo" src="./images/logo.png" alt="logo" title="logo">
-            <!-- 反馈按钮 -->
-            <button id="feedback" onselectstart="return false">反馈</button>
-            <!-- 联系作者 -->
-            <div class="modal fade" id="exampleModal" onselectstart="return false">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">联系作者</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
+<html lang="en, zh">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" id="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <link rel="icon" type="image/x-icin" href="./images/logo.ico">
+    <title>积木</title>
+    <script src="./tools/jQuery3.6.4.min.js"></script>
+    <script src="./tools/axios.js"></script>
+    <link rel="stylesheet" href="./tools/bootstrap.min.css">
+    <script src="./tools/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="./index.css">
+    <script src="./js/style.js"></script>
+    <script src="./index.js"></script>
+    <script src="./js/update.js"></script>
+    <!-- 复制功能工具导入-->
+    <script src="./tools/clipboard.min.js"></script>
+    <!-- 下雪特效导入 -->
+    <script src="./tools/xiaxue.js"></script>
+</head>
+
+<body>
+    <div class="brief-remark hide-scrollbar">... ... ...</div>
+    <div class="container-fluid">
+        <!-- 返回置顶 -->
+        <img id="returntop" src="./images/capslock-fill.svg" alt="置顶" title="置顶">
+        <!-- logo -->
+        <img id="logo" src="./images/logo.png" alt="logo" title="logo">
+        <!-- 反馈按钮 -->
+        <button id="feedback" onselectstart="return false">反馈</button>
+        <!-- 联系作者 -->
+        <div class="modal fade" id="exampleModal" onselectstart="return false">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">联系作者</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <p id="authorQQ">
+                            <span>作者QQ(<span id="authorQQcopybtn" data-clipboard-target="#QQnum">点我复制</span>)：</span><a
+                                id="QQnum" href="https://api.vvhan.com/api/qqChat?qq=1352058684"
+                                target="_blank">1352058684</a>
+                        </p>
+                        <p id="authormail">
+                            <span>作者邮箱(<span id="authorQQmailcopybtn"
+                                    data-clipboard-target="#QQmaillink">点我复制</span>)：</span><a id="QQmaillink"
+                                href="mailto:1352058684@qq.com" target="_blank">1352058684@qq.com</a>
+                        </p>
+                        <p>
+                        <div style="text-align: center;color: #f40;">-- 软件更新链接 --</div>
+                        <div id="appdownload">
+                            <div id="sourceCode">
+                                <span>此版本源码下载(<button id="sourceCodeDownload">复制链接</button>)</span>：
+                                <a class="toupdatelink" target="_blank">跳转下载地址</a>
+                            </div>
+                            <div id="android">
+                                <span>此版本安卓版下载(<button id="androidDownload">复制链接</button>)</span>：
+                                <a class="toupdatelink" target="_blank">跳转下载地址</a>
+                            </div>
+                            <div id="lanzouyun">
+                                <span>备用蓝奏云(<button id="lanzouyunDownload"
+                                        data-clipboard-text="https://var-lin.lanzoui.com/b0176d1pe">复制链接</button>)</span>：
+                                <a class="toupdatelink" href="https://var-lin.lanzoui.com/b0176d1pe"
+                                    target="_blank">跳转下载地址</a>
+                                <div><i class="bi bi-bag-plus-fill"></i>蓝奏云盘密码：lin1</div>
+                            </div>
                         </div>
-                        <div class="modal-body">
-                            <p id="authorQQ">
-                                 <span>作者QQ(<span id="authorQQcopybtn" data-clipboard-target="#QQnum">点我复制</span>)：</span><a id="QQnum" href="https://api.vvhan.com/api/qqChat?qq=1352058684" target="_blank">1352058684</a>                                 
-                            </p>
-                            <p id="authormail">
-                                 <span>作者邮箱(<span id="authorQQmailcopybtn" data-clipboard-target="#QQmaillink">点我复制</span>)：</span><a id="QQmaillink" href="mailto:1352058684@qq.com" target="_blank">1352058684@qq.com</a>
-                            </p>
-                            <p id="authorCommunicationGroup">
-                                <span>QQ交流群(<span id="authorQQCommunicationGroup" data-clipboard-target="#communicationGroup">点我复制</span>)：</span><a id="communicationGroup" href="https://jq.qq.com/?_wv=1027&k=DNmTqW6E" target="_blank">610411365</a>
-                            </p>
-                            <p>
-                                <div style="text-align: center;color: #f40;">-- 软件更新链接 --</div>
-                                <div id="appdownload">
-                                    <div id="sourceCode">
-                                        <span>此版本源码下载(<button id="sourceCodeDownload">复制链接</button>)</span>：
-                                        <a class="toupdatelink" target="_blank">跳转下载地址</a>
-                                    </div>
-                                    <div id="android">
-                                        <span>此版本安卓版下载(<button id="androidDownload">复制链接</button>)</span>：
-                                        <a class="toupdatelink" target="_blank">跳转下载地址</a>
-                                    </div>
-                                    <div id="lanzouyun">
-                                        <span>备用蓝奏云(<button id="lanzouyunDownload" data-clipboard-text="https://lhshilin.lanzoui.com/b0176d1pe">复制链接</button>)</span>：
-                                        <a class="toupdatelink" href="https://lhshilin.lanzoui.com/b0176d1pe" target="_blank">跳转下载地址</a>
-                                    <div><i class="bi bi-bag-plus-fill"></i>蓝奏云盘密码：lin1</div>
-                                    </div>
-                                </div>
-                            </p>
-                            <p id="reward" class="text-center">
-                                <button class="btn btn-success">微信打赏</button>
-                                <button class="btn">支付宝打赏</button>
-                                <a href="weixin://" style="display: inline-block;"><img src="https://lhshilin.github.io/jimu/images/wxcode.png" alt="微信打赏二维码" title="微信打赏二维码"></a>
-                                <a href="alipays://"><img src="https://lhshilin.github.io/jimu/images/zfbcode.jpg" alt="支付宝打赏二维码" title="支付宝打赏二维码"></a>
-                            </p>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>                               
-                        </div>
+                        </p>
+                        <p id="reward" class="text-center">
+                            <button class="btn btn-success">微信打赏</button>
+                            <button class="btn">支付宝打赏</button>
+                            <a href="weixin://" style="display: inline-block;"><img
+                                    src="https://var-lin.github.io/jimu/images/wxcode.png" alt="微信打赏二维码"
+                                    title="微信打赏二维码"></a>
+                            <a href="alipays://"><img src="https://var-lin.github.io/jimu/images/zfbcode.jpg"
+                                    alt="支付宝打赏二维码" title="支付宝打赏二维码"></a>
+                        </p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
                     </div>
                 </div>
             </div>
+        </div>
 
-            <!-- 显示区 -->
+        <!-- 显示区 -->
 
-            <div id="showregion" onselectstart="return false">
+        <div id="showregion" onselectstart="return false">
 
-                <!-- 首页 -->
+            <!-- 首页 -->
 
-                <div id="homepage" class="container">
+            <div id="homepage" class="container">
 
-                    <!-- 导航栏 -->
+                <!-- 导航栏 -->
 
-                    <div class="sidebarBn">
-                        <img src="./images/justify.svg" alt="功能导航栏" title="功能导航栏">
-                    </div>
-                    <div class="sidebar hide-scrollbar">
-                        <div class="ipSignatureFile">
-                            <img src="https://api.lewz.cn/api/ipqm" alt="ip签名档" title="ip签名档">
-                        </div>
-                        <div class="col-12 pasttime">
-                            已运行<span id="day"></span>天<span id="hour"></span>小时<span id="minute"></span>分钟<span id="second"></span>秒
-                        </div>
-                        <ul class="navigaBar">
-                            <li style="color: #dc3545;">QQ专区</li>
-                            <li style="color: #3545ab;">实用工具</li>
-                            <li style="color: #6c757d;">信息查询专区</li>
-                            <li style="color: #ffc107;">网站专区</li>
-                            <li style="color: #dde329;">解析专区</li>
-                            <li style="color: #bbc107;">热搜专区</li>
-                            <li style="color: #28a745;">文案专区</li>
-                            <li style="color: #17a2b8;">其他</li>
-                        </ul>
-                        <ul class="setting">
-                            <li class="setting_headerTip" style="margin-top: 0;">首页设置</li>
-                            <li class="set_historyBrowsing">
-                                <div>显示/隐藏历史浏览</div>
-                                <input type="checkbox">
-                            </li>
-                            <li class="set_historyBrowsing_deleteSound">
-                                <div>开启/关闭历史浏览删除音</div>
-                                <input type="checkbox">
-                            </li>
-                            <li class="set_xiaxue">
-                                <div>显示/隐藏下雪动画</div>
-                                <input type="checkbox">
-                            </li>
-                            <li class="setting_headerTip">功能页设置</li>
-                            <li class="set_dataRtention">
-                                <div>输入框保存上次输入的数据</div>
-                                <input type="checkbox">
-                            </li>
-                            <li class="set_inputRtention">
-                                <div>查询后保留输入框数据</div>
-                                <input type="checkbox">
-                            </li>
-                        </ul>
-                        <div class="about">
-                            <button class="checkUpdateBtn fl">检测更新</button>
-                            <button class="authorBtn fr" data-toggle="modal" data-target="#exampleModal">联系作者</button>
-                        </div>
-                    </div>
-
-                    <!-- 搜索 -->
-
-                    <div class="search">
-                        <div class="search-box text-center">
-                            <input type="search" placeholder="请输入关键词" readonly><img src="./images/x-lg.svg" alt="clear" title="clear" style="margin-left: 10px;">
-                        </div>
-                        <ul class="search-content hide-scrollbar"></ul>
-                    </div>
-
-                    <!-- 代刷网分享 -->
-
-                    <div class="replaceBrush">
-                        <h6 class="text-center" style="cursor: pointer;margin: 0;font-weight: bold;">
-                            <span>代刷网分享</span>
-                            <span><img src="" alt="代刷网内容下拉" style="vertical-align: -3px;width: 1rem;"></span>
-                        </h6>
-                        <div class="replaceBrush-content" style="display: none;">
-                            <div class="replaceBrush-header marginTop" style="text-indent: 2rem;color: #424242;">
-                                免费领Q名片赞，空间访客，等免费业务！还有永久Q钻专区，影视会员专区，游戏业务专区，粉丝关注专区，实物包邮专区，抖音快手业务，甚至还有网课代看业务！快来看看满足你需求的专区吧！！！ 下单网址：
-                                <a href="https://xyz.auu8.com/qsu4ih" target="_blank">https://xyz.auu8.com/qsu4ih</a>
-                            </div>
-                            <div class="replaceBrush-down marginTop" style="color: #999;text-align: center;">
-                                安卓苹果APP下载页
-                                <br>
-                                <a href="http://lhshilin.kkxdn.com/?mod=app&id=15018" target="_blank">http://lhshilin.kkxdn.com/?mod=app&id=15018</a>
-                            </div>
-                            <div class="urlClipboard marginTop clearFlost">
-                                <button class="leftBtn btn btn-info" style="float: left;margin-left: 10px;" data-clipboard-target=".replaceBrush-header a">网站网址复制</button>
-                                <button class="rightBtn btn btn-info" style="float: right;margin-right: 10px;" data-clipboard-target=".replaceBrush-down a">下载网址复制</button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- 历史浏览 -->
-
-                    <audio class="historyBrowsing_deleteSound" src="./audio/historyBrowsing_deleteSound.mp3"></audio>
-                    <ul class="historyBrowsing clearFlost"></ul>
-
-                    <!-- 功能区 -->
-
-                    <div class="row fn-qq">
-                        <div class="jumbotron col-12" style="background-image: linear-gradient(#fdd, #dff);">
-                            <h4><span class="fnHeadBorder" style="color: #dc3545;border-color: #dc3545;">QQ专区</span></h4>                         
-                            <hr class="my-4">
-                            <p class="row">
-                                <img class="loaddingImg" src="./images/arrow-clockwise.svg" alt="Loadding" title="Loadding">
-                            </p>
-                        </div>
-                    </div>
-                    <div class="row fn-usingTools">
-                        <div class="jumbotron col-12" style="background-image: linear-gradient(#cdd, #dff);">
-                            <h4><span class="fnHeadBorder" style="color: #3545ab;border-color: #3545ab;">实用工具</span></h4>                         
-                            <hr class="my-4">
-                            <p class="row">
-                                <img class="loaddingImg" src="./images/arrow-clockwise.svg" alt="Loadding" title="Loadding">
-                            </p>
-                        </div>
-                    </div>
-                    <div class="row fn-informationquery">
-                        <div class="jumbotron col-12" style="background-image: linear-gradient(#ddd, #dff);">
-                            <h4><span class="fnHeadBorder" style="color: #6c757d;border-color: #6c757d;">信息查询专区</span></h4>
-                            <hr class="my-4">
-                            <p class="row">
-                                <img class="loaddingImg" src="./images/arrow-clockwise.svg" alt="Loadding" title="Loadding">
-                            </p>
-                        </div>
-                    </div>
-                    <div class="row fn-website">
-                        <div class="jumbotron col-12" style="background-image: linear-gradient(#fdb, #dff);">
-                            <h4><span class="fnHeadBorder" style="color: #ffc107;border-color: #ffc107;">网站专区</span></h4>                         
-                            <hr class="my-4">
-                            <p class="row">
-                                <img class="loaddingImg" src="./images/arrow-clockwise.svg" alt="Loadding" title="Loadding">
-                            </p>
-                        </div>
-                    </div>
-                    <div class="row fn-analysis">
-                        <div class="jumbotron col-12" style="background-image: linear-gradient(#fe7, #dff);">
-                            <h4><span class="fnHeadBorder" style="color: #dde329;border-color: #dde329;">解析专区</span></h4>                         
-                            <hr class="my-4">
-                            <p class="row">
-                                <img class="loaddingImg" src="./images/arrow-clockwise.svg" alt="Loadding" title="Loadding">
-                            </p>
-                        </div>
-                    </div>
-                    <div class="row fn-hotSearchList">
-                        <div class="jumbotron col-12" style="background-image: linear-gradient(#dc5, #dff);">
-                            <h4><span class="fnHeadBorder" style="color: #bbc107;border-color: #bbc107;">热搜专区</span></h4>                         
-                            <hr class="my-4">
-                            <p class="row">
-                                <img class="loaddingImg" src="./images/arrow-clockwise.svg" alt="Loadding" title="Loadding">
-                            </p>
-                        </div>
-                    </div>
-                    <div class="row fn-copywriting">
-                        <div class="jumbotron col-12" style="background-image: linear-gradient(#dfd, #dff);">
-                            <h4><span class="fnHeadBorder" style="color: #28a745;border-color: #28a745;">文案专区</span></h4>                         
-                            <hr class="my-4">
-                            <p class="row">
-                                <img class="loaddingImg" src="./images/arrow-clockwise.svg" alt="Loadding" title="Loadding">
-                            </p>
-                        </div>
-                    </div>
-                    <div class="row fn-other">
-                        <div class="jumbotron col-12" style="background-image: linear-gradient(#aff, #dff);">
-                            <h4><span class="fnHeadBorder" style="color: #17a2b8;border-color: #17a2b8;">其他</span></h4>                         
-                            <hr class="my-4">
-                            <p class="row">
-                                <img class="loaddingImg" src="./images/arrow-clockwise.svg" alt="Loadding" title="Loadding">
-                            </p>
-                        </div>
-                    </div>
-                    <div class="row fn-mysteriouCode" style="display: none;">
-                        <div class="jumbotron col-12" style="background-image: linear-gradient(#dad, #dff);">
-                            <h4><span class="fnHeadBorder" style="color: #a0a;border-color: #a0a;">秘密区</span></h4>                         
-                            <hr class="my-4">
-                            <p class="row">
-                                <img class="loaddingImg" src="./images/arrow-clockwise.svg" alt="Loadding" title="Loadding">
-                            </p>
-                        </div>
-                    </div>
-                    <div class="fn-num">一共<span></span>个功能</div>
-                    <div class="cover" style="z-index: 998;"></div>
+                <div class="sidebarBn">
+                    <img src="./images/justify.svg" alt="功能导航栏" title="功能导航栏">
                 </div>
-                   <!-- 更新日志 -->
-                <div id="toupdate" class="container">
-                    <div class="tips text-center">
-                        <div>#日志前加“New”代表此版本更新内容#</div>
+                <div class="sidebar hide-scrollbar">
+                    <div class="ipSignatureFile">
+                        <img src="https://api.lewz.cn/api/ipqm" alt="ip签名档" title="ip签名档">
                     </div>
-                    <img class="loaddingImg" src="./images/arrow-clockwise.svg" alt="Loadding" title="Loadding">
+                    <div class="col-12 pasttime">
+                        已运行<span id="day"></span>天<span id="hour"></span>小时<span id="minute"></span>分钟<span
+                            id="second"></span>秒
+                    </div>
+                    <ul class="navigaBar">
+                        <li style="color: #dc3545;">QQ专区</li>
+                        <li style="color: #3545ab;">实用工具</li>
+                        <li style="color: #6c757d;">信息查询专区</li>
+                        <li style="color: #ffc107;">网站专区</li>
+                        <li style="color: #dde329;">解析专区</li>
+                        <li style="color: #bbc107;">热搜专区</li>
+                        <li style="color: #28a745;">文案专区</li>
+                        <li style="color: #17a2b8;">其他</li>
+                    </ul>
+                    <ul class="setting">
+                        <li class="setting_headerTip" style="margin-top: 0;">首页设置</li>
+                        <li class="set_historyBrowsing">
+                            <div>显示/隐藏历史浏览</div>
+                            <input type="checkbox">
+                        </li>
+                        <li class="set_historyBrowsing_deleteSound">
+                            <div>开启/关闭历史浏览删除音</div>
+                            <input type="checkbox">
+                        </li>
+                        <li class="set_xiaxue">
+                            <div>显示/隐藏下雪动画</div>
+                            <input type="checkbox">
+                        </li>
+                        <li class="setting_headerTip">功能页设置</li>
+                        <li class="set_dataRtention">
+                            <div>输入框保存上次输入的数据</div>
+                            <input type="checkbox">
+                        </li>
+                        <li class="set_inputRtention">
+                            <div>查询后保留输入框数据</div>
+                            <input type="checkbox">
+                        </li>
+                    </ul>
+                    <div class="about">
+                        <button class="checkUpdateBtn fl">检测更新</button>
+                        <button class="authorBtn fr" data-toggle="modal" data-target="#exampleModal">联系作者</button>
+                    </div>
                 </div>
+
+                <!-- 搜索 -->
+
+                <div class="search">
+                    <div class="search-box text-center">
+                        <input type="search" placeholder="请输入关键词" readonly><img src="./images/x-lg.svg" alt="clear"
+                            title="clear" style="margin-left: 10px;">
+                    </div>
+                    <ul class="search-content hide-scrollbar"></ul>
+                </div>
+
+                <!-- 代刷网分享 -->
+
+                <div class="replaceBrush">
+                    <h6 class="text-center" style="cursor: pointer;margin: 0;font-weight: bold;">
+                        <span>代刷网分享</span>
+                        <span><img src="" alt="代刷网内容下拉" style="vertical-align: -3px;width: 1rem;"></span>
+                    </h6>
+                    <div class="replaceBrush-content" style="display: none;">
+                        <div class="replaceBrush-header marginTop" style="text-indent: 2rem;color: #424242;">
+                            免费领Q名片赞，空间访客，等免费业务！还有永久Q钻专区，影视会员专区，游戏业务专区，粉丝关注专区，实物包邮专区，抖音快手业务，甚至还有网课代看业务！快来看看满足你需求的专区吧！！！
+                            下单网址：
+                            <a href="https://xyz.auu8.com/qsu4ih" target="_blank">https://xyz.auu8.com/qsu4ih</a>
+                        </div>
+                        <div class="replaceBrush-down marginTop" style="color: #999;text-align: center;">
+                            安卓苹果APP下载页
+                            <br>
+                            <a href="http://var-lin.kkxdn.com/?mod=app&id=15018"
+                                target="_blank">http://var-lin.kkxdn.com/?mod=app&id=15018</a>
+                        </div>
+                        <div class="urlClipboard marginTop clearFlost">
+                            <button class="leftBtn btn btn-info" style="float: left;margin-left: 10px;"
+                                data-clipboard-target=".replaceBrush-header a">网站网址复制</button>
+                            <button class="rightBtn btn btn-info" style="float: right;margin-right: 10px;"
+                                data-clipboard-target=".replaceBrush-down a">下载网址复制</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 历史浏览 -->
+
+                <audio class="historyBrowsing_deleteSound" src="./audio/historyBrowsing_deleteSound.mp3"></audio>
+                <ul class="historyBrowsing clearFlost"></ul>
+
+                <!-- 功能区 -->
+
+                <div class="row fn-qq">
+                    <div class="jumbotron col-12" style="background-image: linear-gradient(#fdd, #dff);">
+                        <h4><span class="fnHeadBorder" style="color: #dc3545;border-color: #dc3545;">QQ专区</span></h4>
+                        <hr class="my-4">
+                        <p class="row">
+                            <img class="loaddingImg" src="./images/arrow-clockwise.svg" alt="Loadding" title="Loadding">
+                        </p>
+                    </div>
+                </div>
+                <div class="row fn-usingTools">
+                    <div class="jumbotron col-12" style="background-image: linear-gradient(#cdd, #dff);">
+                        <h4><span class="fnHeadBorder" style="color: #3545ab;border-color: #3545ab;">实用工具</span></h4>
+                        <hr class="my-4">
+                        <p class="row">
+                            <img class="loaddingImg" src="./images/arrow-clockwise.svg" alt="Loadding" title="Loadding">
+                        </p>
+                    </div>
+                </div>
+                <div class="row fn-informationquery">
+                    <div class="jumbotron col-12" style="background-image: linear-gradient(#ddd, #dff);">
+                        <h4><span class="fnHeadBorder" style="color: #6c757d;border-color: #6c757d;">信息查询专区</span></h4>
+                        <hr class="my-4">
+                        <p class="row">
+                            <img class="loaddingImg" src="./images/arrow-clockwise.svg" alt="Loadding" title="Loadding">
+                        </p>
+                    </div>
+                </div>
+                <div class="row fn-website">
+                    <div class="jumbotron col-12" style="background-image: linear-gradient(#fdb, #dff);">
+                        <h4><span class="fnHeadBorder" style="color: #ffc107;border-color: #ffc107;">网站专区</span></h4>
+                        <hr class="my-4">
+                        <p class="row">
+                            <img class="loaddingImg" src="./images/arrow-clockwise.svg" alt="Loadding" title="Loadding">
+                        </p>
+                    </div>
+                </div>
+                <div class="row fn-analysis">
+                    <div class="jumbotron col-12" style="background-image: linear-gradient(#fe7, #dff);">
+                        <h4><span class="fnHeadBorder" style="color: #dde329;border-color: #dde329;">解析专区</span></h4>
+                        <hr class="my-4">
+                        <p class="row">
+                            <img class="loaddingImg" src="./images/arrow-clockwise.svg" alt="Loadding" title="Loadding">
+                        </p>
+                    </div>
+                </div>
+                <div class="row fn-hotSearchList">
+                    <div class="jumbotron col-12" style="background-image: linear-gradient(#dc5, #dff);">
+                        <h4><span class="fnHeadBorder" style="color: #bbc107;border-color: #bbc107;">热搜专区</span></h4>
+                        <hr class="my-4">
+                        <p class="row">
+                            <img class="loaddingImg" src="./images/arrow-clockwise.svg" alt="Loadding" title="Loadding">
+                        </p>
+                    </div>
+                </div>
+                <div class="row fn-copywriting">
+                    <div class="jumbotron col-12" style="background-image: linear-gradient(#dfd, #dff);">
+                        <h4><span class="fnHeadBorder" style="color: #28a745;border-color: #28a745;">文案专区</span></h4>
+                        <hr class="my-4">
+                        <p class="row">
+                            <img class="loaddingImg" src="./images/arrow-clockwise.svg" alt="Loadding" title="Loadding">
+                        </p>
+                    </div>
+                </div>
+                <div class="row fn-other">
+                    <div class="jumbotron col-12" style="background-image: linear-gradient(#aff, #dff);">
+                        <h4><span class="fnHeadBorder" style="color: #17a2b8;border-color: #17a2b8;">其他</span></h4>
+                        <hr class="my-4">
+                        <p class="row">
+                            <img class="loaddingImg" src="./images/arrow-clockwise.svg" alt="Loadding" title="Loadding">
+                        </p>
+                    </div>
+                </div>
+                <div class="row fn-mysteriouCode" style="display: none;">
+                    <div class="jumbotron col-12" style="background-image: linear-gradient(#dad, #dff);">
+                        <h4><span class="fnHeadBorder" style="color: #a0a;border-color: #a0a;">秘密区</span></h4>
+                        <hr class="my-4">
+                        <p class="row">
+                            <img class="loaddingImg" src="./images/arrow-clockwise.svg" alt="Loadding" title="Loadding">
+                        </p>
+                    </div>
+                </div>
+                <div class="fn-num">一共<span></span>个功能</div>
+                <div class="cover" style="z-index: 998;"></div>
             </div>
-            <!-- 底部元素 -->
-            <footer class="row">                              
-                <button id="homepagebtn" class="col-6">
-                     <p class="icon">
-                        <img src="./images/layers-fill.svg" alt="首页" title="首页">
-                    </p>
-                     <p class="text cornflowerblue">
-                        <span class="texttype">首页</span>
-                    </p>
-                </button>
-                <button id="toupdatelogobtn" class="col-6">
-                    <p class="icon">
-                        <img src="./images/calendar2-check-fill.svg" alt="更新日志" title="更新日志">
-                    </p>
-                    <p class="text">
-                        <span>更新日志</span>
-                    </p>
-                </button>                
-            </footer>
+            <!-- 更新日志 -->
+            <div id="toupdate" class="container">
+                <div class="tips text-center">
+                    <div>#日志前加“New”代表此版本更新内容#</div>
+                </div>
+                <img class="loaddingImg" src="./images/arrow-clockwise.svg" alt="Loadding" title="Loadding">
+            </div>
         </div>
-        <div class="mysteriouCode prompt" onselectstart="return false">
-            <div>
-                <input type="text" placeholder="请输入密码">
-            </div>
-            <div class="mysteriouCodeTip">
-                <div>#恭喜你发现神秘通道,寻找作者联系密码开启神秘功能,因为这些功能可能埗嫌到隐私,实用时请理智实用,谢谢#</div>
-                <div class="meg" style="color: #f00;"></div>
-            </div>
-            <div>
-                <button class="mysteriouCodeLeft btn btn-secondary">取消</button>
-                <button class="mysteriouCodeRight btn btn-secondary" style="float: right;">确定</button>
-            </div>
+        <!-- 底部元素 -->
+        <footer class="row">
+            <button id="homepagebtn" class="col-6">
+                <p class="icon">
+                    <img src="./images/layers-fill.svg" alt="首页" title="首页">
+                </p>
+                <p class="text cornflowerblue">
+                    <span class="texttype">首页</span>
+                </p>
+            </button>
+            <button id="toupdatelogobtn" class="col-6">
+                <p class="icon">
+                    <img src="./images/calendar2-check-fill.svg" alt="更新日志" title="更新日志">
+                </p>
+                <p class="text">
+                    <span>更新日志</span>
+                </p>
+            </button>
+        </footer>
+    </div>
+    <div class="mysteriouCode prompt" onselectstart="return false">
+        <div>
+            <input type="text" placeholder="请输入密码">
         </div>
-        <div class="update prompt" onselectstart="return false">
-            <h3>检测到新版本</h3>
-            <p>网页版链接(蓝奏云密码：lin1)：<a href="https://lhshilin.github.io/jimu" target="_blank">https://lhshilin.github.io/jimu</a></p>
-            <p class="androidUrl">安卓版下载链接：<a href="#" target="_blank"><span></span></a></p>
-            <p class="updateTips">不更新将可能导致新增加的功能无法打开使用</p>
-            <button>下次一定</button>
-            <button><a href="https://lhshilin.lanzoui.com/b0176d1pe" target="_blank">备用蓝奏云</a></button>
-            <button><a target="_blank">安卓更新</a></button>
+        <div class="mysteriouCodeTip">
+            <div>#恭喜你发现神秘通道,寻找作者联系密码开启神秘功能,因为这些功能可能埗嫌到隐私,实用时请理智实用,谢谢#</div>
+            <div class="meg" style="color: #f00;"></div>
         </div>
-        <div class="feedbackBox prompt" onselectstart="return false">
-            <div>
-                <input type="text" name="name" placeholder="请输入标题">
-                <input type="text" name="certno" placeholder="请输入内容">
-                <input type="email" name="certno" placeholder="请输入邮箱联系方式">
-            </div>
-            <div>
-                <button class="btn btn-info">关闭反馈</button>
-                <button class="btn btn-primary">确定反馈</button>
-            </div>
-            <div class="message">作者会在第一时间回复你</div>
+        <div>
+            <button class="mysteriouCodeLeft btn btn-secondary">取消</button>
+            <button class="mysteriouCodeRight btn btn-secondary" style="float: right;">确定</button>
         </div>
-        <div class="cover" onselectstart="return false"></div>
-    </body>
+    </div>
+    <div class="update prompt" onselectstart="return false">
+        <h3>检测到新版本</h3>
+        <p>网页版链接(蓝奏云密码：lin1)：<a href="https://var-lin.github.io/jimu" target="_blank">https://var-lin.github.io/jimu</a>
+        </p>
+        <p class="androidUrl">安卓版下载链接：<a href="#" target="_blank"><span></span></a></p>
+        <p class="updateTips">不更新将可能导致新增加的功能无法打开使用</p>
+        <button>下次一定</button>
+        <button><a href="https://var-lin.lanzoui.com/b0176d1pe" target="_blank">备用蓝奏云</a></button>
+        <button><a target="_blank">安卓更新</a></button>
+    </div>
+    <div class="feedbackBox prompt" onselectstart="return false">
+        <div>
+            <input type="text" name="name" placeholder="请输入标题">
+            <input type="text" name="certno" placeholder="请输入内容">
+            <input type="email" name="certno" placeholder="请输入邮箱联系方式">
+        </div>
+        <div>
+            <button class="btn btn-info">关闭反馈</button>
+            <button class="btn btn-primary">确定反馈</button>
+        </div>
+        <div class="message">作者会在第一时间回复你</div>
+    </div>
+    <div class="cover" onselectstart="return false"></div>
+</body>
+
 </html>
